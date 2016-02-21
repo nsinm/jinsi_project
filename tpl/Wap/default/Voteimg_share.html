@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><if condition="$action_info['action_name']">{pigcms:$action_info['action_name']}</if></title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<script type="text/javascript" src="{pigcms:$staticPath}/tpl/static/voteimg/js/jquery-1.4.2.min.js"></script>
+<link  rel="stylesheet" type="text/css" href="{pigcms:$staticPath}/tpl/static/voteimg/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="{pigcms:$staticPath}/tpl/static/voteimg/css/style_PageDefault.css">
+<link rel="stylesheet" type="text/css" href="{pigcms:$staticPath}/tpl/static/voteimg/css/style_PageMaster.css">
+<script type="text/javascript">
+$(function(){
+	$("#fly_page").hide();
+	//$("#TopTipClose").click();//执行关闭
+	$("#TopTipHolder").hide();
+});
+</script>
+</head>
+<body style="overflow:scroll;overflow-x:hidden">
+<div id="babydiv2">
+<div  id="babydiv3">
+  <if condition="$item neq ''">
+  <div id="babydiv6" style="margin-top:1px;">
+	<div id="content_pic" style="border:solid 2px #fff;">
+		<img src="{pigcms:$item.vote_img}"/>    
+	</div> 
+	<div  id="babydiv4" > {pigcms:$item.vote_title} </div>
+	<div  id="babydiv5" >
+	 ——<span class="xiangx">已有</span><span class="xiangx1">{pigcms:$item.vote_count}</span><span class="xiangx">票</span> ——</div></div>
+	 <div id="babydiv7" id="sharelp"><if condition="$vote_date neq '' && ($vote_date eq 'over' || $vote_date eq 'wait')"><button class="STYLE1" id="content_button" style="height:35px;background-color:#ccc;">投票</button><elseif condition="$notice_content neq '' && $notice_content eq 'no_register'" /><a href="#TopTip" onclick="anchor()"><button class="STYLE1" id="content_button" style="height:35px">投票</button></a><elseif condition="$notice_content neq '' && $notice_content eq 'no_follow'" /><a href="#fly_page" onclick="anchor_follow()"><button class="STYLE1" id="content_button" style="height:35px">投票</button></a><else /><a target="_blank" href="javascript:;"><button class="STYLE1" id="content_button" onclick="my_vote({pigcms:$item_id})" style="height:35px">投票</button> </a> </if></div>
+	 	 <div id="babydiv7" id="sharelp" style="margin: 20px 0 35px 0;"><a href="{pigcms::U('Voteimg/index',array('id'=>$vote_id,'token'=>$token))}"> <button class="STYLE1" id="content_button" style="height:35px;margin-bottom: 30px;">我也参与</button> </a> </div>
+	 <else />
+	 <div id="babydiv6">
+	<img src="{pigcms:$staticPath}/tpl/static/voteimg/img/nobady.jpg" height="200px" width="100px"/>     
+	<div id="babydiv4"> 暂无记录 </div></div>
+	 </if>
+   </div>
+ </div>
+<div id="notice_vote" style="z-index:99;left:58%;top: 30%;width:250px;height:40px; line-height:40px;color:#fff; font-size:18px;  border-radius: 9px;  background-color: #2dcc70;  margin: 0 auto; text-align:center; font-family:'微软雅黑';margin-left:-150px!important;margin-top:-60px!important;margin-top:0px;position:fixed!important;display:none">投票成功</div>
+<div id="bg" class="bg" style="display:none;"></div>
+<if condition="$memberNotice neq ''">
+	{pigcms:$memberNotice}
+</if>
+</body>
+</html>
+<script type="text/javascript">
+//锚点
+function anchor(){
+	$("#TopTipHolder").show();
+	if($("#TopTipHolder").css('height') == '0px'){
+		$("#TopTipClose").click();//执行关闭
+		$("#TopTipHolder").css('height','35px');//弹出
+	}
+}
+function anchor_follow(){
+	$("#fly_page").show();
+}
+//提示信息
+function votenotice(text){
+	$("#notice_vote").text(text);
+	$("#notice_vote").show();
+	$("#bg").show();
+	$("#notice_vote").fadeOut(1500);
+	$("#bg").fadeOut(1500);
+}
+//投票
+function my_vote(id){
+	$.ajaxSetup({
+		async: false
+	});
+	if(id){
+		var msg = '';
+		$.get("/index.php?g=Wap&m=Voteimg&a=vote&vote_id={pigcms:$vote_id}&token={pigcms:$token}&id="+id,function(info){
+			var data = eval('('+info+')');
+			if(data.status == 'done'){
+				if(data.data.left_vote_day == ''){
+					msg = '投票成功';
+				}else{
+					msg = '投票成功,今日还可以投'+data.data.left_vote_day+'票';
+				}
+				var vid = $(".content_piao_"+id).text();
+				var total_count = $("#main_b").text();
+				$(".content_piao_"+id).text((parseInt(vid)+1)+'票');
+				$("#main_b").text((parseInt(total_count)+1));
+				votenotice(msg);
+			}else if(data.status == 'fail' && data.data == 'no_follow'){
+				$("#no_follow").show();
+				$("#bg").show();
+			}else{
+				votenotice(data.data);
+			}
+		});
+	}else{
+		votenotice();
+	}
+}
+//隐藏提醒关注注册弹框
+$(".close").click(function(){
+	$("#no_follow").hide();
+	$("#bg").hide();
+});
+</script>
+<script>
+window.shareData = {  
+	"moduleName":"Voteimg",
+	"moduleID":"0",
+	"imgUrl": "{pigcms:$item['vote_img']}", 
+	"timeLineLink": "{pigcms:$f_siteUrl}{pigcms::U('Voteimg/share',array('token'=>$token,'id'=>$vote_id,'item_id'=>$item_id))}",
+	"sendFriendLink": "{pigcms:$f_siteUrl}{pigcms::U('Voteimg/share',array('token'=>$token,'id'=>$vote_id,'item_id'=>$item_id))}",
+	"weiboLink": "{pigcms:$f_siteUrl}{pigcms::U('Voteimg/share',array('token'=>$token,'id'=>$vote_id,'item_id'=>$item_id))}",
+	"tTitle": "{pigcms:$action_name}",
+	"tContent": "{pigcms:$item['manifesto']|strip_tags}",
+	"fTitle": "{pigcms:$action_name}:{pigcms:$item['manifesto']|strip_tags}",
+};
+</script>
+{pigcms:$shareScript}

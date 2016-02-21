@@ -1,0 +1,39 @@
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+	<if condition="$usertplid eq 0">
+		<link href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style.css?id=103" rel="stylesheet" type="text/css" />
+	<else />
+		<link href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style-{pigcms:$usertplid}.css?id=103" rel="stylesheet" type="text/css" />
+	</if>
+<link rel="stylesheet" type="text/css" href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style_2_common.css?BPm" />
+<div class="content" >
+	<div class="cLineB">
+		<h4>生成二维码<span class="FAQ"></span></h4>
+	</div>
+
+	<div class="msgWrap">
+		 <form class="form" method="post" action="" enctype="multipart/form-data" >
+			<TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+				<THEAD>
+					<TR>
+						<TH valign="top"><label for="keyword">渠道号：</label></TH>
+						<TD><input type="text" class="px" id="keyword" value="" name="keyword" style="width:500px" ><br />
+							32位非0整型，最大值为100000</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+				 </THEAD>
+				 <TBODY>
+					<TR>
+						<TH></TH>
+						<TD><button type="submit"  name="button"  class="btnGreen left" >保存</button>　
+							<a href="javascript:history.go(-1);"  class="btnGray vm">取消</a>
+						</TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+		</form>
+	</div>
+	
+</div>
+<include file="Public:footer"/>
