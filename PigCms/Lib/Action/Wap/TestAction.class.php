@@ -14,6 +14,12 @@ class TestAction extends WapAction{
 			exit;
 		}
 	}
+
+
+    public function sound(){
+
+        $this->display();
+    }
 	//判断关注
 	public function gzhurl(){
 		$gzhurl = M('Home')->where(array('token'=>$this->token))->getField('gzhurl');
