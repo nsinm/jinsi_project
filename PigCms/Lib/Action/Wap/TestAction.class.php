@@ -17,8 +17,8 @@ class TestAction extends WapAction{
 
 
     public function sound(){
-
-        $this->display();
+        echo "111";
+        //$this->display();
     }
 	//判断关注
 	public function gzhurl(){
