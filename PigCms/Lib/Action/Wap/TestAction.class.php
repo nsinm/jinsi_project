@@ -17,30 +17,8 @@ class TestAction extends WapAction{
 
 
     public function sound(){
-        $where_test['token'] = $this->token;
-        $where_test['pigcms_id'] = (int)($_GET['id']);
-        $test = $this->m_test->where($where_test)->find();
-        $save['pv'] = $test['pv'] + 1;
-        $update = $this->m_test->where($where_test)->save($save);
-        $this->assign("test",$test);
-        $where_test_list['token'] = $this->token;
-        $test_list1 = $this->m_test->where($where_test_list)->order("pigcms_id desc")->select();
-        $test_list2 = $this->m_test->where($where_test_list)->order("pigcms_id")->select();
-        if($test_list1[0]['pigcms_id'] == (int)($_GET['id'])){
-            $next['id'] = $test_list2[0]['pigcms_id'];
-            $next['name'] = $test_list2[0]['name'];
-        }else{
-            foreach($test_list2 as $k=>$v){
-                $test_next[$v['pigcms_id']] = $k;
-            }
-            $where_test_next['token'] = $this->token;
-            $where_test_next['pigcms_id'] = $test_list2[($test_next[(int)($_GET['id'])]+1)]['pigcms_id'];
-            $find_test_next = $this->m_test->where($where_test_next)->find();
-            $next['id'] = $find_test_next['pigcms_id'];
-            $next['name'] = $find_test_next['name'];
-        }
-        $this->assign("next",$next);
-        //$this->display();
+
+        $this->display();
     }
 	//判断关注
 	public function gzhurl(){
