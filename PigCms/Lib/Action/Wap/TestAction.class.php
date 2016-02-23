@@ -40,7 +40,7 @@ class TestAction extends WapAction{
             $next['name'] = $find_test_next['name'];
         }
         $this->assign("next",$next);
-        $this->display();
+        //$this->display();
     }
 	//判断关注
 	public function gzhurl(){
