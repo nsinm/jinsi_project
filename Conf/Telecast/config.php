@@ -7,6 +7,6 @@
  */
 
 return array(
-    'TEMP_FILE_DEPR' => '_',
+    'TMPL_FILE_DEPR' => '_',
     'DEFAULT_THEME'=>'default',
 );
