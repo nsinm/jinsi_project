@@ -105,7 +105,7 @@ $dirfile_items = array(
 	'PLAS' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/System/'),
 	'PLAU' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/User/'),
 	'PLAW' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/Wap/'),
-	'PLAT' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/Telecast/'),
+	'PLAT' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/Live/'),
 	
 	'PLM' => array('type' => 'dir', 'path' => './PigCms/Lib/Model/'),
 	'PLMO' => array('type' => 'dir', 'path' => './PigCms/Lib/Model/Other/'),
@@ -153,9 +153,9 @@ $dirfile_items = array(
 	'tWd' => array('type' => 'dir', 'path' => './tpl/Wap/default/'),
 	'tWdc' => array('type' => 'dir', 'path' => './tpl/Wap/default/common/'),
 
-	'tT' => array('type' => 'dir', 'path' => './tpl/Telecast/'),
-	'tTd' => array('type' => 'dir', 'path' => './tpl/Telecast/default/'),
-	'tTdc' => array('type' => 'dir', 'path' => './tpl/Telecast/default/style/'),
+	'tT' => array('type' => 'dir', 'path' => './tpl/Live/'),
+	'tTd' => array('type' => 'dir', 'path' => './tpl/Live/default/'),
+	'tTdc' => array('type' => 'dir', 'path' => './tpl/Live/default/style/'),
 
 	
 );
