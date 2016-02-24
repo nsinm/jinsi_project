@@ -203,6 +203,16 @@ $(function () {
                         $loadingToast.hide();
                     }, 2000);
                 }
+            },
+            ".like-btn":{
+                click: function (e) {
+                    var $this = $(this),
+                        $like = $this.find(".icon-like")
+                        $.ajax({})
+                        $like.toggleClass('on')
+
+                   
+                }
             }
         }
     };
