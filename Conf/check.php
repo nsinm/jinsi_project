@@ -105,6 +105,7 @@ $dirfile_items = array(
 	'PLAS' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/System/'),
 	'PLAU' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/User/'),
 	'PLAW' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/Wap/'),
+	'PLAT' => array('type' => 'dir', 'path' => './PigCms/Lib/Action/Telecast/'),
 	
 	'PLM' => array('type' => 'dir', 'path' => './PigCms/Lib/Model/'),
 	'PLMO' => array('type' => 'dir', 'path' => './PigCms/Lib/Model/Other/'),
@@ -121,8 +122,7 @@ $dirfile_items = array(
 	'PLOWN' => array('type' => 'dir', 'path' => './PigCms/Lib/ORG/Weixinnewpay/'),
 	'PLOWP' => array('type' => 'dir', 'path' => './PigCms/Lib/ORG/Weixinpay/'),
 	'PLOY' => array('type' => 'dir', 'path' => './PigCms/Lib/ORG/Yeepay/'),
-	
-	
+
 	't' => array('type' => 'dir', 'path' => './tpl/'),
 	'tA' => array('type' => 'dir', 'path' => './tpl/Agent/'),
 	
@@ -152,6 +152,10 @@ $dirfile_items = array(
 	'tW' => array('type' => 'dir', 'path' => './tpl/Wap/'),
 	'tWd' => array('type' => 'dir', 'path' => './tpl/Wap/default/'),
 	'tWdc' => array('type' => 'dir', 'path' => './tpl/Wap/default/common/'),
+
+	'tT' => array('type' => 'dir', 'path' => './tpl/Telecast/'),
+	'tTd' => array('type' => 'dir', 'path' => './tpl/Telecast/default/'),
+	'tTdc' => array('type' => 'dir', 'path' => './tpl/Telecast/default/style/'),
 
 	
 );
