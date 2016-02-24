@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="/tpl/Telecast/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Telecast/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Telecast/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+    <div class="plus-nav" id="showNormalAction">
+        
+    </div>
+        <!--BEGIN actionSheet-->
+        <div id="actionSheet_wrap">
+            <div class="weui_mask_transition" id="mask"></div>
+            <div class="weui_actionsheet bt44" id="weui_actionsheet1">
+                <div class="weui_actionsheet_menu">
+                    <div class="weui_actionsheet_cell">照片</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                </div>
+                <div class="weui_actionsheet_action">
+                    <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
+                </div>
+            </div>
+        </div>
+        <!--END actionSheet-->
+    <div class="bottom-bar">
+        <div class="selected">直播间</div>
+        <div>导师</div>
+        <div>我的</div>
+    </div>
+    <div class="container js_container">
+
+    </div>
+    <script type="text/html" id="tpl_home">
+    <div class="page">
+    <div class="hd topbar">
+        <h1 class="page_title teacher_title">推荐导师</h1>
+        <span class="more-teacher">更多</span>
+    </div>
+    <div class="bd">
+        <div class="weui_grids user_grids">
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    猪小薇
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="cell">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    导师列表
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="toast">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    评论详情
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="dialog1">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    猪小薇
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="progress1">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    猪小薇
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="msg">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    我的关注
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="article">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    我的粉丝
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="actionsheet">
+                <div class="user_thumb mb10">
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    个人信息
+                </p>
+            </a>
+        </div>
+        <div class="weui_cells weui_cells_access mt0">
+            <div class="weui_toptips weui_warn js_tooltips teacher_toggle" style="display: none;"></div>
+            <div class="filter off" id="filter" alt=""></div>
+            <div class="weui_cell live_block">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                      <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="user_livename">JUDY</p>
+                    <p class="user_liveword">我不是股神，是神</p>
+                    <img src="/tpl/Telecast/default/style//uinfo/1.jpg" alt="">
+                    <p class="user_livetime">2016-1-15 21:00</p>
+                    <p class="user_liveinteract">
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">赞&nbsp;36
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">评论&nbsp;32
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/share@2x.png" alt="">分享&nbsp;32
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="weui_cell live_block">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                      <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="user_livename">JUDY</p>
+                    <p class="user_liveword">我不是股神，是神</p>
+                    <p class="user_wordbubble" >
+                        <img src="/tpl/Telecast/default/style/images/bubble@2x.png" alt="">
+                        <span>32&quot;</span>
+                    </p>
+                    <p class="user_livetime">2016-1-15 21:00</p>
+                    <p class="user_liveinteract">
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">赞&nbsp;36
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">评论&nbsp;32
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/share@2x.png" alt="">分享&nbsp;32
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="weui_cell live_block">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                      <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="user_livename">JUDY</p>
+                    <p class="user_liveword">我不是股神，是神</p>
+                    <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                    <p class="user_livetime">2016-1-15 21:00</p>
+                    <p class="user_liveinteract">
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">赞&nbsp;36
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">评论&nbsp;32
+                        </span>
+                        <span>
+                            <img src="/tpl/Telecast/default/style/images/share@2x.png" alt="">分享&nbsp;32
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</script>
+    <script type="text/html" id="tpl_button">
+<div class="page">
+    <div class="weui_cells weui_cells_access">
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_hd">
+                <div class="user_thumb mr10">
+                    <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                </div>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>头像</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>名字</p>
+            </div>
+            <div class="weui_cell_ft">血海</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>风格</p>
+            </div>
+            <div class="weui_cell_ft">激进</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>签名</p>
+            </div>
+            <div class="weui_cell_ft">我不是股神</div>
+        </a>
+        <a class="weui_cell" href="javascript:;">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>简介</p>
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+    </div>
+</div>
+</script>
+<script type="text/html" id="tpl_cell">
+    <div class="page">
+        <div class="bd">
+            <div class="weui_cells_title">筛选方式</div>
+            <div class="weui_cells">
+                <div class="weui_cell weui_cell_select">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="select1">
+                            <option selected="" value="1">推荐</option>
+                            <option value="2">人气</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary ">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <!--<p class="user_signature">我不是股神，是神</p>-->
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow">取消关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                        
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">关注：1221</p>
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                        
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <p class="user_location">位置：</p>
+                        <p class="user_style">风格：</p>
+                        <p class="user_intro">简介：</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+    <script type="text/html" id="tpl_toast">
+        <div class="page">
+            <div class="bd pdtb0">
+                <div class="weui_cells weui_cells_access mt0">
+                    <div class="weui_cell live_block">
+                        <div class="weui_cell_hd">
+                            <div class="user_thumb mr10">
+                              <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="user_livename">JUDY</p>
+                            <p class="user_liveword">我不是股神，是神</p>
+                            <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                            <p class="user_livetime">2016-1-15 21:00</p>
+                            <p class="user_liveinteract">
+                                <span>
+                                    <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">赞&nbsp;36
+                                </span>
+                                <span>
+                                    <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">评论&nbsp;32
+                                </span>
+                                <span>
+                                    <img src="/tpl/Telecast/default/style/images/share@2x.png" alt="">分享&nbsp;32
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="weui_cell live_block">
+                        <div class="weui_cell_hd">
+                            <div class="user_thumb mr10">
+                              <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="user_livename">JUDY</p>
+                            <p class="user_liveword">我不是股神，是神我不是股神，是神我不是股神，是神我不是股神，是神我不是股神，是神我不是股神，是神</p>
+                            <p class="user_livetime"></p>
+                            <p class="user_liveinteract">
+                                <span class="sm-time">
+                                    2016-1-15 21:00
+                                </span>
+                                <span class="sm-like">
+                                    <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">36
+                                </span>
+                                <span class="sm-comment">
+                                    <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">32
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="weui_cell live_block">
+                        <div class="weui_cell_hd">
+                            <div class="user_thumb mr10">
+                              <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="user_livename">JUDY</p>
+                            <p class="user_liveword">我不是股神，是神</p>
+                            <p class="user_livetime"></p>
+                            <p class="user_liveinteract">
+                                <span class="sm-time">
+                                    2016-1-15 21:00
+                                </span>
+                                <span class="sm-like">
+                                    <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">36
+                                </span>
+                                <span class="sm-comment">
+                                    <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">32
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="weui_cell live_block">
+                        <div class="weui_cell_hd">
+                            <div class="user_thumb mr10">
+                              <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p class="user_livename">JUDY</p>
+                            <p class="user_liveword">我不是股神，是神</p>
+                            <p class="user_livetime"></p>
+                            <p class="user_liveinteract">
+                                <span class="sm-time">
+                                    2016-1-15 21:00
+                                </span>
+                                <span class="sm-like">
+                                    <img src="/tpl/Telecast/default/style/images/like@2x.png" alt="">36
+                                </span>
+                                <span class="sm-comment">
+                                    <img src="/tpl/Telecast/default/style/images/comment@2x.png" alt="">32
+                                </span>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</script>
+    <script type="text/html" id="tpl_dialog">
+<div class="page">
+    <div class="hd">
+        <h1 class="page_title">Dialog</h1>
+    </div>
+    <div class="bd spacing">
+        <a href="javascript:;" class="weui_btn weui_btn_primary" id="showDialog1">点击弹出Dialog样式一</a>
+        <a href="javascript:;" class="weui_btn weui_btn_primary" id="showDialog2">点击弹出Dialog样式二</a>
+    </div>
+    <!--BEGIN dialog1-->
+    <div class="weui_dialog_confirm" id="dialog1" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">弹窗标题</strong></div>
+            <div class="weui_dialog_bd">自定义弹窗内容，居左对齐显示，告知需要确认的信息等</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog default">取消</a>
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <!--END dialog1-->
+    <!--BEGIN dialog2-->
+    <div class="weui_dialog_alert" id="dialog2" style="display: none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">弹窗标题</strong></div>
+            <div class="weui_dialog_bd">弹窗内容，告知当前页面信息等</div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <!--END dialog2-->
+</div>
+</script>
+    <script type="text/html" id="tpl_progress">
+<div class="page">
+    <div class="hd">
+        <h1 class="page_title">Progress</h1>
+    </div>
+    <div class="bd spacing">
+        <div class="weui_progress">
+            <div class="weui_progress_bar">
+                <div class="weui_progress_inner_bar js_progress" style="width: 0%;"></div>
+            </div>
+            <a href="javascript:;" class="weui_progress_opr">
+                <i class="weui_icon_cancel"></i>
+            </a>
+        </div>
+        <br>
+        <div class="weui_progress">
+            <div class="weui_progress_bar">
+                <div class="weui_progress_inner_bar js_progress" style="width: 50%;"></div>
+            </div>
+            <a href="javascript:;" class="weui_progress_opr">
+                <i class="weui_icon_cancel"></i>
+            </a>
+        </div>
+        <br>
+        <div class="weui_progress">
+            <div class="weui_progress_bar">
+                <div class="weui_progress_inner_bar js_progress" style="width: 80%;"></div>
+            </div>
+            <a href="javascript:;" class="weui_progress_opr">
+                <i class="weui_icon_cancel"></i>
+            </a>
+        </div>
+        <div class="weui_btn_area">
+            <a href="javascript:;" class="weui_btn weui_btn_primary" id="btnStartProgress">上传</a>
+        </div>
+    </div>
+</div>
+</script>
+    <script type="text/html" id="tpl_msg">
+<div class="page">
+    <div class="bd">
+        <div class="weui_cells_title">我的关注</div>
+        <div class="weui_cells weui_cells_checkbox">
+            <label class="weui_cell weui_check_label" for="s11">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                        <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>JUDY</p>
+                    <p class="user_signature">我不是股神，是神</p>
+                </div>
+                <input type="checkbox" name="checkbox1" class="weui_check" id="s11">
+                <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow">取消关注</a>
+                <!-- <i class="weui_icon_checked"></i> -->
+            </label>
+            <label class="weui_cell weui_check_label" for="s12">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                        <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>JUDY</p>
+                    <p class="user_signature">我不是股神，是神</p>
+                </div>
+                <input type="checkbox" name="checkbox1" class="weui_check" id="s12">
+                <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                <!-- <i class="weui_icon_checked"></i> -->
+            </label>
+        </div>
+    </div>
+</div>
+</script>
+    <script type="text/html" id="tpl_article">
+    <div class="page">
+        <div class="bd">
+            <div class="weui_cells_title">我的粉丝</div>
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+    <script type="text/html" id="tpl_actionsheet">
+    <!-- 我的    页面 -->
+    <div class="page" style="overflow: hidden">
+        <div class="bd">
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                          <img src="/tpl/Telecast/default/style/uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的关注</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的粉丝</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的直播</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>用户反馈</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>学习课堂</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+        </div>
+        <!--<div class="bd spacing">
+            <a href="javascript:;" class="weui_btn weui_btn_primary" id="showActionSheet">点击上拉ActionSheet</a>
+        </div>-->
+        <!--BEGIN actionSheet-->
+        <!--<div id="actionSheet_wrap">
+            <div class="weui_mask_transition" id="mask"></div>
+            <div class="weui_actionsheet" id="weui_actionsheet">
+                <div class="weui_actionsheet_menu">
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                    <div class="weui_actionsheet_cell">示例菜单</div>
+                </div>
+                <div class="weui_actionsheet_action">
+                    <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
+                </div>
+            </div>
+        </div>-->
+        <!--END actionSheet-->
+    </div>
+</script>
+    <script type="text/html" id="tpl_icons">
+<div class="page">
+    <div class="hd">
+        <h1 class="page_title">Icons</h1>
+    </div>
+    <div class="bd spacing">
+        <i class="weui_icon_msg weui_icon_success"></i>
+        <i class="weui_icon_msg weui_icon_info"></i>
+        <i class="weui_icon_msg weui_icon_warn"></i>
+        <i class="weui_icon_msg weui_icon_waiting"></i>
+        <i class="weui_icon_safe weui_icon_safe_success"></i>
+        <i class="weui_icon_safe weui_icon_safe_warn"></i>
+        <div class="icon_sp_area">
+            <i class="weui_icon_success"></i>
+            <i class="weui_icon_success_circle"></i>
+            <i class="weui_icon_success_no_circle"></i>
+            <i class="weui_icon_info"></i>
+            <i class="weui_icon_waiting"></i>
+            <i class="weui_icon_waiting_circle"></i>
+            <i class="weui_icon_circle"></i>
+            <i class="weui_icon_warn"></i>
+            <i class="weui_icon_download"></i>
+            <i class="weui_icon_info_circle"></i>
+            <i class="weui_icon_cancel"></i>
+            <i class="weui_icon_search"></i>
+        </div>
+    </div>
+</div>
+</script>
+    <script src="/tpl/Telecast/default/style/js/zepto.min.js"></script>
+    <script src="/tpl/Telecast/default/style/js/example.js"></script>
+    <script>
+    // 十字按钮呼出
+    var navBar = $('#showNormalAction')[0];
+        navBar.onclick=function(){
+                    var mask = $('#mask');
+                    var weuiActionsheet = $('#weui_actionsheet1');
+                    weuiActionsheet.addClass('weui_actionsheet_toggle');
+                    mask.show().addClass('weui_fade_toggle').click(function () {
+                        hideActionSheet(weuiActionsheet, mask);
+                    });
+                    $('#actionsheet_cancel').click(function () {
+                        hideActionSheet(weuiActionsheet, mask);
+                    });
+                    weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
+
+                    function hideActionSheet(weuiActionsheet, mask) {
+                        weuiActionsheet.removeClass('weui_actionsheet_toggle');
+                        mask.removeClass('weui_fade_toggle');
+                        weuiActionsheet.on('transitionend', function () {
+                            mask.hide();
+                        }).on('webkitTransitionEnd', function () {
+                            mask.hide();
+                        })
+                    }
+                }
+    // //直播列表筛选
+    // var liveList = $("#filter")[0];
+    //     liveList.onclick = function () {
+    //         console.log(111)
+    //             var $tooltips = $('.js_tooltips');
+    //             if ($tooltips.css('display') != 'none') {
+    //                 return;
+    //             }
+
+    //             // 如果有`animation`, `position: fixed`不生效
+    //             $('.page.cell').removeClass('slideIn');
+    //             $tooltips.show();
+    //             setTimeout(function () {
+    //                 $tooltips.hide();
+    //             }, 2000);
+    //         }
+    </script>
+</body>
+</html>
