@@ -29,12 +29,12 @@ class IndexAction extends Action
     public function getRecomendInstructor ()
     {
         if(!IS_AJAX) _404('页面不存在');
-        $result = array('status' => 'fail', 'errcode' => 1);
+        $result = array('errcode' => 1, 'msg' => '获取推荐导师数据失败!');
         $instructors = M('user')->where('jinsi_user_type = 2')->order('jinsi_user_create_time')->limit(8)->select();
         if($instructors){
             $result = array(
-                'status' => 'success',
                 'errcode' => 0,
+                'msg' => '获取推荐导师数据成功!',
                 'data' => $instructors
             );
         }
