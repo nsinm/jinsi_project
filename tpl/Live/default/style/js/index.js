@@ -14,7 +14,7 @@ var indexAction = {
                     html += '<div class="user_thumb mb10">';
                     html += '<img src="' + data.data[index].jinsi_user_header_pic + '" alt="">';
                     html += '</div>';
-                    html += '<p class="weui_grid_label">' + data.data[index].jinsi_user_name /p>';
+                    html += '<p class="weui_grid_label">' + data.data[index].jinsi_user_name + '</p>';
                     html += '</a>';
                 }
             }else{
