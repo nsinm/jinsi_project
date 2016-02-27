@@ -12,9 +12,9 @@ var indexAction = {
                 for (var index in data) {
                     html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button">';
                     html += '<div class="user_thumb mb10">';
-                    html += '<img src="/tpl/Live/default/style/uinfo/1.jpg" alt="">';
+                    html += '<img src="' + data.data[index].jinsi_user_header_pic + '" alt="">';
                     html += '</div>';
-                    html += '<p class="weui_grid_label">' + data.data[index].jinsi_user_name + '</p>';
+                    html += '<p class="weui_grid_label">' + data.data[index].jinsi_user_name /p>';
                     html += '</a>';
                 }
             }else{
