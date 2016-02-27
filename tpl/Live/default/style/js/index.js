@@ -6,7 +6,7 @@ var indexAction = {
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
-            tag.remove();
+            tag.empty();
             var html = '';
             for(var index in data){
                 html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button">';

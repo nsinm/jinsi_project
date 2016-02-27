@@ -29,8 +29,15 @@ class IndexAction extends Action
     public function getRecomendInstructor ()
     {
         if(!IS_AJAX) _404('页面不存在');
-
+        $result = array('status' => 'fail', 'errcode' => 1);
         $instructors = M('user')->where('jinsi_user_type = 2')->order('jinsi_user_create_time')->limit(8)->select();
-        $this->ajaxReturn($instructors, 'JSON');
+        if($instructors){
+            $result = array(
+                'status' => 'success',
+                'errcode' => 0,
+                'data' => $instructors
+            );
+        }
+        $this->ajaxReturn($result, 'JSON');
     }
 }
