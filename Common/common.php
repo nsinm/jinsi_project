@@ -667,4 +667,14 @@ function trace($value='[think]',$label='',$level='DEBUG',$record=false) {
         }
     }
 }
+
+/**
+ * 格式化输出数组
+ */
+if(!function_exists('p')) {
+    function p ($arr) {
+        echo '<pre>';
+        print_r($arr);
+    }
+}
 ?>
