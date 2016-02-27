@@ -16,6 +16,10 @@ class IndexAction extends Action
      */
     public function index ()
     {
+        $ajaxUrls = array(
+            'griUrl' => U('getRecomendInstructor')
+        );
+        $this->assign('urls', $ajaxUrls);
         $this->display();
     }
 
@@ -24,7 +28,9 @@ class IndexAction extends Action
      */
     public function getRecomendInstructor ()
     {
-        $instructors = M('user', 'jinsi_')->where('jinsi_user_type = 1')->order('jinsi_user_create_time')->limit(8)->select();
-        p($instructors);
+        if(!IS_AJAX) _404('页面不存在');
+
+        $instructors = M('user')->where('jinsi_user_type = 2')->order('jinsi_user_create_time')->limit(8)->select();
+        $this->ajaxReturn($instructors, 'JSON');
     }
 }
