@@ -61,7 +61,8 @@ class IndexAction extends Action
     {
         if(!IS_AJAX) _404('页面不存在');
         $result= array('errcode' => 1, 'msg' => '获取关注导师评论失败!');
-        $instructorIds = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
+        $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
+        $instructorIds = array_column($instructors, 'jinsi_follow_user_id');
         $this->ajaxReturn($instructorIds, 'JSON');
     }
 }
