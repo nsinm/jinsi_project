@@ -6,7 +6,7 @@
  * Time: 下午12:02
  */
 
-class LiveModel extends Model
+class LiveBehavior extends Behavior
 {
     function get_openid($url)
     {
