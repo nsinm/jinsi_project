@@ -11,7 +11,7 @@ class AuthAction extends Action
 
     public function index ()
     {
-        $Live = D('Live');
+        $Live = M('Live');
         echo $Live->get_openid('aaa');
         //echo M('live')->get_openid('aa');
     }
