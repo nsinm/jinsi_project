@@ -11,6 +11,18 @@
 
 class IndexAction extends Action
 {
+    /*
+     * 当前登陆用户id
+     */
+    private $userId;
+
+    function __construct()
+    {
+        if(!session('userId'))
+            session('userId', 2);
+        $this->userId = session('userId');
+    }
+
     /**
      * 直播主页
      */
@@ -39,5 +51,15 @@ class IndexAction extends Action
             );
         }
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     *
+     */
+    public function getReInCommnet ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '获取关注导师评论失败!');
+        //$instructorIds = M('follow')->
     }
 }

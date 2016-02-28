@@ -706,3 +706,23 @@ function send_http_status($code) {
         header('Status:'.$code.' '.$_status[$code]);
     }
 }
+
+function vpost($url,$data=null){ // 模拟提交数据函数
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)'); // 模拟用户使用的浏览器
+
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS,http_build_query((array)$data));
+    curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+    curl_setopt($curl, CURLOPT_HEADER, 0);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $tmpInfo = curl_exec($curl);
+    if (curl_errno($curl)) {
+        echo 'Errno'.curl_error($curl);
+    }
+    curl_close($curl);
+    return $tmpInfo;
+}
