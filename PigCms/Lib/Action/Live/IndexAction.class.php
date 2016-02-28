@@ -67,6 +67,13 @@ class IndexAction extends Action
             $in = '(' . implode(',', $instructorIds) . ')';
             $sql = "SELECT jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
             $comments = M()->query($sql);
+            foreach($comments as $key => $value){
+                array_walk($value, function(&$v, $k){
+                    if($k == 'jinsi_content_create_time'){
+                        $v = date('Y-m-d H:i:s', $v);
+                    }
+                });
+            }
             if($comments){
                 $result = array('errcode' => 0, 'msg' => '获取关注导师评论列表成功!', 'data' => $comments);
             }
