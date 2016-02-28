@@ -55,7 +55,7 @@ class IndexAction extends Action
     }
 
     /**
-     *
+     * 获取关注导师评论列表
      */
     public function getReInCommnet ()
     {
