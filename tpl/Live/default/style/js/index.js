@@ -25,7 +25,14 @@ var indexAction = {
     },
     'getReInComment' : function(){
         $.getJSON(params.gricUrl, {}, function(data){
-            console.log(data);
+            var element = $('#user_comments');
+            var html = '';
+            if(data.errcode == 0){
+                for(var index in data.data){
+                    html += '<div class="weui_cell live_block">';
+                    html += '';
+                }
+            }
         }, 'JSON');
     }
 };
