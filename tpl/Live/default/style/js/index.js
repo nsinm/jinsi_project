@@ -33,4 +33,6 @@ var indexAction = {
 $(function(){
     //获取推荐导师列表
     indexAction.getRecomendInstructor();
+    //获取关注导师评论列表
+    indexAction.getReInComment();
 });
