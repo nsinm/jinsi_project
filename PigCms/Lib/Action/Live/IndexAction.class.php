@@ -69,7 +69,7 @@ class IndexAction extends Action
             $comments = M()->query($sql);
             foreach($comments as $key => $value){
                 array_walk($value, function(&$v, $k){
-                    if($k == 'jinsi_content_create_time'){
+                    if($k == 'jinsi_content_create'){
                         $v = date('Y-m-d H:i:s', $v);
                     }
                 });
