@@ -65,15 +65,8 @@ class IndexAction extends Action
         if($instructors) {
             $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
             $in = '(' . implode(',', $instructorIds) . ')';
-            $sql = "SELECT jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
+            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i:%s%') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
             $comments = M()->query($sql);
-            foreach($comments as $key => $value){
-                array_walk($value, function(&$v, $k){
-                    if($k == 'jinsi_content_create'){
-                        $v = date('Y-m-d H:i:s', $v);
-                    }
-                });
-            }
             if($comments){
                 $result = array('errcode' => 0, 'msg' => '获取关注导师评论列表成功!', 'data' => $comments);
             }
