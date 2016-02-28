@@ -29,7 +29,8 @@ class IndexAction extends Action
     public function index ()
     {
         $ajaxUrls = array(
-            'griUrl' => U('getRecomendInstructor')
+            'griUrl' => U('getRecomendInstructor'),
+            'gricUrl' => U('getReInCommnet')
         );
         $this->assign('urls', $ajaxUrls);
         $this->display();
@@ -60,6 +61,7 @@ class IndexAction extends Action
     {
         if(!IS_AJAX) _404('页面不存在');
         $result= array('errcode' => 1, 'msg' => '获取关注导师评论失败!');
-        //$instructorIds = M('follow')->
+        $instructorIds = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
+        $this->ajaxReturn($instructorIds, 'JSON');
     }
 }

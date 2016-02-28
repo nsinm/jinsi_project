@@ -23,6 +23,11 @@ var indexAction = {
             tag.html(html);
         }, 'JSON');
     },
+    'getReInComment' : function(){
+        $.getJSON(params.gricUrl, {}, function(data){
+            console.log(data);
+        }, 'JSON');
+    }
 };
 
 $(function(){
