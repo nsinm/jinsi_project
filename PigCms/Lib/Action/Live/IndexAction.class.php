@@ -65,7 +65,7 @@ class IndexAction extends Action
         if($instructors) {
             $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
             $in = '(' . implode(',', $instructorIds) . ')';
-            $sql = "SELECT jc.* ju.id user_id ju.jinsi_user_name ju.jinsi_user_header.pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
+            $sql = "SELECT jc.* ju.id AS user_id ju.jinsi_user_name ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
             $comments = M()->query($sql);
             if($comments){
                 $result = array('errcode' => 0, 'msg' => '获取关注导师评论列表成功!', 'data' => $comments);
