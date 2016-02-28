@@ -1,6 +1,6 @@
 <?php 
 return array (
-  'pigcms_debug' => '0',
+  'pigcms_debug' => '1',
   'site_name' => '金丝',
   'site_title' => '金丝',
   'site_logo' => 'http://182.92.222.144/Conf/logo-sy.png',
