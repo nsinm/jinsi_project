@@ -6,11 +6,10 @@
  * Time: 下午12:02
  */
 
-class LiveBehavior extends Behavior
+class LiveBehavio extends Behavior
 {
     function get_openid($url)
     {
-
         return $url;
         //$url = urlencode($url);
         //return $appid = C('APPID');
