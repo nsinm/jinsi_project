@@ -26,7 +26,7 @@ var indexAction = {
     'getReInComment' : function(){
         $.getJSON(params.gricUrl, {}, function(data){
             console.log(data);
-            var element = $('#user_comments');
+            var tag = $('#user_comments');
             var html = '';
             if(data.errcode == 0){
                 var infos = data.data;
@@ -50,10 +50,25 @@ var indexAction = {
                         html +=         '<span>32&quot;</span>';
                         html +=     '</p>';
                     }
-                    html +=         '<p class="user_livetime"></p>';
-
+                    html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
+                    html +=         '<p class="user_liveinteract">';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/like@2x.png" alt="">赞&nbsp;' + infos[index].jinsi_content_praise_no;
+                    html +=             '</span>';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/comment@2x.png" alt="">评论&nbsp;' + infos[index].jinsi_content_comment_no;
+                    html +=             '</span>';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/share@2x.png" alt="">分享&nbsp;' + infos[index].jinsi_content_share_no;
+                    html +=             '</span>';
+                    html +=         '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
                 }
+            }else{
+                html += '还没有导师直播内容哦!';
             }
+            tag.append(html);
         }, 'JSON');
     }
 };
