@@ -6,13 +6,13 @@
  * Time: 上午11:53
  */
 
-class AuthAction extends Action
+class LiveModel extends Model
 {
 
-    public function index ()
+    public function get_openid ($url)
     {
-        $Live = M('Live');
-        echo $Live->get_openid('aaa');
+        return $url;
+
         //echo M('live')->get_openid('aa');
     }
 }

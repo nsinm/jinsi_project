@@ -1,6 +1,6 @@
 <?php
 if (!C('pigcms_debug')){
-Header("Location: http://".$_SERVER['HTTP_HOST']); 
+Header("Location: http://".$_SERVER['HTTP_HOST']);
 }else {
 ?>
 
