@@ -15,5 +15,7 @@ return array(
 	/*定义模版标签*/
 	'TMPL_L_DELIM'   		=>'{pigcms:',			//模板引擎普通标签开始标记
 	'TMPL_R_DELIM'			=>'}',				//模板引擎普通标签结束标记
+	'APPID'					=>'wx4a9dbdd2c0d4a024',   //金丝用的APPID
+	'APPSECRET'				=>'ccfab95b3c2837037b9fd1d8aa0ce854',
 );
 ?>
