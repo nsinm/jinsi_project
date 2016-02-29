@@ -61,7 +61,7 @@ class LiveModel extends Model
     public function get_user_info($openid)
     {
         $where['openid'] = $openid;
-        $user = M('jinsi_user');
+        $user = M('user');
         $user_info = $user->where($where)->find();
         //print_r($user_info);
         if($user_info){
