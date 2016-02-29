@@ -747,7 +747,7 @@ function getUrl($url){
     curl_close($ch);
     return $output;
     //打印获得的数据
-    print_r($output);
+    //print_r($output);
 
 }
 
