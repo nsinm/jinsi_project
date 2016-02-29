@@ -40,4 +40,41 @@ class InstructorAction extends Action
 
         $this->ajaxReturn($result, 'JSON');
     }
+
+    /**
+     * 获取导师列表
+     */
+    public function getInstructorList ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+
+        $map = array('errcode' => 1, 'msg' => '获取导师列表失败!');
+
+        $model = M();
+        $filter = $this->_get('filter');
+        $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_create';
+        if($filter)
+            $where = 'ju.jinsi_user_type = 2';
+        $sql = "SELECT * FROM jinsi_user WHERE {$where}";
+        $result = $model->query($sql);
+        if($result) {
+            $instructors = array();
+            $sql = "SELECT count(1) FROM jinsi_follow WHERE jinsi_follow_id_user = ";
+            foreach ($result as $key => $value) {
+                $count = $model->query($sql .= $value['id']);
+                $value['follow_num'] = $count;
+                array_push($instructors, $value);
+            }
+
+            if ($filter) {
+                usort($instructors, function ($a, $b) {
+                    if ($a['follow_num'] == $b['follow_num'])
+                        return 0;
+                    return $a['follow_num'] > $b['follow_num'] ? 1 : 0;
+                });
+            }
+            $map = array('errcode' => 0, 'msg' => '获取导师列表成功!', 'data' => $instructors);
+        }
+        $this->ajaxReturn($map, 'JSON');
+    }
 }

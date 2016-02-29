@@ -31,7 +31,8 @@ class IndexAction extends Action
         $ajaxUrls = array(
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
-            'guiUrl' => U('Instructor/index')
+            'guiUrl' => U('Instructor/index'),
+            'giiUrl' => U('Instructor/getInstructorList')
         );
         $this->assign('urls', $ajaxUrls);
         $this->display();
