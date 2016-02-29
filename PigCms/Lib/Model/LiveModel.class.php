@@ -63,10 +63,22 @@ class LiveModel extends Model
         $where['openid'] = $openid;
         $user = M('jinsi_user');
         $user_info = $user->where($where)->find();
-        print_r($user_info);
+        //print_r($user_info);
+        if($user_info){
+
+        }
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$token}&openid={$openid}&lang=zh_CN";
         $openid_info = json_decode(getUrl($url),true);
-        print_r($openid_info);
+        //print_r($openid_info);
+        $data['jinsi_user_name'] = $openid_info['nickname'];
+        $data['jinsi_user_create_time'] = time();
+        $data['jinsi_user_header_pic'] = $openid_info['headimgurl'];
+        $data['open_id'] = $openid;
+        if($lastInsId = $user->add($data)){
+            echo "插入数据 id 为：$lastInsId";
+        } else {
+            $this->error('数据写入错误！');
+        }
     }
 }
