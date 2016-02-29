@@ -79,7 +79,7 @@ class LiveModel extends Model
         if($lastInsId = $user->add($data)){
             echo "插入数据 id 为：$lastInsId";
         } else {
-            $this->error('数据写入错误！');
+            echo '数据写入错误！';
         }
     }
 }
