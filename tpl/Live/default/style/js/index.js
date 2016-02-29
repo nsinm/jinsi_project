@@ -9,7 +9,7 @@ var indexAction = {
             var html = '';
             if(data.errcode == 0) {
                 for (var index in data.data) {
-                    html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button" data-uid="' + data.data[index].id + '">';
+                    html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button" onclick="goUserInfo(this, ' + data.data[index].id + ')">';
                     html +=     '<div class="user_thumb mb10">';
                     html +=         '<img src="' + data.data[index].jinsi_user_header_pic + '" alt="">';
                     html +=     '</div>';
@@ -69,11 +69,6 @@ var indexAction = {
             }
             tag.append(html);
         }, 'JSON');
-    },
-    'getUserInfo' : function(){
-        $(".bd a[data-id='button']").each(function(){
-             console.log($(this));
-        });
     }
 };
 
@@ -82,6 +77,10 @@ $(function(){
     indexAction.getRecomendInstructor();
     //获取关注导师评论列表
     indexAction.getReInComment();
-    //跳转到用户信息页面
-    indexAction.getUserInfo();
 });
+
+function goUserInfo(tag, userId){
+    $(tag).click(function(){
+        location.href = params.guiUrl + '&userId=' + userId;
+    });
+}
