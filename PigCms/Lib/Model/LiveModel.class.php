@@ -17,13 +17,14 @@ class LiveModel extends Model
     {
         $data = json_decode(F('jsapi_token'),true);
         if($data['expire_time']>time()){
+            print_r($data);
             return $data['access_token'];
         }
         $appid = C('APPID_A');
         $appsecret= C('APPSECRET_A');
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
         $data = json_decode(getUrl($url),true);
-        $data['expire_time'] = $time + 7000;
+        $data['expire_time'] = time() + 7000;
         F('jsapi_token',json_encode($data));
         return $data['access_token'];
     }
@@ -66,7 +67,11 @@ class LiveModel extends Model
         //echo $user->getlastsql();
         //print_r($user_info);
         if($user_info) {
-            print_r($user_info);
+            //print_r($user_info);
+            session('userId',$user_info['id']);
+            session('jinsi_user_name',$user_info['jinsi_user_name']);
+            session('jinsi_user_header_pic',$user_info['jinsi_user_header_pic']);
+            return $user_info['id'];
             exit;
         }
         $token = $this->get_token();
@@ -80,7 +85,10 @@ class LiveModel extends Model
         $lastInsId = $user->add($data);
         //echo $user->getlastsql();
         if($lastInsId){
-            echo "插入数据 id 为：$lastInsId";
+            session('userId',$lastInsId);
+            session('jinsi_user_name',$openid_info['nickname']);
+            session('jinsi_user_header_pic',$openid_info['headimgurl']);
+            return $lastInsId;
         } else {
             echo '数据写入错误！';
         }
