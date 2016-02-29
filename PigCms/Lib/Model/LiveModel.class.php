@@ -11,8 +11,9 @@ class LiveModel extends Model
 
     public function get_openid ($url)
     {
-        return $url;
+        //return $url;
 
+        return C('APPID');
         //echo M('live')->get_openid('aa');
     }
 }
