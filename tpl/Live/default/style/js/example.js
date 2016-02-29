@@ -320,7 +320,7 @@ $(function () {
     };
 
     pageManager.push(home)
-        .push(button)
+        //.push(button)
         .push(cell)
         .push(toast)
         .push(dialog)
