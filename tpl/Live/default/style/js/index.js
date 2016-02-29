@@ -6,7 +6,6 @@ var indexAction = {
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
-            tag.empty();
             var html = '';
             if(data.errcode == 0) {
                 for (var index in data.data) {
@@ -20,7 +19,7 @@ var indexAction = {
             }else{
                 html += '还没有推荐导师哦';
             }
-            tag.html(html);
+            tag.append(html);
         }, 'JSON');
     },
     'getReInComment' : function(){
@@ -72,8 +71,8 @@ var indexAction = {
         }, 'JSON');
     },
     'getUserInfo' : function(){
-        $("a[data-id='button']").each(function(){
-             alert($(this).attr('data-uid'));
+        $(".bd a[data-id='button']").each(function(){
+             console.log($(this));
         });
     }
 };
@@ -83,4 +82,6 @@ $(function(){
     indexAction.getRecomendInstructor();
     //获取关注导师评论列表
     indexAction.getReInComment();
+    //跳转到用户信息页面
+    indexAction.getUserInfo();
 });
