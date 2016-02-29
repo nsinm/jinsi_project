@@ -62,10 +62,10 @@ class LiveModel extends Model
     {
         //$where['openid'] = $openid;
         $user = M('user');
-        $user_info = $user->where("openid='{$openid}'")->find();
-        echo $user->getlastsql();
-        print_r($user_info);
-        if($user_info){
+        $user_info = $user->where("open_id='{$openid}'")->find();
+        //echo $user->getlastsql();
+        //print_r($user_info);
+        if($user_info) {
             print_r($user_info);
             exit;
         }
@@ -78,7 +78,7 @@ class LiveModel extends Model
         $data['jinsi_user_header_pic'] = $openid_info['headimgurl'];
         $data['open_id'] = $openid;
         $lastInsId = $user->add($data);
-        echo $user->getlastsql();
+        //echo $user->getlastsql();
         if($lastInsId){
             echo "插入数据 id 为：$lastInsId";
         } else {
