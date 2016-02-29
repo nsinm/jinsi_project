@@ -19,6 +19,7 @@ class LiveModel extends Model
             $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$code}&grant_type=authorization_code";
             $openid_json = json_decode(getUrl($url),true);
             print_r($openid_json);
+
             return $code;
         }
         $url = urlencode($url);
