@@ -76,7 +76,9 @@ class LiveModel extends Model
         $data['jinsi_user_create_time'] = time();
         $data['jinsi_user_header_pic'] = $openid_info['headimgurl'];
         $data['open_id'] = $openid;
-        if($lastInsId = $user->add($data)){
+        $lastInsId = $user->add($data);
+        echo $user->getlastsql();
+        if(){
             echo "插入数据 id 为：$lastInsId";
         } else {
             echo '数据写入错误！';
