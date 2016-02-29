@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * 用户相关控制器类
+ * 导师相关控制器类
  *
  * Created by PhpStorm.
  * User: Nsinm
@@ -9,7 +9,7 @@
  * Time: 下午1:02
  */
 
-class UserAction extends Action
+class InstructorAction extends Action
 {
     /**
      * 用户信息主页
@@ -25,16 +25,16 @@ class UserAction extends Action
     /**
      * 获取用户详细信息
      */
-    public function getUserInfo ()
+    public function getInstructorInfo ()
     {
         if(!IS_AJAX) _404('页面不存在');
 
-        $result = array('errcode' => 1, 'msg' => '获取用户信息失败!');
+        $result = array('errcode' => 1, 'msg' => '获取导师信息失败!');
         $userId = $this->_get('userId');
         if($userId){
             $userInfo = M('user')->where('id = ' . $userId)->select();
             if($userInfo){
-                $result = array('errcode' => 0, 'msg' => '获取用户信息成功!', 'data' => $userInfo);
+                $result = array('errcode' => 0, 'msg' => '获取导师信息成功!', 'data' => $userInfo);
             }
         }
 
