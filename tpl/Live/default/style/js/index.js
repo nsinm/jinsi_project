@@ -20,7 +20,10 @@ var indexAction = {
                 html += '还没有推荐导师哦';
             }
             tag.append(html).find('.weui_grid').each(function(){
-                console.log($(this));
+                $(this).click(function(){
+                    var userId = $(this).attr('data-value');
+                    location.href = params.guiUrl + '&userId=' + userId;
+                });
             });
         }, 'JSON');
     },
