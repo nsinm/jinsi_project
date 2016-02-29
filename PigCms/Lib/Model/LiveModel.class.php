@@ -65,7 +65,8 @@ class LiveModel extends Model
         $user_info = $user->where($where)->find();
         //print_r($user_info);
         if($user_info){
-
+            print_r($user_info);
+            exit;
         }
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$token}&openid={$openid}&lang=zh_CN";
