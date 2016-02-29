@@ -17,7 +17,7 @@ class UserAction extends Action
     public function index ()
     {
         $userId = $this->_get('userId');
-        $getUserInfoUrl = U('getUserInfo');
+        $getUserInfoUrl = U('getUserInfo', 'userId='. $userId);
         $this->assign('urls', $getUserInfoUrl);
         $this->display();
     }
