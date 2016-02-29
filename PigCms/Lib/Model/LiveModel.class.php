@@ -62,7 +62,7 @@ class LiveModel extends Model
     {
         //$where['openid'] = $openid;
         $user = M('user');
-        $user_info = $user->where('openid='.$openid)->find();
+        $user_info = $user->where("openid='{$openid}'")->find();
         echo $user->getlastsql();
         //print_r($user_info);
         if($user_info){
