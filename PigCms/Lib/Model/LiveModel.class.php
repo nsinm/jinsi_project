@@ -78,7 +78,7 @@ class LiveModel extends Model
         $data['open_id'] = $openid;
         $lastInsId = $user->add($data);
         echo $user->getlastsql();
-        if(){
+        if($lastInsId){
             echo "插入数据 id 为：$lastInsId";
         } else {
             echo '数据写入错误！';
