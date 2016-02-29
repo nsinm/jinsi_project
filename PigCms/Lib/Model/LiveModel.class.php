@@ -13,7 +13,7 @@ class LiveModel extends Model
     {
         //return $url;
 
-        return C('APPID');
+        return C('APPID_A');
         //echo M('live')->get_openid('aa');
     }
 }
