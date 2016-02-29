@@ -70,6 +70,11 @@ var indexAction = {
             }
             tag.append(html);
         }, 'JSON');
+    },
+    'getUserInfo' : function(){
+        $("a[data-id='button']").each(function(){
+             alert($(this).attr('data-uid'));
+        });
     }
 };
 
