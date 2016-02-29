@@ -78,9 +78,3 @@ $(function(){
     //获取关注导师评论列表
     indexAction.getReInComment();
 });
-
-function goUserInfo(tag, userId){
-    $(tag).click(function(){
-        location.href = params.guiUrl + '&userId=' + userId;
-    });
-}
