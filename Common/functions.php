@@ -733,21 +733,22 @@ function vpost($url,$data=null){ // 模拟提交数据函数
  * @param string $data
  * @return array
  */
-function getUrl($url,$data=''){
+function getUrl($url){
     $ch = curl_init();
-    $header = $this->makeHttpHeader();
+
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $tmpInfo   = curl_exec($ch);
-    $tmpError  = curl_error($ch);
-    $tmpHeader = curl_getinfo($ch);
-    return array('header'=>$tmpHeader,'data'=>$tmpInfo,'error'=>$tmpError);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    //执行并获取HTML文档内容
+    $output = curl_exec($ch);
+
+    //释放curl句柄
+    curl_close($ch);
+    return $output;
+    //打印获得的数据
+    print_r($output);
+
 }
 
 /**
