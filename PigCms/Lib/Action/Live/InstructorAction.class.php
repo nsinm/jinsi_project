@@ -70,6 +70,8 @@ class InstructorAction extends Action
     public function instructor ()
     {
         $this->ajaxUrls['gilUrl'] = U('getInstructorList');
+        $this->ajaxUrls['followUrl'] = U('follow');
+        $this->ajaxUrls['cfollowUrl'] = U('cancelFollow');
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }
@@ -116,5 +118,50 @@ class InstructorAction extends Action
             $map = array('errcode' => 0, 'msg' => '获取导师列表成功!', 'data' => $instructors);
         }
         $this->ajaxReturn($map, 'JSON');
+    }
+
+    /**
+     * 关注
+     */
+    public function follow ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+
+        $result = array('errcode' => 1, 'msg' => '关注导师失败!');
+
+        $userId = $this->_get('userId');
+        $instructorId = $this->_get('instructorId');
+
+        if($userId && $instructorId){
+            $data = array(
+                'jinsi_follow_user_id' => $userId,
+                'jinsi_follow_id_user' => $instructorId,
+                'jinsi_follow_create' => time()
+            );
+            $id = M('follow')->add($data);
+            if($id)
+                $result = array('errcode' => 0, 'msg' => '关注导师成功!');
+        }
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 取消关注
+     */
+    public function cancelFollow ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+
+        $result = array('errcode' => 1, 'msg' => '取消关注失败!');
+
+        $userId = $this->_get('userId');
+        $instructorId = $this->_get('instructorId');
+
+        if($userId && $instructorId){
+            $status = M('follow')->where("jinsi_follow_user_id = {$userId} AND jinsi_follow_id_user = {$instructorId}")->delete();
+            if($status)
+                $result = array('errcode' => 0, 'msg' => '取消关注成功!');
+        }
+        $this->ajaxReturn($result, 'JSON');
     }
 }

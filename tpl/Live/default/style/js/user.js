@@ -58,7 +58,17 @@ var userAction = {
                 }else{
                     html += '还没有导师信息哦!';
                 }
-                tag.html(html);
+                tag.html(html).find('a').each(function(){
+                    if($(this).attr('class').indexOf('weui_btn_default')){
+                        $(this).click(function(){
+                            alert(1111);
+                        });
+                    }else{
+                        $(this).click(function(){
+                            alert(2222);
+                        });
+                    }
+                });
             }, 'JSON');
         }
         getDefault(1);
