@@ -63,6 +63,7 @@ class InstructorAction extends Action
      */
     public function instructor ()
     {
+        $this->ajaxUrls['gilUrl'] = U('getInstructorList');
         $this->display();
     }
 
