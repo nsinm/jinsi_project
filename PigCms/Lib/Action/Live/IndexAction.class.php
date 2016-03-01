@@ -32,7 +32,7 @@ class IndexAction extends Action
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
             'guiUrl' => U('Instructor/index'),
-            'instructorUrl' => U('Instructor/getInstructorList'),
+            'instructorUrl' => U('Instructor/instructor'),
             'liveRoomUrl' => U('index'),
             'myUrl' => U('My/index')
         );

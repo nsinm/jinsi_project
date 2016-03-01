@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <div class="selected">导师</div>
+    <div>我的</div>
+</div>
+<div class="container js_container">
+    <div class="page">
+        <div class="bd">
+            <div class="weui_cells_title">筛选方式</div>
+            <div class="weui_cells">
+                <div class="weui_cell weui_cell_select">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="select1">
+                            <option selected="" value="1">推荐</option>
+                            <option value="2">人气</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary ">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <!--<p class="user_signature">我不是股神，是神</p>-->
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow">取消关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">关注：1221</p>
+                        <p class="user_location">位置：北京</p>
+                        <p class="user_style">风格：激进 短线 创业板</p>
+                        <p class="user_intro">简介：英大证券首席分析师英大证券首席分析师英大证券首席分析师英大证券首席分析师</p>
+                    </div>
+                </div>
+                <div class="weui_cell teacherlist_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>
+                        <p class="user_fans">粉丝：1221</p>
+                        <p class="user_location">位置：</p>
+                        <p class="user_style">风格：</p>
+                        <p class="user_intro">简介：</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/user.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'guiUrl' : '{pigcms:$urls.getUserInfoUrl}',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}'
+    };
+</script>
+</body>
+</html>

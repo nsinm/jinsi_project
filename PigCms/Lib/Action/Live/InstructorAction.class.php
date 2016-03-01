@@ -11,19 +11,31 @@
 
 class InstructorAction extends Action
 {
+    /*
+     * ajax调用的url
+     */
+    private $ajaxUrls;
+
+    /**
+     * InstructorAction constructor.
+     */
+    function __construct()
+    {
+        $this->ajaxUrls = array(
+            'instructorUrl' => U('instructor'),
+            'liveRoomUrl' => U('Index/index'),
+            'myUrl' => U('My/index')
+        );
+    }
+
     /**
      * 用户信息主页
      */
     public function index ()
     {
         $userId = $this->_get('userId');
-        $ajaxUrls = array(
-            'getUserInfoUrl' => U('getInstructorInfo', 'userId='. $userId),
-            'instructorUrl' => U('getInstructorList'),
-            'liveRoomUrl' => U('Index/index'),
-            'myUrl' => U('My/index')
-        );
-        $this->assign('urls', $ajaxUrls);
+        $this->ajaxUrls['getUserInfoUrl'] = U('getInstructorInfo', 'userId='. $userId);
+        $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }
 
@@ -44,6 +56,14 @@ class InstructorAction extends Action
         }
 
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 导师页面
+     */
+    public function instructor ()
+    {
+        $this->display();
     }
 
     /**
