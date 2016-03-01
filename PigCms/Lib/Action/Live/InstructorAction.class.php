@@ -114,7 +114,7 @@ class InstructorAction extends Action
                 usort($instructors, function ($a, $b) {
                     if ($a['follow_num'] == $b['follow_num'])
                         return 0;
-                    return $a['follow_num'] > $b['follow_num'] ? 1 : 0;
+                    return $a['follow_num'] > $b['follow_num'] ? 0 : 1;
                 });
             }
             $map = array('errcode' => 0, 'msg' => '获取导师列表成功!', 'data' => $instructors);
