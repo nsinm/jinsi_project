@@ -15,16 +15,22 @@ class InstructorAction extends Action
      * ajax调用的url
      */
     private $ajaxUrls;
+    /*
+     * 当前用户id
+     */
+    private $userId;
 
     /**
      * InstructorAction constructor.
      */
     function __construct()
     {
+        $this->userId = session('userId');
         $this->ajaxUrls = array(
             'instructorUrl' => U('instructor'),
             'liveRoomUrl' => U('Index/index'),
-            'myUrl' => U('My/index')
+            'myUrl' => U('My/index'),
+            'userId' => $this->userId
         );
     }
 
@@ -80,7 +86,7 @@ class InstructorAction extends Action
         $model = M();
         $filter = $this->_get('filter');
         if($filter == '2'){
-            $where = 'ju.jinsi_user_type = 2';
+            $where = 'jinsi_user_type = 2';
         }else{
             $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_create';
         }
@@ -88,10 +94,15 @@ class InstructorAction extends Action
         $result = $model->query($sql);
         if($result) {
             $instructors = array();
-            $sql = "SELECT count(1) FROM jinsi_follow WHERE jinsi_follow_id_user = ";
             foreach ($result as $key => $value) {
-                $count = $model->query($sql .= $value['id']);
-                $value['follow_num'] = $count;
+                $sql = "SELECT count(1) follow_num FROM jinsi_follow WHERE jinsi_follow_id_user = {$value['id']}";
+                $count = $model->query($sql);
+                $value['follow_num'] = $count[0]['follow_num'];
+                if($value['follow_num'] > 0) {
+                    $sql = "SELECT jinsi_follow_user_id FROM jinsi_follow WHERE jinsi_follow_id_user = {$value['id']}";
+                    $res = $model->query($sql);
+                    $value['is_follow'] = in_array($this->userId, array_column($res, 'jinsi_follow_user_id')) ? 1 : 0;
+                }
                 array_push($instructors, $value);
             }
 

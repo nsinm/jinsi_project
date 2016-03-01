@@ -32,14 +32,44 @@ var userAction = {
             var html = '';
             $.getJSON(params.gilUrl, {'filter' : filter}, function(data){
                 console.log(data);
+                if(data.errcode == 0){
+                    var infos = data.data;
+                    for(var index in infos){
+                        html += '<div class="weui_cell teacherlist_block">';
+                        html +=     '<div class="weui_cell_hd">';
+                        html +=         '<div class="user_thumb mr10">';
+                        html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                        html +=         '</div>';
+                        html +=     '</div>';
+                        html +=     '<div class="weui_cell_bd weui_cell_primary ">';
+                        html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
+                        if(infos[index].is_follow){
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow">取消关注</a>';
+                        }else{
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow">关注</a>';
+                        }
+                        html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
+                        html +=         '<p class="user_location">位置：' + infos[index].jinsi_follow_city + '</p>';
+                        html +=         '<p class="user_style">风格：' + infos[index].jinsi_user_style + '</p>';
+                        html +=         '<p class="user_intro">简介：' + infos[index].jinsi_user_info + '</p>';
+                        html +=     '</div>';
+                        html += '</div>';
+                    }
+                }else{
+                    html += '还没有导师信息哦!';
+                }
+                tag.append(html);
             }, 'JSON');
         }
         getDefault(1);
     },
 
     'init': function () {
-        this.getUserInfo();
-        this.instructorList();
+        if(params.tplName == 'instructor_index') {
+            this.getUserInfo();
+        }else if(params.tplName == 'instructor_instructor'){
+            this.instructorList();
+        }
     }
 };
 
