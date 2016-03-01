@@ -20,7 +20,7 @@ var userAction = {
     'instructorList': function () {
         var tag = $('.weui_cells.weui_cells_access');
         var html = '';
-        $.getJSON(params.instructorUrl, {}, function(data){
+        $.getJSON(params.gilUrl, {}, function(data){
             console.log(data);
         }, 'JSON');
     },
