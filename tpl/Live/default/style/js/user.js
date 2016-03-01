@@ -46,7 +46,7 @@ var userAction = {
                         if(infos[index].is_follow){
                             html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow" data-value="' + infos[index].id + '">取消关注</a>';
                         }else{
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow " data-value="' + infos[index].id + '>关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow " data-value="' + infos[index].id + '">关注</a>';
                         }
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
