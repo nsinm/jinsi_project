@@ -3,14 +3,18 @@
  */
 
 $(function(){
-    $('.bottom-bar').find('div').each(function(i){
-        if($('.bottom-bar').find('div').get(i).getAttribute('class') == 'selected'){
-            $('.bottom-bar').find('div').get(i).setAttribute('class', null);
-        }
+    $('.bottom-bar').find('div').each(function(){
         $(this).click(function(){
-            if($(this).attr('class') == 'selected')
-                return;
+            $('.bottom-bar div').removeClass('selected');
             $(this).attr('class', 'selected');
+            if($(this).text() == '直播间'){
+                location.href = params.liveRoomUrl;
+            }else if($(this).text() == '导师'){
+                location.href = params.instructorUrl;
+            }else{
+                location.href = params.myUrl;
+            }
         })
+
     });
 })

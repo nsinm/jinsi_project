@@ -32,7 +32,9 @@ class IndexAction extends Action
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
             'guiUrl' => U('Instructor/index'),
-            'giiUrl' => U('Instructor/getInstructorList')
+            'instructorUrl' => U('Instructor/getInstructorList'),
+            'liveRoomUrl' => U('index'),
+            'myUrl' => U('My/index')
         );
         $this->assign('urls', $ajaxUrls);
         $this->display();
