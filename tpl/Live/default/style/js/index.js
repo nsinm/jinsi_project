@@ -94,5 +94,5 @@ var indexAction = {
 };
 
 $(function(){
-
+    indexAction.init();
 });
