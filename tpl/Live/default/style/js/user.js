@@ -44,9 +44,9 @@ var userAction = {
                         html +=     '<div class="weui_cell_bd weui_cell_primary ">';
                         html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
                         if(infos[index].is_follow){
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow" data-value="' + infos[index].id + '">取消关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini follow weui_btn_default" data-value="' + infos[index].id + '">取消关注</a>';
                         }else{
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary follow " data-value="' + infos[index].id + '">关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini follow weui_btn_primary" data-value="' + infos[index].id + '">关注</a>';
                         }
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
@@ -67,7 +67,7 @@ var userAction = {
                             $.getJSON(params.cfollowUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_primary').addClass('weui_btn_default');
+                                    $(this).removeClass('weui_btn_default').addClass('weui_btn_primary');
                                 }else{
                                     alert(data.msg);
                                 }
@@ -78,7 +78,7 @@ var userAction = {
                             $.getJSON(params.followUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_default').addClass('weui_btn_primary');
+                                    $(this).removeClass('weui_btn_primary').addClass('weui_btn_default');
                                 }else{
                                     alert(data.msg);
                                 }
