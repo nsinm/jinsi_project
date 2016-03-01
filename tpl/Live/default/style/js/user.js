@@ -64,19 +64,23 @@ var userAction = {
                     var json = {'userId' : userId, 'instructorId' : instructorId};
                     if($(this).attr('class').indexOf('weui_btn_default') > 0){
                         $(this).click(function(){
-                            $.getJSON(params.followUrl, json, function(data){
+                            $.getJSON(params.cfollowUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_default').addClass('weui_btn_primary');
+                                    $(this).removeClass('weui_btn_primary').addClass('weui_btn_default');
+                                }else{
+                                    alert(data.msg);
                                 }
                             }, 'JSON');
                         });
                     }else{
                         $(this).click(function(){
-                            $.getJSON(params.cfollowUrl, json, function(data){
+                            $.getJSON(params.followUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_primary').addClass('weui_btn_default');
+                                    $(this).removeClass('weui_btn_default').addClass('weui_btn_primary');
+                                }else{
+                                    alert(data.msg);
                                 }
                             }, 'JSON');
                         });
