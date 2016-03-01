@@ -73,13 +73,13 @@ var indexAction = {
             }else{
                 html += '还没有导师直播内容哦!';
             }
-            tag.append(html).find('.weui_cell.live_block').each(function(){
+            tag.append(html).find("div[class='weui_cell live_block']").each(function(){
                 console.log($(this));
             });
         }, 'JSON');
     },
 
-    
+
 
     'init' : function(){
         if(params.tplName == 'index_index') {
