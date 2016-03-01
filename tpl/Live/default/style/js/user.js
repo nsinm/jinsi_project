@@ -58,7 +58,7 @@ var userAction = {
                 }else{
                     html += '还没有导师信息哦!';
                 }
-                tag.append(html);
+                tag.html(html);
             }, 'JSON');
         }
         getDefault(1);
