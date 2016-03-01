@@ -12,6 +12,10 @@
 class IndexAction extends Action
 {
     /*
+     * ajax调用的url
+     */
+    private $ajaxUrls;
+    /*
      * 当前登陆用户id
      */
     private $userId;
@@ -21,6 +25,12 @@ class IndexAction extends Action
         if(!session('userId'))
             session('userId', 2);
         $this->userId = session('userId');
+        $this->ajaxUrls = array(
+            'userId' => $this->userId,
+            'instructorUrl' => U('Instructor/instructor'),
+            'liveRoomUrl' => U('index'),
+            'myUrl' => U('My/index')
+        );
     }
 
     /**
@@ -28,15 +38,13 @@ class IndexAction extends Action
      */
     public function index ()
     {
-        $ajaxUrls = array(
+        $uris = array(
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
-            'guiUrl' => U('Instructor/index'),
-            'instructorUrl' => U('Instructor/instructor'),
-            'liveRoomUrl' => U('index'),
-            'myUrl' => U('My/index')
+            'guiUrl' => U('Instructor/index')
         );
-        $this->assign('urls', $ajaxUrls);
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
         $this->display();
     }
 
@@ -59,12 +67,12 @@ class IndexAction extends Action
     }
 
     /**
-     * 获取关注导师评论列表
+     * 获取关注导师直播列表
      */
     public function getReInCommnet ()
     {
         if(!IS_AJAX) _404('页面不存在');
-        $result= array('errcode' => 1, 'msg' => '获取关注导师评论失败!');
+        $result= array('errcode' => 1, 'msg' => '获取关注导师直播失败!');
         $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
         if($instructors) {
             $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
@@ -72,9 +80,28 @@ class IndexAction extends Action
             $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_id_user = ju.id WHERE jc.jinsi_content_id_user IN {$in} ORDER BY jc.jinsi_content_create DESC";
             $comments = M()->query($sql);
             if($comments){
-                $result = array('errcode' => 0, 'msg' => '获取关注导师评论列表成功!', 'data' => $comments);
+                $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
             }
         }
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 评论详情页
+     */
+    public function comment ()
+    {
+        $cid = $this->_get('cid');
+        $uris = array(
+            'gcUrl' => U('getComment', 'instructorId=' . $cid),
+        );
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
+        $this->display();
+    }
+
+    public function getComment ()
+    {
+
     }
 }
