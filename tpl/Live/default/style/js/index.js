@@ -36,7 +36,7 @@ var indexAction = {
             if(data.errcode == 0){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block">';
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -74,7 +74,10 @@ var indexAction = {
                 html += '还没有导师直播内容哦!';
             }
             tag.append(html).find("div[class='weui_cell live_block']").each(function(){
-                console.log($(this));
+                var cid = $(this).attr('data-cid');
+                $(this).click(function(){
+                    location.href = params.cUrl + '&cid=' + cid;
+                });
             });
         }, 'JSON');
     },
