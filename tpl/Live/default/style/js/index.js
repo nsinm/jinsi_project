@@ -79,7 +79,7 @@ var indexAction = {
         }, 'JSON');
     },
 
-    ''
+    
 
     'init' : function(){
         if(params.tplName == 'index_index') {
