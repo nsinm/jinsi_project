@@ -3,11 +3,12 @@
  */
 
 $(function(){
-    $('.bottom-bar').find('div').each(function(){
+    $('.bottom-bar').find('div').each(function(i){
+        alert(i);
         $(this).click(function(){
             if($(this).attr('class') == 'selected')
                 return;
-            
+
         })
 
     });
