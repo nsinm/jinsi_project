@@ -79,9 +79,11 @@ class InstructorAction extends Action
 
         $model = M();
         $filter = $this->_get('filter');
-        $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_create';
-        if($filter)
+        if($filter == '2'){
             $where = 'ju.jinsi_user_type = 2';
+        }else{
+            $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_create';
+        }
         $sql = "SELECT * FROM jinsi_user WHERE {$where}";
         $result = $model->query($sql);
         if($result) {

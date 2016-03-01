@@ -18,11 +18,23 @@ var userAction = {
         }, 'JSON');
     },
     'instructorList': function () {
-        var tag = $('.weui_cells.weui_cells_access');
-        var html = '';
-        $.getJSON(params.gilUrl, {}, function(data){
-            console.log(data);
-        }, 'JSON');
+        $('.weui_select').change(function(){
+            var filter = $(this).children('option:selected').val();
+            getDefault(filter);
+            return;
+        });
+
+        function getDefault(filter){
+            var filter = filter;
+            if(filter == '')
+                filter = 1;
+            var tag = $('.weui_cells.weui_cells_access');
+            var html = '';
+            $.getJSON(params.gilUrl, {'filter' : filter}, function(data){
+                console.log(data);
+            }, 'JSON');
+        }
+        getDefault(1);
     },
 
     'init': function () {
