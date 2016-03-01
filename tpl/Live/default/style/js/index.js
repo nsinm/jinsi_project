@@ -27,6 +27,7 @@ var indexAction = {
             });
         }, 'JSON');
     },
+
     'getReInComment' : function(){
         $.getJSON(params.gricUrl, {}, function(data){
             console.log(data);
@@ -72,14 +73,26 @@ var indexAction = {
             }else{
                 html += '还没有导师直播内容哦!';
             }
-            tag.append(html);
+            tag.append(html).find('.weui_cell.live_block').each(function(){
+                console.log($(this));
+            });
         }, 'JSON');
+    },
+
+    ''
+
+    'init' : function(){
+        if(params.tplName == 'index_index') {
+            //获取推荐导师列表
+            indexAction.getRecomendInstructor();
+            //获取关注导师评论列表
+            indexAction.getReInComment();
+        }else if(params.tplName == 'index_comment'){
+
+        }
     }
 };
 
 $(function(){
-    //获取推荐导师列表
-    indexAction.getRecomendInstructor();
-    //获取关注导师评论列表
-    indexAction.getReInComment();
+
 });
