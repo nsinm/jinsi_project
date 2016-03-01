@@ -17,7 +17,6 @@ class LiveModel extends Model
     {
         $data = json_decode(F('jsapi_token'),true);
         if($data['expire_time']>time()){
-            print_r($data);
             return $data['access_token'];
         }
         $appid = C('APPID_A');

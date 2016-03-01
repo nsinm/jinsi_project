@@ -11,10 +11,14 @@ class AuthAction extends Action
 
     public function index ()
     {
-        $Live = D('Live');
-        $openid = $Live->get_openid(get_url());
+        //$Live = D('Live');
+        //$openid = $Live->get_openid(get_url());
 
-        $Live->get_user_info($openid);
+        //$userid = $Live->get_user_info($openid);
         //echo M('live')->get_openid('aa');
+        $jssdk = D('Jssdk');
+        $signPackage = $jssdk->GetSignPackage();
+        print_r($signPackage);
+        $this->display();
     }
 }
