@@ -25,6 +25,8 @@ class InstructorAction extends Action
      */
     function __construct()
     {
+        if(!session('userId'))
+            session('userId', 2);
         $this->userId = session('userId');
         $this->ajaxUrls = array(
             'instructorUrl' => U('instructor'),
