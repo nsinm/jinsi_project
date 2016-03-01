@@ -34,7 +34,7 @@ class InstructorAction extends Action
     public function index ()
     {
         $userId = $this->_get('userId');
-        $this->ajaxUrls['getUserInfoUrl'] = U('getInstructorInfo', 'userId='. $userId);
+        $this->ajaxUrls['gilUrl'] = U('getInstructorInfo', 'userId='. $userId);
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }
