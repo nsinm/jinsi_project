@@ -41,7 +41,8 @@ class IndexAction extends Action
         $uris = array(
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
-            'guiUrl' => U('Instructor/index')
+            'guiUrl' => U('Instructor/index'),
+            'cUrl' => U('comment')
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);
