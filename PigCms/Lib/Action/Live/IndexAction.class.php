@@ -9,34 +9,11 @@
  * Time: 上午11:06
  */
 
-class IndexAction extends Action
+class IndexAction extends LiveAction
 {
-    /*
-     * ajax调用的url
-     */
-    private $ajaxUrls;
-    /*
-     * 当前登陆用户id
-     */
-    private $userId;
-    /*
-     * 用户类型 1用户 2讲师
-     */
-    private $userType;
-
     function __construct()
     {
-        if(!session('userId'))
-            session('userId', 1);
-        $this->userId = session('userId');
-        $this->userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
-        $this->ajaxUrls = array(
-            'userId' => $this->userId,
-            'userType' => $this->userType,
-            'instructorUrl' => U('Instructor/instructor'),
-            'liveRoomUrl' => U('index'),
-            'myUrl' => U('My/index')
-        );
+        parent::__construct();
     }
 
     /**
