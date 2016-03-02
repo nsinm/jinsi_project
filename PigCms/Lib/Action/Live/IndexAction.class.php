@@ -95,10 +95,16 @@ class IndexAction extends Action
         $cid = $this->_get('cid');
         $uris = array(
             'gcUrl' => U('getComment', 'cid=' . $cid),
+            'pUrl' => U('praise')
         );
         $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.id = {$cid}";
         $liveInfo = M()->query($sql);
         $urls = array_merge($this->ajaxUrls, $uris);
+        $praise = M('praise')->where('jinsi_praise_content_id=' . $cid . ' AND jinsi_praise_user_id=' . $this->userId)->find();
+        $liveInfo[0]['current_user_praise'] = 0;
+        if($praise){
+            $liveInfo[0]['current_user_praise'] = 1;
+        }
         $this->assign('live', $liveInfo[0]);
         $this->assign('urls', $urls);
         $this->display();
@@ -116,10 +122,52 @@ class IndexAction extends Action
         if($cid){
             $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_id = {$cid} ORDER BY jc.jinsi_content_create ASC";
             $comments = M()->query($sql);
+
+            $data = array();
+
+            //加入当前用户是否赞过
+            foreach($comments as $key => $value){
+                $value['current_user_praise'] = 0;
+                $praise = M('praise')->where('jinsi_praise_content_id=' . $value['id'] . ' AND jinsi_praise_user_id=' . $this->userId)->find();
+                if($praise){
+                    $value['current_user_praise'] = 1;
+                }
+                array_push($array, $value);
+            }
+
+
             if($comments){
-                $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $comments);
+                $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $data);
             }
         }
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 赞
+     */
+    public function praise ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '点赞失败!');
+
+        $cid = $this->_get('cid');
+        if($cid){
+            $data = array(
+                'jinsi_praise_content_id' => $cid,
+                'jinsi_praise_user_id' => $this->userId
+            );
+
+            $status = M('praise')->add($data);
+
+            $praiseNo = M('content')->where('id=' . $cid)->getField('jinsi_content_praise_no');
+            $update['jinsi_content_praise_no'] = $praiseNo + 1;
+            $fetchRows = M('content')->save($update);
+            if($status && $fetchRows){
+                $result = array('errcode' => 0, 'msg' => '点赞成功!');
+            }
+        }
+
         $this->ajaxReturn($result, 'JSON');
     }
 }

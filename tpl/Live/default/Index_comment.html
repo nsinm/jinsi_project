@@ -33,7 +33,12 @@
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
                             <span class="like-btn">
-                                <span class="icon-like on" alt="">
+                                <if condition="$live.current_user_praise eq 1">
+                                    <span class="icon-like" alt="">
+                                <else />
+                                    <span class="icon-like on" alt="">
+                                </if>
+
                                 </span>赞&nbsp;{pigcms:$live.jinsi_content_praise_no}
                             </span>
                             <span>
@@ -59,6 +64,7 @@
         'userId' : '{pigcms:$urls.userId}',
         'tplName' : 'index_comment',
         'gcUrl' : '{pigcms:$urls.gcUrl}',
+        'pUrl' : '{pigcms:$urls.pUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',

@@ -86,10 +86,11 @@ var indexAction = {
         var tag = $('.weui_cells.weui_cells_access.mt0');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
+            console.log(data);
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block">';
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].jinsi_content_praise_no + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -105,7 +106,7 @@ var indexAction = {
                     html +=         '<p class="user_liveinteract">';
                     html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
                     html +=             '<span class="sm-like like-btn">';
-                    html +=                 '<span class="icon-like" alt=""></span>' + infos[index].jinsi_content_praise_no;
+                    html +=                 '<span class="icon-like on" alt=""></span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
                     html +=             '<span class="sm-comment">';
                     html +=                 '<span class="icon-comment" alt=""></span>' + infos[index].jinsi_content_comment_no;
@@ -118,9 +119,15 @@ var indexAction = {
                 html += '当前还没有评论内容哦!';
             }
             tag.append(html).find('.user_liveinteract span').each(function(){
-                if($(this).attr('class') == 'icon-like'){
+                if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
-                        alert(1111);
+                        var cid = $('.weui_cell.live_block').attr('data-cid');
+                        var url = params.pUrl + '&cid=' + cid;
+                        $.getJSON(url, {}, function(data){
+                            if(data.errcode == '0'){
+                                $(this).removeClass('no');
+                            }
+                        }, 'JSON');
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).click(function(){
