@@ -94,9 +94,10 @@ var indexAction = {
         if(params.tplName == 'index_index') {
             //获取推荐导师列表
             this.getRecomendInstructor();
-            //获取关注导师评论列表
+            //获取关注导师直播列表
             this.getReInComment();
         }else if(params.tplName == 'index_comment'){
+            //获取直播评论列表
             this.getComments();
         }
     }

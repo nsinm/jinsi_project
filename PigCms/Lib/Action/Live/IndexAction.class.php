@@ -114,7 +114,7 @@ class IndexAction extends Action
 
         $cid = $this->_get('cid');
         if($cid){
-            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_user_id = ju.id WHERE jc.jinsi_content_id = {$cid} ORDER BY jc.jinsi_content_create ASC";
+            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_id = {$cid} ORDER BY jc.jinsi_content_create ASC";
             $comments = M()->query($sql);
             if($comments){
                 $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $comments);
