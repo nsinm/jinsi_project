@@ -25,8 +25,10 @@ class IndexAction extends Action
         if(!session('userId'))
             session('userId', 2);
         $this->userId = session('userId');
+        $userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->ajaxUrls = array(
             'userId' => $this->userId,
+            'userType' => $userType,
             'instructorUrl' => U('Instructor/instructor'),
             'liveRoomUrl' => U('index'),
             'myUrl' => U('My/index')
@@ -44,6 +46,7 @@ class IndexAction extends Action
             'guiUrl' => U('Instructor/index'),
             'cUrl' => U('comment')
         );
+
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);
         $this->display();
