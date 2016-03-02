@@ -46,7 +46,6 @@ class IndexAction extends Action
             'guiUrl' => U('Instructor/index'),
             'cUrl' => U('comment')
         );
-
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);
         $this->display();
