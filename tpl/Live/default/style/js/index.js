@@ -131,7 +131,8 @@ var indexAction = {
                         $.getJSON(url, {}, function(data){
                             console.log(data);
                             if(data.errcode == '0'){
-                                location.reload();
+                                tag.empty();
+                                tag.html(html);
                             }else{
                                 alert(data.msg);
                             }
