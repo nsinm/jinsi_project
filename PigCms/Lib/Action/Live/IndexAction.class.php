@@ -83,7 +83,11 @@ class IndexAction extends Action
         $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
         $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
         if($this->userType == 2){
-            $instructorIds = array_push($instructorIds, $this->userId);
+            if($instructorIds){
+                $instructorIds = array_push($instructorIds, $this->userId);
+            }else{
+                $instructorIds[0] = $this->userId;
+            }
         }
         $in = '(' . implode(',', $instructorIds) . ')';
         if($instructorIds) {
