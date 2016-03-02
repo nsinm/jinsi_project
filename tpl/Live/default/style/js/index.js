@@ -90,7 +90,7 @@ var indexAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    html += '<div class="weui_cell live_block">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -109,7 +109,7 @@ var indexAction = {
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
-                        html +=             '<span class="icon-like on" alt="">';
+                        html +=             '<span class="icon-like on" alt=""  data-cid="' + infos[index].id + '">';
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
@@ -126,7 +126,7 @@ var indexAction = {
             tag.append(html).find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
-                        var cid = $('.weui_cell.live_block').attr('data-cid');
+                        var cid = $(this).attr('data-cid');
                         var url = params.pUrl + '&cid=' + cid;
                         $.getJSON(url, {}, function(data){
                             console.log(data);

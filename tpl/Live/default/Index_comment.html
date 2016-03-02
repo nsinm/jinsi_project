@@ -18,7 +18,7 @@
     <div class="page">
         <div class="bd pdtb0">
             <div class="weui_cells weui_cells_access mt0">
-                <div class="weui_cell live_block" data-cid="{pigcms:$live.id}">
+                <div class="weui_cell live_block">
                     <div class="weui_cell_hd">
                         <div class="user_thumb mr10">
                             <img src="{pigcms:$live.jinsi_user_header_pic}" alt="">
@@ -36,7 +36,7 @@
                                 <if condition="$live.current_user_praise eq 1">
                                     <span class="icon-like" alt="">
                                 <else />
-                                    <span class="icon-like on" alt="">
+                                    <span class="icon-like on" alt="" data-cid="{pigcms:$live.id}">
                                 </if>
 
                                 </span>赞&nbsp;{pigcms:$live.jinsi_content_praise_no}
