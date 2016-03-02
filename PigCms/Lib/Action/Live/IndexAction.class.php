@@ -132,7 +132,7 @@ class IndexAction extends Action
                 if($praise){
                     $value['current_user_praise'] = 1;
                 }
-                array_push($array, $value);
+                array_push($data, $value);
             }
 
 
