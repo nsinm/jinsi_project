@@ -47,8 +47,6 @@
             </div>
         </div>
     </div>
-    <script src="/tpl/Live/default/style/js/zepto.min.js"></script>
-    <script src="/tpl/Live/default/style/js/example.js"></script>
     <script src="/tpl/Live/default/style/js/jquery.min.js"></script>
     <script src="/tpl/Live/default/style/js/index.js"></script>
     <script src="/tpl/Live/default/style/js/bottom.js"></script>
@@ -67,7 +65,7 @@
 
         // 十字按钮呼出
         var navBar = $('#showNormalAction')[0];
-        navBar.click=function(){
+        navBar.click(function(){
             var mask = $('#mask');
             var weuiActionsheet = $('#weui_actionsheet1');
             weuiActionsheet.addClass('weui_actionsheet_toggle');
@@ -88,7 +86,7 @@
                     mask.hide();
                 })
             }
-        }
+        });
     </script>
 </body>
 </html>
