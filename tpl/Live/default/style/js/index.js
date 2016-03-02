@@ -132,7 +132,7 @@ var indexAction = {
                             console.log(data);
                             if(data.errcode == '0'){
                                 tag.empty();
-                                tag.html(html);
+                                indexAction.getComments();
                             }else{
                                 alert(data.msg);
                             }
