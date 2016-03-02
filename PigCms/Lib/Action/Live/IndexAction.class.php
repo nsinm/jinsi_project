@@ -162,7 +162,7 @@ class IndexAction extends Action
 
             $praiseNo = M('content')->where('id=' . $cid)->getField('jinsi_content_praise_no');
             $update['jinsi_content_praise_no'] = $praiseNo + 1;
-            $fetchRows = M('content')->save($update);
+            $fetchRows = M('content')->where('id=' . $cid)->save($update);
             if($status && $fetchRows){
                 $result = array('errcode' => 0, 'msg' => '点赞成功!');
             }

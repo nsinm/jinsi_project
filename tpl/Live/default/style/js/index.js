@@ -131,7 +131,9 @@ var indexAction = {
                         $.getJSON(url, {}, function(data){
                             console.log(data);
                             if(data.errcode == '0'){
-                                indexAction.getComments();
+                                location.reload();
+                            }else{
+                                alert(data.msg);
                             }
                         }, 'JSON');
                     });
