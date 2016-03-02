@@ -82,16 +82,22 @@ var indexAction = {
         }, 'JSON');
     },
 
-
+    'getComments' : function(){
+        var tag = $('.weui_cells.weui_cells_access.mt0');
+        var html = '';
+        $.getJSON(params.gcUrl, {}, function(data){
+            console.log(data);
+        }, 'JSON')
+    },
 
     'init' : function(){
         if(params.tplName == 'index_index') {
             //获取推荐导师列表
-            indexAction.getRecomendInstructor();
+            this.getRecomendInstructor();
             //获取关注导师评论列表
-            indexAction.getReInComment();
+            this.getReInComment();
         }else if(params.tplName == 'index_comment'){
-
+            this.getComments();
         }
     }
 };

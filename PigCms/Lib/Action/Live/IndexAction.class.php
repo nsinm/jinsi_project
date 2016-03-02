@@ -88,13 +88,13 @@ class IndexAction extends Action
     }
 
     /**
-     * 评论详情页
+     * 直播详情页
      */
     public function comment ()
     {
         $cid = $this->_get('cid');
         $uris = array(
-            'gcUrl' => U('getComment', 'instructorId=' . $cid),
+            'gcUrl' => U('getComment', 'cid=' . $cid),
         );
         $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.id = {$cid}";
         $liveInfo = M()->query($sql);
@@ -104,8 +104,22 @@ class IndexAction extends Action
         $this->display();
     }
 
+    /**
+     * 获取直播评论
+     */
     public function getComment ()
     {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '获取直播评论失败!');
 
+        $cid = $this->_get('cid');
+        if($cid){
+            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_user_id = ju.id WHERE jc.jinsi_content_id = {$cid} ORDER BY jc.jinsi_content_create ASC";
+            $comments = M()->query($sql);
+            if($comments){
+                $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $comments);
+            }
+        }
+        $this->ajaxReturn($result, 'JSON');
     }
 }
