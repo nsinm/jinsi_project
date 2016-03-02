@@ -99,7 +99,7 @@ var indexAction = {
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
                     html +=         '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
-                        html +=     '<img src="' + infos[index].jinsi_content_url + 'alt="">';
+                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
                     }
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
