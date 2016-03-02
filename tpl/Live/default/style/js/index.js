@@ -83,7 +83,7 @@ var indexAction = {
     },
 
     'getComments' : function(){
-        var tag = $('.weui_cells.weui_cells_access.mt0');
+        var tag = $('#other');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
             console.log(data);
@@ -123,7 +123,7 @@ var indexAction = {
             }else{
                 html += '当前还没有评论内容哦!';
             }
-            tag.append(html).find('.user_liveinteract span').each(function(){
+            tag.html(html).find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
                         var cid = $(this).attr('data-cid');
