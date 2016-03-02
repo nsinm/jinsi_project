@@ -19,6 +19,10 @@ class InstructorAction extends Action
      * 当前用户id
      */
     private $userId;
+    /*
+     * 用户类型 1用户 2讲师
+     */
+    private $userType;
 
     /**
      * InstructorAction constructor.
@@ -28,7 +32,9 @@ class InstructorAction extends Action
         if(!session('userId'))
             session('userId', 2);
         $this->userId = session('userId');
+        $this->userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->ajaxUrls = array(
+            'userType' => $this->userType,
             'instructorUrl' => U('instructor'),
             'liveRoomUrl' => U('Index/index'),
             'myUrl' => U('My/index'),
@@ -91,9 +97,18 @@ class InstructorAction extends Action
         $filter = $this->_get('filter');
         if($filter == '2'){
             $where = 'jinsi_user_type = 2';
+            if($this->userType == 2){
+                $where .= ' AND id != ' . $this->userId;
+            }
         }else{
-            $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_create_time';
+            $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1';
+            if($this->userType == 2){
+                $where .= ' AND id != ' . $this->userId;
+            }
+            $where .= ' ORDER BY jinsi_user_create_time';
         }
+
+
         $sql = "SELECT * FROM jinsi_user WHERE {$where}";
         $result = $model->query($sql);
         if($result) {
