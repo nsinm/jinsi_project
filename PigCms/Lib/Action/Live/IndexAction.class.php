@@ -25,7 +25,8 @@ class IndexAction extends LiveAction
             'griUrl' => U('getRecomendInstructor'),
             'gricUrl' => U('getReInCommnet'),
             'guiUrl' => U('Instructor/index'),
-            'cUrl' => U('comment')
+            'cUrl' => U('comment'),
+            'tocUrl' => U('Comment/index')
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);

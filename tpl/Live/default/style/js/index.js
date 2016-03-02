@@ -146,6 +146,15 @@ var indexAction = {
         }, 'JSON')
     },
 
+    'toComment' : function(){
+        $('.weui_actionsheet_menu').find('dive').each(function(){
+            var type = $(this).attr('data-value');
+            $(this).click(function(){
+                location.href = params.tocUrl + '&type=' + type;
+            });
+        });
+    },
+
     'init' : function(){
         if(params.tplName == 'index_index') {
             //获取推荐导师列表
@@ -155,6 +164,8 @@ var indexAction = {
         }else if(params.tplName == 'index_comment'){
             //获取直播评论列表
             this.getComments();
+        }else{
+            this.toComment();
         }
     }
 };
