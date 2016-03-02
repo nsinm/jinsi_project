@@ -62,7 +62,11 @@ class IndexAction extends Action
     {
         if(!IS_AJAX) _404('页面不存在');
         $result = array('errcode' => 1, 'msg' => '获取推荐导师数据失败!');
-        $instructors = M('user')->where('jinsi_user_type = 2 AND jinsi_user_recommend = 1')->order('jinsi_user_create_time')->limit(8)->select();
+        $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1';
+        if($this->userType == 2){
+            $where .= ' AND id != ' . $this->userId;
+        }
+        $instructors = M('user')->where($where)->order('jinsi_user_create_time')->limit(8)->select();
         if($instructors){
             $result = array(
                 'errcode' => 0,
