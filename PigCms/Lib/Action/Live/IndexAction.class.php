@@ -19,16 +19,20 @@ class IndexAction extends Action
      * 当前登陆用户id
      */
     private $userId;
+    /*
+     * 用户类型 1用户 2讲师
+     */
+    private $userType;
 
     function __construct()
     {
         if(!session('userId'))
             session('userId', 1);
         $this->userId = session('userId');
-        $userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
+        $this->userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->ajaxUrls = array(
             'userId' => $this->userId,
-            'userType' => $userType,
+            'userType' => $this->userType,
             'instructorUrl' => U('Instructor/instructor'),
             'liveRoomUrl' => U('index'),
             'myUrl' => U('My/index')
@@ -79,6 +83,9 @@ class IndexAction extends Action
         $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
         if($instructors) {
             $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
+            if($this->userType == 2){
+                $instructorIds = array_push($instructorIds, $this->userId);
+            }
             $in = '(' . implode(',', $instructorIds) . ')';
             $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id IN {$in} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
             $comments = M()->query($sql);
