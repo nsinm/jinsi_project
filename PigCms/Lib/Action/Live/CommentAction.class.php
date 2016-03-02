@@ -18,10 +18,12 @@ class CommentAction extends LiveAction
     }
 
     /**
-     *
+     * 直播主页
      */
     public function index ()
     {
+        $type = $this->_get('type');
+        $this->assign('type', $type);
         $this->display();
     }
 }

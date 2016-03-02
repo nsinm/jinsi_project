@@ -147,7 +147,7 @@ var indexAction = {
     },
 
     'toComment' : function(){
-        $('.weui_actionsheet_menu').find('dive').each(function(){
+        $('.weui_actionsheet_menu').find('div').each(function(){
             var type = $(this).attr('data-value');
             $(this).click(function(){
                 location.href = params.tocUrl + '&type=' + type;
@@ -164,9 +164,9 @@ var indexAction = {
         }else if(params.tplName == 'index_comment'){
             //获取直播评论列表
             this.getComments();
-        }else{
-            this.toComment();
         }
+        //十字呼出框点击事件
+        this.toComment();
     }
 };
 
