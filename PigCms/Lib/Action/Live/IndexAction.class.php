@@ -23,7 +23,7 @@ class IndexAction extends Action
     function __construct()
     {
         if(!session('userId'))
-            session('userId', 2);
+            session('userId', 1);
         $this->userId = session('userId');
         $userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->ajaxUrls = array(
