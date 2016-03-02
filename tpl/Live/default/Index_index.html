@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
 </head>
 <body ontouchstart>
+    <div class="plus-nav" id="showNormalAction">
+
+    </div>
     <!--BEGIN actionSheet-->
     <div id="actionSheet_wrap">
         <div class="weui_mask_transition" id="mask"></div>
@@ -65,7 +68,7 @@
 
         // 十字按钮呼出
         var navBar = $('#showNormalAction')[0];
-        navBar.click(function(){
+        navBar.onclick=function(){
             var mask = $('#mask');
             var weuiActionsheet = $('#weui_actionsheet1');
             weuiActionsheet.addClass('weui_actionsheet_toggle');
@@ -86,7 +89,7 @@
                     mask.hide();
                 })
             }
-        });
+        }
     </script>
 </body>
 </html>
