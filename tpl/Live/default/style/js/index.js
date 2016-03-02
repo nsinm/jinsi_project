@@ -119,9 +119,13 @@ var indexAction = {
             }
             tag.append(html).find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like'){
-                    alert(11111);
+                    $(this).click(function(){
+                        alert(1111);
+                    });
                 }else if($(this).attr('class') == 'icon-comment'){
-                    alert(22222);
+                    $(this).click(function(){
+                        alert(2222);
+                    });
                 }
             });
         }, 'JSON')
