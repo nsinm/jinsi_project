@@ -7,7 +7,18 @@
  * Time: 23:04
  */
 
-class UploadAction extends Action
+class UploadAction extends LiveAction
 {
+    /**
+     * UploadAction constructor.
+     */
+    function __construct()
+    {
+        parent::__construct();
+    }
 
+    public function index ()
+    {
+        $this->display();
+    }
 }
