@@ -86,7 +86,44 @@ var indexAction = {
         var tag = $('.weui_cells.weui_cells_access.mt0');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
-            console.log(data);
+            if(data.errcode == '0'){
+                var infos = data.data;
+                for(var index in infos){
+                    html += '<div class="weui_cell live_block">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                    if(infos[index].jinsi_content_type != '1'){
+                        html +=     '<img src="' + infos[index].jinsi_content_url + 'alt="">';
+                    }
+                    html +=         '<p class="user_livetime"></p>';
+                    html +=         '<p class="user_liveinteract">';
+                    html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
+                    html +=             '<span class="sm-like like-btn">';
+                    html +=                 '<span class="icon-like" alt=""></span>' + infos[index].jinsi_content_praise_no;
+                    html +=             '</span>';
+                    html +=             '<span class="sm-comment">';
+                    html +=                 '<span class="icon-comment" alt=""></span>' + infos[index].jinsi_content_comment_no;
+                    html +=             '</span>';
+                    html +=         '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
+                }
+            }else{
+                html += '当前还没有评论内容哦!';
+            }
+            tag.append(html).find('.user_liveinteract span').each(function(){
+                if($(this).attr('class') == 'icon-like'){
+                    alert(11111);
+                }else if($(this).attr('class') == 'icon-comment'){
+                    alert(22222);
+                }
+            });
         }, 'JSON')
     },
 
