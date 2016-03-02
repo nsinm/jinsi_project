@@ -83,7 +83,7 @@ var indexAction = {
     },
 
     'getComments' : function(){
-        var tag = $('#other');
+        var tag = $('.weui_cells.weui_cells_access.mt0');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
             console.log(data);
@@ -123,7 +123,7 @@ var indexAction = {
             }else{
                 html += '当前还没有评论内容哦!';
             }
-            tag.html(html).find('.user_liveinteract span').each(function(){
+            tag.append(html).find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
                         var cid = $(this).attr('data-cid');
@@ -131,8 +131,7 @@ var indexAction = {
                         $.getJSON(url, {}, function(data){
                             console.log(data);
                             if(data.errcode == '0'){
-                                tag.empty();
-                                indexAction.getComments();
+                                location.reload();
                             }else{
                                 alert(data.msg);
                             }
