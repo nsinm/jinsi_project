@@ -21,26 +21,28 @@
                 <div class="weui_cell live_block">
                     <div class="weui_cell_hd">
                         <div class="user_thumb mr10">
-                            <img src="./uinfo/1.jpg" alt="">
+                            <img src="{pigcms:$live.jinsi_user_header_pic}" alt="">
                         </div>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <p class="user_livename">JUDY</p>
-                        <p class="user_liveword">我不是股神，是神</p>
-                        <img src="./uinfo/1.jpg" alt="">
-                        <p class="user_livetime">2016-1-15 21:00</p>
+                        <p class="user_livename">{pigcms:$live.jinsi_user_name}</p>
+                        <p class="user_liveword">{pigcms:$live.jinsi_content_info}</p>
+                        <if condition="$live.jinsi_content_type neq 1">
+                            <img src="{pigcms:$live.jinsi_content_url}" alt="">
+                        </if>
+                        <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
                             <span class="like-btn">
                                 <span class="icon-like on" alt="">
-                                </span>赞&nbsp;32
+                                </span>赞&nbsp;{pigcms:$live.jinsi_content_praise_no}
                             </span>
                             <span>
                                 <span class="icon-comment" alt="">
-                                </span>评论&nbsp;32
+                                </span>评论&nbsp;{pigcms:$live.jinsi_content_comment_no}
                             </span>
                             <span>
                                 <span class="icon-share" alt="">
-                                </span>分享&nbsp;32
+                                </span>分享&nbsp;{pigcms:$live.jinsi_content_share_no}
                             </span>
                         </p>
                     </div>

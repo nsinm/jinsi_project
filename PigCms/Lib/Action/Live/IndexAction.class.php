@@ -96,7 +96,10 @@ class IndexAction extends Action
         $uris = array(
             'gcUrl' => U('getComment', 'instructorId=' . $cid),
         );
-        $urls = array_merge($this->ajaxUrls, $uris);
+        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.id = {$cid} ORDER BY jc.jinsi_content_create DESC";
+        $liveInfo = M('content')->where('id=' . $cid)->select();
+        $urls = array_merge($this->ajaxUrls, $uris[0]);
+        $this->assign('live', $liveInfo);
         $this->assign('urls', $urls);
         $this->display();
     }
