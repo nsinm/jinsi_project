@@ -90,7 +90,7 @@ var indexAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].jinsi_content_praise_no + '">';
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -106,7 +106,12 @@ var indexAction = {
                     html +=         '<p class="user_liveinteract">';
                     html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
                     html +=             '<span class="sm-like like-btn">';
-                    html +=                 '<span class="icon-like on" alt=""></span>' + infos[index].jinsi_content_praise_no;
+                    if(infos[index].current_user_praise == 1){
+                        html +=             '<span class="icon-like" alt="">';
+                    }else{
+                        html +=             '<span class="icon-like on" alt="">';
+                    }
+                    html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
                     html +=             '<span class="sm-comment">';
                     html +=                 '<span class="icon-comment" alt=""></span>' + infos[index].jinsi_content_comment_no;
@@ -125,7 +130,7 @@ var indexAction = {
                         var url = params.pUrl + '&cid=' + cid;
                         $.getJSON(url, {}, function(data){
                             if(data.errcode == '0'){
-                                $(this).removeClass('no');
+                                indexAction.getComments();
                             }
                         }, 'JSON');
                     });
