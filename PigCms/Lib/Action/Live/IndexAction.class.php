@@ -65,7 +65,7 @@ class IndexAction extends LiveAction
         $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
         if($this->userType == 2){
             if($instructorIds){
-                $instructorIds = array_push($instructorIds, $this->userId);
+                array_push($instructorIds, $this->userId);
             }else{
                 $instructorIds[0] = $this->userId;
             }
