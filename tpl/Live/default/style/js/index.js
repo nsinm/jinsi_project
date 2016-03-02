@@ -129,6 +129,7 @@ var indexAction = {
                         var cid = $('.weui_cell.live_block').attr('data-cid');
                         var url = params.pUrl + '&cid=' + cid;
                         $.getJSON(url, {}, function(data){
+                            console.log(data);
                             if(data.errcode == '0'){
                                 indexAction.getComments();
                             }
