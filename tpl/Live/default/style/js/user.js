@@ -67,7 +67,7 @@ var userAction = {
                             $.getJSON(params.cfollowUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_default').addClass('weui_btn_primary');
+                                    getDefault(filter);
                                 }else{
                                     alert(data.msg);
                                 }
@@ -78,7 +78,7 @@ var userAction = {
                             $.getJSON(params.followUrl, json, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    $(this).removeClass('weui_btn_primary').addClass('weui_btn_default');
+                                    getDefault(filter);
                                 }else{
                                     alert(data.msg);
                                 }
