@@ -90,7 +90,8 @@ class IndexAction extends LiveAction
         $cid = $this->_get('cid');
         $uris = array(
             'gcUrl' => U('getComment', 'cid=' . $cid),
-            'pUrl' => U('praise')
+            'pUrl' => U('praise'),
+            'tocUrl' => U('Comment/index')
         );
         $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.id = {$cid}";
         $liveInfo = M()->query($sql);
