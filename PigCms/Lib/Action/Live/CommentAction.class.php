@@ -2,12 +2,12 @@
 /**
  *
  * author: Nsinm
- * package: jinsi UploadAction.class.php
+ * package: jinsi CommentAction.class.php
  * Date: 16/3/2
  * Time: 23:04
  */
 
-class UploadAction extends LiveAction
+class CommentAction extends LiveAction
 {
     /**
      * UploadAction constructor.
@@ -17,6 +17,9 @@ class UploadAction extends LiveAction
         parent::__construct();
     }
 
+    /**
+     *
+     */
     public function index ()
     {
         $this->display();
