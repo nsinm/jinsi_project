@@ -32,9 +32,20 @@ var commemtAction = {
     },
 
     'upload' : function(){
-        var tag = $("input[type='file']");
+        var tag = $("#file");
         tag.change(function(){
-           alert(1111);
+            $.ajaxFileUpload({
+                url : params.upUrl,
+                secureuri : false,
+                fileElementId : 'file',
+                dataType : 'json',
+                success : function(data){
+                    console.log(data);
+                },
+                error : function(data, status, e){
+                    console.log(data);
+                }
+            });
         });
     },
 
