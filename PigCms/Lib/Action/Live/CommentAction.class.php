@@ -69,7 +69,7 @@ class CommentAction extends LiveAction
             $result = array('errcode' => 0, 'msg' => '添加成功!');
         }
 
-        $this->ajaxReturn($data, 'JSON');
+        $this->ajaxReturn($result, 'JSON');
 
     }
 }
