@@ -73,7 +73,10 @@ class MyAction extends Action
      */
     public function follow ()
     {
-        $uris = array();
+        $uris = array(
+            'gfUrl' => U('getMyFollowList'),
+            'cfUrl' => U('Instructor/cancelFollow')
+        );
         $urls = array_merge($this->ajaxUrls, $uris);
         //获取我关注的导师列表
         $res = M('follow')->where('jinsi_follow_user_id=' . $this->userId)->select();
@@ -88,6 +91,25 @@ class MyAction extends Action
         $this->assign('urls', $urls);
         $this->assign('infos', $followInfos);
         $this->display();
+    }
+
+    /**
+     * 获取我的关注列表
+     */
+    public function getMyFollowList ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+        $result = array('errcode' => 1, 'msg' => '获取关注列表失败!');
+
+        $res = M('follow')->where('jinsi_follow_user_id=' . $this->userId)->select();
+        if($res){
+            $followIds = array_column($res, 'jinsi_follow_id_user');
+            $in = '(' . implode(',', $followIds) . ')';
+            $followInfos = M('user')->where('id IN ' . $in)->select();
+            $result = array('errcode' => 0, 'msg' => '获取关注列表成功!', 'data' => $followInfos);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
     }
 
     /**

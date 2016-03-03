@@ -21,7 +21,7 @@
             <div class="weui_cells weui_cells_checkbox">
                 <if condition="$infos neq 0">
                     <foreach name="infos" item="info">
-                        <label class="weui_cell weui_check_label" for="s11">
+                        <label class="weui_cell weui_check_label" for="s11" data-cid="{pigcms:$info.id}">
                             <div class="weui_cell_hd">
                                 <div class="user_thumb mr10">
                                     <img src="{pigcms:$info.jinsi_user_header_pic}" alt="">
@@ -50,6 +50,8 @@
     var params = {
         'userId' : '{pigcms:$urls.userId}',
         'tplName' : 'my_follow',
+        'gfUrl' : '{pigcms:$urls.gfUrl}',
+        'cfUrl' : '{pigcms:$urls.cfUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',

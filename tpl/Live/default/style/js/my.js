@@ -28,6 +28,10 @@ var myAction = {
         }
     },
 
+    'getMyFollowList' : function(){
+        var tag = $('')
+    },
+
     'init' : function(){
         if(params.tplName == 'my_index') {
             this.toMyModel();
