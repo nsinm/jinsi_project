@@ -5,10 +5,13 @@
 var myAction = {
     'toAnyModel' : function(){
         $("a[class='weui_cell']").each(function(){
-            var text = $(this + ' p').text();
-            console.log(text);
+            var text = $(this).text();
             if(text.indexOf('我的关注') > 0){
-
+                toUrl(this, params.followUrl);
+            }else if(text.indexOf('我的粉丝') > 0){
+                toUrl(this, params.fansUrl);
+            }else{
+                toUrl(this, params.liveUrl);
             }
         });
 
