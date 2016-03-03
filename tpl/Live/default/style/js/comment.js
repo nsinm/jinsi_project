@@ -22,7 +22,11 @@ var commemtAction = {
             var userId = params.userId;
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
             $.post(params.addUrl, json, function(data){
-                console.log(data);
+                if(data.errcode == '0'){
+                    location.go(-1);
+                }else{
+                    alert(data.msg);
+                }
             }, 'JSON');
         });
     },
