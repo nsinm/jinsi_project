@@ -141,7 +141,12 @@ var myAction = {
             }else{
                 html += '您还有没发布直播哦!';
             }
-            tag.html(html);
+            tag.html(html).find("div[class='weui_cell live_block']").each(function(){
+                var cid = $(this).attr('data-cid');
+                $(this).click(function(){
+                    location.href = params.commentUrl + '&cid=' + cid;
+                });
+            });
         }, 'JSON');
     },
 

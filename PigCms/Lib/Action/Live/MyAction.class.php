@@ -139,7 +139,8 @@ class MyAction extends Action
     public function live ()
     {
         $uris = array(
-            'llUrl' => U('getMyLiveList')
+            'llUrl' => U('getMyLiveList'),
+            'commentUrl' => U('Index/comment')
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);
