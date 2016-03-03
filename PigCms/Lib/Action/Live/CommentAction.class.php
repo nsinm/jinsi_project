@@ -45,12 +45,16 @@ class CommentAction extends LiveAction
 
         //当前用户id
         $userId = $this->userId;
+
         //ajax传递的userId
         $postUserId = $this->_post('userId');
         if($userId != $postUserId){
             $result = array('errcode' => 2, 'msg' => '非法用户!');
             $this->ajaxReturn($result, 'JSON');
         }
+
+        //直播id
+        $cid = $this->_post('cid');
 
         $data = array(
             'jinsi_content_info' => $this->_post('content'),
@@ -62,11 +66,18 @@ class CommentAction extends LiveAction
             'jinsi_content_share_no' => 0,
             'jinsi_content_create_user_id' => $userId,
             'jinsi_content_is_comment' => $this->_post('isComment'),
-            'jinsi_content_id' => $this->_post('cid')
+            'jinsi_content_id' => $cid
         );
 
+        $model =  M('content');
+        $number = $model->where('id=' . $cid)->getField('jinsi_content_comment_no');
+        $upData['jinsi_content_comment_no'] = $number + 1;
+        $status = $model->where('id=' . $cid)->save($upData);
+
         $id = M('content')->add($data);
-        if($id){
+        if($status && $id){
+
+
             $result = array('errcode' => 0, 'msg' => '添加成功!');
         }
 
