@@ -48,9 +48,39 @@ class MyAction extends Action
      */
     public function index ()
     {
-        $uris = array();
+        $uris = array(
+            'followUrl' => U('follow'),
+            'fansUrl' => U('fans'),
+            'liveUrl' => U('live')
+        );
         $urls = array_merge($this->ajaxUrls, $uris);
+        $userInfo = M('user')->where('id=' . $this->userId)->select();
+        $this->assign('user', $userInfo[0]);
         $this->assign('urls', $urls);
         $this->display();
+    }
+
+    /**
+     * 我的关注
+     */
+    public function follow ()
+    {
+
+    }
+
+    /**
+     * 我的粉丝
+     */
+    public function fans ()
+    {
+
+    }
+
+    /**
+     * 我的直播
+     */
+    public function live ()
+    {
+
     }
 }

@@ -21,12 +21,12 @@
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
                         <div class="user_thumb mr10">
-                            <img src="./uinfo/1.jpg" alt="">
+                            <img src="{pigcms:$user.jinsi_user_header_pic}" alt="">
                         </div>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <p>JUDY</p>
-                        <p class="user_signature">我不是股神，是神</p>
+                        <p>{pigcms:jinsi_user_name}</p>
+                        <p class="user_signature">{pigcms:jinsi_user_sign}</p>
                     </div>
                     <div class="weui_cell_ft"></div>
                 </div>
@@ -77,6 +77,9 @@
     var params = {
         'userId' : '{pigcms:$urls.userId}',
         'tplName' : 'my_index',
+        'followUrl' : '{pigcms:$urls.followUrl}',
+        'fansUrl' : '{pigcms:$urls.fansUrl}',
+        'liveUrl' : '{pigcms:$urls.liveUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',
