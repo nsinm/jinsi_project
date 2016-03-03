@@ -3,6 +3,12 @@
  */
 
 var myAction = {
+    'toEditUserModel' : function(){
+        $('.bd .weui_cells.weui_cells_access').click(function(){
+
+        });
+    },
+
     'toMyModel' : function(){
         $("a[class='weui_cell']").each(function(){
             var text = $(this).text();

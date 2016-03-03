@@ -61,13 +61,28 @@ class MyAction extends Action
     }
 
     /**
+     * 编辑个人信息页
+     */
+    public function edit ()
+    {
+
+    }
+
+    /**
      * 我的关注
      */
     public function follow ()
     {
         $uris = array();
         $urls = array_merge($this->ajaxUrls, $uris);
+        //获取我关注的导师列表
+        $res = M('follow')->where('jinsi_follow_user_id=' . $this->userId)->select();
+        $followIds = array_column($res, 'jinsi_follow_id_user');
+        $in = '(' . implode(',', $followIds) . ')';
+
+        $followInfos = M('user')->where('id IN ' . $in)->select();
         $this->assign('urls', $urls);
+        $this->assign('infos', $followInfos);
         $this->display();
     }
 
