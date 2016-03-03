@@ -33,6 +33,7 @@ var commemtAction = {
 
     'upload' : function(){
         var tag = $("#file");
+        var ul = $('.weui_uploader_files');
         tag.change(function(){
             $.ajaxFileUpload({
                 url : params.upUrl,
@@ -40,10 +41,17 @@ var commemtAction = {
                 fileElementId : 'file',
                 dataType : 'json',
                 success : function(data){
-                    console.log(data);
+                    if(data.errcode == '0'){
+                        $('.weui_uploader_input_wrp').remove();
+                        var infos = data.data;
+                        var picUrl = infos[0].savepath + infos[0].name;
+                        var html = '<li class="weui_uploader_file" style="background-image:url(' + picUrl + ')"></li>';
+                        ul.append(html);
+                        $("input[name='uploadfile']").val(picUrl);
+                    }
                 },
                 error : function(data, status, e){
-                    console.log(data);
+                    alert('上传失败');
                 }
             });
         });
