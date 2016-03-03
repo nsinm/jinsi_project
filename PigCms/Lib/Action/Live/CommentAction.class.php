@@ -82,7 +82,7 @@ class CommentAction extends LiveAction
         $upload = new UploadFile();
         $upload->maxSize = 1024 * 1024;// 设置附件上传大小
         $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
-        $upload->savePath = './uploads/' . $this->userId . '/' . date('Ymd');// 设置附件上传目录
+        $upload->savePath = './uploads/' . $this->userId . '/' . date('Ymd') . '/';// 设置附件上传目录
         // 上传错误提示错误信息
         if (!$upload->upload()) {
             $result = array('errcode' => 1, 'msg' => $this->error($upload->getErrorMsg()));
