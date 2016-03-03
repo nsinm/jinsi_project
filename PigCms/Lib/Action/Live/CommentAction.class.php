@@ -64,6 +64,11 @@ class CommentAction extends LiveAction
             'jinsi_content_id' => $this->_post('cid')
         );
 
+        $id = M('content')->add($data);
+        if($id){
+            $result = array('errcode' => 0, 'msg' => '添加成功!');
+        }
+
         $this->ajaxReturn($data, 'JSON');
 
     }
