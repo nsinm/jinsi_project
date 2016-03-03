@@ -29,12 +29,50 @@ var myAction = {
     },
 
     'getMyFollowList' : function(){
-        var tag = $('')
+        var tag = $('.weui_cells.weui_cells_checkbox');
+        $.getJSON(params.gfUrl, {}, function(data){
+            var infos = data.data;
+            var html = '';
+            if(data.errcode == '0'){
+                for(var index in infos){
+                    html += '<label class="weui_cell weui_check_label" for="s11">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_signature">' + infos[index].jinsi_user_sign + '</p>';
+                    html +=     '</div>';
+                    html +=     '<input type="checkbox" name="checkbox1" class="weui_check" id="s11">';
+                    html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow"  data-value="' + infos[index].id + '">取消关注</a>';
+                    html += '</label>';
+                }
+            }else{
+                html += '您还没有关注任何导师哦,赶快关注吧!';
+            }
+            tag.html(html).find('a').each(function(){
+                $(this).click(function(){
+                    var instructorId = $(this).attr('data-value');
+                    var userId = params.userId;
+                    $.getJSON(params.cfUrl, {'userId': userId, 'instructorId' : instructorId}, function(data){
+                        if(data.errcode == '0'){
+                            myAction.getMyFollowList();
+                        }else{
+                            alert(data.msg);
+                        }
+                    }, 'JSON');
+                });
+            });
+        }, 'JSON');
     },
 
     'init' : function(){
         if(params.tplName == 'my_index') {
             this.toMyModel();
+        }else if(params.tplName == 'my_follow'){
+            this.getMyFollowList();
         }
     }
 };
