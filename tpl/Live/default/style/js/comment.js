@@ -41,6 +41,7 @@ var commemtAction = {
                 fileElementId : 'file',
                 dataType : 'json',
                 success : function(data){
+                    console.log(data);
                     if(data.errcode == '0'){
                         $('.weui_uploader_input_wrp').remove();
                         var infos = data.data;
@@ -51,6 +52,7 @@ var commemtAction = {
                     }
                 },
                 error : function(data, status, e){
+                    console.log(data);
                     alert('上传失败');
                 }
             });
