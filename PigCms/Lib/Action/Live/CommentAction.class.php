@@ -71,16 +71,20 @@ class CommentAction extends LiveAction
             'jinsi_content_id' => $cid
         );
 
-        $model =  M('content');
-        $number = $model->where('id=' . $cid)->getField('jinsi_content_comment_no');
-        $upData['jinsi_content_comment_no'] = $number + 1;
-        $status = $model->where('id=' . $cid)->save($upData);
-
-        $id = M('content')->add($data);
-        if($status && $id){
-
-
-            $result = array('errcode' => 0, 'msg' => '添加成功!');
+        if($cid) {
+            $model = M('content');
+            $number = $model->where('id=' . $cid)->getField('jinsi_content_comment_no');
+            $upData['jinsi_content_comment_no'] = $number + 1;
+            $status = $model->where('id=' . $cid)->save($upData);
+            $id = M('content')->add($data);
+            if($status && $id){
+                $result = array('errcode' => 0, 'msg' => '添加成功!');
+            }
+        }else{
+            $id = M('content')->add($data);
+            if($id){
+                $result = array('errcode' => 0, 'msg' => '添加成功!');
+            }
         }
 
         $this->ajaxReturn($result, 'JSON');
