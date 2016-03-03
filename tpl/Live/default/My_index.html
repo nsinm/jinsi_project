@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <div>导师</div>
+    <div class="selected">我的</div>
+</div>
+<div class="container js_container">
+    <div class="page" style="overflow: hidden">
+        <div class="bd">
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的关注</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的粉丝</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>我的直播</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <!--<a class="weui_cell" href="javascript:;">-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>用户反馈</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="weui_cell" href="javascript:;">-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--<p>学习课堂</p>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft">-->
+                <!--</div>-->
+            <!--</a>-->
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'userId' : '{pigcms:$urls.userId}',
+        'tplName' : 'my_index',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}',
+    };
+</script>
+</body>
+</html>
