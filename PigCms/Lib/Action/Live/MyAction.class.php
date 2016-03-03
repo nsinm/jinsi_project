@@ -48,6 +48,9 @@ class MyAction extends Action
      */
     public function index ()
     {
+        $uris = array();
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
         $this->display();
     }
 }
