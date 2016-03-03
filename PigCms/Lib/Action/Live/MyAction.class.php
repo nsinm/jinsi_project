@@ -65,7 +65,10 @@ class MyAction extends Action
      */
     public function follow ()
     {
-
+        $uris = array();
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
+        $this->display();
     }
 
     /**
@@ -73,7 +76,10 @@ class MyAction extends Action
      */
     public function fans ()
     {
-
+        $uris = array();
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
+        $this->display();
     }
 
     /**
@@ -81,6 +87,9 @@ class MyAction extends Action
      */
     public function live ()
     {
-
+        $uris = array();
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
+        $this->display();
     }
 }

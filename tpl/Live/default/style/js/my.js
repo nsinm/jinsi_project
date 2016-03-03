@@ -3,7 +3,7 @@
  */
 
 var myAction = {
-    'toAnyModel' : function(){
+    'toMyModel' : function(){
         $("a[class='weui_cell']").each(function(){
             var text = $(this).text();
             if(text.indexOf('我的关注') > 0){
@@ -23,7 +23,9 @@ var myAction = {
     },
 
     'init' : function(){
-        this.toAnyModel();
+        if(params.tplName == 'my_index') {
+            this.toMyModel();
+        }
     }
 };
 
