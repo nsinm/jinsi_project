@@ -30,8 +30,11 @@ class LiveAction extends Action
     function __construct ()
     {
         parent::__construct();
+        $Live = D('Live');
+        $openid = $Live->get_openid(get_url());
+        $userid = $Live->get_user_info($openid);
         if(!session('userId'))
-            session('userId', 1);
+            session('userId', $userid);
         $this->userId = session('userId');
         $this->userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->ajaxUrls = array(
