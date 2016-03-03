@@ -27,8 +27,10 @@ class CommentAction extends LiveAction
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $type = $this->_get('type');
+        $cid = $this->_get('cid');
         $this->assign('urls', $urls);
         $this->assign('type', $type);
+        $this->assign('cid', $cid);
         $this->display();
     }
 
