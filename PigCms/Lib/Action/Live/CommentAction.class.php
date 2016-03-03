@@ -72,10 +72,23 @@ class CommentAction extends LiveAction
         $this->ajaxReturn($result, 'JSON');
     }
 
+    /**
+     * 文件上传
+     */
     public function upload ()
     {
+        if (!IS_AJAX) _404('页面不存在!');
         import('ORG.UploadFile');
         $upload = new UploadFile();
-        var_dump($upload);
+        $upload->maxSize = 2000;// 设置附件上传大小
+        $upload->allowExts = array('jpg', 'gif', 'png', 'jpeg');// 设置附件上传类型
+        $upload->savePath = './uploads/' . $this->userId . '/' . time();// 设置附件上传目录
+        // 上传错误提示错误信息
+        if (!$upload->upload()) {
+            $result = array('errcode' => 1, 'msg' => $this->error($upload->getErrorMsg()));
+        } else {// 上传成功 获取上传文件信息
+            $result = array('errcode' => 0, 'msg' => '图片上传成功', 'data' => $info = $upload->getUploadFileInfo());
+        }
+        $this->ajaxReturn($result, 'JSON');
     }
 }

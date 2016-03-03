@@ -31,8 +31,16 @@ var commemtAction = {
         });
     },
 
+    'upload' : function(){
+        var tag = $("input[type='file']");
+        tag.change(function(){
+           alert(1111);
+        });
+    },
+
     'init' : function(){
         this.addComment();
+        this.upload();
     }
 };
 
