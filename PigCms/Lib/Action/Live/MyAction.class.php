@@ -106,10 +106,31 @@ class MyAction extends Action
      */
     public function fans ()
     {
-        $uris = array();
+        $uris = array(
+            'fansUrl' => U('getMyFansList')
+        );
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('urls', $urls);
         $this->display();
+    }
+
+    /**
+     * 获取我的粉丝列表
+     */
+    public function getMyFansList ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+        $result = array('errcode' => 1, 'msg' => '获取粉丝列表失败!');
+
+        $res = M('follow')->where('jinsi_follow_id_user=' . $this->userId)->select();
+        if($res){
+            $fansIds = array_column($res, 'jinsi_follow_user_id');
+            $in = '(' . implode(',', $fansIds) . ')';
+            $fansInfos = M('user')->where('id IN ' . $in)->select();
+            $result = array('errcode' => 0, 'msg' => '获取关注列表成功!', 'data' => $fansInfos);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
     }
 
     /**

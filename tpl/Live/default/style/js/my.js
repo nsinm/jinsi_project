@@ -31,9 +31,9 @@ var myAction = {
     'getMyFollowList' : function(){
         var tag = $('.weui_cells.weui_cells_checkbox');
         $.getJSON(params.gfUrl, {}, function(data){
-            var infos = data.data;
             var html = '';
             if(data.errcode == '0'){
+                var infos = data.data;
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
                     html +=     '<div class="weui_cell_hd">';
@@ -68,11 +68,39 @@ var myAction = {
         }, 'JSON');
     },
 
+    'getMyFansList' : function(){
+        var tag = $('.weui_cells.weui_cells_access');
+        $.getJSON(params.fansUrl, {}, function(data){
+            var html = '';
+            if(data.errcode == '0'){
+                var infos = data.data;
+                for(var index in infos){
+                    html += '<div class="weui_cell">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_signature">' + infos[index].jinsi_user_sign + '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
+                }
+            }else{
+                html += '您还没有粉丝,加油哦!';
+            }
+            tag.html(html);
+        }, 'JSON');
+    },
+
     'init' : function(){
         if(params.tplName == 'my_index') {
             this.toMyModel();
         }else if(params.tplName == 'my_follow'){
             this.getMyFollowList();
+        }else if(params.tplName == 'my_fans'){
+            this.getMyFansList();
         }
     }
 };
