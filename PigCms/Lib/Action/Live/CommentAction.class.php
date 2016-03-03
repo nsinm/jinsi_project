@@ -78,7 +78,6 @@ class CommentAction extends LiveAction
      */
     public function upload ()
     {
-        if (!IS_AJAX) _404('页面不存在!');
         import('ORG.UploadFile');
         $upload = new UploadFile();
         $upload->maxSize = 2000;// 设置附件上传大小
