@@ -18,57 +18,59 @@
     <div class="page">
         <div class="bd">
             <div class="weui_cells_title">我的直播</div>
-            <div class="weui_cell live_block">
-                <div class="weui_cell_hd">
-                    <div class="user_thumb mr10">
-                        <img src="./uinfo/1.jpg" alt="">
+            <span id="live_list">
+                <div class="weui_cell live_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p class="user_livename">JUDY</p>
+                        <p class="user_liveword">我不是股神，是神</p>
+                        <p class="user_wordbubble" >
+                            <img src="./images/bubble@2x.png" alt="">
+                            <span>32&quot;</span>
+                        </p>
+                        <p class="user_livetime">2016-1-15 21:00</p>
+                        <p class="user_liveinteract">
+                            <span>
+                                <img src="./images/like@2x.png" alt="">赞&nbsp;36
+                            </span>
+                            <span>
+                                <img src="./images/comment@2x.png" alt="">评论&nbsp;32
+                            </span>
+                            <span>
+                                <img src="./images/share@2x.png" alt="">分享&nbsp;32
+                            </span>
+                        </p>
                     </div>
                 </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p class="user_livename">JUDY</p>
-                    <p class="user_liveword">我不是股神，是神</p>
-                    <p class="user_wordbubble" >
-                        <img src="./images/bubble@2x.png" alt="">
-                        <span>32&quot;</span>
-                    </p>
-                    <p class="user_livetime">2016-1-15 21:00</p>
-                    <p class="user_liveinteract">
-                        <span>
-                            <img src="./images/like@2x.png" alt="">赞&nbsp;36
-                        </span>
-                        <span>
-                            <img src="./images/comment@2x.png" alt="">评论&nbsp;32
-                        </span>
-                        <span>
-                            <img src="./images/share@2x.png" alt="">分享&nbsp;32
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="weui_cell live_block">
-                <div class="weui_cell_hd">
-                    <div class="user_thumb mr10">
+                <div class="weui_cell live_block">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p class="user_livename">JUDY</p>
+                        <p class="user_liveword">我不是股神，是神</p>
                         <img src="./uinfo/1.jpg" alt="">
+                        <p class="user_livetime">2016-1-15 21:00</p>
+                        <p class="user_liveinteract">
+                            <span>
+                                <img src="./images/like@2x.png" alt="">赞&nbsp;36
+                            </span>
+                            <span>
+                                <img src="./images/comment@2x.png" alt="">评论&nbsp;32
+                            </span>
+                            <span>
+                                <img src="./images/share@2x.png" alt="">分享&nbsp;32
+                            </span>
+                        </p>
                     </div>
                 </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p class="user_livename">JUDY</p>
-                    <p class="user_liveword">我不是股神，是神</p>
-                    <img src="./uinfo/1.jpg" alt="">
-                    <p class="user_livetime">2016-1-15 21:00</p>
-                    <p class="user_liveinteract">
-                        <span>
-                            <img src="./images/like@2x.png" alt="">赞&nbsp;36
-                        </span>
-                        <span>
-                            <img src="./images/comment@2x.png" alt="">评论&nbsp;32
-                        </span>
-                        <span>
-                            <img src="./images/share@2x.png" alt="">分享&nbsp;32
-                        </span>
-                    </p>
-                </div>
-            </div>
+            </span>
         </div>
     </div>
 </div>
@@ -78,7 +80,8 @@
 <script>
     var params = {
         'userId' : '{pigcms:$urls.userId}',
-        'tplName' : 'my_follow',
+        'tplName' : 'my_live',
+        'llUrl' : '{pigcms:$urls.llUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',

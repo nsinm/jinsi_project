@@ -31,6 +31,7 @@ var myAction = {
     'getMyFollowList' : function(){
         var tag = $('.weui_cells.weui_cells_checkbox');
         $.getJSON(params.gfUrl, {}, function(data){
+            console.log(data);
             var html = '';
             if(data.errcode == '0'){
                 var infos = data.data;
@@ -57,6 +58,7 @@ var myAction = {
                     var instructorId = $(this).attr('data-value');
                     var userId = params.userId;
                     $.getJSON(params.cfUrl, {'userId': userId, 'instructorId' : instructorId}, function(data){
+                        console.log(data);
                         if(data.errcode == '0'){
                             myAction.getMyFollowList();
                         }else{
@@ -71,6 +73,7 @@ var myAction = {
     'getMyFansList' : function(){
         var tag = $('.weui_cells.weui_cells_access');
         $.getJSON(params.fansUrl, {}, function(data){
+            console.log(data);
             var html = '';
             if(data.errcode == '0'){
                 var infos = data.data;
@@ -94,6 +97,54 @@ var myAction = {
         }, 'JSON');
     },
 
+    'getMyLiveList' : function(){
+        var tag = $('#live_list');
+        $.getJSON(params.llUrl, {}, function(data){
+            var html = '';
+            if(data.errcode == '0'){
+                var infos = data.data;
+                for(var index in infos){
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
+                    if(infos[index].jinsi_content_type == '1') {
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                    }else if(infos[index].jinsi_content_type == '2'){
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                    }else{
+                        html +=     '<p class="user_wordbubble" >';
+                        html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                        html +=         '<span>32&quot;</span>';
+                        html +=     '</p>';
+                    }
+                    html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
+                    html +=         '<p class="user_liveinteract">';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/like@2x.png" alt="">赞&nbsp;' + infos[index].jinsi_content_praise_no;
+                    html +=             '</span>';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/comment@2x.png" alt="">评论&nbsp;' + infos[index].jinsi_content_comment_no;
+                    html +=             '</span>';
+                    html +=             '<span>';
+                    html +=                 '<img src="/tpl/Live/default/style/images/share@2x.png" alt="">分享&nbsp;' + infos[index].jinsi_content_share_no;
+                    html +=             '</span>';
+                    html +=         '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
+                }
+            }else{
+                html += '您还有没发布直播哦!';
+            }
+            tag.html(html);
+        }, 'JSON');
+    },
+
     'init' : function(){
         if(params.tplName == 'my_index') {
             this.toMyModel();
@@ -101,6 +152,8 @@ var myAction = {
             this.getMyFollowList();
         }else if(params.tplName == 'my_fans'){
             this.getMyFansList();
+        }else if(params.tplName == 'my_live'){
+            this.getMyLiveList();
         }
     }
 };
