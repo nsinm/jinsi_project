@@ -11,7 +11,7 @@ var commemtAction = {
                 alert('评论内容不能为空')
             }
             //获取上传图片
-            var picUrl = $("input[name='uploadfile']").val();
+            var picUrl = $("#picurl").val();
             //类型 1文字 2图文
             var type = !picUrl ? 1 : 2;
             //获取评论帖子id
@@ -46,9 +46,9 @@ var commemtAction = {
                         $('.weui_uploader_input_wrp').remove();
                         var infos = data.data;
                         var picUrl = infos[0].savepath + infos[0].savename;
+                        $('#picurl').val(picUrl);
                         var html = '<li class="weui_uploader_file" style="background-image:url(' + picUrl + ')"></li>';
                         ul.append(html);
-                        $("input[name='uploadfile']").val(picUrl);
                     }
                 },
                 error : function(data, status, e){
