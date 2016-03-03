@@ -70,6 +70,12 @@ class CommentAction extends LiveAction
         }
 
         $this->ajaxReturn($result, 'JSON');
+    }
 
+    public function upload ()
+    {
+        import('ORG.UploadFile');
+        $upload = new UploadFile();
+        var_dump($upload);
     }
 }
