@@ -23,7 +23,7 @@ var commemtAction = {
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
             $.post(params.addUrl, json, function(data){
                 if(data.errcode == '0'){
-                    location.go(-1);
+                    history.go(-1);
                 }else{
                     alert(data.msg);
                 }
