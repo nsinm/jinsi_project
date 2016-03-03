@@ -23,7 +23,12 @@ var commemtAction = {
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
             $.post(params.addUrl, json, function(data){
                 if(data.errcode == '0'){
-                    history.go(-1);
+                    if(cid){
+                        location.href = params.toicUrl + '&cid=' + cid;
+                    }else{
+                        location.href = params.toindexUrl;
+                    }
+
                 }else{
                     alert(data.msg);
                 }

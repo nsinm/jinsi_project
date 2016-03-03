@@ -24,7 +24,9 @@ class CommentAction extends LiveAction
     {
         $uris = array(
             'addUrl' => U('add'),
-            'upUrl' => U('upload')
+            'upUrl' => U('upload'),
+            'toicUrl' => U('Index/comment'),
+            'toindexUrl' => U('Index/index')
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $type = $this->_get('type');
