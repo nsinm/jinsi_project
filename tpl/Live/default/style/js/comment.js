@@ -7,5 +7,13 @@ var commemtAction = {
         $('.weui_btn.weui_btn_primary').click(function(){
             alert(1111);
         });
+    },
+
+    'init' : function(){
+        this.addComment();
     }
 };
+
+$(function(){
+    commemtAction.init();
+})
