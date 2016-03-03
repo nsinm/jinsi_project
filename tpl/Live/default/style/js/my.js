@@ -4,9 +4,19 @@
 
 var myAction = {
     'toAnyModel' : function(){
-        $('.weui_cells.weui_cells_access').find('a').each(function(){
-            console.log($(this).html());
+        $("a[class='weui_cell']").each(function(){
+            var text = $(this + ' p').text();
+            console.log(text);
+            if(text.indexOf('我的关注') > 0){
+
+            }
         });
+
+        function toUrl (tag, url){
+            $(tag).click(function(){
+                location.href = url;
+            });
+        }
     },
 
     'init' : function(){
