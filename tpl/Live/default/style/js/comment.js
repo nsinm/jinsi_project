@@ -45,7 +45,7 @@ var commemtAction = {
                     if(data.errcode == '0'){
                         $('.weui_uploader_input_wrp').remove();
                         var infos = data.data;
-                        var picUrl = infos[0].savepath + infos[0].name;
+                        var picUrl = infos[0].savepath + infos[0].savename;
                         var html = '<li class="weui_uploader_file" style="background-image:url(' + picUrl + ')"></li>';
                         ul.append(html);
                         $("input[name='uploadfile']").val(picUrl);
