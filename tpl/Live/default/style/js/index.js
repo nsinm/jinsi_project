@@ -147,9 +147,15 @@ var indexAction = {
     },
 
     'toComment' : function(){
-        $('.weui_actionsheet_menu').find('div').each(function(){
+        var tag = $('.weui_actionsheet_menu');
+        tag.find('div').each(function(){
+            var cid = tag.attr('data-value');
             var type = $(this).attr('data-value');
             $(this).click(function(){
+                if(cid){
+                    location.href = params.tocUrl + '&type=' + type + '&cid=' + cid;
+                    return;
+                }
                 location.href = params.tocUrl + '&type=' + type;
             });
         });
