@@ -33,6 +33,7 @@
                             <div class="weui_uploader">
                                 <div class="weui_uploader_bd">
                                     <ul class="weui_uploader_files">
+                                        <input type="hidden" name="uploadfile" value="" />
                                         <li class="weui_uploader_file" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)"></li>
                                         <li class="weui_uploader_file weui_uploader_status" style="background-image:url(http://shp.qpic.cn/weixinsrc_pic/pScBR7sbqjOBJomcuvVJ6iacVrbMJaoJZkFUIq4nzQZUIqzTKziam7ibg/)">
                                             <div class="weui_uploader_status_content">
@@ -58,14 +59,15 @@
         </div>
     </div>
 </div>
-<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/jquery.js"></script>
+<script src="/tpl/Live/default/style/js/ajaxfileupload.js"></script>
+<script src="/tpl/Live/default/style/js/comment.js"></script>
 <script src="/tpl/Live/default/style/js/bottom.js"></script>
 <script>
     var params = {
         'userId' : '{pigcms:$urls.userId}',
         'tplName' : 'index_comment',
-        'gcUrl' : '{pigcms:$urls.gcUrl}',
-        'pUrl' : '{pigcms:$urls.pUrl}',
+        'addUrl' : '{pigcms:$urls.addUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',
