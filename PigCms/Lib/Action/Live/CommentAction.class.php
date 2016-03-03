@@ -51,7 +51,18 @@ class CommentAction extends LiveAction
             $this->ajaxReturn($result, 'JSON');
         }
 
-        $data = $this->_post();
+        $data = array(
+            'jinsi_content_info' => $this->_post('content'),
+            'jinsi_content_type' => $this->_post('type'),
+            'jinsi_content_create' => time(),
+            'jinsi_content_url' => $this->_post('picUrl'),
+            'jinsi_content_praise_no' => 0,
+            'jinsi_content_comment_no' => 0,
+            'jinsi_content_share_no' => 0,
+            'jinsi_content_create_user_id' => $userId,
+            'jinsi_content_is_comment' => $this->_post('isComment'),
+            'jinsi_content_id' => $this->_post('cid')
+        );
 
         $this->ajaxReturn($data, 'JSON');
 
