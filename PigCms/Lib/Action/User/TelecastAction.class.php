@@ -13,6 +13,6 @@ class TelecastAction extends Action
 {
     public function index ()
     {
-        $this->display('Public/head');
+        $this->display('Public:head');
     }
 }
