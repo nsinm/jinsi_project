@@ -14,7 +14,7 @@ var indexAction = {
     },
 
     'getUserList' : function(){
-        var tag = $("tbody");
+        var tag = $("#user_info");
         $.getJSON(params.getUserListUrl, {}, function(data){
             console.log(data);
             var html = '';
