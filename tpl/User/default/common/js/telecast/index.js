@@ -4,12 +4,10 @@
 
 var indexAction = {
     'navEvent' : function(){
-        var tag = $('.tab ul li');
-        tag.each(function(){
+        var lis = $('.tab ul li');
+        $.each(lis, function(){
             $(this).click(function(){
-                if($(this).attr('class') == 'tabli current')
-                    return;
-                tag.removeClass('currnet');
+                lis.removeClass('current');
                 $(this).addClass('current');
             }) ;
         });
