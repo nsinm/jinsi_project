@@ -9,10 +9,10 @@
  * Time: 下午2:22
  */
 
-class TelecastAction extends UserAction
+class TelecastAction extends Action
 {
     public function index ()
     {
-        $this->display();
+        $this->display('Public/head');
     }
 }
