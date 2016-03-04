@@ -35,6 +35,7 @@ var indexAction = {
                     html +=     '<td>' + infos[index].jinsi_user_style + '</td>';
                     html +=     '<td>' + infos[index].jinsi_user_sign + '</td>';
                     html +=     '<td>' + infos[index].jinsi_user_info + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     if(infos[index].jinsi_user_recommend == '1'){
                         html += '<td>推荐导师</td>';
                     }else{
