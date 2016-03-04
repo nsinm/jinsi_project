@@ -18,7 +18,12 @@ class AuthAction extends Action
         //echo M('live')->get_openid('aa');
         $jssdk = D('Jssdk');
         $signPackage = $jssdk->GetSignPackage();
-        print_r($signPackage);
+        //print_r($signPackage);
+        $this->display('signPackage',$signPackage);
+        $data['title'] = "测试测试";
+        $data['imgUrl'] = "https://www.baidu.com/img/baidu_jgylogo3.gif";
+        $data['link'] = get_url();
+        $this->display('data',$data);
         $this->display();
     }
 }
