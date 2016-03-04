@@ -9,7 +9,7 @@
  * Time: 下午2:22
  */
 
-class TelecastAction extends Action
+class TelecastAction extends UserAction
 {
     public function index ()
     {
