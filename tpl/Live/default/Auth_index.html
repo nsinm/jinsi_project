@@ -24,9 +24,9 @@
         debug: true,
         appId: '{pigcms:$signPackage.appId}',
         timestamp: {pigcms:$signPackage.timestamp},
-    nonceStr: '{pigcms:$signPackage.nonceStr}',
-            signature: '{pigcms:$signPackage.signature}<?php echo $signPackage["signature"];?>',
-            jsApiList: [
+        nonceStr: '{pigcms:$signPackage.nonceStr}',
+        signature: '{pigcms:$signPackage.signature}',
+        jsApiList: [
                 'onMenuShareTimeline'
         // 所有要调用的 API 都要加到这个列表中
     ]
