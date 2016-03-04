@@ -47,8 +47,8 @@ var indexAction = {
                     html += '</tr>';
                 }
             }
+            tag.html(html);
         }, 'JSON');
-        tag.html(html);
     },
 
     'init' : function(){
