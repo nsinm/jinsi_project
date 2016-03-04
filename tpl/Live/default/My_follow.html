@@ -18,27 +18,8 @@
     <div class="page">
         <div class="bd">
             <div class="weui_cells_title">我的关注</div>
-            <div class="weui_cells weui_cells_checkbox">
-                <if condition="$infos neq 0">
-                    <foreach name="infos" item="info">
-                        <label class="weui_cell weui_check_label" for="s11" data-cid="{pigcms:$info.id}">
-                            <div class="weui_cell_hd">
-                                <div class="user_thumb mr10">
-                                    <img src="{pigcms:$info.jinsi_user_header_pic}" alt="">
-                                </div>
-                            </div>
-                            <div class="weui_cell_bd weui_cell_primary">
-                                <p>{pigcms:$info.jinsi_user_name}</p>
-                                <p class="user_signature">{pigcms:$info.jinsi_user_sign}</p>
-                            </div>
-                            <input type="checkbox" name="checkbox1" class="weui_check" id="s11">
-                            <a href="javascript:;" class="weui_btn weui_btn_mini  weui_btn_default follow">取消关注</a>
-                            <!-- <i class="weui_icon_checked"></i> -->
-                        </label>
-                    </foreach>
-                <else />
-                    您还没有关注任何导师!
-                </if>
+            <div class="weui_cells weui_cells_checkbox mb44">
+
             </div>
         </div>
     </div>
