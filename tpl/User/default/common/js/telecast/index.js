@@ -14,7 +14,7 @@ var indexAction = {
     },
 
     'getUserList' : function(){
-        var tag = $('#t');
+        var tag = $("volist[name='list']");
         $.getJSON(params.getUserListUrl, {}, function(data){
             console.log(data);
             var html = '';
