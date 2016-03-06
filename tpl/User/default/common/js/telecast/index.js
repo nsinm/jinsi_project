@@ -189,7 +189,7 @@ var indexAction = {
                 var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
-                        indexAction.getLiveList(0);
+                        indexAction.getLiveList(index);
                     }else{
                         alert(data.msg);
                     }
@@ -249,7 +249,7 @@ var indexAction = {
                 var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
-                        indexAction.getCommentList(0);
+                        indexAction.getCommentList(index);
                     }else{
                         alert(data.msg);
                     }
