@@ -4,7 +4,7 @@
 
 var indexAction = {
     'pageIndex' : 0,
-    'pageSize' : params.pageSize,
+    'pageSize' : 20,
 
     'navEvent' : function(){
         var lis = $('.tab ul li');
