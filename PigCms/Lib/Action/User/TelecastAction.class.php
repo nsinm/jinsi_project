@@ -35,13 +35,12 @@ class TelecastAction extends UserAction
         $result = array('errcode' => 1, 'msg' => '获取用户列表失败!');
 
         $model = M('user', 'jinsi_');
-        $count = $model->count();
         $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
         $start = ($page - 1) * $pageSize;
-        $userList = M('user', 'jinsi_')->limit($start, $pageSize)->select();
+        $userList = $model->limit($start, $pageSize)->select();
         if($userList){
-            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'total' => $count, 'data' => $userList);
+            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'data' => $userList);
         }
 
         $this->ajaxReturn($result, 'JSON');
@@ -98,22 +97,32 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 获取直播列表
+     */
+    public function getLiveList ()
+    {
+        $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '获取直播列表失败!');
+
+        $page = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = ($page - 1) * $pageSize;
+
+        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, \'%Y-%m-%d %H:%i\') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
+        $liveList = M()->query($sql);
+        if($liveList){
+            $result = array('errcode' => 0, 'msg' => '获取直播列表成功!', 'data' => $liveList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()
     {
         if(!IS_AJAX) _404('该页面不存在!');
-    }
-
-    private function page ($table, $where=1, $pageRows=20, $currentPage=1)
-    {
-        $model = M($table, 'jinsi_');
-        if(!$model)
-            $this->ajaxReturn(array('errcode' => 2, 'msg' => '连接数据表失败!'), 'JSON');
-        //数据库中总的记录数
-        $count = $model->where($where)->count();
-        //总页数
-        $pageNum = ceil($count / $pageRows);
-
     }
 }
