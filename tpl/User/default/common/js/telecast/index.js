@@ -304,7 +304,7 @@ var indexAction = {
     'init' : function(){
         //导航条点击事件
         this.navEvent();
-        this.pagination();
+        this.userPagination();
     }
 };
 
