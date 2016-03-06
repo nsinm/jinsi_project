@@ -67,7 +67,7 @@ var indexAction = {
 
                     if ($('.M-box').html().length == '') {
                         $('.M-box').pagination(data.total, {
-                            callback: pageCallback,
+                            callback: 'pageCallback',
                             prev_text: '<',
                             next_text: '>',
                             items_per_page: pageSize,
