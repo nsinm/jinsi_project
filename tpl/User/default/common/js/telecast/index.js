@@ -69,7 +69,16 @@ var indexAction = {
                     switch (text){
                         case '删除':
                             var type = 1;
-                            edit(type, userId);
+                            var data = {'type' : type, 'userId' : userId};
+                            $.getJSON(params.editUserUrl, data, function(msg){
+                                console.log(msg);
+                                if(msg.errcode == '0'){
+                                    alert(data.msg);
+                                    indexAction.getUserList(index);
+                                }else{
+                                    alert(data.msg);
+                                }
+                            }, 'JSON');
                             break;
                         case '取消导师':
                             var type = 2;
