@@ -103,16 +103,37 @@ class TelecastAction extends UserAction
     {
         $this->_to404();
 
-        $result = array('errcode' => 1, 'msg' => '获取直播列表失败!');
+        $result = array('errcode' => 1, 'msg' => '获取失败!');
 
         $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
+        $type = $this->_get('type'); //1评论 0直播
         $start = ($page - 1) * $pageSize;
 
-        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, \'%Y-%m-%d %H:%i\') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
+        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, \'%Y-%m-%d %H:%i\') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = {$type} ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
         $liveList = M()->query($sql);
         if($liveList){
-            $result = array('errcode' => 0, 'msg' => '获取直播列表成功!', 'data' => $liveList);
+            $result = array('errcode' => 0, 'msg' => '获取成功!', 'data' => $liveList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 删除评论或直播
+     */
+    public function delContent ()
+    {
+        $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '操作失败!');
+
+        $cid = $this->_get('cid');
+        if($cid){
+            $status = M('content', 'jinsi_')->where('id=' . $cid)->delete();
+            if($status){
+                $result = array('errcode' => 0, 'msg' => '删除成功!');
+            }
         }
 
         $this->ajaxReturn($result, 'JSON');
