@@ -26,7 +26,6 @@ var indexAction = {
                     html +=     '<td>' + infos[index].id + '</td>';
                     html +=     '<td>' + infos[index].open_id + '</td>';
                     html +=     '<td>' + infos[index].jinsi_user_name + '</td>';
-                    html +=     '<td>' + infos[index].jinsi_user_header_pic + '</td>';
                     if(infos[index].jinsi_user_type == '1'){
                         html += '<td>普通用户</td>';
                     }else{
@@ -35,7 +34,6 @@ var indexAction = {
                     html +=     '<td>' + infos[index].jinsi_user_style + '</td>';
                     html +=     '<td>' + infos[index].jinsi_user_sign + '</td>';
                     html +=     '<td>' + infos[index].jinsi_user_info + '</td>';
-                    html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     if(infos[index].jinsi_user_recommend == '1'){
                         html += '<td>推荐导师</td>';
                     }else{
