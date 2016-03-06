@@ -39,7 +39,7 @@ var indexAction = {
                     }else{
                         html += '<td>普通导师</td>';
                     }
-                    html +=     '<td>' + infos[index].jinsi_user_create_time + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     html +=     '<td class="norightborder">';
                     html +=         '<a href="javascript:void(0)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>';
                     html +=     '</td>';
