@@ -41,7 +41,7 @@ var indexAction = {
                     }
                     html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     html +=     '<td class="norightborder">';
-                    html +=         '<a href="javascript:void(0)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>';
+                    html +=         '<a href="javascript:void(0)">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">推荐</a>';
                     html +=     '</td>';
                     html += '</tr>';
                 }
