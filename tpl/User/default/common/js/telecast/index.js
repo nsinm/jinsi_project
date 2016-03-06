@@ -4,7 +4,7 @@
 
 var indexAction = {
     'pageIndex' : 0,
-    'pageSize' : 20,
+    'pageSize' : 10,
 
     'navEvent' : function(){
         var lis = $('.tab ul li');
@@ -18,7 +18,7 @@ var indexAction = {
 
     'getUserList' : function(index){
         var tag = $("#user_info");
-
+        var index = index == '' ? 1 : index;
         $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': this.pageSize}, function (data) {
             console.log(data);
             var html = '';
@@ -78,6 +78,10 @@ var indexAction = {
                 }
             }
         }, 'JSON');
+
+        function pageCallback (index, jq){
+            this.getUserList(index);
+        }
     },
 
     'pageCallback' : function(index, jq){
