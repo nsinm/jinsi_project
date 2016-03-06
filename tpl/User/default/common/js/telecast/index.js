@@ -82,7 +82,7 @@ var indexAction = {
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.page(params.userCount, this.getUserList());
+            this.page(params.userCount, this.getUserList);
         }
     }
 };
