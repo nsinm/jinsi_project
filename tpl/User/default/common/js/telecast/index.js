@@ -40,6 +40,8 @@ var indexAction = {
                         } else {
                             html += '<td>普通导师</td>';
                         }
+                    }else{
+                        html += '<td></td>';
                     }
                     html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     html +=     '<td class="norightborder">';
