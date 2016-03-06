@@ -130,7 +130,7 @@ var indexAction = {
             var data = {'type' : type, 'userId' : userId};
             $.getJSON(params.editUserUrl, data, function(msg){
                 if(msg.errcode == '0'){
-                    indexAction.getUserList(0);
+                    indexAction.getUserList(index);
                 }else{
                     alert(data.msg);
                 }
