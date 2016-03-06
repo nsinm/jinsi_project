@@ -5,6 +5,7 @@
 var indexAction = {
     'navEvent' : function(){
         var lis = $('.tab ul li');
+        var type = 1;
         $.each(lis, function(){
             $(this).click(function(){
                 lis.removeClass('current');
@@ -14,17 +15,18 @@ var indexAction = {
                 $('.M-box').empty();
                 switch (text){
                     case '用户管理':
-                        indexAction.userPagination();
+                        type = 1;
                         break;
                     case '直播管理':
-                        indexAction.livePagination();
+                        type = 2;
                         break;
                     case '评论管理':
-                        indexAction.commentPagination();
+                        type = 3;
                         break;
                 }
             }) ;
         });
+        return type;
     },
 
     'getUserList' : function(index){
@@ -304,8 +306,15 @@ var indexAction = {
 
     'init' : function(){
         //导航条点击事件
-        this.navEvent();
-        this.userPagination();
+        var type = this.navEvent();
+        if(type == 1){
+            this.userPagination();
+        }else if(type == 2){
+            this.livePagination();
+        }else{
+            this.commentPagination();
+        }
+
     }
 };
 
