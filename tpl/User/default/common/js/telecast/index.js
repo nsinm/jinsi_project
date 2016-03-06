@@ -45,7 +45,7 @@ var indexAction = {
                         html += '<td></td>';
                     }
                     html += '<td>' + infos[index].jinsi_user_city + '</td>';
-                    html += '<td class="norightborder">';
+                    html += '<td class="norightborder" data-uid="' + infos[index].id + '">';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
                     if (infos[index].jinsi_user_type == '2') {
                         html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a><br/>';
@@ -63,27 +63,46 @@ var indexAction = {
             }
             tag.html(html).find('.norightborder a').each(function(){
                 $(this).click(function(){
+                    var userId = $('.norightborder').attr('data-uid');
                     var text = $(this).text();
+                    var type = '';
                     switch (text){
                         case '删除':
-                            alert(1111);
+                            var type = 1;
+                            edit(type, userId);
                             break;
                         case '取消导师':
-                            alert(2222);
+                            var type = 2;
+                            edit(type, userId);
                             break;
                         case '取消推荐':
-                            alert(3333);
+                            var type = 3;
+                            edit(type, userId);
                             break;
                         case '推荐':
-                            alert(4444);
+                            var type = 4;
+                            edit(type, userId);
                             break;
                         case '设为导师':
-                            alert(5555);
+                            var type = 5;
+                            edit(type, userId);
                             break;
                     }
                 });
             });
         }, 'JSON');
+
+        function edit (type, userId){
+            var data = {'type' : type, 'userId' : userId};
+            $.getJSON(params.editUserUrl, data, function(msg){
+                if(msg.errcode == '0'){
+                    alert(data.msg);
+                    indexAction.getUserList(index);
+                }else{
+                    alert(data.msg);
+                }
+            }, 'JSON');
+        }
     },
 
     'pagination' : function(){

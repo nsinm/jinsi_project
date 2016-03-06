@@ -47,22 +47,52 @@ class TelecastAction extends UserAction
         $this->ajaxReturn($result, 'JSON');
     }
 
-    public function delUser ()
+    /**
+     * 编辑用户
+     */
+    public function eidtUser ()
     {
         $this->_to404();
 
-        $result = array('errcode' => 1, 'msg' => '删除用户失败!');
+        $result = array('errcode' => 1, 'msg' => '操作失败!');
 
-        $model = M('user', 'jinsi_');
-        $count = $model->count();
-        $page = $this->_get('page');
-        $pageSize = $this->_get('pageSize');
-        $start = ($page - 1) * $pageSize;
-        $userList = M('user', 'jinsi_')->limit($start, $pageSize)->select();
-        if($userList){
-            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'total' => $count, 'data' => $userList);
+        $handleType = $this->_get('type');
+        $userId = $this->_get('userId');
+        if($handleType && $userId){
+            $model = M('user', 'jinsi_')->where('id=' . $userId);
+            switch ($handleType){
+                case '1':
+                    $status = $model->delete();
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '删除成功!');
+                    break;
+                case '2':
+                    $data['jinsi_user_type'] = 1;
+                    $data['jinsi_user_recommend'] = 0;
+                    $status = $model->save($data);
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '取消成功!');
+                    break;
+                case '3':
+                    $data['jinsi_user_recommend'] = 0;
+                    $status = $model->save($data);
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '取消成功!');
+                    break;
+                case '4':
+                    $data['jinsi_user_recommend'] = 1;
+                    $status = $model->save($data);
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '推荐成功!');
+                    break;
+                case '5':
+                    $data['jinsi_user_type'] = 2;
+                    $status = $model->save($data);
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '设置成功!');
+                    break;
+            }
         }
-
         $this->ajaxReturn($result, 'JSON');
     }
 
