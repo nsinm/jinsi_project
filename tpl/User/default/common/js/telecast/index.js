@@ -18,7 +18,7 @@ var indexAction = {
 
     'getUserList' : function(index){
         var tag = $("#user_info");
-        var index = index == '' ? 1 : index;
+        var index = index == '' ? 0 : index;
         $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': this.pageSize}, function (data) {
             console.log(data);
             var html = '';
