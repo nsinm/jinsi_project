@@ -11,6 +11,7 @@ var indexAction = {
                 $(this).addClass('current');
                 var text = $('a', $(this)).text();
                 $(".ListProduct").empty();
+                $('.M-box, .M-box1, .M-box2').empty();
                 switch (text){
                     case '用户管理':
                         indexAction.userPagination();
