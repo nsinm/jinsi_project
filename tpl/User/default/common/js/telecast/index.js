@@ -309,11 +309,11 @@ var indexAction = {
     'init' : function(){
         //导航条点击事件
         this.navEvent();
-        if(params.tplName == 'index'){
+        if(params.tplName == 'user_list'){
             this.userPagination();
-        }else if(params.tplName == 'live'){
+        }else if(params.tplName == 'user_live'){
             this.livePagination();
-        }else if(params.tplName == 'comment'){
+        }else if(params.tplName == 'user_comment'){
             this.commentPagination();
         }
     }
