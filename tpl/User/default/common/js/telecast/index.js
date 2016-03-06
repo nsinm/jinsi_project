@@ -68,7 +68,7 @@ var indexAction = {
         var pageIndex = 0;
         var pageSize = params.pageSize;
         $('.M-box').pagination(count, {
-            callback: callback,
+            callback: pageCallback,
             prev_text: '<',
             next_text: '>',
             items_per_page: pageSize,
@@ -77,7 +77,7 @@ var indexAction = {
             current_page: pageIndex
         });
 
-        function callback (index, jq){
+        function pageCallback (index, jq){
             this.getUserList(index);
         }
     },
