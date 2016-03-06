@@ -64,15 +64,25 @@ var indexAction = {
         }, 'JSON');
     },
 
-    'pagination' : function(){
-        
+    'page' : function(count, callback){
+        var pageIndex = 0;
+        var pageSize = 20;
+        $('.M-box').pagination(count, {
+            callback: callback,
+            prev_text: '<',
+            next_text: '>',
+            items_per_page: pageSize,
+            num_edge_entries: 2,
+            num_display_entries: 6,
+            current_page: pageIndex
+        });
     },
 
     'init' : function(){
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.getUserList();
+            this.page(params.userCount, this.getUserList());
         }
     }
 };
