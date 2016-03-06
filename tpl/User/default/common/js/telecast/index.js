@@ -26,7 +26,7 @@ var indexAction = {
     },
 
     'getUserList' : function(index){
-        var tag = $("#user_info");
+        var tag = $(".ListProduct");
         var index = index;
         $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': params.pageSize}, function (data) {
             console.log(data);
@@ -135,7 +135,7 @@ var indexAction = {
     },
 
     'getLiveList' : function(index){
-        var tag = $("#user_info");
+        var tag = $(".ListProduct");
         var index = index;
         $.getJSON(params.getLiveList, {'page': index, 'pageSize': params.pageSize}, function (data) {
             console.log(data);
