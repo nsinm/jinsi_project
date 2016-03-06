@@ -11,7 +11,6 @@ var indexAction = {
                 $(this).addClass('current');
                 var text = $('a', $(this)).text();
                 $(".ListProduct").empty();
-                $('.M-box').empty();
                 switch (text){
                     case '用户管理':
                         indexAction.userPagination();
@@ -277,7 +276,7 @@ var indexAction = {
     },
 
     'livePagination' : function(){
-        $('.M-box').pagination({
+        $('.M-box1').pagination({
             totalData : params.liveCount,
             showData : params.pageSize,
             prevContent : '<',
@@ -291,7 +290,7 @@ var indexAction = {
     },
 
     'commentPagination' : function(){
-        $('.M-box').pagination({
+        $('.M-box2').pagination({
             totalData : params.commentCount,
             showData : params.pageSize,
             prevContent : '<',
