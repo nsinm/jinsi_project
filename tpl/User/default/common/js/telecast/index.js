@@ -43,7 +43,11 @@ var indexAction = {
                     html +=     '<td class="norightborder">';
                     html +=         '<a href="javascript:void(0)">删除</a>';
                     if(infos[index].jinsi_user_type == '2'){
-                        html +=     '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">推荐</a>';
+                        if(infos[index].jinsi_user_recommend = '1'){
+                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消推荐</a>';
+                        }else{
+                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">推荐</a>';
+                        }
                     }else{
                         html +=     '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>';
                     }
