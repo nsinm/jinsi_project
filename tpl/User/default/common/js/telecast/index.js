@@ -13,9 +13,9 @@ var indexAction = {
         });
     },
 
-    'getUserList' : function(){
+    'getUserList' : function(index){
         var tag = $("#user_info");
-        $.getJSON(params.getUserListUrl, {}, function(data){
+        $.getJSON(params.getUserListUrl, {'page' : index, 'pageSize' : params.pageSize}, function(data){
             console.log(data);
             var html = '';
             if(data.errcode == '0'){
@@ -64,9 +64,9 @@ var indexAction = {
         }, 'JSON');
     },
 
-    'page' : function(count, callback){
+    'page' : function(count){
         var pageIndex = 0;
-        var pageSize = 20;
+        var pageSize = params.pageSize;
         $('.M-box').pagination(count, {
             callback: callback,
             prev_text: '<',
@@ -76,6 +76,10 @@ var indexAction = {
             num_display_entries: 6,
             current_page: pageIndex
         });
+
+        function callback (index, jq){
+            this.getUserList(index);
+        }
     },
 
     'init' : function(){
