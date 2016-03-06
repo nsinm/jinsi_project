@@ -136,7 +136,8 @@ class TelecastAction extends UserAction
         $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
         $type = $this->_get('type'); //1评论 0直播
-        $start = ($page - 1) * $pageSize;
+        $index = ($page - 1) >= 0 ? ($page - 1) : 0;
+        $start = $index * $pageSize;
 
         $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = {$type} ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
         $liveList = M()->query($sql);
