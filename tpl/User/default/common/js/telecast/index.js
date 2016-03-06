@@ -187,7 +187,7 @@ var indexAction = {
             }
             tag.html(html).find('.norightborder a').click(function(){
                 var cid = $(this).parent().attr('data-cid');
-                var data = {'cid' : cid, 'type' : 0};
+                var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
                         indexAction.getLiveList(index);
@@ -247,7 +247,7 @@ var indexAction = {
             }
             tag.html(html).find('.norightborder a').click(function(){
                 var cid = $(this).parent().attr('data-cid');
-                var data = {'cid' : cid, 'type' : 1};
+                var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
                         indexAction.getCommentList(index);
