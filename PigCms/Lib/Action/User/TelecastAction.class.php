@@ -28,6 +28,12 @@ class TelecastAction extends UserAction
 
         $result = array('errcode' => 1, 'msg' => '获取用户列表失败!');
 
+        import('ORG.Page');
+
+        $model = M('user', 'jinsi_');
+        $count = $model->count();
+        $pageNum = 20;
+        $page = new Page($count, $pageNum);
         $userList = M('user', 'jinsi_')->select();
         if($userList){
             $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'data' => $userList);
@@ -42,5 +48,17 @@ class TelecastAction extends UserAction
     private function _to404 ()
     {
         if(!IS_AJAX) _404('该页面不存在!');
+    }
+
+    private function page ($table, $where=1, $pageRows=20, $currentPage=1)
+    {
+        $model = M($table, 'jinsi_');
+        if(!$model)
+            $this->ajaxReturn(array('errcode' => 2, 'msg' => '连接数据表失败!'), 'JSON');
+        //数据库中总的记录数
+        $count = $model->where($where)->count();
+        //总页数
+        $pageNum = ceil($count / $pageRows);
+
     }
 }
