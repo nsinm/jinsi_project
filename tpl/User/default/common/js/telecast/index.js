@@ -181,7 +181,7 @@ var indexAction = {
                         html += '<td></td>';
                     }else if(infos[index].jinsi_content_type == '2'){
                         html += '<td>图文直播</td>';
-                        html += '<td><img src="' + infos[index].jinsi_content_url + '" alt=""></td>';
+                        html += '<td><img src="' + infos[index].jinsi_content_url + '" width="100" alt=""></td>';
                     }
                     html += '<td>' + infos[index].jinsi_content_praise_no + '</td>';
                     if(type == 0){
