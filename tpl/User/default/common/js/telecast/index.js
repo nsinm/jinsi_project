@@ -62,24 +62,26 @@ var indexAction = {
                 }
             }
             tag.html(html).find('.norightborder a').each(function(){
-                var text = $(this).text();
-                switch (text){
-                    case '删除':
-                        alert(1111);
-                        break;
-                    case '取消导师':
-                        alert(2222);
-                        break;
-                    case '取消推荐':
-                        alert(3333);
-                        break;
-                    case '推荐':
-                        alert(4444);
-                        break;
-                    case '设为导师':
-                        alert(5555);
-                        break;
-                }
+                $(this).click(function(){
+                    var text = $(this).text();
+                    switch (text){
+                        case '删除':
+                            alert(1111);
+                            break;
+                        case '取消导师':
+                            alert(2222);
+                            break;
+                        case '取消推荐':
+                            alert(3333);
+                            break;
+                        case '推荐':
+                            alert(4444);
+                            break;
+                        case '设为导师':
+                            alert(5555);
+                            break;
+                    }
+                });
             });
         }, 'JSON');
     },
