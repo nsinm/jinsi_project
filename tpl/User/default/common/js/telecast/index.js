@@ -15,58 +15,80 @@ var indexAction = {
 
     'getUserList' : function(index){
         var tag = $("#user_info");
-        $.getJSON(params.getUserListUrl, {'page' : index, 'pageSize' : params.pageSize}, function(data){
-            console.log(data);
-            var html = '';
-            if(data.errcode == '0'){
-                var infos = data.data;
-                for(var index in infos){
-                    html += '<tr>';
-                    html +=     '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
-                    html +=     '<td>' + infos[index].id + '</td>';
-                    html +=     '<td>' + infos[index].open_id + '</td>';
-                    html +=     '<td>' + infos[index].jinsi_user_name + '</td>';
-                    if(infos[index].jinsi_user_type == '1'){
-                        html += '<td>普通用户</td>';
-                    }else{
-                        html += '<td>导师</td>';
-                    }
-                    html +=     '<td>' + infos[index].jinsi_user_style + '</td>';
-                    html +=     '<td>' + infos[index].jinsi_user_sign + '</td>';
-                    html +=     '<td>' + infos[index].jinsi_user_info + '</td>';
-                    if(infos[index].jinsi_user_type == '2') {
-                        if (infos[index].jinsi_user_recommend == '1') {
-                            html += '<td>推荐导师</td>';
+        var pageIndex = 0;
+        var pageSize = params.pageSize;
+
+        function getList (index) {
+            $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': pageSize}, function (data) {
+                console.log(data);
+                var html = '';
+                if (data.errcode == '0') {
+                    var infos = data.data;
+                    for (var index in infos) {
+                        html += '<tr>';
+                        html += '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
+                        html += '<td>' + infos[index].id + '</td>';
+                        html += '<td>' + infos[index].open_id + '</td>';
+                        html += '<td>' + infos[index].jinsi_user_name + '</td>';
+                        if (infos[index].jinsi_user_type == '1') {
+                            html += '<td>普通用户</td>';
                         } else {
-                            html += '<td>普通导师</td>';
+                            html += '<td>导师</td>';
                         }
-                    }else{
-                        html += '<td></td>';
-                    }
-                    html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
-                    html +=     '<td class="norightborder">';
-                    html +=         '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
-                    if(infos[index].jinsi_user_type == '2'){
-                        html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a><br/>';
-                        if(infos[index].jinsi_user_recommend == '1'){
-                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消推荐</a>';
-                        }else{
-                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">推荐</a>';
+                        html += '<td>' + infos[index].jinsi_user_style + '</td>';
+                        html += '<td>' + infos[index].jinsi_user_sign + '</td>';
+                        html += '<td>' + infos[index].jinsi_user_info + '</td>';
+                        if (infos[index].jinsi_user_type == '2') {
+                            if (infos[index].jinsi_user_recommend == '1') {
+                                html += '<td>推荐导师</td>';
+                            } else {
+                                html += '<td>普通导师</td>';
+                            }
+                        } else {
+                            html += '<td></td>';
                         }
-                    }else{
-                        html +=     '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>';
+                        html += '<td>' + infos[index].jinsi_user_city + '</td>';
+                        html += '<td class="norightborder">';
+                        html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
+                        if (infos[index].jinsi_user_type == '2') {
+                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a><br/>';
+                            if (infos[index].jinsi_user_recommend == '1') {
+                                html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消推荐</a>';
+                            } else {
+                                html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">推荐</a>';
+                            }
+                        } else {
+                            html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">设为导师</a>';
+                        }
+                        html += '</td>';
+                        html += '</tr>';
                     }
-                    html +=     '</td>';
-                    html += '</tr>';
+                    tag.html(html);
+
+                    if ($('.M-box').html().length == '') {
+                        $('.M-box').pagination(data.total, {
+                            callback: pageCallback,
+                            prev_text: '<',
+                            next_text: '>',
+                            items_per_page: pageSize,
+                            num_edge_entries: 2,
+                            num_display_entries: 6,
+                            current_page: pageIndex
+                        });
+                    }
                 }
-            }
-            tag.html(html);
-        }, 'JSON');
+            }, 'JSON');
+        }
+
+        function pageCallback (index, jq){
+            getList(index);
+        }
+
+        getList(0);
     },
 
     'page' : function(count){
-        var pageIndex = 0;
-        var pageSize = params.pageSize;
+
         $('.M-box').pagination(count, {
             callback: pageCallback,
             prev_text: '<',

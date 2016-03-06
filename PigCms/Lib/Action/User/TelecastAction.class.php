@@ -16,12 +16,6 @@ class TelecastAction extends UserAction
      */
     public function index ()
     {
-        $params = array(
-            'userCount' => M('user', 'jinsi_')->count(),
-            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
-            'liveCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=0')->count()
-        );
-        $this->assign('vars', $params);
         $this->display();
     }
 
@@ -34,15 +28,15 @@ class TelecastAction extends UserAction
 
         $result = array('errcode' => 1, 'msg' => '获取用户列表失败!');
 
-        import('ORG.Page');
-
         $model = M('user', 'jinsi_');
         $count = $model->count();
-        $pageNum = 20;
-        $page = new Page($count, $pageNum);
-        $userList = M('user', 'jinsi_')->select();
+        $currentPage = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = $currentPage * $pageSize;
+
+        $userList = M('user', 'jinsi_')->limit($start, $pageSize)->select();
         if($userList){
-            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'data' => $userList);
+            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'total' => $count, 'data' => $userList);
         }
 
         $this->ajaxReturn($result, 'JSON');
