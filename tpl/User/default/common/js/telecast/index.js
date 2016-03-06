@@ -63,22 +63,13 @@ var indexAction = {
             }
             tag.html(html).find('.norightborder a').each(function(){
                 $(this).click(function(){
-                    var userId = $('.norightborder').attr('data-uid');
+                    var userId = $(this).parent().attr('data-uid');
                     var text = $(this).text();
                     var type = '';
                     switch (text){
                         case '删除':
                             type = 1;
-                            var data = {type : type, userId : userId};
-                            $.getJSON(params.editUserUrl, data, function(msg){
-                                console.log(msg);
-                                if(msg.errcode == '0'){
-                                    alert(data.msg);
-                                    indexAction.getUserList(index);
-                                }else{
-                                    alert(data.msg);
-                                }
-                            }, 'JSON');
+                            edit(type, userId);
                             break;
                         case '取消导师':
                             type = 2;
@@ -105,7 +96,6 @@ var indexAction = {
             var data = {'type' : type, 'userId' : userId};
             $.getJSON(params.editUserUrl, data, function(msg){
                 if(msg.errcode == '0'){
-                    alert(data.msg);
                     indexAction.getUserList(index);
                 }else{
                     alert(data.msg);
