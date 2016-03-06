@@ -13,7 +13,7 @@ var indexAction = {
         });
     },
 
-    'getUserList' : function(index){
+    'getUserList' : function(){
         var tag = $("#user_info");
         var pageIndex = 0;
         var pageSize = params.pageSize;
@@ -80,11 +80,11 @@ var indexAction = {
             }, 'JSON');
         }
 
-        function pageCallback (index, jq){
-            getList(index);
+        function pageCallback (pageIndex, jq){
+            getList(pageIndex);
         }
 
-        getList(index);
+        getList(pageIndex);
     },
 
     'page' : function(count){
@@ -108,7 +108,7 @@ var indexAction = {
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.getUserList(0);
+            this.getUserList();
         }
     }
 };
