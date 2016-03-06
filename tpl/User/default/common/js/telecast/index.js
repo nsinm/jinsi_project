@@ -20,7 +20,7 @@ var indexAction = {
                         indexAction.livePagination();
                         break;
                     case '评论管理':
-                        indexAction.commnetPagination();
+                        indexAction.commentPagination();
                         break;
                 }
             }) ;
@@ -288,7 +288,7 @@ var indexAction = {
         })
     },
 
-    'commnetPagination' : function(){
+    'commentPagination' : function(){
         $('.M-box').pagination({
             totalData : params.commentCount,
             showData : params.pageSize,
