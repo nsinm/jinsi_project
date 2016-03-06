@@ -32,8 +32,8 @@
 <!--tab start-->
 <div class="tab">
     <ul>
-        <li class="tabli current" id="tab0"><a href="javascript:void(0);">用户管理</a></li>
-        <li class="tabli" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
+        <li class="tabli" id="tab0"><a href="javascript:void(0);">用户管理</a></li>
+        <li class="tabli current" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
         <li class="tabli" id="tab2"><a href="javascript:void(0);">评论管理</a></li>
         <!--<li class="tabli" id="tab3"><a href="">社区配置</a></li>-->
     </ul>
@@ -54,9 +54,7 @@
 </div>
 <div class="cLine">
     <div class="pageNavigator right">
-        <div class="M-box"></div>
         <div class="M-box1"></div>
-        <div class="M-box2"></div>
     </div>
     <div class="clr"></div>
 </div>
@@ -66,7 +64,7 @@
 </if>
 <script language="JavaScript">
     var params = {
-        'tplName' : 'user_list',
+        'tplName' : 'user_live',
         'pageSize' : 10,
         'index' : '{pigcms::U("Telecast/index")}',
         'live' : '{pigcms::U("Telecast/live")}',

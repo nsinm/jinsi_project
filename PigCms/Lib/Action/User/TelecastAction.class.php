@@ -97,6 +97,34 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 直播管理页面
+     */
+    public function live ()
+    {
+        $params = array(
+            'userCount' => M('user', 'jinsi_')->count(),
+            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
+            'liveCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=0')->count()
+        );
+        $this->assign('vars', $params);
+        $this->display();
+    }
+
+    /**
+     * 评论管理页面
+     */
+    public function comment ()
+    {
+        $params = array(
+            'userCount' => M('user', 'jinsi_')->count(),
+            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
+            'liveCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=0')->count()
+        );
+        $this->assign('vars', $params);
+        $this->display();
+    }
+
+    /**
      * 获取直播列表
      */
     public function getLiveList ()

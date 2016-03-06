@@ -10,26 +10,19 @@ var indexAction = {
                 lis.removeClass('current');
                 $(this).addClass('current');
                 var text = $('a', $(this)).text();
-                $(".ListProduct").empty();
-                $('.M-box, .M-box1, .M-box2').hide();
                 switch (text){
                     case '用户管理':
-                        $('.M-box').show();
-                        indexAction.userPagination();
+                        location.href = params.index;
                         break;
                     case '直播管理':
-                        $('.M-box1').show();
-                        indexAction.livePagination();
+                        location.href = params.live;
                         break;
                     case '评论管理':
-                        $('.M-box2').show();
-                        indexAction.commentPagination();
+                        location.href = params.comment;
                         break;
                 }
-                return;
             }) ;
         });
-        indexAction.userPagination();
     },
 
     'getUserList' : function(index){
@@ -315,7 +308,14 @@ var indexAction = {
 
     'init' : function(){
         //导航条点击事件
-        var type = this.navEvent();
+        this.navEvent();
+        if(params.tplName == 'index'){
+            this.userPagination();
+        }else if(params.tplName == 'live'){
+            this.livePagination();
+        }else if(params.tplName == 'comment'){
+            this.commentPagination();
+        }
     }
 };
 
