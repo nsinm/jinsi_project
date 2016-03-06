@@ -283,7 +283,7 @@ var indexAction = {
                 indexAction.getLiveList(index);
             }
         },function(api){
-            indexAction.getUserList(api.getCurrent());
+            indexAction.getLiveList(api.getCurrent());
         })
     },
 
