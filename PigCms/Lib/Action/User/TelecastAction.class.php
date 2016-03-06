@@ -50,7 +50,7 @@ class TelecastAction extends UserAction
     /**
      * 编辑用户
      */
-    public function eidtUser ()
+    public function editUser ()
     {
         $this->_to404();
 
