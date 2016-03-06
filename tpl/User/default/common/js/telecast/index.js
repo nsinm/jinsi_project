@@ -270,9 +270,11 @@ var indexAction = {
             nextContent : '>',
             callback : function(index){
                 indexAction.getUserList(index);
+                return;
             }
         },function(api){
             indexAction.getUserList(api.getCurrent());
+            return;
         })
     },
 
@@ -284,9 +286,11 @@ var indexAction = {
             nextContent : '>',
             callback : function(index){
                 indexAction.getLiveList(index);
+                return;
             }
         },function(api){
             indexAction.getLiveList(api.getCurrent());
+            return;
         })
     },
 
@@ -298,9 +302,11 @@ var indexAction = {
             nextContent : '>',
             callback : function(index){
                 indexAction.getCommentList(index);
+                return;
             }
         },function(api){
             indexAction.getCommentList(api.getCurrent());
+            return;
         })
     },
 
