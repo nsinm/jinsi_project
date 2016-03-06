@@ -12,18 +12,22 @@ var indexAction = {
                 var text = $('a', $(this)).text();
                 $(".ListProduct").empty();
                 var navType = 2;
+                var count = 0;
                 switch (text){
                     case '用户管理':
                         navType = 2;
+                        count = params.userCount;
                         break;
                     case '直播管理':
                         navType = 0;
+                        count = params.liveCount;
                         break;
                     case '评论管理':
                         navType = 1;
+                        count = params.commentCount;
                         break;
                 }
-                indexAction.pagination(navType);
+                indexAction.pagination(navType, count);
             }) ;
         });
     },
@@ -210,9 +214,9 @@ var indexAction = {
         }, 'JSON');
     },
 
-    'pagination' : function(navType){
+    'pagination' : function(navType, count){
         $('.M-box').pagination({
-            totalData : params.userCount,
+            totalData : count,
             showData : params.pageSize,
             prevContent : '<',
             nextContent : '>',
