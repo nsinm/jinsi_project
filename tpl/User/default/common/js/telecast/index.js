@@ -3,9 +3,6 @@
  */
 
 var indexAction = {
-    'pageIndex' : 0,
-    'pageSize' : 10,
-
     'navEvent' : function(){
         var lis = $('.tab ul li');
         $.each(lis, function(){
@@ -18,8 +15,8 @@ var indexAction = {
 
     'getUserList' : function(index){
         var tag = $("#user_info");
-        var index = index == '' ? 0 : index;
-        $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': this.pageSize}, function (data) {
+        var index = index;
+        $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': params.pageSize}, function (data) {
             console.log(data);
             var html = '';
             if (data.errcode == '0') {
@@ -63,36 +60,28 @@ var indexAction = {
                     html += '</td>';
                     html += '</tr>';
                 }
-                tag.html(html);
-
-                if ($('.M-box').html().length == '') {
-                    $('.M-box').pagination(data.total, {
-                        callback: this.pageCallback,
-                        prev_text: '<',
-                        next_text: '>',
-                        items_per_page: this.pageSize,
-                        num_edge_entries: 2,
-                        num_display_entries: 6,
-                        current_page: this.pageIndex
-                    });
-                }
             }
+            tag.html(html);
         }, 'JSON');
-
-        function pageCallback (index, jq){
-            this.getUserList(index);
-        }
     },
 
-    'pageCallback' : function(index, jq){
-        this.getUserList(index);
+    'pagination' : function(){
+        $('.M-box').pagination({
+            totalData : params.userCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                alert(index);
+            }
+        })
     },
 
     'init' : function(){
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.getUserList(0);
+            this.pagination();
         }
     }
 };

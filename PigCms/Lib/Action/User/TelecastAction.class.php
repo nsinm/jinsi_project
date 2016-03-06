@@ -16,6 +16,12 @@ class TelecastAction extends UserAction
      */
     public function index ()
     {
+        $params = array(
+            'userCount' => M('user', 'jinsi_')->count(),
+            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
+            'liveCount' => M('content', 'jinsi_')->where('jinsi_content_is_comemnt=0')->count()
+        );
+        $this->assign('vars', $params);
         $this->display();
     }
 
@@ -30,10 +36,9 @@ class TelecastAction extends UserAction
 
         $model = M('user', 'jinsi_');
         $count = $model->count();
-        $currentPage = $this->_get('page');
+        $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
-        $start = $currentPage * $pageSize;
-
+        $start = ($page - 1) * $pageSize;
         $userList = M('user', 'jinsi_')->limit($start, $pageSize)->select();
         if($userList){
             $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'total' => $count, 'data' => $userList);
