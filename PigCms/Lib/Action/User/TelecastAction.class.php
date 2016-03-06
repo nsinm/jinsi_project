@@ -110,7 +110,7 @@ class TelecastAction extends UserAction
         $type = $this->_get('type'); //1评论 0直播
         $start = ($page - 1) * $pageSize;
 
-        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, \'%Y-%m-%d %H:%i\') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = {$type} ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
+        $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = {$type} ORDER BY jc.jinsi_content_create DESC LIMIT {$start}, {$pageSize}";
         $liveList = M()->query($sql);
         if($liveList){
             $result = array('errcode' => 0, 'msg' => '获取成功!', 'data' => $liveList);
