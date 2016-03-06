@@ -47,6 +47,25 @@ class TelecastAction extends UserAction
         $this->ajaxReturn($result, 'JSON');
     }
 
+    public function delUser ()
+    {
+        $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '删除用户失败!');
+
+        $model = M('user', 'jinsi_');
+        $count = $model->count();
+        $page = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = ($page - 1) * $pageSize;
+        $userList = M('user', 'jinsi_')->limit($start, $pageSize)->select();
+        if($userList){
+            $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'total' => $count, 'data' => $userList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
     /**
      * 非ajax请求错误提示
      */
