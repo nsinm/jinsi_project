@@ -130,7 +130,7 @@ var indexAction = {
             var data = {'type' : type, 'userId' : userId};
             $.getJSON(params.editUserUrl, data, function(msg){
                 if(msg.errcode == '0'){
-                    indexAction.getUserList(index);
+                    indexAction.getUserList(0);
                 }else{
                     alert(data.msg);
                 }
@@ -193,7 +193,7 @@ var indexAction = {
                 var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
-                        indexAction.getLiveList(index);
+                        indexAction.getLiveList(0);
                     }else{
                         alert(data.msg);
                     }
@@ -253,7 +253,7 @@ var indexAction = {
                 var data = {'cid' : cid};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
-                        indexAction.getCommentList(index);
+                        indexAction.getCommentList(0);
                     }else{
                         alert(data.msg);
                     }
