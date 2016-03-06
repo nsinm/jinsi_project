@@ -1,6 +1,8 @@
 <include file="Public:head"/>
 <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<link rel="stylesheet" type="text/css" href="/tpl/User/default/common/css/telecast/pagination.css" />
 <script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/User/default/common/js/telecast/jquery.pagination.js"></script>
 <script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
 <script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
 <script src="/tpl/User/default/common/js/telecast/index.js"></script>
@@ -81,5 +83,8 @@
     var params = {
         'tplName' : 'user_list',
         'getUserListUrl' : '{pigcms::U("Telecast/getUserList")}',
+        'userCount' : '{pigcms:$vars.userCount}',
+        'commentCount' : '{pigcms:$vars.commentCount}',
+        'liveCount' : '{pigcms:$vars.liveCount}',
     };
 </script>

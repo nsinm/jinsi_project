@@ -64,6 +64,10 @@ var indexAction = {
         }, 'JSON');
     },
 
+    'pagination' : function(){
+        
+    },
+
     'init' : function(){
         //导航条点击事件
         this.navEvent();

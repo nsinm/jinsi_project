@@ -16,6 +16,12 @@ class TelecastAction extends UserAction
      */
     public function index ()
     {
+        $params = array(
+            'userCount' => M('user', 'jinsi_')->count(),
+            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
+            'liveCount' => M('conetent', 'jinsi_')->where('jinsi_content_is_comemnt=0')->count()
+        );
+        $this->assign('vars', $params);
         $this->display();
     }
 
