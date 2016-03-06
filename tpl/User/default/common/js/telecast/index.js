@@ -11,23 +11,17 @@ var indexAction = {
                 $(this).addClass('current');
                 var text = $('a', $(this)).text();
                 $(".ListProduct").empty();
-                var navType = 2;
-                var count = 0;
                 switch (text){
                     case '用户管理':
-                        navType = 2;
-                        count = params.userCount;
+                        indexAction.userPagination();
                         break;
                     case '直播管理':
-                        navType = 0;
-                        count = params.liveCount;
+                        indexAction.livePagination();
                         break;
                     case '评论管理':
-                        navType = 1;
-                        count = params.commentCount;
+                        indexAction.commnetPagination();
                         break;
                 }
-                indexAction.pagination(navType, count);
             }) ;
         });
     },
@@ -141,11 +135,10 @@ var indexAction = {
         }
     },
 
-    'getLiveList' : function(type, index){
+    'getLiveList' : function(index){
         var tag = $(".ListProduct");
         var index = index;
-        var type = type;
-        $.getJSON(params.getLiveList, {'type': type, 'page': index, 'pageSize': params.pageSize}, function (data) {
+        $.getJSON(params.getLiveList, {'type': 0, 'page': index, 'pageSize': params.pageSize}, function (data) {
             console.log(data);
             var html = '';
             if (data.errcode == '0') {
@@ -154,21 +147,75 @@ var indexAction = {
                 html +=     '<tr>';
                 html +=         '<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall(\'id[]\');"></th>';
                 html +=         '<th width="50">编号</th>';
-                if(type == 0){
-                    html +=         '<th width="50">直播导师</th>';
-                    html +=         '<th width="80">直播类型</th>';
-                    html +=         '<th width="100">直播内容</th>';
-                }else{
-                    html +=         '<th width="50">评论人</th>';
-                    html +=         '<th width="80">评论类型</th>';
-                    html +=         '<th width="100">评论内容</th>';
-                }
+                html +=         '<th width="50">直播导师</th>';
+                html +=         '<th width="80">直播类型</th>';
+                html +=         '<th width="100">直播内容</th>';
                 html +=         '<th class="210">图片</th>';
                 html +=         '<th width="50">赞</th>';
-                if(type == 0) {
-                    html += '<th class="50">评论</th>';
-                    html += '<th class="50">分享</th>';
+                html +=         '<th class="50">评论</th>';
+                html +=         '<th class="50">分享</th>';
+                html +=         '<th class="40">创建时间</th>';
+                html +=         '<th width="100" class="norightborder">操作</th>';
+                html +=     '</tr>';
+                html += '</thead>';
+                html += '<tbody id="user_info">';
+
+                for (var index in infos) {
+                    html += '<tr>';
+                    html +=     '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
+                    html +=     '<td>' + infos[index].id + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_user_name + '</td>';
+                    if(infos[index].jinsi_content_type == '1'){
+                        html += '<td>文字直播</td>';
+                        html += '<td>' + infos[index].jinsi_content_info + '</td>';
+                        html += '<td></td>';
+                    }else if(infos[index].jinsi_content_type == '2'){
+                        html += '<td>图文直播</td>';
+                        html += '<td>' + infos[index].jinsi_content_info + '</td>';
+                        html += '<td><img src="' + infos[index].jinsi_content_url + '" width="100" alt=""></td>';
+                    }
+                    html +=     '<td>' + infos[index].jinsi_content_praise_no + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_content_comment_no + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_content_share_no + '</td>';
+                    html +=     '<td>' + infos[index].content_create_time + '</td>';
+                    html +=     '<td class="norightborder" data-cid="' + infos[index].id + '">';
+                    html +=         '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
+                    html +=     '</td>';
+                    html += '</tr>';
                 }
+                html += '<tbody>';
+            }
+            tag.html(html).find('.norightborder a').click(function(){
+                var cid = $(this).parent().attr('data-cid');
+                var data = {'cid' : cid, 'type' : 0};
+                $.getJSON(params.delContent, data, function(msg){
+                    if(msg.errcode == '0'){
+                        indexAction.getLiveList(index);
+                    }else{
+                        alert(data.msg);
+                    }
+                }, 'JSON');
+            });
+        }, 'JSON');
+    },
+
+    'getCommentList' : function(index){
+        var tag = $(".ListProduct");
+        var index = index;
+        $.getJSON(params.getLiveList, {'type': 1, 'page': index, 'pageSize': params.pageSize}, function (data) {
+            console.log(data);
+            var html = '';
+            if (data.errcode == '0') {
+                var infos = data.data;
+                html += '<thead>';
+                html +=     '<tr>';
+                html +=         '<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall(\'id[]\');"></th>';
+                html +=         '<th width="50">编号</th>';
+                html +=         '<th width="50">评论人</th>';
+                html +=         '<th width="80">评论类型</th>';
+                html +=         '<th width="100">评论内容</th>';
+                html +=         '<th class="210">图片</th>';
+                html +=         '<th width="50">赞</th>';
                 html +=         '<th class="40">创建时间</th>';
                 html +=         '<th width="100" class="norightborder">操作</th>';
                 html +=     '</tr>';
@@ -182,16 +229,14 @@ var indexAction = {
                     html += '<td>' + infos[index].jinsi_user_name + '</td>';
                     if(infos[index].jinsi_content_type == '1'){
                         html += '<td>文字直播</td>';
+                        html += '<td>' + infos[index].jinsi_content_info + '</td>';
                         html += '<td></td>';
                     }else if(infos[index].jinsi_content_type == '2'){
                         html += '<td>图文直播</td>';
+                        html += '<td>' + infos[index].jinsi_content_info + '</td>';
                         html += '<td><img src="' + infos[index].jinsi_content_url + '" width="100" alt=""></td>';
                     }
                     html += '<td>' + infos[index].jinsi_content_praise_no + '</td>';
-                    if(type == 0){
-                        html += '<td>' + infos[index].jinsi_content_comment_no + '</td>';
-                        html += '<td>' + infos[index].jinsi_content_share_no + '</td>';
-                    }
                     html += '<td>' + infos[index].content_create_time + '</td>';
                     html += '<td class="norightborder" data-cid="' + infos[index].id + '">';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
@@ -202,10 +247,10 @@ var indexAction = {
             }
             tag.html(html).find('.norightborder a').click(function(){
                 var cid = $(this).parent().attr('data-cid');
-                var data = {'cid' : cid};
+                var data = {'cid' : cid, 'type' : 1};
                 $.getJSON(params.delContent, data, function(msg){
                     if(msg.errcode == '0'){
-                        indexAction.getLiveList(type, index);
+                        indexAction.getCommentList(index);
                     }else{
                         alert(data.msg);
                     }
@@ -214,33 +259,52 @@ var indexAction = {
         }, 'JSON');
     },
 
-    'pagination' : function(navType, count){
+    'userPagination' : function(){
         $('.M-box').pagination({
-            totalData : count,
+            totalData : params.userCount,
             showData : params.pageSize,
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                if(navType == 2){
-                    indexAction.getUserList(index);
-                }else{
-                    indexAction.getLiveList(navType, index);
-                }
+                indexAction.getUserList(index);
             }
         },function(api){
-            if(navType == 2){
-                indexAction.getUserList(api.getCurrent());
-            }else{
-                indexAction.getLiveList(navType, api.getCurrent());
-            }
+            indexAction.getUserList(api.getCurrent());
+        })
+    },
 
+    'livePagination' : function(){
+        $('.M-box').pagination({
+            totalData : params.liveCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getLiveList(index);
+            }
+        },function(api){
+            indexAction.getUserList(api.getCurrent());
+        })
+    },
+
+    'commnetPagination' : function(){
+        $('.M-box').pagination({
+            totalData : params.commentCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getCommentList(index);
+            }
+        },function(api){
+            indexAction.getCommentList(api.getCurrent());
         })
     },
 
     'init' : function(){
         //导航条点击事件
         this.navEvent();
-        this.pagination(2);
+        this.pagination();
     }
 };
 

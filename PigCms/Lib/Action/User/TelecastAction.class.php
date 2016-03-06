@@ -129,6 +129,7 @@ class TelecastAction extends UserAction
         $result = array('errcode' => 1, 'msg' => '操作失败!');
 
         $cid = $this->_get('cid');
+        $type
         if($cid){
             $status = M('content', 'jinsi_')->where('id=' . $cid)->delete();
             if($status){
