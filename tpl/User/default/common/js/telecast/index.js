@@ -45,9 +45,9 @@ var indexAction = {
                     }
                     html +=     '<td>' + infos[index].jinsi_user_city + '</td>';
                     html +=     '<td class="norightborder">';
-                    html +=         '<a href="javascript:void(0)">删除</a>';
+                    html +=         '<a href="javascript:void(0)">删除</a><br/>';
                     if(infos[index].jinsi_user_type == '2'){
-                        html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a>';
+                        html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a><br/>';
                         if(infos[index].jinsi_user_recommend == '1'){
                             html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消推荐</a>';
                         }else{
