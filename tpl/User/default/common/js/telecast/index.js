@@ -231,11 +231,11 @@ var indexAction = {
                     html += '<td>' + infos[index].id + '</td>';
                     html += '<td>' + infos[index].jinsi_user_name + '</td>';
                     if(infos[index].jinsi_content_type == '1'){
-                        html += '<td>文字直播</td>';
+                        html += '<td>文字评论</td>';
                         html += '<td>' + infos[index].jinsi_content_info + '</td>';
                         html += '<td></td>';
                     }else if(infos[index].jinsi_content_type == '2'){
-                        html += '<td>图文直播</td>';
+                        html += '<td>图文评论</td>';
                         html += '<td>' + infos[index].jinsi_content_info + '</td>';
                         html += '<td><img src="' + infos[index].jinsi_content_url + '" width="100" alt=""></td>';
                     }
