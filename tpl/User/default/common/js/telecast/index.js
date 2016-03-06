@@ -68,8 +68,8 @@ var indexAction = {
                     var type = '';
                     switch (text){
                         case '删除':
-                            var type = 1;
-                            var data = {'type' : type, 'userId' : userId};
+                            type = 1;
+                            var data = {type : type, userId : userId};
                             $.getJSON(params.editUserUrl, data, function(msg){
                                 console.log(msg);
                                 if(msg.errcode == '0'){
@@ -81,19 +81,19 @@ var indexAction = {
                             }, 'JSON');
                             break;
                         case '取消导师':
-                            var type = 2;
+                            type = 2;
                             edit(type, userId);
                             break;
                         case '取消推荐':
-                            var type = 3;
+                            type = 3;
                             edit(type, userId);
                             break;
                         case '推荐':
-                            var type = 4;
+                            type = 4;
                             edit(type, userId);
                             break;
                         case '设为导师':
-                            var type = 5;
+                            type = 5;
                             edit(type, userId);
                             break;
                     }
