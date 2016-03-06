@@ -11,15 +11,18 @@ var indexAction = {
                 $(this).addClass('current');
                 var text = $('a', $(this)).text();
                 $(".ListProduct").empty();
-                $('.M-box, .M-box1, .M-box2').empty();
+                $('.M-box, .M-box1, .M-box2').hide();
                 switch (text){
                     case '用户管理':
+                        $('.M-box').show();
                         indexAction.userPagination();
                         break;
                     case '直播管理':
+                        $('.M-box1').show();
                         indexAction.livePagination();
                         break;
                     case '评论管理':
+                        $('.M-box2').show();
                         indexAction.commentPagination();
                         break;
                 }
