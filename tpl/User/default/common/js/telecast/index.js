@@ -72,7 +72,7 @@ var indexAction = {
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                alert(index);
+                indexAction.getUserList(index);
             }
         })
     },
