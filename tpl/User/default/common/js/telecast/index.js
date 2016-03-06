@@ -74,6 +74,8 @@ var indexAction = {
             callback : function(index){
                 indexAction.getUserList(index);
             }
+        },function(api){
+            indexAction.getUserList(api.getCurrent());
         })
     },
 
