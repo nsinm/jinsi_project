@@ -236,9 +236,7 @@ var indexAction = {
     'init' : function(){
         //导航条点击事件
         this.navEvent();
-        if(params.tplName == 'user_list'){
-            this.pagination();
-        }
+        this.pagination(2);
     }
 };
 
