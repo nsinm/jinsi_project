@@ -4,16 +4,17 @@
 
 var commemtAction = {
     'addComment' : function(){
-        $('.weui_btn.weui_btn_primary').one('click', function(){
+        $('.weui_btn.weui_btn_primary').bind('click', function(){
             //获取内容
             var content = $("textarea[name='content']").val();
-            if(content == ''){
-                alert('评论内容不能为空')
-            }
             //获取上传图片
             var picUrl = $("#picurl").val();
             //类型 1文字 2图文
             var type = !picUrl ? 1 : 2;
+            if(type == 1 && content == ''){
+                alert('评论内容不能为空');
+                return;
+            }
             //获取评论帖子id
             var cid = $("input[name='cid']").val();
             //是否为评论
@@ -22,6 +23,7 @@ var commemtAction = {
             var userId = params.userId;
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
             $.post(params.addUrl, json, function(data){
+                $('.weui_btn.weui_btn_primary').unbind();
                 if(data.errcode == '0'){
                     if(cid){
                         location.href = params.toicUrl + '&cid=' + cid;
