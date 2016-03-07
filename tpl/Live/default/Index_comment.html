@@ -108,7 +108,12 @@
             link: '{pigcms:$data.link}', // 分享链接
             imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
             success: function () {
-                // 用户确认分享后执行的回调函数
+                var url = '{pigcms::U("Index/share")}?cid={pigcms:$live.id}';
+                $.getJSON(url, {}, function(data){
+                    if(data.errcode != '0'){
+                        alert(data.msg);
+                    }
+                }, 'JSON');
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数

@@ -174,4 +174,25 @@ class IndexAction extends LiveAction
 
         $this->ajaxReturn($result, 'JSON');
     }
+
+    /**
+     * 分享
+     */
+    public function share ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '分享失败!');
+
+        $cid = $this->_get('cid');
+        if($cid){
+            $shareNo = M('content')->where('id=' . $cid)->getField('jinsi_content_share_no');
+            $update['jinsi_content_share_no'] = $shareNo + 1;
+            $fetchRows = M('content')->where('id=' . $cid)->save($update);
+            if($fetchRows){
+                $result = array('errcode' => 0, 'msg' => '分享成功!');
+            }
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
 }
