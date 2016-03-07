@@ -19,10 +19,6 @@ var userAction = {
     },
     'instructorList': function () {
         $('.weui_select').change(function(){
-            if(params.type == '3'){
-                getDefault(2);
-                return;
-            }
             var filter = $(this).children('option:selected').val();
             getDefault(filter);
             return;
@@ -92,7 +88,11 @@ var userAction = {
                 });
             }, 'JSON');
         }
-        getDefault(1);
+        if(params.type == '3'){
+            getDefault(2);
+        }else{
+            getDefault(1);
+        }
     },
 
     'init': function () {
