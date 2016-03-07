@@ -101,6 +101,14 @@ class IndexAction extends LiveAction
         if($praise){
             $liveInfo[0]['current_user_praise'] = 1;
         }
+        $jssdk = D('Jssdk');
+        $signPackage = $jssdk->GetSignPackage();
+        //print_r($signPackage);
+        $this->assign('signPackage',$signPackage);
+        $data['title'] = $liveInfo[0]['jinsi_content_info'];
+        $data['imgUrl'] = "https://www.baidu.com/img/baidu_jgylogo3.gif";
+        $data['link'] = get_url();
+        $this->assign('data',$data);
         $this->assign('live', $liveInfo[0]);
         $this->assign('urls', $urls);
         $this->display();

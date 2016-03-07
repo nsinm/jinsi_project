@@ -75,6 +75,7 @@
     </div>
 </div>
 <script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="/tpl/Live/default/style/js/index.js"></script>
 <script src="/tpl/Live/default/style/js/bottom.js"></script>
 <script>
@@ -89,30 +90,31 @@
         'tocUrl' : '{pigcms:$urls.tocUrl}'
     };
 
-    // 十字按钮呼出
-    var navBar = $('#showNormalAction')[0];
-    navBar.onclick=function(){
-        var mask = $('#mask');
-        var weuiActionsheet = $('#weui_actionsheet1');
-        weuiActionsheet.addClass('weui_actionsheet_toggle');
-        mask.show().addClass('weui_fade_toggle').click(function () {
-            hideActionSheet(weuiActionsheet, mask);
+    wx.config({
+        debug: true,
+        appId: '{pigcms:$signPackage.appId}',
+        timestamp: {pigcms:$signPackage.timestamp},
+        nonceStr: '{pigcms:$signPackage.nonceStr}',
+        signature: '{pigcms:$signPackage.signature}',
+        jsApiList: [
+            'onMenuShareTimeline'
+            // 所有要调用的 API 都要加到这个列表中
+        ]
+    });
+    wx.ready(function () {
+        // 在这里调用 API
+        wx.onMenuShareTimeline({
+            title: '{pigcms:$data.title}', // 分享标题
+            link: '{pigcms:$data.link}', // 分享链接
+            imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
         });
-        $('#actionsheet_cancel').click(function () {
-            hideActionSheet(weuiActionsheet, mask);
-        });
-        weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
-
-        function hideActionSheet(weuiActionsheet, mask) {
-            weuiActionsheet.removeClass('weui_actionsheet_toggle');
-            mask.removeClass('weui_fade_toggle');
-            weuiActionsheet.on('transitionend', function () {
-                mask.hide();
-            }).on('webkitTransitionEnd', function () {
-                mask.hide();
-            })
-        }
-    }
+    });
 </script>
 </body>
 </html>
