@@ -37,6 +37,7 @@ var indexAction = {
         $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
             var tag = $('#user_comments');
+            tag.empty();
             var html = '';
             if(data.errcode == 0){
                 var infos = data.data;
