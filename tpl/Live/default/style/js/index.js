@@ -28,8 +28,13 @@ var indexAction = {
         }, 'JSON');
     },
 
-    'getReInComment' : function(){
-        $.getJSON(params.gricUrl, {}, function(data){
+    'getReInComment' : function(type){
+        var type = type;
+        if(type == null){
+            alert('参数错误');
+            return;
+        }
+        $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
             var tag = $('#user_comments');
             var html = '';
@@ -189,12 +194,42 @@ var indexAction = {
         });
     },
 
+    'liveFilter' : function(){
+        $('#filter').click(function(){
+            var $tooltips = $('.js_tooltips'),
+                $filter = $('#filter')
+            $filter.toggleClass('off')
+            $tooltips.html()=='当前切换到已关注导师'?$tooltips.html('当前切换到所有导师'):$tooltips.html('当前切换到已关注导师')
+            if ($tooltips.css('display') != 'none') {
+                return;
+            }
+
+            var type = null;
+            if($tooltips.html() == '' || $tooltips.html() == '当前切换到所有导师'){
+                type = 1;
+            }else{
+                type = 2;
+            }
+
+            // 如果有`animation`, `position: fixed`不生效
+            $('.page.cell').removeClass('slideIn');
+            $tooltips.show();
+            setTimeout(function () {
+                $tooltips.hide();
+            }, 2000);
+
+            indexAction.getReInComment(type);
+            return;
+        });
+        this.getReInComment(1);
+    },
+
     'init' : function(){
         if(params.tplName == 'index_index') {
             //获取推荐导师列表
             this.getRecomendInstructor();
             //获取关注导师直播列表
-            this.getReInComment();
+            this.liveFilter();
         }else if(params.tplName == 'index_comment'){
             //获取直播评论列表
             this.getComments();

@@ -62,23 +62,31 @@ class IndexAction extends LiveAction
     {
         if(!IS_AJAX) _404('页面不存在');
         $result= array('errcode' => 1, 'msg' => '获取关注导师直播失败!');
-        $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
-        $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
-        if($this->userType == 2){
-            if($instructorIds){
-                array_push($instructorIds, $this->userId);
-            }else{
-                $instructorIds[0] = $this->userId;
+
+        $type = $this->_get('type'); //1 所有导师 2关注导师
+
+        if($type == 2){
+            $instructors = M('follow')->where('jinsi_follow_user_id = ' . $this->userId)->select();
+            $instructorIds = array_column($instructors, 'jinsi_follow_id_user');
+            if($this->userType == 2){
+                if($instructorIds){
+                    array_push($instructorIds, $this->userId);
+                }else{
+                    $instructorIds[0] = $this->userId;
+                }
             }
+            $in = '(' . implode(',', $instructorIds) . ')';
+            if($instructorIds)
+                $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id IN {$in} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
+        }else{
+            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
         }
-        $in = '(' . implode(',', $instructorIds) . ')';
-        if($instructorIds) {
-            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id IN {$in} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
-            $comments = M()->query($sql);
-            if($comments){
-                $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
-            }
+
+        $comments = M()->query($sql);
+        if($comments){
+            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
         }
+
         $this->ajaxReturn($result, 'JSON');
     }
 
