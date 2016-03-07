@@ -84,11 +84,13 @@
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',
-        'tocUrl' : '{pigcms:$urls.tocUrl}'
+        'tocUrl' : '{pigcms:$urls.tocUrl}',
+        'shareUrl' : '{pigcms::U("Index/share")}',
+        'cid' : '{pigcms:$live.id}'
     };
 
     wx.config({
-        debug: true,
+        debug: false,
         appId: '{pigcms:$signPackage.appId}',
         timestamp: {pigcms:$signPackage.timestamp},
         nonceStr: '{pigcms:$signPackage.nonceStr}',
@@ -105,10 +107,10 @@
             link: '{pigcms:$data.link}', // 分享链接
             imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
             success: function () {
-                var url = '{pigcms::U("Index/share")}?cid={pigcms:$live.id}';
+                var url = params.shareUrl + '&cid=' + params.cid;
                 $.getJSON(url, {}, function(data){
                     if(data.errcode != '0'){
-                        //alert(data.msg);
+                        alert(data.msg);
                     }
                 }, 'JSON');
             },
