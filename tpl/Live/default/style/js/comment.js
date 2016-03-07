@@ -4,7 +4,8 @@
 
 var commemtAction = {
     'addComment' : function(){
-        $('.weui_btn.weui_btn_primary').bind('click', function(){
+        $('.weui_btn.weui_btn_primary').click(function(){
+            var url = $(this).attr('data-url');
             //获取内容
             var content = $("textarea[name='content']").val();
             //获取上传图片
@@ -22,9 +23,9 @@ var commemtAction = {
             //评论人id
             var userId = params.userId;
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
-            $.post(params.addUrl, json, function(data){
-                $('.weui_btn.weui_btn_primary').unbind();
+            $.post(url, json, function(data){
                 if(data.errcode == '0'){
+                    $('.weui_btn.weui_btn_primary').removeAttr('data-url');
                     if(cid){
                         location.href = params.toicUrl + '&cid=' + cid;
                     }else{
