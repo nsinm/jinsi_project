@@ -4,7 +4,7 @@
 
 var commemtAction = {
     'addComment' : function(){
-        $('.weui_btn.weui_btn_primary').click(function(){
+        $('.weui_btn.weui_btn_primary').one('click', function(){
             //获取内容
             var content = $("textarea[name='content']").val();
             if(content == ''){
@@ -23,7 +23,6 @@ var commemtAction = {
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
             $.post(params.addUrl, json, function(data){
                 if(data.errcode == '0'){
-                    $(this).disable();
                     if(cid){
                         location.href = params.toicUrl + '&cid=' + cid;
                     }else{
