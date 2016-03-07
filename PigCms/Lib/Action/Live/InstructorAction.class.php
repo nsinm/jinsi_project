@@ -57,6 +57,7 @@ class InstructorAction extends LiveAction
         $this->ajaxUrls['gilUrl'] = U('getInstructorList');
         $this->ajaxUrls['followUrl'] = U('follow');
         $this->ajaxUrls['cfollowUrl'] = U('cancelFollow');
+        $this->ajaxUrls['type'] = $this->_get('type');
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }

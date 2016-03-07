@@ -19,9 +19,14 @@ var userAction = {
     },
     'instructorList': function () {
         $('.weui_select').change(function(){
-            var filter = $(this).children('option:selected').val();
-            getDefault(filter);
-            return;
+            if(params.type == ''){
+                var filter = $(this).children('option:selected').val();
+                getDefault(filter);
+                return;
+            }else{
+                getDefault(2);
+                return;
+            }
         });
 
         function getDefault(filter){

@@ -194,6 +194,14 @@ var indexAction = {
         });
     },
 
+    'moreTeacher' : function(){
+        var tag = $('.more-teacher');
+        var url = params.instructorUrl + '&type=3';
+        tag.click(function(){
+            location.href = url;
+        });
+    },
+
     'liveFilter' : function(){
         $('#filter').click(function(){
             var $tooltips = $('.js_tooltips'),
@@ -230,6 +238,7 @@ var indexAction = {
             this.getRecomendInstructor();
             //获取关注导师直播列表
             this.liveFilter();
+            this.moreTeacher();
         }else if(params.tplName == 'index_comment'){
             //获取直播评论列表
             this.getComments();
