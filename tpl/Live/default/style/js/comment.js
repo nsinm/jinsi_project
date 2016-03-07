@@ -6,6 +6,8 @@ var commemtAction = {
     'addComment' : function(){
         $('.weui_btn.weui_btn_primary').click(function(){
             var url = $(this).attr('data-url');
+            if(url == '')
+                return;
             //获取内容
             var content = $("textarea[name='content']").val();
             //获取上传图片
