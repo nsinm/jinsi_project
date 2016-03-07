@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
 </head>
 <body ontouchstart>
-<div class="plus-nav" id="showNormalAction">
-
-</div>
 <!--BEGIN actionSheet-->
 <div id="actionSheet_wrap">
     <div class="weui_mask_transition" id="mask"></div>
@@ -111,7 +108,7 @@
                 var url = '{pigcms::U("Index/share")}?cid={pigcms:$live.id}';
                 $.getJSON(url, {}, function(data){
                     if(data.errcode != '0'){
-                        alert(data.msg);
+                        //alert(data.msg);
                     }
                 }, 'JSON');
             },
