@@ -36,8 +36,7 @@ var indexAction = {
         }
         $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
-            var tag = $('#user_comments');
-            tag.empty();
+            var tag = $('#content');
             var html = '';
             if(data.errcode == 0){
                 var infos = data.data;
@@ -91,7 +90,7 @@ var indexAction = {
             }else{
                 html += '还没有导师直播内容哦!';
             }
-            tag.append(html).find("div[class='weui_cell live_block']").each(function(){
+            tag.html(html).find("div[class='weui_cell live_block']").each(function(){
                 var cid = $(this).attr('data-cid');
                 $(this).click(function(){
                     location.href = params.cUrl + '&cid=' + cid;
