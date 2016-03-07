@@ -4,11 +4,13 @@
  * Created by PhpStorm.
  * User: huangtuo
  * Date: 16/3/1
- * Time: 下午3:09
+ * Time: 锟斤拷锟斤拷3:09
  */
 class JssdkModel extends Model
 {
 
+    private $appId;
+    private $appSecret;
 
     public function __construct()
     {
@@ -20,14 +22,12 @@ class JssdkModel extends Model
     {
         $jsapiTicket = $this->getJsApiTicket();
 
-        // 注意 URL 一定要动态获取，不能 hardcode.
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         $timestamp = time();
         $nonceStr = $this->createNonceStr();
 
-        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
         $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
 
         $signature = sha1($string);
@@ -55,12 +55,9 @@ class JssdkModel extends Model
 
     private function getJsApiTicket()
     {
-        // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
         $data = json_decode(F("jsapi_ticket"));
         if ($data->expire_time < time()) {
             $accessToken = $this->getAccessToken();
-            // 如果是企业号用以下 URL 获取 ticket
-            // $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
             $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
             $res = json_decode($this->httpGet($url));
             $ticket = $res->ticket;
@@ -88,8 +85,6 @@ class JssdkModel extends Model
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 500);
-        // 为保证第三方服务器与微信服务器之间数据传输的安全性，所有微信接口采用https方式调用，必须使用下面2行代码打开ssl安全校验。
-        // 如果在部署过程中代码在此处验证失败，请到 http://curl.haxx.se/ca/cacert.pem 下载新的证书判别文件。
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, true);
         curl_setopt($curl, CURLOPT_URL, $url);
