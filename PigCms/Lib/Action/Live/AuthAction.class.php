@@ -17,7 +17,7 @@ class AuthAction extends Action
         //$userid = $Live->get_user_info($openid);
         //echo M('live')->get_openid('aa');
         //$jssdk = D('Jssdk');
-        $signPackage = $jssdk->GetSignPackage();
+        //$signPackage = $jssdk->GetSignPackage();
         //print_r($signPackage);
         //$this->assign('signPackage',$signPackage);
         $data['title'] = "测试测试";
