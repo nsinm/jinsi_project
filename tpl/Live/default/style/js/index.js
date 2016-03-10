@@ -150,8 +150,16 @@ var indexAction = {
                         $.getJSON(url, {}, function(data){
                             console.log(data);
                             if(data.errcode == '0'){
-                                that.removeClass('on');
-                                console.log(that);
+                                var parent = that.parent();
+                                var parentHtml = parent.html().substring(0, -1);
+                                console.log(parentHtml);
+                                parent.empty();
+                                var parentText = parent.text();
+                                var count = 0;
+                                if(parentHtml.indexOf('赞') > 0){
+                                    count = parentText.trim().substring(1).trim();
+
+                                }
                             }else{
                                 alert($(this).attr('class'));
                             }
