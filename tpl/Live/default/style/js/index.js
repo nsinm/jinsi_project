@@ -9,11 +9,15 @@ var indexAction = {
             var html = '';
             if(data.errcode == 0) {
                 for (var index in data.data) {
+                    var userName = data.data[index].jinsi_user_name;
+                    if(userName.length > 4){
+                        userName = userName.substring(0, 2) + '...';
+                    }
                     html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button" data-value="' + data.data[index].id + '">';
                     html +=     '<div class="user_thumb mb10">';
                     html +=         '<img src="' + data.data[index].jinsi_user_header_pic + '" alt="">';
                     html +=     '</div>';
-                    html +=     '<p class="weui_grid_label">' + data.data[index].jinsi_user_name + '</p>';
+                    html +=     '<p class="weui_grid_label">' + userName + '</p>';
                     html += '</a>';
                 }
             }else{
