@@ -11,12 +11,12 @@ class AuthAction extends Action
 
     public function index ()
     {
-        //$Live = D('Live');
+        $Live = D('Live');
         //$openid = $Live->get_openid(get_url());
 
         //$userid = $Live->get_user_info($openid);
         //echo M('live')->get_openid('aa');
-        $jssdk = D('Jssdk');
+        //$jssdk = D('Jssdk');
         $signPackage = $jssdk->GetSignPackage();
         //print_r($signPackage);
         //$this->assign('signPackage',$signPackage);
@@ -28,7 +28,7 @@ class AuthAction extends Action
         $send_data['auther'] = "我是12哥";
         $send_data['content'] = "有新的股票发布了";
         $send_data['url'] = "http://www.baidu.com";
-        $rs = $jssdk->send_message($send_data);
+        $rs = $Live->send_message($send_data);
         print_r($rs);
         $this->display();
     }
