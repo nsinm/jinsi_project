@@ -10,8 +10,8 @@ var indexAction = {
             if(data.errcode == 0) {
                 for (var index in data.data) {
                     var userName = data.data[index].jinsi_user_name;
-                    if(userName.length > 4){
-                        userName = userName.substring(0, 2) + '...';
+                    if(userName.length > 5){
+                        userName = userName.substring(0, 5) + '...';
                     }
                     html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button" data-value="' + data.data[index].id + '">';
                     html +=     '<div class="user_thumb mb10">';
