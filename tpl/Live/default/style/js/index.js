@@ -141,31 +141,32 @@ var indexAction = {
             }else{
                 html += '当前还没有评论内容哦!';
             }
-            tag.append(html).find('.user_liveinteract span').each(function(){
-                if($(this).attr('class') == 'icon-like on'){
-                    $(this).click(function(){
-                        var cid = $(this).attr('data-cid');
-                        var url = params.pUrl + '&cid=' + cid;
-                        $.getJSON(url, {}, function(data){
-                            console.log(data);
-                            if(data.errcode == '0'){
-                                location.reload();
-                            }else{
-                                alert(data.msg);
-                            }
-                        }, 'JSON');
-                    });
-                }else if($(this).attr('class') == 'icon-comment'){
-                    $(this).click(function(){
-                        showDailog();
-                    });
-                }
+            tag.append(html).find('#user_comment').each(function(){
+                $(this).find('.user_liveinteract span').each(function(){
+                    if($(this).attr('class') == 'icon-like on'){
+                       $(this).click(function(){
+                           var cid = $(this).attr('data-cid');
+                           var url = params.pUrl + '&cid=' + cid;
+                           $.getJSON(url, {}, function(data){
+                               console.log(data);
+                               if(data.errcode == '0'){
+                                   location.reload();
+                               }else{
+                                   alert(data.msg);
+                               }
+                           }, 'JSON');
+                       });
+                    }else if($(this).attr('class') == 'icon-comment'){
+                       $(this).click(function(){
+                           showDailog();
+                       });
+                    }
+                });
+                $(this).click(function(){
+                    showDailog();
+                });
             });
         }, 'JSON');
-
-        $('#user_comment').bind('click', function(){
-            showDailog();
-        });
 
         function showDailog(){
             var mask = $('#mask');
