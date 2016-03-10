@@ -180,7 +180,7 @@ var indexAction = {
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).click(function() {
                         showDailog();
-                    }
+                    })
                 }
             });
         }, 'JSON');
