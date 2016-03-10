@@ -151,16 +151,16 @@ var indexAction = {
                             console.log(data);
                             if(data.errcode == '0'){
                                 var parent = that.parent();
-                                var parentHtml = parent.html().substring(0, parent.html().length - 1);
-                                parent.empty();
                                 var parentText = parent.text();
+                                parent.empty();
                                 var count = 0;
-                                if(parentHtml.indexOf('赞') > 0){
+                                if(parentText.indexOf('赞') > 0){
                                     count = parentText.trim().substring(1).trim();
                                 }else{
-                                    count = parentText.trim().substring(0).trim();
+                                    count = parentText.trim();
                                 }
-                                var html = parentHtml + (parseInt(count) + 1);
+                                console.log(count);
+                                var html = '<span class="icon-like" alt="">' + (parseInt(count) + 1);
                                 parent.html(html);
                             }else{
                                 alert($(this).attr('class'));
