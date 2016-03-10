@@ -178,7 +178,9 @@ var indexAction = {
                         showDailog();
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
-                    showDailog();
+                    $(this).click(function() {
+                        showDailog();
+                    }
                 }
             });
         }, 'JSON');
