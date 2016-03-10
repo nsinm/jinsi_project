@@ -126,7 +126,7 @@ var indexAction = {
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
                     html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
-                    html +=             '<span class="sm-comment">';
+                    html +=             '<span class="sm-like like-btn">';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
@@ -134,6 +134,9 @@ var indexAction = {
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
+                    html +=             '<span class="sm-comment">'
+                    html +=                 '<span class="icon-comment reply" alt=""></span>回复'
+                    html +=             '</span>'
                     html +=         '</p>';
                     html +=     '</div>';
                     html += '</div>';
@@ -169,21 +172,16 @@ var indexAction = {
                             }
                         }, 'JSON');
                     });
-                }else if($(this).attr('class') == 'icon-comment'){
+                }else if($(this).attr('class') == 'icon-comment reply'){
                     $(this).click(function(){
+                        $('.weui_actionsheet_menu').empty().html('<div class="weui_actionsheet_cell" data-value="1">回复</div>');
                         showDailog();
                     });
+                }else if($(this).attr('class') == 'icon-comment'){
+                    showDailog();
                 }
-
-                $(this).parents('.user_comment').click(function(){
-                    alert(1111);
-                });
             });
         }, 'JSON');
-
-        $('#user_comment').bind('click', function(){
-            showDailog();
-        });
 
         function showDailog(){
             var mask = $('#mask');
