@@ -144,14 +144,16 @@ var indexAction = {
             tag.append(html).find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
+                        var that = $(this);
                         var cid = $(this).attr('data-cid');
                         var url = params.pUrl + '&cid=' + cid;
                         $.getJSON(url, {}, function(data){
                             console.log(data);
                             if(data.errcode == '0'){
-                                $(this).removeClass('on');
+                                that.removeClass('on');
+                                console.log(that);
                             }else{
-                                alert(data.msg);
+                                alert($(this).attr('class'));
                             }
                         }, 'JSON');
                     });
