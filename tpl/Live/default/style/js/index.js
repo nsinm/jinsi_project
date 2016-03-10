@@ -154,13 +154,15 @@ var indexAction = {
                                 var parentText = parent.text();
                                 parent.empty();
                                 var count = 0;
+                                var html = '<span class="icon-like" alt=""></span>';
                                 if(parentText.indexOf('赞') > 0){
                                     count = parentText.trim().substring(1).trim();
+                                    html = '<span class="icon-like" alt=""></span>赞&nbsp;'
                                 }else{
                                     count = parentText.trim();
                                 }
                                 console.log(count);
-                                var html = '<span class="icon-like" alt="">' + (parseInt(count) + 1);
+                                html += parseInt(count) + 1;
                                 parent.html(html);
                             }else{
                                 alert($(this).attr('class'));
