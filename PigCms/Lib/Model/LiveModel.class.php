@@ -102,14 +102,14 @@ class LiveModel extends Model
         $array['template_id'] = $t_id;
         $array['url'] = $data['url'];
         $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
-        $item['keynote1'] = array('value'=>$data['content'],'color'=>'#173177');
-        $item['keynote2'] = array('value'=>$data['auther'],'color'=>'#173177');
+        $item['keyword1'] = array('value'=>$data['content'],'color'=>'#173177');
+        $item['keyword2'] = array('value'=>$data['auther'],'color'=>'#173177');
         $date = date('Y-m-d H:i:s');
-        $item['keynote3'] = array('value'=>$date,'color'=>'#173177');
+        $item['keyword3'] = array('value'=>$date,'color'=>'#173177');
         $item['remark'] = array('value'=>$data['content'],'color'=>'#173177');
         $array['data'] = $item;
         $str = json_encode($array);
-        $result = vpost($url,$str);
+        $result = postUrl($url,$str);
 
         return json_decode($result,true);
 

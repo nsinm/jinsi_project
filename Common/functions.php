@@ -727,6 +727,25 @@ function vpost($url,$data=null){ // 模拟提交数据函数
     return $tmpInfo;
 }
 
+function postUrl($url,$post_data)
+{
+    //echo $url;
+    //echo $post_data;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // post数据
+    curl_setopt($ch, CURLOPT_POST, 1);
+    // post的变量
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+    $output = curl_exec($ch);
+    curl_close($ch);
+
+    //print_r($ch);
+    //打印获得的数据
+    return $output;
+}
+
 /**
  * 通过CURL方式模拟GET
  * @param $url
