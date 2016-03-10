@@ -92,4 +92,30 @@ class LiveModel extends Model
             echo '数据写入错误！';
         }
     }
+
+    function send_message($data)
+    {
+        $token = $this->get_token();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
+        $t_id = "2UcqSgjddCH-Js8ahrO_11L_xaV5baBqOVCQLJ4F7sQ";
+        $array['touser'] = $data['openid'];
+        $array['template_id'] = $t_id;
+        $array['url'] = $data['url'];
+        $item['first'] = "您关注的{$data['auther']}有新消息发布了";
+        $item['keyword1'] = $data['content'];
+        $item['keyword2'] = $data['auther'];
+        $item['keyword3'] = date('Y-m-d H:i:s');
+        $item['remark'] = $data['content'];
+        $array['data'] = $item;
+
+        $result = vpost($url,json_encode($data));
+
+        return json_decode($result,true);
+
+
+
+
+
+
+    }
 }
