@@ -174,8 +174,8 @@ var indexAction = {
                     });
                 }else if($(this).attr('class') == 'icon-comment reply'){
                     $(this).click(function(){
-                        $('.weui_actionsheet_menu').filter("div[data-value='2']").hide();
-                        $('.weui_actionsheet_menu').filter("div[data-value='1']").text('回复');
+                        $('.weui_actionsheet_menu').find("div[data-value='2']").hide();
+                        $('.weui_actionsheet_menu').find("div[data-value='1']").text('回复');
                         showDailog();
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
