@@ -151,15 +151,17 @@ var indexAction = {
                             console.log(data);
                             if(data.errcode == '0'){
                                 var parent = that.parent();
-                                var parentHtml = parent.html().substring(0, -1);
-                                console.log(parentHtml);
+                                var parentHtml = parent.html().substring(0, parent.html().length - 1);
                                 parent.empty();
                                 var parentText = parent.text();
                                 var count = 0;
                                 if(parentHtml.indexOf('赞') > 0){
                                     count = parentText.trim().substring(1).trim();
-
+                                }else{
+                                    count = parentText.trim().substring(0).trim();
                                 }
+                                var html = parentHtml + (parseInt(count) + 1);
+                                parent.html(html);
                             }else{
                                 alert($(this).attr('class'));
                             }
