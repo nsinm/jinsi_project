@@ -11,7 +11,7 @@ var indexAction = {
                 for (var index in data.data) {
                     var userName = data.data[index].jinsi_user_name;
                     if(userName.length > 5){
-                        userName = userName.substring(0, 5) + '...';
+                        userName = userName.substring(0, 4) + '...';
                     }
                     html += '<a href="javascript:;" class="weui_grid js_grid col-3-md" data-id="button" data-value="' + data.data[index].id + '">';
                     html +=     '<div class="user_thumb mb10">';
@@ -111,7 +111,7 @@ var indexAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block">';
+                    html += '<div class="weui_cell live_block" id="user_comment">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -157,30 +157,38 @@ var indexAction = {
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).click(function(){
-                        var mask = $('#mask');
-                        var weuiActionsheet = $('#weui_actionsheet1');
-                        weuiActionsheet.addClass('weui_actionsheet_toggle');
-                        mask.show().addClass('weui_fade_toggle').click(function () {
-                            hideActionSheet(weuiActionsheet, mask);
-                        });
-                        $('#actionsheet_cancel').click(function () {
-                            hideActionSheet(weuiActionsheet, mask);
-                        });
-                        weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
-
-                        function hideActionSheet(weuiActionsheet, mask) {
-                            weuiActionsheet.removeClass('weui_actionsheet_toggle');
-                            mask.removeClass('weui_fade_toggle');
-                            weuiActionsheet.on('transitionend', function () {
-                                mask.hide();
-                            }).on('webkitTransitionEnd', function () {
-                                mask.hide();
-                            })
-                        }
+                        showDailog();
                     });
                 }
             });
-        }, 'JSON')
+        }, 'JSON');
+
+        $('#user_comment').bind('click', function(){
+            showDailog();
+        });
+
+        function showDailog(){
+            var mask = $('#mask');
+            var weuiActionsheet = $('#weui_actionsheet1');
+            weuiActionsheet.addClass('weui_actionsheet_toggle');
+            mask.show().addClass('weui_fade_toggle').click(function () {
+                hideActionSheet(weuiActionsheet, mask);
+            });
+            $('#actionsheet_cancel').click(function () {
+                hideActionSheet(weuiActionsheet, mask);
+            });
+            weuiActionsheet.unbind('transitionend').unbind('webkitTransitionEnd');
+        }
+
+        function hideActionSheet(weuiActionsheet, mask) {
+            weuiActionsheet.removeClass('weui_actionsheet_toggle');
+            mask.removeClass('weui_fade_toggle');
+            weuiActionsheet.on('transitionend', function () {
+                mask.hide();
+            }).on('webkitTransitionEnd', function () {
+                mask.hide();
+            })
+        }
     },
 
     'toComment' : function(){
