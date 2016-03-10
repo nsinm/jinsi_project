@@ -108,8 +108,8 @@ class LiveModel extends Model
         $item['keyword3'] = array('value'=>$date,'color'=>'#173177');
         $item['remark'] = array('value'=>$data['content'],'color'=>'#173177');
         $array['data'] = $item;
-
-        $result = vpost($url,json_encode($data));
+        $str = json_encode($array);
+        $result = postUrl($url,$str);
 
         return json_decode($result,true);
 
