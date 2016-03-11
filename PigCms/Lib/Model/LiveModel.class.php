@@ -137,7 +137,8 @@ class LiveModel extends Model
         $follow_list = $follow->where("jinsi_follow_id_user=".$content_arr['jinsi_content_create_user_id'])->select();
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $content_arr['jinsi_content_info'];
-        $data['url'] = "http://www.biadu.com";
+        $data['url'] = U('Index/comment')."cid=".$id;
+        print_r($data);
         if($follow_list){
             foreach($follow_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
