@@ -130,15 +130,31 @@ class LiveModel extends Model
     {
         $content = M('content');
         $content_arr = $content->find($id);
-        //print_r($content_arr);
-        $user = M('user');
-        $user_info = $user->find($content_arr['jinsi_content_create_user_id']);
-        print_r($user_info);
+        //print_r($content_arr)；
+        $user_info = $this->get_user_one_info($content_arr['jinsi_content_create_user_id']);
+        //print_r($user_info);
         $follow = M('follow');
         $follow_list = $follow->where("jinsi_follow_id_user=".$content_arr['jinsi_content_create_user_id'])->select();
-        print_r($follow_list);
+        $data['auther'] = $user_info['jinsi_user_name'];
+        $data['content'] = $content_arr['jinsi_content_info'];
+        $data['url'] = "http://www.biadu.com";
+        if($follow_list){
+            foreach($follow_list as $v){
+                $user_arr = $this->get_user_one_info($v['id']);
+                $data['openid'] = $user_arr['open_id'];
+                $this->send_message($data);
+            }
+        }
+        //print_r($follow_list);
 
 
 
+    }
+
+    public function get_user_one_info($id)
+    {
+        $user = M('user');
+        $user_info = $user->find($id);
+        return $user_info;
     }
 }
