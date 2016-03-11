@@ -6,16 +6,16 @@
 	position: absolute;
 	right: 8px;
 	top: 8px;
-	width: 23px;
-	height: 23px;
-	background-image:url(../images/filter-sm.png);
-	background-size: 46px 23px;
+	width: 30px;
+	height: 30px;
+	background-image:url(../images/filter-sm1.png);
+	background-size: 60px 30px;
 	background-position: 0 0;
 	cursor: pointer;
 	z-index: 1;
 }
 .filter.off{
-	background-position: 23px 0;
+	background-position: 30px 0;
 }
 .bt44{
 	bottom:44px;
@@ -33,7 +33,7 @@
 	font-weight: normal;
 }
 .teacher_title{
-	color: #f6cd25;
+	color: #f15d12;
 	background-color: #f7f2ec;
 	font-weight: bold;
 	margin:0;
@@ -156,7 +156,7 @@
 .user_livename{
 	font-size: 14px;
 	line-height: 1.8em;
-	color:#f6cd25;
+	color:#f15d12;
 }
 .user_liveword{
 	font-size: 14px;
@@ -291,8 +291,8 @@
     padding:0;
 }
 .bottom-bar div.selected{
-	border-top: 1px solid #f6cd25;
-	background-color: #f6cd25;
+	border-top: 1px solid #f15d12;
+	background-color: #f15d12;
 	color: #fff;
 }
 
@@ -305,4 +305,9 @@
 }
 .no-padding{
 	padding: 0!important;
+}
+.weui_grid_label{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
