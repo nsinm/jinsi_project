@@ -93,6 +93,11 @@ class LiveModel extends Model
         }
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     * 发送模板消息
+     */
     function send_message($data)
     {
         $token = $this->get_token();
@@ -115,6 +120,17 @@ class LiveModel extends Model
 
 
 
+
+
+
+    }
+
+
+    public function put_content($id)
+    {
+        $content = M('countent');
+        $content_arr = $content->find($id);
+        print_r($content_arr);
 
 
 
