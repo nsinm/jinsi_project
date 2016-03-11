@@ -168,6 +168,43 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 获取直播列表
+     */
+    public function getFeedbackList ()
+    {
+        $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '获取失败!');
+
+        $page = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = ($page - 1) * $pageSize;
+
+        $sql = "SELECT FROM_UNIXTIME(jf.jinsi_feedback_time, '%Y-%m-%d %H:%i:%s') AS feedback_create_time, jf.*, ju.id AS user_id, ju.jinsi_user_name FROM jinsi_feedback AS jf LEFT JOIN jinsi_user AS ju ON jf.jinsi_feedback_user_id = ju.id WHERE 1 ORDER BY jf.jinsi_feedback_time DESC LIMIT {$start}, {$pageSize}";
+        $feedbackList = M()->query($sql);
+        if($feedbackList){
+            $result = array('errcode' => 0, 'msg' => '获取成功!', 'data' => $feedbackList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 反馈管理页面
+     */
+    public function feedback ()
+    {
+        $params = array(
+            'userCount' => M('user', 'jinsi_')->count(),
+            'commentCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=1')->count(),
+            'liveCount' => M('content', 'jinsi_')->where('jinsi_content_is_comment=0')->count(),
+            'feedbackCount' => M('feedback', 'jinsi_')->count()
+        );
+        $this->assign('vars', $params);
+        $this->display();
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()

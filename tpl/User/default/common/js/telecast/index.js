@@ -20,6 +20,9 @@ var indexAction = {
                     case '评论管理':
                         location.href = params.comment;
                         break;
+                    case '反馈管理':
+                        location.href = params.feedback;
+                        break;
                 }
             }) ;
         });
@@ -258,6 +261,38 @@ var indexAction = {
         }, 'JSON');
     },
 
+    'getFeedbackList' : function(index){
+        var tag = $(".ListProduct");
+        var index = index;
+        $.getJSON(params.getFeedbackList, {'page': index, 'pageSize': params.pageSize}, function (data) {
+            console.log(data);
+            var html = '';
+            if (data.errcode == '0') {
+                var infos = data.data;
+                html += '<thead>';
+                html +=     '<tr>';
+                html +=         '<th width="50">编号</th>';
+                html +=         '<th width="50">反馈人</th>';
+                html +=         '<th width="300">反馈内容</th>';
+                html +=         '<th class="40">反馈时间</th>';
+                html +=     '</tr>';
+                html += '</thead>';
+                html += '<tbody id="user_info">';
+
+                for (var index in infos) {
+                    html += '<tr>';
+                    html +=     '<td>' + infos[index].id + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_user_name + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_feedback_content + '</td>';
+                    html +=     '<td>' + infos[index].feedback_create_time + '</td>';
+                    html += '</tr>';
+                }
+                html += '<tbody>';
+            }
+            tag.html(html);
+        }, 'JSON');
+    },
+
     'userPagination' : function(){
         $('.M-box').pagination({
             totalData : params.userCount,
@@ -306,6 +341,22 @@ var indexAction = {
         })
     },
 
+    'feedbackPagination' : function(){
+        $('.M-box3').pagination({
+            totalData : params.feedbackCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getFeedbackList(index);
+                return;
+            }
+        },function(api){
+            indexAction.getFeedbackList(api.getCurrent());
+            return;
+        })
+    },
+
     'init' : function(){
         //导航条点击事件
         this.navEvent();
@@ -315,6 +366,8 @@ var indexAction = {
             this.livePagination();
         }else if(params.tplName == 'user_comment'){
             this.commentPagination();
+        }else if(params.tplName == 'user_feedback'){
+            this.feedbackPagination();
         }
     }
 };
