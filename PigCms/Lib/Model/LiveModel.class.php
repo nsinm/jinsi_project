@@ -129,7 +129,7 @@ class LiveModel extends Model
     public function put_content($id)
     {
         $content = M('countent');
-        $content_arr = $content->find($id);
+        $content_arr = $content->where("id=".$id)->find();
         print_r($content_arr);
 
 
