@@ -22,7 +22,11 @@
 <div class="container js_container">
     <div class="page">
         <div class="bd">
-            <div class="weui_cells_title">我的直播</div>
+            <if condition="$cUserId neq $urls.userId">
+                <div class="weui_cells_title">直播列表</div>
+            <else/>
+                <div class="weui_cells_title">我的直播</div>
+            </if>
             <span id="live_list" class="mb44">
 
             </span>
