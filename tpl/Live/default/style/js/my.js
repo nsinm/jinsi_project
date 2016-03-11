@@ -20,6 +20,8 @@ var myAction = {
                 toUrl(this, params.liveUrl);
             }else if(text.indexOf('用户反馈') > 0){
                 toUrl(this, params.feedbackUrl)
+            }else if(text.indexOf('申请当导师') > 0){
+                toUrl(this, 'http://form.mikecrm.com/f.php?t=VVpXjv')
             }else{
                 toUrl(this, params.exceptionUrl)
             }
