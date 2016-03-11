@@ -87,9 +87,15 @@ var userAction = {
                     }
 
                     var parent = $(this).parents('.weui_cell.teacherlist_block');
+                    var userId = parent.attr('data-uid');
+                    var url = params.llUrl + '&userId=' + userId;
                     parent.find('.user_thumb img').each(function(){
-                        var userId = $(this).attr('data-uid');
-                        var url = params.llUrl + '&userId=' + userId;
+                        $(this).click(function(){
+                            location.href = url;
+                        });
+                    })
+
+                    parent.find('.weui_cell_bd.weui_cell_primary p').each(function(){
                         $(this).click(function(){
                             location.href = url;
                         });
