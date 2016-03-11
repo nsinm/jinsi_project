@@ -21,7 +21,7 @@ var myAction = {
             }else if(text.indexOf('用户反馈') > 0){
                 toUrl(this, params.feedbackUrl)
             }else{
-
+                toUrl(this, params.exceptionUrl)
             }
         });
 

@@ -29,6 +29,7 @@ class MyAction extends LiveAction
             'fansUrl' => U('fans'),
             'liveUrl' => U('live'),
             'feedbackUrl' => U('feedback'),
+            'exceptionUrl' => U('exception'),
             'userInfoUrl' => U('Instructor/index') . '&userId=' . $this->userId . '&type=1'
         );
         $urls = array_merge($this->ajaxUrls, $uris);
@@ -189,5 +190,13 @@ class MyAction extends LiveAction
         }
 
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /*
+     * 免责声明页
+     */
+    public function exception ()
+    {
+        $this->display();
     }
 }
