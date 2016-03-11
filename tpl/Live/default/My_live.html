@@ -11,8 +11,13 @@
 <body ontouchstart>
 <div class="bottom-bar">
     <div>直播间</div>
-    <div>导师</div>
-    <div class="selected">我的</div>
+    <else condition="$cUserId neq $urls.userId">
+        <div class="selected">导师</div>
+        <div>我的</div>
+    </else>
+        <div>导师</div>
+        <div class="selected">我的</div>
+    </if>
 </div>
 <div class="container js_container">
     <div class="page">
@@ -30,6 +35,7 @@
 <script>
     var params = {
         'userId' : '{pigcms:$urls.userId}',
+        'cUserId' : '{pigcms:$cUserId}',
         'tplName' : 'my_live',
         'llUrl' : '{pigcms:$urls.llUrl}',
         'commentUrl' : '{pigcms:$urls.commentUrl}',

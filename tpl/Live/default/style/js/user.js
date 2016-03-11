@@ -35,7 +35,7 @@ var userAction = {
                 if(data.errcode == 0){
                     var infos = data.data;
                     for(var index in infos){
-                        html += '<div class="weui_cell teacherlist_block">';
+                        html += '<div class="weui_cell teacherlist_block" data-uid="' + infos[index].id + '">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10">';
                         html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -85,6 +85,15 @@ var userAction = {
                             }, 'JSON');
                         });
                     }
+
+                    var parent = $(this).parents('.weui_cell.teacherlist_block');
+                    parent.find('.user_thumb img').each(function(){
+                        var userId = $(this).attr('data-uid');
+                        var url = params.llUrl + '&userId=' + userId;
+                        $(this).click(function(){
+                            location.href = url;
+                        });
+                    })
                 });
             }, 'JSON');
         }

@@ -118,7 +118,11 @@ class MyAction extends LiveAction
             'llUrl' => U('getMyLiveList'),
             'commentUrl' => U('Index/comment')
         );
+
+        $cUserId = $this->_get('userId');
+
         $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('cUserId', $cUserId);
         $this->assign('urls', $urls);
         $this->display();
     }
@@ -129,6 +133,11 @@ class MyAction extends LiveAction
     public function getMyLiveList ()
     {
         if(!IS_AJAX) _404('页面不存在!');
+
+        if($this->_get('userId')){
+            $this->userId = $this->_get('userId');
+        }
+
         $result = array('errcode' => 1, 'msg' => '获取直播列表失败!');
         $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content jc LEFT JOIN jinsi_user ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id = {$this->userId} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
         $liveList = M()->query($sql);

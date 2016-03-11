@@ -99,7 +99,12 @@ var myAction = {
 
     'getMyLiveList' : function(){
         var tag = $('#live_list');
-        $.getJSON(params.llUrl, {}, function(data){
+        var userId = params.cUserId;
+        var data = {};
+        if(userId){
+            data = {'userId': userId};
+        }
+        $.getJSON(params.llUrl, data, function(data){
             var html = '';
             if(data.errcode == '0'){
                 var infos = data.data;
