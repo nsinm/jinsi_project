@@ -11,10 +11,10 @@
 <body ontouchstart>
 <div class="bottom-bar">
     <div>直播间</div>
-    <else condition="$cUserId neq $urls.userId">
+    <if condition="$cUserId neq $urls.userId">
         <div class="selected">导师</div>
         <div>我的</div>
-    </else>
+    <else/>
         <div>导师</div>
         <div class="selected">我的</div>
     </if>
