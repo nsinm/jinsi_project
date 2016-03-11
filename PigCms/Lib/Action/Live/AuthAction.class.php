@@ -29,7 +29,7 @@ class AuthAction extends Action
         $send_data['content'] = "有新的股票发布了";
         $send_data['url'] = "http://www.baidu.com";
         //$rs = $Live->send_message($send_data);
-        $Live->put_content(17);
+        $Live->put_content(90);
         //print_r($rs);
         $this->display();
     }
