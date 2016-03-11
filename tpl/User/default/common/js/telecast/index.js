@@ -273,7 +273,7 @@ var indexAction = {
                 html +=     '<tr>';
                 html +=         '<th width="50">编号</th>';
                 html +=         '<th width="50">反馈人</th>';
-                html +=         '<th width="300">反馈内容</th>';
+                html +=         '<th width="1000">反馈内容</th>';
                 html +=         '<th class="40">反馈时间</th>';
                 html +=     '</tr>';
                 html += '</thead>';
