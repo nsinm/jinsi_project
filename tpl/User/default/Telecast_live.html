@@ -35,7 +35,7 @@
         <li class="tabli" id="tab0"><a href="javascript:void(0);">用户管理</a></li>
         <li class="tabli current" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
         <li class="tabli" id="tab2"><a href="javascript:void(0);">评论管理</a></li>
-        <!--<li class="tabli" id="tab3"><a href="">社区配置</a></li>-->
+        <li class="tabli" id="tab3"><a href="javascript:void(0);">反馈管理</a></li>
     </ul>
 </div>
 <!--tab end-->
@@ -64,18 +64,21 @@
 </if>
 <script language="JavaScript">
     var params = {
-        'tplName' : 'user_live',
+        'tplName' : 'user_list',
         'pageSize' : 10,
         'index' : '{pigcms::U("Telecast/index")}',
         'live' : '{pigcms::U("Telecast/live")}',
         'comment' : '{pigcms::U("Telecast/comment")}',
+        'feedback' : '{pigcms::U("Telecast/feedback")}',
         'getUserListUrl' : '{pigcms::U("Telecast/getUserList")}',
         'editUserUrl' : '{pigcms::U("Telecast/editUser")}',
         'getLiveList' : '{pigcms::U("Telecast/getLiveList")}',
         'getCommentList' : '{pigcms::U("Telecast/getCommentList")}',
+        'getFeedbackList' : '{pigcms::U("Telecast/getFeedbackList")}',
         'delContent' : '{pigcms::U("Telecast/delContent")}',
         'userCount' : '{pigcms:$vars.userCount}',
         'commentCount' : '{pigcms:$vars.commentCount}',
         'liveCount' : '{pigcms:$vars.liveCount}',
+        'feedbackCount' : '{pigcms:$vars.feedbackCount}',
     };
 </script>
