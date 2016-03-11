@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <div>导师</div>
+    <div class="selected">我的</div>
+</div>
+<div class="container js_container">
+    <input type="hidden" name="cid" value="{pigcms:$cid}" />
+    <div class="page">
+        <div class="bd no-padding">
+            <div class="weui_cells weui_cells_form my-opinion">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea name="content" class="weui_textarea" placeholder="反馈内容" rows="3"></textarea>
+                        <div class="weui_textarea_counter"><span>0</span>/200</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bd spacing" style="padding:10px 5px;">
+                <a href="javascript:;" class="weui_btn weui_btn_primary">确&nbsp;&nbsp;&nbsp;&nbsp;认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.js"></script>
+<script src="/tpl/Live/default/style/js/ajaxfileupload.js"></script>
+<script src="/tpl/Live/default/style/js/my.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'userId' : '{pigcms:$urls.userId}',
+        'tplName' : 'my_feedback',
+        'addFeedUrl' : '{pigcms:$urls.addFeedUrl}',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}',
+    };
+</script>
+</body>
+</html>

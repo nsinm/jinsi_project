@@ -16,8 +16,12 @@ var myAction = {
                 toUrl(this, params.followUrl);
             }else if(text.indexOf('我的粉丝') > 0){
                 toUrl(this, params.fansUrl);
-            }else{
+            }else if(text.indexOf('我的直播') > 0){
                 toUrl(this, params.liveUrl);
+            }else if(text.indexOf('用户反馈') > 0){
+                toUrl(this, params.feedbackUrl)
+            }else{
+
             }
         });
 
@@ -162,6 +166,24 @@ var myAction = {
         }, 'JSON');
     },
 
+    'addFeedback' : function(){
+        var tag = $('.weui_btn.weui_btn_primary');
+        tag.click(function(){
+            var content = $('.weui_cell textarea').val();
+            if(content == ''){
+                alert('请填写反馈内容');
+                return;
+            }
+            $.post(params.addFeedUrl, {'content': content}, function(data){
+                if(data.errcode == '0'){
+                    history.go(-1);
+                }else{
+                    alert(data.msg);
+                }
+            }, 'JSON')
+        })
+    },
+
     'init' : function(){
         if(params.tplName == 'my_index') {
             this.toMyModel();
@@ -171,6 +193,8 @@ var myAction = {
             this.getMyFansList();
         }else if(params.tplName == 'my_live'){
             this.getMyLiveList();
+        }else if(params.tplName == 'my_feedback'){
+            this.addFeedback();
         }
     }
 };

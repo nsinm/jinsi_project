@@ -28,6 +28,7 @@ class MyAction extends LiveAction
             'followUrl' => U('follow'),
             'fansUrl' => U('fans'),
             'liveUrl' => U('live'),
+            'feedbackUrl' => U('feedback'),
             'userInfoUrl' => U('Instructor/index') . '&userId=' . $this->userId . '&type=1'
         );
         $urls = array_merge($this->ajaxUrls, $uris);
@@ -144,6 +145,45 @@ class MyAction extends LiveAction
         $liveList = M()->query($sql);
         if($liveList){
             $result = array('errcode' => 0, 'msg' => '获取直播列表成功!', 'data' => $liveList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 用户反馈
+     */
+    public function feedback ()
+    {
+        $uris = array(
+            'addFeedUrl' => U('addFeedback', 'userId=' . $this->userId)
+        );
+
+        $urls = array_merge($this->ajaxUrls, $uris);
+        $this->assign('urls', $urls);
+        $this->display();
+    }
+
+    /**
+     * 添加反馈
+     */
+    public function addFeedback ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+
+        $userId = $this->userId;
+        $content = $this->_post('content');
+        $result = array('errcode' => 1, 'msg' => '添加反馈失败!');
+        if($userId && $content){
+            $data = array(
+                'jinsi_feedback_content' => $content,
+                'jinsi_feedback_user_id' => $userId,
+                'jinsi_feedback_time' => time()
+            );
+            $id = M('feedback', 'jinsi_')->add($data);
+            if($id){
+                $result = array('errcode' => 0, 'msg' => '添加反馈成功!', 'id' => $id);
+            }
         }
 
         $this->ajaxReturn($result, 'JSON');
