@@ -40,20 +40,22 @@
                 <div class="weui_cell_ft">
                 </div>
             </a>
-            <a class="weui_cell" href="javascript:;">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>我的粉丝</p>
-                </div>
-                <div class="weui_cell_ft">
-                </div>
-            </a>
-            <a class="weui_cell" href="javascript:;">
-                <div class="weui_cell_bd weui_cell_primary">
-                    <p>我的直播</p>
-                </div>
-                <div class="weui_cell_ft">
-                </div>
-            </a>
+            <if condition="$userType ep '2'">
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>我的粉丝</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                    </div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>我的直播</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                    </div>
+                </a>
+            </if>
             <a class="weui_cell" href="javascript:;">
                 <div class="weui_cell_bd weui_cell_primary">
                     <p>用户反馈</p>

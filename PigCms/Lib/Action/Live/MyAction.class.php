@@ -33,8 +33,10 @@ class MyAction extends LiveAction
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $userInfo = M('user')->where('id=' . $this->userId)->select();
+        $userType = M('user')->where('id=' . $this->userId)->getField('jinsi_user_type');
         $this->assign('user', $userInfo[0]);
         $this->assign('urls', $urls);
+        $this->assign('userType', $userType);
         $this->display();
     }
 
