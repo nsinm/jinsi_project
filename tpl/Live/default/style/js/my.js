@@ -21,6 +21,10 @@ var myAction = {
             }
         });
 
+        $('#my_info').click(function(){
+            location.href = params.userInfoUrl;
+        })
+
         function toUrl (tag, url){
             $(tag).click(function(){
                 location.href = url;

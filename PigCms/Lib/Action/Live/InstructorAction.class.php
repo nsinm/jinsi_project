@@ -25,7 +25,9 @@ class InstructorAction extends LiveAction
     public function index ()
     {
         $userId = $this->_get('userId');
+        $type = $this->_get('type');
         $this->ajaxUrls['giiUrl'] = U('getInstructorInfo', 'userId='. $userId);
+        $this->assign('type', $type);
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }

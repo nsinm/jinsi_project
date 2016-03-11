@@ -27,7 +27,8 @@ class MyAction extends LiveAction
         $uris = array(
             'followUrl' => U('follow'),
             'fansUrl' => U('fans'),
-            'liveUrl' => U('live')
+            'liveUrl' => U('live'),
+            'userInfoUrl' => U('Instructor/index') . '&userId=' . $this->userId . '&type=1'
         );
         $urls = array_merge($this->ajaxUrls, $uris);
         $userInfo = M('user')->where('id=' . $this->userId)->select();

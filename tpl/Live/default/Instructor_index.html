@@ -11,8 +11,14 @@
 <body ontouchstart>
 <div class="bottom-bar">
     <div>直播间</div>
-    <div class="selected">导师</div>
-    <div>我的</div>
+    <if condition="$type eq 1">
+        <div>导师</div>
+        <div class="selected">我的</div>
+    <else/>
+        <div class="selected">导师</div>
+        <div>我的</div>
+    </if>
+
 </div>
 <div class="container js_container">
     <div class="page">
