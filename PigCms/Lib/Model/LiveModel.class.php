@@ -140,7 +140,7 @@ class LiveModel extends Model
         $data['url'] = "http://www.biadu.com";
         if($follow_list){
             foreach($follow_list as $v){
-                $user_arr = $this->get_user_one_info($v['jinsi_follow_id_user']);
+                $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 print_r($user_arr);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
