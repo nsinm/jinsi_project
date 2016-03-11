@@ -138,14 +138,11 @@ class LiveModel extends Model
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $content_arr['jinsi_content_info'];
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$id;
-        print_r($data);
         if($follow_list){
             foreach($follow_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
-                print_r($user_arr);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
-                print_r($rs);
             }
         }
         //print_r($follow_list);
