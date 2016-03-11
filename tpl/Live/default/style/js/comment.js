@@ -25,8 +25,10 @@ var commemtAction = {
             //评论人id
             var userId = params.userId;
             var push = 0;
-            if(!isComment && confirm('是否推送给粉丝')){
-                push = 1;
+            if(!isComment){
+                if(confirm('是否推送给粉丝')){
+                    push = 1;
+                }
             }
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId, 'push':push};
             $.post(url, json, function(data){
