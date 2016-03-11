@@ -93,6 +93,11 @@ class LiveModel extends Model
         }
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     * 发送模板消息
+     */
     function send_message($data)
     {
         $token = $this->get_token();
@@ -115,6 +120,23 @@ class LiveModel extends Model
 
 
 
+
+
+
+    }
+
+
+    public function put_content($id)
+    {
+        $content = M('content');
+        $content_arr = $content->find($id);
+        //print_r($content_arr);
+        $user = M('user');
+        $user_info = $user->find($content_arr['jinsi_content_create_user_id']);
+        print_r($user_info);
+        $follow = M('follow');
+        $follow_list = $follow->where("jinsi_follow_id_user=".$content_arr['jinsi_content_create_user_id'])->select();
+        print_r($follow_list);
 
 
 
