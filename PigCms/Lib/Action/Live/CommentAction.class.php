@@ -57,6 +57,7 @@ class CommentAction extends LiveAction
 
         //直播id
         $cid = $this->_post('cid');
+        $push = $this->_post('push');
 
         $data = array(
             'jinsi_content_info' => $this->_post('content'),
@@ -83,6 +84,11 @@ class CommentAction extends LiveAction
         }else{
             $id = M('content')->add($data);
             if($id){
+                if($push){
+                    //推送
+                    $live = D('Live');
+                    $live->put_content($id);
+                }
                 $result = array('errcode' => 0, 'msg' => '添加成功!');
             }
         }

@@ -24,7 +24,11 @@ var commemtAction = {
             var isComment = !cid ? 0 : 1;
             //评论人id
             var userId = params.userId;
-            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId};
+            var push = 0;
+            if(confirm('是否推送给粉丝')){
+                push = 1;
+            }
+            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId, 'push':push};
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
                     $('.weui_btn.weui_btn_primary').removeAttr('data-url');
