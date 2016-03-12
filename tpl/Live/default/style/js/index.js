@@ -74,7 +74,7 @@ var indexAction = {
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
-                        html +=         '<span>';
+                        html +=         '<span style="display: none;">';
                         html +=             '<span class="icon-share" alt="">';
                         html +=             '</span>分享&nbsp;' + infos[index].jinsi_content_share_no;
                         html +=         '</span>';
