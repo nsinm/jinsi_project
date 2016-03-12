@@ -62,8 +62,8 @@ class TelecastAction extends UserAction
             switch ($handleType){
                 case '1':
                     $status = $model->delete();
-                    $rows = M('follow', 'jinsi_')->where('jinsi_follow_id_user=' . $userId)->delete();
-                    if($status && $rows)
+                    M('follow', 'jinsi_')->where('jinsi_follow_id_user=' . $userId)->delete();
+                    if($status)
                         $result = array('errcode' => 0, 'msg' => '删除成功!');
                     break;
                 case '2':
