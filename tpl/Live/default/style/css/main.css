@@ -134,6 +134,9 @@
 .mt10{
 	margin-top: 10px;
 }
+.mb01{
+	display:block;
+}
 .live_block,
 .teacherlist_block{
 	align-items: flex-start;
