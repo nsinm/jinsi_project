@@ -11,6 +11,11 @@ class AuthAction extends Action
 
     public function index ()
     {
+        $user = M('user');
+        $user_info = $user->where("jinsi_user_name=''")->select();
+        foreach($user_info as $v){
+
+        }
         $Live = D('Live');
         //$openid = $Live->get_openid(get_url());
 
