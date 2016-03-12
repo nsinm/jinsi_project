@@ -84,6 +84,7 @@ class LiveModel extends Model
             $data['jinsi_user_header_pic'] = $openid_info['headimgurl'];
             $data['open_id'] = $openid;
             if($user_info){
+                $data['id'] = $user_info['id'];
                 $lastInsId = $user->save();
             }else{
                 $lastInsId = $user->add($data);
