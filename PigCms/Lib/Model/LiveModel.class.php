@@ -76,13 +76,19 @@ class LiveModel extends Model
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$token}&openid={$openid}&lang=zh_CN";
         $openid_info = json_decode(getUrl($url),true);
+
         if($openid_info['openid']){
             //print_r($openid_info);
             $data['jinsi_user_name'] = $openid_info['nickname'];
             $data['jinsi_user_create_time'] = time();
             $data['jinsi_user_header_pic'] = $openid_info['headimgurl'];
             $data['open_id'] = $openid;
-            $lastInsId = $user->add($data);
+            if($user_info){
+                $lastInsId = $user->save();
+            }else{
+                $lastInsId = $user->add($data);
+            }
+
             //echo $user->getlastsql();
             if($lastInsId){
                 session('userId',$lastInsId);
