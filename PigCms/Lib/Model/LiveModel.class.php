@@ -85,7 +85,9 @@ class LiveModel extends Model
             $data['open_id'] = $openid;
             if($user_info){
                 $data['id'] = $user_info['id'];
-                $lastInsId = $user->save();
+                $rs = $user->save();
+                if($rs)
+                    $lastInsId = $user_info['id'];
             }else{
                 $lastInsId = $user->add($data);
             }
