@@ -25,11 +25,11 @@ var commemtAction = {
             //评论人id
             var userId = params.userId;
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
-            commemtAction.showDialog(url, json);
+            commemtAction.showDialog(url, cid, json);
         });
     },
 
-    'showDialog' : function(url, json){
+    'showDialog' : function(url, cid, json){
         var dialog = $('#dialog');
         var json = json;
         var url = url;
