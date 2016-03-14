@@ -40,7 +40,7 @@ var commemtAction = {
             if($(this).text == '发布并推送'){
                 push = 1;
             }
-            json.push({'push': push});
+            json.push = push;
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
                     $('.weui_btn.weui_btn_primary').removeAttr('data-url');
