@@ -92,7 +92,7 @@ var commemtAction = {
             if(len > 199){
                 $(this).val($(this).val().substring(0, 200));
             }
-            var num = 200 - len;
+            var num = len;
             countNum.text(num);
         })
     },
