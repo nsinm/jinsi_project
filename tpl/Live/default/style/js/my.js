@@ -140,7 +140,7 @@ var myAction = {
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=         '<p class="user_liveinteract">';
-                    html +=             '<span class="like-btn">';
+                    html +=             '<span class="like-btn"  style="display: none">';
                     html +=                 '<span class="icon-like on" alt="">'
                     html +=                     '</span>赞&nbsp;' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>'
@@ -148,9 +148,9 @@ var myAction = {
                     html +=                 '<span class="icon-comment" alt="">'
                     html +=                 '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                     html +=             '</span>'
-                    html +=             '<span style="display: none">'
-                    html +=                 '<span class="icon-share" alt="">'
-                    html +=                 '</span>分享&nbsp;' + infos[index].jinsi_content_share_no;
+                    html +=             '<span>'
+                    html +=                 '<span class="icon-like on" alt="">'
+                    html +=                     '</span>赞&nbsp;' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>'
                     html +=         '</p>';
                     html +=     '</div>';

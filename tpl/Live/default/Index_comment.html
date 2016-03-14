@@ -47,7 +47,20 @@
                         </if>
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
-                            <span class="like-btn">
+                            <span class="like-btn"  style="display: none;">
+                                <!--<if condition="$live.current_user_praise eq 1">-->
+                                    <!--<span class="icon-like" alt="">-->
+                                <!--<else />-->
+                                    <!--<span class="icon-like on" alt="" data-cid="{pigcms:$live.id}">-->
+                                <!--</if>-->
+
+                                <!--</span>赞&nbsp;{pigcms:$live.jinsi_content_praise_no}-->
+                            </span>
+                            <span>
+                                <span class="icon-comment" alt="">
+                                </span>评论&nbsp;{pigcms:$live.jinsi_content_comment_no}
+                            </span>
+                            <span>
                                 <if condition="$live.current_user_praise eq 1">
                                     <span class="icon-like" alt="">
                                 <else />
@@ -55,14 +68,6 @@
                                 </if>
 
                                 </span>赞&nbsp;{pigcms:$live.jinsi_content_praise_no}
-                            </span>
-                            <span>
-                                <span class="icon-comment" alt="">
-                                </span>评论&nbsp;{pigcms:$live.jinsi_content_comment_no}
-                            </span>
-                            <span style="display: none;">
-                                <span class="icon-share" alt="">
-                                </span>分享&nbsp;{pigcms:$live.jinsi_content_share_no}
                             </span>
                         </p>
                     </div>

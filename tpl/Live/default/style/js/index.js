@@ -66,7 +66,7 @@ var indexAction = {
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=         '<p class="user_liveinteract">';;
-                        html +=         '<span class="like-btn">';
+                        html +=         '<span class="like-btn" style="display: none;">';
                         html +=              '<span class="icon-like on" alt="">';
                         html +=                 '</span>赞&nbsp;' + infos[index].jinsi_content_praise_no;
                         html +=         '</span>';
