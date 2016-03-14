@@ -26,7 +26,7 @@ var commemtAction = {
             var userId = params.userId;
             var push = 0;
             if(!isComment){
-                if(confirm('是否推送给粉丝')){
+                if(commemtAction.showDialog()){
                     push = 1;
                 }
             }
@@ -44,6 +44,21 @@ var commemtAction = {
                 }
             }, 'JSON');
         });
+    },
+
+    'showDialog' : function(){
+        var dialog = $('#dialog');
+        dialog.show();
+        dialog.find('.weui_dialog_ft a').each(function(){
+            $(this).click(function(){
+                dialog.hide();
+                if($(this).text() == '发布并推送'){
+                    return true;
+                }else{
+                    return false;
+                }
+            })
+        })
     },
 
     'upload' : function(){

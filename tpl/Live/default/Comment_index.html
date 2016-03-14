@@ -46,8 +46,21 @@
                 </div>
             </if>
             <div class="bd spacing" style="padding:10px 5px;">
-                <a href="javascript:;" class="weui_btn weui_btn_primary" data-url="{pigcms:$urls.addUrl}">确&nbsp;&nbsp;&nbsp;&nbsp;认</a>
+                <a href="javascript:;" class="weui_btn weui_btn_primary" id="showDialog" data-url="{pigcms:$urls.addUrl}">确&nbsp;&nbsp;&nbsp;&nbsp;认</a>
             </div>
+            <!--BEGIN dialog1-->
+            <div class="weui_dialog_confirm" id="dialog" style="display: none;">
+                <div class="weui_mask"></div>
+                <div class="weui_dialog">
+                    <div class="weui_dialog_hd"><strong class="weui_dialog_title">是否推送</strong></div>
+                    <div class="weui_dialog_bd">是否将此直播内容推送给关注您的粉丝?</div>
+                    <div class="weui_dialog_ft">
+                        <a href="javascript:;" class="weui_btn_dialog default">只发布</a>
+                        <a href="javascript:;" class="weui_btn_dialog primary">发布并推送</a>
+                    </div>
+                </div>
+            </div>
+            <!--END dialog1-->
         </div>
     </div>
 </div>
