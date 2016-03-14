@@ -84,9 +84,23 @@ var commemtAction = {
         });
     },
 
+    'wordCount' : function(){
+        var content = $('.weui_textarea');
+        var countNum = $('#word_count');
+        content.keyup(function(){
+            var len = $(this).val().length;
+            if(len > 199){
+                $(this).val($(this).val().substring(0, 200));
+            }
+            var num = 200 - len;
+            countNum.text(num);
+        })
+    },
+
     'init' : function(){
         this.addComment();
         this.upload();
+        this.wordCount();
     }
 };
 
