@@ -25,7 +25,23 @@ var commemtAction = {
             //评论人id
             var userId = params.userId;
             var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
-            commemtAction.showDialog(url, cid, json);
+            if(!isComment){
+                commemtAction.showDialog(url, cid, json);
+            }else{
+                json.push = 0;
+                $.post(url, json, function(data){
+                    if(data.errcode == '0'){
+                        $('.weui_btn.weui_btn_primary').removeAttr('data-url');
+                        if(cid){
+                            location.href = params.toicUrl + '&cid=' + cid;
+                        }else{
+                            location.href = params.toindexUrl;
+                        }
+                    }else{
+                        alert(data.msg);
+                    }
+                }, 'JSON');
+            }
         });
     },
 
