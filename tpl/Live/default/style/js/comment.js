@@ -24,13 +24,23 @@ var commemtAction = {
             var isComment = !cid ? 0 : 1;
             //评论人id
             var userId = params.userId;
+            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+            commemtAction.showDialog(url, json);
+        });
+    },
+
+    'showDialog' : function(url, json){
+        var dialog = $('#dialog');
+        var json = json;
+        var url = url;
+        dialog.show();
+        dialog.find('.weui_dialog_ft a').on('click', function(e){
+            dialog.hide();
             var push = 0;
-            if(!isComment){
-                if(commemtAction.showDialog()){
-                    push = 1;
-                }
+            if($(this).text == '发布并推送'){
+                push = 1;
             }
-            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId, 'push':push};
+            json.push({'push': push});
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
                     $('.weui_btn.weui_btn_primary').removeAttr('data-url');
@@ -43,15 +53,6 @@ var commemtAction = {
                     alert(data.msg);
                 }
             }, 'JSON');
-        });
-    },
-
-    'showDialog' : function(){
-        var dialog = $('#dialog');
-        dialog.show();
-        dialog.find('.weui_dialog_ft a').on('click', function(e){
-            dialog.hide();
-            console.log(e);
         })
     },
 
