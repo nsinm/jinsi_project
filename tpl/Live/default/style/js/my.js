@@ -141,7 +141,7 @@ var myAction = {
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=         '<p class="user_liveinteract">';
                     html +=             '<span class="like-btn">';
-                    html +=                 '<span class="icon-like on" alt="">'
+                    html +=                 '<span alt="">'
                     html +=                     '</span>'
                     html +=             '</span>'
                     html +=             '<span>'
