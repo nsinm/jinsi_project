@@ -49,6 +49,10 @@ var commemtAction = {
     'showDialog' : function(){
         var dialog = $('#dialog');
         dialog.show();
+        dialog.find('.weui_dialog_ft a').on('click', function(e){
+            dialog.hide();
+            console.log(e);
+        })
     },
 
     'upload' : function(){
