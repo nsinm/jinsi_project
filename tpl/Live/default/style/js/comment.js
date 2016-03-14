@@ -49,16 +49,6 @@ var commemtAction = {
     'showDialog' : function(){
         var dialog = $('#dialog');
         dialog.show();
-        dialog.find('.weui_dialog_ft a').each(function(){
-            $(this).click(function(){
-                dialog.hide();
-                if($(this).text() == '发布并推送'){
-                    return true;
-                }else{
-                    return false;
-                }
-            })
-        })
     },
 
     'upload' : function(){
