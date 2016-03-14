@@ -93,6 +93,7 @@ var indexAction = {
                 }
             }else{
                 html += '还没有导师直播内容哦!';
+                $('#filter').attr({'width':'30px'});
             }
             tag.html(html).find("div[class='weui_cell live_block']").each(function(){
                 var cid = $(this).attr('data-cid');
