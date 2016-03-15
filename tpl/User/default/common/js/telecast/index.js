@@ -144,28 +144,31 @@ var indexAction = {
             }, 'JSON');
         }
 
-        function userInfoEdit(parent, userId){
-            var userId = userId;
+        function userInfoEdit(parent){
             var siblings = parent.siblings();
             $.each(siblings, function(i, n){
                 var idName = $(n).attr('id');
                 switch(idName){
                     case 'user_style':
-                        var text = $(n).text();
-                        var html = '<input type="text" name="style" value="' + text +'" style="width:20px;" maxlength="200" />'
-                        $(n).html(html);
+                        createHtml(n, 'style');
                         break;
                     case 'user_sign':
-                        alert(2222);
+                        createHtml(n, 'sign');
                         break;
                     case 'user_content':
-                        alert(3333);
+                        createHtml(n, 'content');
                         break;
                     case 'user_city':
-                        alert(4444);
+                        createHtml(n, 'city');
                         break;
                 }
             })
+        }
+
+        function createHtml(ele, name){
+            var text = $(ele).text();
+            var html = '<input type="text" name="' + name + '" value="' + text +'" style="width:100px;" maxlength="200" />'
+            $(ele).html(html);
         }
     },
 
