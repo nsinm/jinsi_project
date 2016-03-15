@@ -106,39 +106,45 @@ var indexAction = {
                     switch (text){
                         case '删除':
                             type = 1;
-                            edit(type, userId);
+                            edit(type, userId, '');
                             break;
                         case '取消导师':
                             type = 2;
-                            edit(type, userId);
+                            edit(type, userId, '');
                             break;
                         case '取消推荐':
                             type = 3;
-                            edit(type, userId);
+                            edit(type, userId, '');
                             break;
                         case '推荐':
                             type = 4;
-                            edit(type, userId);
+                            edit(type, userId, '');
                             break;
                         case '设为导师':
                             type = 5;
-                            edit(type, userId);
+                            edit(type, userId, '');
                             break;
                         case '编辑':
                             $(this).text('保存');
-                            userInfoEdit(parent, userId);
+                            userInfoEdit(parent);
                             break;
                         case '保存':
-                            alert(11111);
+                            type = 6;
+                            $(this).text('编辑');
+                            var json = getJson(parent);
+                            edit(type, userId, json);
                             break;
                     }
                 });
             });
         }, 'JSON');
 
-        function edit (type, userId){
+        function edit (type, userId, json){
             var data = {'type' : type, 'userId' : userId};
-            $.getJSON(params.editUserUrl, data, function(msg){
+            if(json){
+                data = $.extend({}, data, json);
+            }
+            $.post(params.editUserUrl, data, function(msg){
                 if(msg.errcode == '0'){
                     indexAction.getUserList(index);
                 }else{
@@ -172,6 +178,16 @@ var indexAction = {
             var text = $(ele).text();
             var html = '<input type="text" name="' + name + '" value="' + text +'" style="width:100px;" maxlength="200" />'
             $(ele).html(html);
+        }
+
+        function getJson(parent){
+            var grand = parent.parent();
+            var style = grand.find("input[name='style']").val();
+            var sign = grand.find("input[name='sign']").val();
+            var content = grand.find("input[name='content']").val();
+            var city = grand.find("input[name='city']").val();
+            var json = {'style':style, 'sign':sign, 'content':content, 'city':city};
+            return json;
         }
     },
 

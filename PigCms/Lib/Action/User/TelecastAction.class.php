@@ -55,8 +55,8 @@ class TelecastAction extends UserAction
 
         $result = array('errcode' => 1, 'msg' => '操作失败!');
 
-        $handleType = $this->_get('type');
-        $userId = $this->_get('userId');
+        $handleType = $this->_post('type');
+        $userId = $this->_post('userId');
         if($handleType && $userId){
             $model = M('user', 'jinsi_')->where('id=' . $userId);
             switch ($handleType){
@@ -90,6 +90,17 @@ class TelecastAction extends UserAction
                     $status = $model->save($data);
                     if($status)
                         $result = array('errcode' => 0, 'msg' => '设置成功!');
+                    break;
+                case '6':
+                    $data = array(
+                        'jinsi_user_style' => $this->_post('style'),
+                        'jinsi_user_sign' => $this->_post('sign'),
+                        'jinsi_user_info' => $this->_post('content'),
+                        'jinsi_user_city' => $this->_post('city')
+                    );
+                    $status = $model->save($data);
+                    if($status)
+                        $result = array('errcode' => 0, 'msg' => '修改成功!');
                     break;
             }
         }
