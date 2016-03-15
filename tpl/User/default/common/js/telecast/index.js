@@ -128,6 +128,9 @@ var indexAction = {
                             $(this).text('保存');
                             userInfoEdit(parent, userId);
                             break;
+                        case '保存':
+                            alert(11111);
+                            break;
                     }
                 });
             });
