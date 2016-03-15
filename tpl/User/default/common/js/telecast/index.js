@@ -125,6 +125,7 @@ var indexAction = {
                             edit(type, userId);
                             break;
                         case '编辑':
+                            $(this).text('保存');
                             userInfoEdit(parent, userId);
                             break;
                     }
@@ -146,13 +147,14 @@ var indexAction = {
         function userInfoEdit(parent, userId){
             var userId = userId;
             var siblings = parent.siblings();
-            var html = '<input type="text" name="" value="" />';
+            var html = '<input type="text" name="" value="" length="50" maxlength="200"/>';
             $.each(siblings, function(i, n){
                 var idName = $(n).attr('id');
                 switch(idName){
                     case 'user_style':
                         var text = $(n).text();
-                        $(n).html(html).val(text);
+                        $(html).val(text);
+                        $(n).html(html);
                         break;
                     case 'user_sign':
                         alert(2222);
