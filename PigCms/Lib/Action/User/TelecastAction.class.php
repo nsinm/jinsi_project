@@ -100,7 +100,9 @@ class TelecastAction extends UserAction
                     );
                     $status = $model->save($data);
                     if($status)
-                        $result = array('errcode' => 0, 'msg' => '修改成功!');
+                        $result = array('errcode' => 0, 'msg' => '修改成功!', 'status' => $status);
+                    else
+                        $result = array('errcode' => 1, 'msg' => '修改失败!', 'status' => $status);
                     break;
             }
         }
