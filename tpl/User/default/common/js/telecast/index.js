@@ -147,13 +147,12 @@ var indexAction = {
         function userInfoEdit(parent, userId){
             var userId = userId;
             var siblings = parent.siblings();
-            var html = '<input type="text" name="" value="" length="50" maxlength="200"/>';
             $.each(siblings, function(i, n){
                 var idName = $(n).attr('id');
                 switch(idName){
                     case 'user_style':
                         var text = $(n).text();
-                        $(html).val(text);
+                        var html = '<input type="text" name="style" value="' + text +'" style="width:20px;" maxlength="200" />'
                         $(n).html(html);
                         break;
                     case 'user_sign':
