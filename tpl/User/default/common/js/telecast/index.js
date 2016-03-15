@@ -64,9 +64,9 @@ var indexAction = {
                     } else {
                         html += '<td>导师</td>';
                     }
-                    html += '<td>' + infos[index].jinsi_user_style + '</td>';
-                    html += '<td>' + infos[index].jinsi_user_sign + '</td>';
-                    html += '<td>' + infos[index].jinsi_user_info + '</td>';
+                    html += '<td id="user_style">' + infos[index].jinsi_user_style + '</td>';
+                    html += '<td id="user_sign">' + infos[index].jinsi_user_sign + '</td>';
+                    html += '<td id="user_info">' + infos[index].jinsi_user_info + '</td>';
                     if (infos[index].jinsi_user_type == '2') {
                         if (infos[index].jinsi_user_recommend == '1') {
                             html += '<td>推荐导师</td>';
@@ -76,7 +76,7 @@ var indexAction = {
                     } else {
                         html += '<td></td>';
                     }
-                    html += '<td>' + infos[index].jinsi_user_city + '</td>';
+                    html += '<td id="user_city">' + infos[index].jinsi_user_city + '</td>';
                     html += '<td class="norightborder" data-uid="' + infos[index].id + '">';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
                     if (infos[index].jinsi_user_type == '2') {
@@ -94,7 +94,9 @@ var indexAction = {
                 }
                 html += '</tbody>'
             }
-            tag.html(html).find('.norightborder a').each(function(){
+
+            var element = tag.html(html);
+            element.find('.norightborder a').each(function(){
                 $(this).click(function(){
                     var userId = $(this).parent().attr('data-uid');
                     var text = $(this).text();
