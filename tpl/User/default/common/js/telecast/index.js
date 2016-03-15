@@ -125,7 +125,7 @@ var indexAction = {
                             edit(type, userId);
                             break;
                         case '编辑':
-                            alert(1111);
+                            userInfoEdit(parent, userId);
                             break;
                     }
                 });
