@@ -56,7 +56,7 @@ var indexAction = {
                 for (var index in infos) {
                     html += '<tr>';
                     html += '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
-                    html += '<td>' + infos[index].id + '</td>';
+                    html += '<td id="user_id">' + infos[index].id + '</td>';
                     html += '<td>' + infos[index].open_id + '</td>';
                     html += '<td>' + infos[index].jinsi_user_name + '</td>';
                     if (infos[index].jinsi_user_type == '1') {
@@ -66,7 +66,7 @@ var indexAction = {
                     }
                     html += '<td id="user_style">' + infos[index].jinsi_user_style + '</td>';
                     html += '<td id="user_sign">' + infos[index].jinsi_user_sign + '</td>';
-                    html += '<td id="user_info">' + infos[index].jinsi_user_info + '</td>';
+                    html += '<td id="user_content">' + infos[index].jinsi_user_info + '</td>';
                     if (infos[index].jinsi_user_type == '2') {
                         if (infos[index].jinsi_user_recommend == '1') {
                             html += '<td>推荐导师</td>';
@@ -79,6 +79,7 @@ var indexAction = {
                     html += '<td id="user_city">' + infos[index].jinsi_user_city + '</td>';
                     html += '<td class="norightborder" data-uid="' + infos[index].id + '">';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
+                    html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">编辑</a><br/>';
                     if (infos[index].jinsi_user_type == '2') {
                         html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">取消导师</a><br/>';
                         if (infos[index].jinsi_user_recommend == '1') {
@@ -121,6 +122,9 @@ var indexAction = {
                         case '设为导师':
                             type = 5;
                             edit(type, userId);
+                            break;
+                        case '编辑':
+                            alert(1111);
                             break;
                     }
                 });
