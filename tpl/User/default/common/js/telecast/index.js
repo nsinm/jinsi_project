@@ -148,7 +148,7 @@ var indexAction = {
             var siblings = parent.siblings();
             var html = '<input type="text" name="" value="" />';
             $.each(siblings, function(i, n){
-                var idName = n.attr('id');
+                var idName = $(n).attr('id');
                 switch(idName){
                     case 'user_style':
                         alert(1111);
