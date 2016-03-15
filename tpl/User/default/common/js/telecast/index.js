@@ -130,9 +130,9 @@ var indexAction = {
                             break;
                         case '保存':
                             type = 6;
-                            $(this).text('编辑');
                             var json = getJson(parent);
                             edit(type, userId, json);
+                            $(this).text('编辑');
                             break;
                     }
                 });
