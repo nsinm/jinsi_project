@@ -99,7 +99,8 @@ var indexAction = {
             var element = tag.html(html);
             element.find('.norightborder a').each(function(){
                 $(this).click(function(){
-                    var userId = $(this).parent().attr('data-uid');
+                    var parent = $(this).parent();
+                    var userId = parent.attr('data-uid');
                     var text = $(this).text();
                     var type = '';
                     switch (text){
@@ -140,6 +141,29 @@ var indexAction = {
                     alert(data.msg);
                 }
             }, 'JSON');
+        }
+
+        function userInfoEdit(parent, userId){
+            var userId = userId;
+            var siblings = parent.siblings();
+            var html = '<input type="text" name="" value="" />';
+            $.each(siblings, function(i, n){
+                var idName = n.attr('id');
+                switch(idName){
+                    case 'user_style':
+                        alert(1111);
+                        break;
+                    case 'user_sign':
+                        alert(2222);
+                        break;
+                    case 'user_contet':
+                        alert(3333);
+                        break;
+                    case 'user_city':
+                        alert(4444);
+                        break;
+                }
+            })
         }
     },
 
