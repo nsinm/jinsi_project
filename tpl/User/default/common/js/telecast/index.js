@@ -151,12 +151,13 @@ var indexAction = {
                 var idName = $(n).attr('id');
                 switch(idName){
                     case 'user_style':
-                        alert(1111);
+                        var text = $(n).text();
+                        $(n).html(html).val(text);
                         break;
                     case 'user_sign':
                         alert(2222);
                         break;
-                    case 'user_contet':
+                    case 'user_content':
                         alert(3333);
                         break;
                     case 'user_city':
