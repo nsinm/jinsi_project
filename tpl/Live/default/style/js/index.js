@@ -264,6 +264,14 @@ var indexAction = {
         this.getReInComment(1);
     },
 
+    'toUserInfo' : function(){
+        var element = $('.user_thumb.mr10');
+        var userId = element.attr('data-uid');
+        element.children('img').on('click', function(){
+            location.href = params.guiUrl + '&userId=' + userId;
+        })
+    },
+
     'init' : function(){
         if(params.tplName == 'index_index') {
             //获取推荐导师列表
@@ -274,6 +282,7 @@ var indexAction = {
         }else if(params.tplName == 'index_comment'){
             //获取直播评论列表
             this.getComments();
+            this.toUserInfo();
         }
         //十字呼出框点击事件
         this.toComment();
