@@ -53,7 +53,7 @@ var commemtAction = {
         dialog.find('.weui_dialog_ft a').on('click', function(e){
             dialog.hide();
             var push = 0;
-            if($(this).text == '发布并推送'){
+            if($(this).text() == '发布并推送'){
                 push = 1;
             }
             json.push = push;
