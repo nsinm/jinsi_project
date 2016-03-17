@@ -15,8 +15,8 @@ class AuthAction extends Action
         $Live = D('Live');
         //$openid = $Live->get_openid(get_url());
 
-        $userid = $Live->get_user_info('o6KftvwBgDKYsQoUaoiCzC8bKpV0');
-        print_r($userid);exit;
+        //$userid = $Live->get_user_info('o6KftvwBgDKYsQoUaoiCzC8bKpV0');
+        //print_r($userid);exit;
         //echo M('live')->get_openid('aa');
         //$jssdk = D('Jssdk');
         //$signPackage = $jssdk->GetSignPackage();
@@ -30,8 +30,8 @@ class AuthAction extends Action
         $send_data['auther'] = "我是12哥";
         $send_data['content'] = "有新的股票发布了";
         $send_data['url'] = "http://www.baidu.com";
-        //$rs = $Live->send_message($send_data);
-        $Live->put_content(47);
+        $rs = $Live->send_message($send_data);
+        $Live->put_content(8);
         //print_r($rs);
         $this->display();
     }
