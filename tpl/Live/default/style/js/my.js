@@ -44,7 +44,9 @@ var myAction = {
             console.log(data);
             var html = '';
             if(data.errcode == '0'){
+                var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
+                text += text + '(' + infos.count + '人)';
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
                     html +=     '<div class="weui_cell_hd">';
@@ -86,7 +88,10 @@ var myAction = {
             console.log(data);
             var html = '';
             if(data.errcode == '0'){
+                var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
+                text += text + '(' + infos.count + '人)';
+                $('.bd .weui_cells_title').innerText(text);
                 for(var index in infos){
                     html += '<div class="weui_cell">';
                     html +=     '<div class="weui_cell_hd">';
