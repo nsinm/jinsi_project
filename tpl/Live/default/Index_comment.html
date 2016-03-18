@@ -109,7 +109,7 @@
     wx.ready(function () {
         // 在这里调用 API
         wx.onMenuShareTimeline({
-            title: '{pigcms:$data.title|utf8_substr=xxx, 0, 20}', // 分享标题
+            title: '{pigcms:$data.title|utf8_substr=0, 20}', // 分享标题
             link: '{pigcms:$data.link}', // 分享链接
             imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
             success: function () {
