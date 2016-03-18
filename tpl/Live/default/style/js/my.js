@@ -44,9 +44,8 @@ var myAction = {
             console.log(data);
             var html = '';
             if(data.errcode == '0'){
-                var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
-                text += text + '(' + data.count + '人)';
+                var text =  '我的关注&nbsp;nbsp;(' + data.count + '人)';
                 $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
@@ -89,9 +88,8 @@ var myAction = {
             console.log(data);
             var html = '';
             if(data.errcode == '0'){
-                var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
-                text += text + '(' + data.count + '人)';
+                var text = '我的粉丝&nbsp;nbsp;(' + data.count + '人)';
                 $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<div class="weui_cell">';
