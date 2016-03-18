@@ -46,7 +46,7 @@ var myAction = {
             if(data.errcode == '0'){
                 var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
-                text += text + '(' + infos.count + '人)';
+                text += text + '(' + data.count + '人)';
                 $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
@@ -91,7 +91,7 @@ var myAction = {
             if(data.errcode == '0'){
                 var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
-                text += text + '(' + infos.count + '人)';
+                text += text + '(' + data.count + '人)';
                 $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<div class="weui_cell">';
