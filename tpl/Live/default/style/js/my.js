@@ -46,7 +46,7 @@ var myAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 var text =  '我的关注&nbsp;&nbsp;(' + data.count + '人)';
-                $('.bd .weui_cells_title').text(text);
+                $('.bd .weui_cells_title').html(text);
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
                     html +=     '<div class="weui_cell_hd">';
@@ -90,7 +90,7 @@ var myAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 var text = '我的粉丝&nbsp;&nbsp;(' + data.count + '人)';
-                $('.bd .weui_cells_title').text(text);
+                $('.bd .weui_cells_title').html(text);
                 for(var index in infos){
                     html += '<div class="weui_cell">';
                     html +=     '<div class="weui_cell_hd">';
