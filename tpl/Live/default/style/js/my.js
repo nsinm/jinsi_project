@@ -47,6 +47,7 @@ var myAction = {
                 var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
                 text += text + '(' + infos.count + '人)';
+                $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<label class="weui_cell weui_check_label" for="s11">';
                     html +=     '<div class="weui_cell_hd">';
@@ -91,7 +92,7 @@ var myAction = {
                 var text = $('.bd .weui_cells_title').text();
                 var infos = data.data;
                 text += text + '(' + infos.count + '人)';
-                $('.bd .weui_cells_title').innerText(text);
+                $('.bd .weui_cells_title').text(text);
                 for(var index in infos){
                     html += '<div class="weui_cell">';
                     html +=     '<div class="weui_cell_hd">';
