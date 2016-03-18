@@ -197,7 +197,7 @@ class apiOauth
 		$now 	= time();
 
 		if(empty($info)){
-			$info 	= M('Wxuser')->where("appid='$appid'")->field('id,appid,appsecret,type,authorizer_access_token,authorizer_refresh_token,authorizer_expires,winxintype')->find();
+			$info 	= M('Wxuser','tp_')->where("appid='$appid'")->field('id,appid,appsecret,type,authorizer_access_token,authorizer_refresh_token,authorizer_expires,winxintype')->find();
 		}
 
 		$this->checkTokenCache($info['appid']);

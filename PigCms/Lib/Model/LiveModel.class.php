@@ -15,17 +15,24 @@ class LiveModel extends Model
      */
     public function get_token()
     {
+        $appid = C('APPID_A');
+        $apiOauth 		= new apiOauth();
+
+        return $access_token  	= $apiOauth->update_authorizer_access_token($appid);
+
+        /**
         $data = json_decode(F('jsapi_token'),true);
         if($data['expire_time']>time()){
             return $data['access_token'];
         }
-        $appid = C('APPID_A');
+
         $appsecret= C('APPSECRET_A');
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
         $data = json_decode(getUrl($url),true);
         $data['expire_time'] = time() + 7000;
         F('jsapi_token',json_encode($data));
         return $data['access_token'];
+         * */
     }
 
     /**
