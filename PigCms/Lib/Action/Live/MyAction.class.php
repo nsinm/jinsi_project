@@ -42,14 +42,6 @@ class MyAction extends LiveAction
     }
 
     /**
-     * 编辑个人信息页
-     */
-    public function edit ()
-    {
-
-    }
-
-    /**
      * 我的关注
      */
     public function follow ()
@@ -76,7 +68,8 @@ class MyAction extends LiveAction
             $followIds = array_column($res, 'jinsi_follow_id_user');
             $in = '(' . implode(',', $followIds) . ')';
             $followInfos = M('user')->where('id IN ' . $in)->select();
-            $result = array('errcode' => 0, 'msg' => '获取关注列表成功!', 'data' => $followInfos);
+            $count = M('user')->where('id IN ' . $in)->count();
+            $result = array('errcode' => 0, 'msg' => '获取关注列表成功!', 'data' => $followInfos, 'count' => $count);
         }
 
         $this->ajaxReturn($result, 'JSON');
@@ -108,7 +101,8 @@ class MyAction extends LiveAction
             $fansIds = array_column($res, 'jinsi_follow_user_id');
             $in = '(' . implode(',', $fansIds) . ')';
             $fansInfos = M('user')->where('id IN ' . $in)->select();
-            $result = array('errcode' => 0, 'msg' => '获取粉丝列表成功!', 'data' => $fansInfos);
+            $count = M('user')->where('id IN ' . $in)->count();
+            $result = array('errcode' => 0, 'msg' => '获取粉丝列表成功!', 'data' => $fansInfos, 'count' => $count);
         }
 
         $this->ajaxReturn($result, 'JSON');
