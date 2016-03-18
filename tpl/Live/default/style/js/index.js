@@ -180,7 +180,7 @@ var indexAction = {
                         showDailog();
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
-                    $(this).click(function() {
+                    $(this).parent().click(function() {
                         showDailog();
                     })
                 }
