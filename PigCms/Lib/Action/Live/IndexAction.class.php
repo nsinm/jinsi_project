@@ -84,11 +84,6 @@ class IndexAction extends LiveAction
 
         $comments = M()->query($sql);
         if($comments){
-            array_walk($comments, function(&$value, $key){
-                 if($value['id'] > 133){
-                     $value['jinsi_content_info'] = base64_decode($value['jinsi_content_info']);
-                 }
-            });
             $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
         }
 
@@ -152,7 +147,6 @@ class IndexAction extends LiveAction
                 }
                 array_push($data, $value);
             }
-
 
             if($comments){
                 $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $data);
