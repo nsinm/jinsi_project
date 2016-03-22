@@ -54,7 +54,7 @@ var indexAction = {
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
                     if(infos[index].jinsi_content_type == '1') {
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                        html +=     '<p class="user_liveword">' + base64.decode(infos[index].jinsi_content_info) + '</p>';
                     }else if(infos[index].jinsi_content_type == '2'){
                         html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                         html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
@@ -102,6 +102,8 @@ var indexAction = {
                 });
             });
         }, 'JSON');
+
+
     },
 
     'getComments' : function(){
@@ -120,7 +122,7 @@ var indexAction = {
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    html +=         '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                    html +=         '<p class="user_liveword">' + base64.decode(infos[index].jinsi_content_info) + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
                         html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
                     }
