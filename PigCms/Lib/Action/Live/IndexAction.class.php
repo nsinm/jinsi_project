@@ -84,7 +84,18 @@ class IndexAction extends LiveAction
 
         $comments = M()->query($sql);
         if($comments){
-            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
+            $data = [];
+            foreach($comments as $value){
+                if(is_array($value)){
+                    array_walk($value, function(&$v, $k){
+                       if($k == 'jinsi_content_info'){
+                           $v = base64_decode($v);
+                       }
+                    });
+                }
+                array_push($data, $value);
+            }
+            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $data);
         }
 
         $this->ajaxReturn($result, 'JSON');
