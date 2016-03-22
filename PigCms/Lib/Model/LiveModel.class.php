@@ -126,7 +126,7 @@ class LiveModel extends Model
         $array['touser'] = $data['openid'];
         $array['template_id'] = $t_id;
         $array['url'] = $data['url'];
-        $data['content'] = cut_str($data['content'],20);
+        $data['content'] = base64_decode(cut_str($data['content'],20));
         $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
         $item['keyword1'] = array('value'=>$data['content'],'color'=>'#173177');
         $item['keyword2'] = array('value'=>$data['auther'],'color'=>'#173177');
