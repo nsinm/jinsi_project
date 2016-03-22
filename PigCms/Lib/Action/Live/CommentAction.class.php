@@ -60,7 +60,7 @@ class CommentAction extends LiveAction
         $push = $this->_post('push');
 
         $data = array(
-            'jinsi_content_info' => $this->_post('content'),
+            'jinsi_content_info' => base64_encode($this->_post('content')),
             'jinsi_content_type' => $this->_post('type'),
             'jinsi_content_create' => time(),
             'jinsi_content_url' => $this->_post('picUrl'),

@@ -41,7 +41,7 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <p class="user_livename">{pigcms:$live.jinsi_user_name}</p>
-                        <p class="user_liveword">{pigcms:$live.jinsi_content_info}</p>
+                        <p class="user_liveword">{pigcms:$live.jinsi_content_info|base64_decode=###}</p>
                         <if condition="$live.jinsi_content_type neq 1">
                             <img src="{pigcms:$live.jinsi_content_url}" alt="">
                         </if>

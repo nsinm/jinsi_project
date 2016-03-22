@@ -84,6 +84,13 @@ class IndexAction extends LiveAction
 
         $comments = M()->query($sql);
         if($comments){
+            foreach($comments as $value){
+                if(is_array($value)){
+                    array_walk($value, function(&$v, $k){
+                         $v = base64_decode($v);
+                    });
+                }
+            }
             $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
         }
 
@@ -150,6 +157,13 @@ class IndexAction extends LiveAction
 
 
             if($comments){
+                foreach($data as $value){
+                    if(is_array($value)){
+                        array_walk($value, function(&$v, $k){
+                            $v = base64_decode($v);
+                        });
+                    }
+                }
                 $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $data);
             }
         }
