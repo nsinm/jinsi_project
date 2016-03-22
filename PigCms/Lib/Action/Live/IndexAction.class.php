@@ -84,14 +84,16 @@ class IndexAction extends LiveAction
 
         $comments = M()->query($sql);
         if($comments){
+            $data = array();
             foreach($comments as $value){
                 if(is_array($value)){
                     array_walk($value, function(&$v, $k){
                          $v = base64_decode($v);
                     });
                 }
+                array_push($data, $value);
             }
-            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
+            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $data);
         }
 
         $this->ajaxReturn($result, 'JSON');
@@ -157,14 +159,16 @@ class IndexAction extends LiveAction
 
 
             if($comments){
+                $infos = array();
                 foreach($data as $value){
                     if(is_array($value)){
                         array_walk($value, function(&$v, $k){
                             $v = base64_decode($v);
                         });
                     }
+                    array_push($infos, $value);
                 }
-                $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $data);
+                $result= array('errcode' => 0, 'msg' => '获取直播评论成功!', 'data' => $infos);
             }
         }
         $this->ajaxReturn($result, 'JSON');
