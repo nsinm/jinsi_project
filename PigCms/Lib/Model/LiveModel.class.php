@@ -126,7 +126,7 @@ class LiveModel extends Model
         $array['touser'] = $data['openid'];
         $array['template_id'] = $t_id;
         $array['url'] = $data['url'];
-        $data['content'] = cut_str($data['content'],0,20);
+        $data['content'] = cut_str($data['content'],20);
         if($self){
             $item['first'] = array('value'=>"您有新消息发布了",'color'=>'#173177');
         }else{
