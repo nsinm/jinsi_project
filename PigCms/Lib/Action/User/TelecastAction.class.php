@@ -93,6 +93,7 @@ class TelecastAction extends UserAction
                     break;
                 case '6':
                     $data = array(
+                        'jinsi_user_name' => $this->_post('name'),
                         'jinsi_user_style' => $this->_post('style'),
                         'jinsi_user_sign' => $this->_post('sign'),
                         'jinsi_user_info' => $this->_post('content'),

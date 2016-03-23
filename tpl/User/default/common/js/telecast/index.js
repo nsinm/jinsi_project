@@ -58,7 +58,7 @@ var indexAction = {
                     html += '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
                     html += '<td id="user_id">' + infos[index].id + '</td>';
                     html += '<td>' + infos[index].open_id + '</td>';
-                    html += '<td>' + infos[index].jinsi_user_name + '</td>';
+                    html += '<td id="user_name">' + infos[index].jinsi_user_name + '</td>';
                     if (infos[index].jinsi_user_type == '1') {
                         html += '<td>普通用户</td>';
                     } else {
@@ -158,6 +158,9 @@ var indexAction = {
             $.each(siblings, function(i, n){
                 var idName = $(n).attr('id');
                 switch(idName){
+                    case 'user_name':
+                        createHtml(n, 'name');
+                        break;
                     case 'user_style':
                         createHtml(n, 'style');
                         break;
@@ -182,11 +185,12 @@ var indexAction = {
 
         function getJson(parent){
             var grand = parent.parent();
+            var name = grand.find("input[name='name']").val();
             var style = grand.find("input[name='style']").val();
             var sign = grand.find("input[name='sign']").val();
             var content = grand.find("input[name='content']").val();
             var city = grand.find("input[name='city']").val();
-            var json = {'style':style, 'sign':sign, 'content':content, 'city':city};
+            var json = {'name':name, 'style':style, 'sign':sign, 'content':content, 'city':city};
             return json;
         }
     },
