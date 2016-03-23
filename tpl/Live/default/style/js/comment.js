@@ -52,6 +52,7 @@ var commemtAction = {
         dialog.show();
         dialog.find('.weui_dialog_ft a').on('click', function(e){
             dialog.hide();
+            showLoading();
             var push = 0;
             if($(this).text() == '发布并推送'){
                 push = 1;
@@ -59,6 +60,7 @@ var commemtAction = {
             json.push = push;
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
+                    hideLoading();
                     $('.weui_btn.weui_btn_primary').removeAttr('data-url');
                     if(cid){
                         location.href = params.toicUrl + '&cid=' + cid;
@@ -70,6 +72,14 @@ var commemtAction = {
                 }
             }, 'JSON');
         })
+
+        function showLoading(){
+            $('#loadingToast').show();
+        }
+
+        function hideLoading(){
+            $('#loadingToast').hide();
+        }
     },
 
     'upload' : function(){
