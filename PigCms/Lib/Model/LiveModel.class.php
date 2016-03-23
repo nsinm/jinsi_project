@@ -118,7 +118,7 @@ class LiveModel extends Model
      * @return mixed
      * 发送模板消息
      */
-    function send_message($data)
+    function send_message($data,$self=0)
     {
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
@@ -127,7 +127,12 @@ class LiveModel extends Model
         $array['template_id'] = $t_id;
         $array['url'] = $data['url'];
         $data['content'] = cut_str($data['content'],0,20);
-        $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
+        if($self){
+            $item['first'] = array('value'=>"您有新消息发布了",'color'=>'#173177');
+        }else{
+            $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
+        }
+
         $item['keyword1'] = array('value'=>$data['content'],'color'=>'#173177');
         $item['keyword2'] = array('value'=>$data['auther'],'color'=>'#173177');
         $date = date('Y-m-d H:i:s');
@@ -165,6 +170,9 @@ class LiveModel extends Model
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
             }
+            //给自己推送一条
+            $data['openid'] = $user_info['open_id'];
+            $rs = $this->send_message($data,1);
         }
         //print_r($follow_list);
 
