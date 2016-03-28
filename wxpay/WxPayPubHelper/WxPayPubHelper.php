@@ -172,7 +172,7 @@ class Common_util_pub
 		//返回结果
 		if($data)
 		{
-			curl_close($ch);
+			//curl_close($ch);
 			return $data;
 		}
 		else 
