@@ -203,7 +203,7 @@ class apiOauth
 		$this->checkTokenCache($info['appid']);
 
 		$cache_token 	= 	S($info['appid']);
-        print_r($cache_token);
+
 		if(!$cache_token['authorizer_access_token']||$flag){
 			
 			if($info['type'] == 1 && $info['winxintype'] == 3  && empty($info['is_domain'])){
@@ -261,7 +261,7 @@ class apiOauth
 							);
 	
 					//M('Wxuser')->where("id={$info['id']}")->save($save);
-					print_r($res);
+
 					S($info['appid'],$cache,$res['expires_in']-1000);
 					
 					$cache_token 	= $res['access_token'];

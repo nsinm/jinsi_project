@@ -80,7 +80,7 @@ class LiveModel extends Model
             return $user_info['id'];
             exit;
         }
-        $token = $this->get_token();
+        $token = $this->get_token(1);
         $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$token}&openid={$openid}&lang=zh_CN";
         $openid_info = json_decode(getUrl($url),true);
 
