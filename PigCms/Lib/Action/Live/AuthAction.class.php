@@ -41,7 +41,13 @@ class AuthAction extends Action
     public function send ()
     {
         $content = M('content');
+        $Live = D('Live');
         $content_arr = $content->where('push=1')->select();
-        print_r($content_arr);
+        //print_r($content_arr);
+        if($content_arr){
+            foreach($content_arr as $v){
+                $Live->put_content($v['id']);
+            }
+        }
     }
 }
