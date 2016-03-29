@@ -37,4 +37,11 @@ class AuthAction extends Action
         //print_r($rs);
         $this->display();
     }
+
+    public function send ()
+    {
+        $content = M('content');
+        $content_arr = $content->where('push=1')->select();
+        print_r($content_arr);
+    }
 }
