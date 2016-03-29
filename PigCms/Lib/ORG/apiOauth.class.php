@@ -229,7 +229,7 @@ class apiOauth
 					
 					//M('Wxuser')->where("id={$info['id']}")->save($save);
 					
-					S($info['appid'],$cache,$res['expires_in']);
+					S($info['appid'],$cache,$res['expires_in']-1000);
 					
 					$cache_token 	= $cache['authorizer_access_token'];
 				

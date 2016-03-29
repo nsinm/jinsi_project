@@ -164,16 +164,25 @@ class LiveModel extends Model
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $content_arr['jinsi_content_info'];
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$id;
+        $flag = 0;
         if($follow_list){
             foreach($follow_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
+                //print_r($rs);
+                if($rs['errcode']==0){
+                    $flag = 1;
+                }
             }
             //给自己推送一条
             $data['openid'] = $user_info['open_id'];
             $rs = $this->send_message($data,1);
         }
+        $data['id'] = $id;
+        $data['push'] = 2;
+        if($flag)
+            $content->save($data);
         //print_r($follow_list);
 
 
