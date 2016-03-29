@@ -13,12 +13,12 @@ class LiveModel extends Model
      * @return mixed
      * 获取TOKEN并存入缓存
      */
-    public function get_token()
+    public function get_token($flag=0)
     {
         $appid = C('APPID_A');
         $apiOauth 		= new apiOauth();
 
-        return $access_token  	= $apiOauth->update_authorizer_access_token($appid);
+        return $access_token  	= $apiOauth->update_authorizer_access_token($appid,'',$flag);
 
         /**
         $data = json_decode(F('jsapi_token'),true);
@@ -141,8 +141,11 @@ class LiveModel extends Model
         $array['data'] = $item;
         $str = json_encode($array);
         $result = postUrl($url,$str);
-
-        return json_decode($result,true);
+        $rs_arr = json_decode($result,true);
+        if($rs_arr['errcode']==42001){
+            $token = $this->get_token(1);
+        }
+        return $rs_arr;
 
 
 
