@@ -69,7 +69,8 @@ class CommentAction extends LiveAction
             'jinsi_content_share_no' => 0,
             'jinsi_content_create_user_id' => $userId,
             'jinsi_content_is_comment' => $this->_post('isComment'),
-            'jinsi_content_id' => $cid
+            'jinsi_content_id' => $cid,
+            'push' => $push
         );
 
         if($cid) {
@@ -84,11 +85,6 @@ class CommentAction extends LiveAction
         }else{
             $id = M('content')->add($data);
             if($id){
-                if($push){
-                    //推送
-                    $live = D('Live');
-                    $live->put_content($id);
-                }
                 $result = array('errcode' => 0, 'msg' => '添加成功!');
             }
         }
