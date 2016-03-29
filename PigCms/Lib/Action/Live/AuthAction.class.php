@@ -22,6 +22,7 @@ class AuthAction extends Action
         //$signPackage = $jssdk->GetSignPackage();
         //print_r($signPackage);
         //$this->assign('signPackage',$signPackage);
+        /*
         $data['title'] = "测试测试";
         $data['imgUrl'] = "https://www.baidu.com/img/baidu_jgylogo3.gif";
         $data['link'] = get_url();
@@ -30,8 +31,9 @@ class AuthAction extends Action
         $send_data['auther'] = "我是12哥";
         $send_data['content'] = "有新的股票发布了";
         $send_data['url'] = "http://www.baidu.com";
-        $rs = $Live->send_message($send_data);
-        $Live->put_content(8);
+        */
+        //$rs = $Live->send_message($send_data);
+        $Live->put_content(428);
         //print_r($rs);
         $this->display();
     }
