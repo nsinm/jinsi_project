@@ -174,6 +174,9 @@ class LiveModel extends Model
             $data['openid'] = $user_info['open_id'];
             $rs = $this->send_message($data,1);
         }
+        $data['id'] = $id;
+        $data['push'] = 2;
+        $content->save($data);
         //print_r($follow_list);
 
 
