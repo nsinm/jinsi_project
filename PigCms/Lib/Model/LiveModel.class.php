@@ -169,6 +169,7 @@ class LiveModel extends Model
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
+                print_r($rs);
             }
             //给自己推送一条
             $data['openid'] = $user_info['open_id'];
