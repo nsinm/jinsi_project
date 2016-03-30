@@ -192,6 +192,43 @@ class LiveModel extends Model
 
     }
 
+
+    /**
+     * @param $id
+     * 推送评论
+     */
+    public function put_comment($id)
+    {
+        $content = M('content');
+        $content_arr = $content->find($id);
+        //print_r($content_arr)；
+        $user_info = $this->get_user_one_info($content_arr['jinsi_content_create_user_id']);
+        //print_r($user_info);
+        $data['auther'] = $user_info['jinsi_user_name'];
+        $data['content'] = $content_arr['jinsi_content_info'];
+        $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_arr['jinsi_content_id'];
+        $flag = 0;
+
+        $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
+                $data['openid'] = $user_arr['open_id'];
+                $rs = $this->send_message($data);
+                //print_r($rs);
+                if($rs['errcode']==0){
+                    $flag = 1;
+                }
+            //给自己推送一条
+            $data['openid'] = $user_info['open_id'];
+            $rs = $this->send_message($data,1);
+
+        $data['id'] = $id;
+        $data['push'] = 2;
+        if($flag)
+            $content->save($data);
+        //print_r($follow_list);
+
+
+
+    }
     public function get_user_one_info($id)
     {
         $user = M('user');
