@@ -28,7 +28,11 @@ header("Content-type: text/html; charset=utf-8");
 		$jsApi->setCode($code);
 		$openid = $jsApi->getOpenId();
 	}
-	
+
+
+    //传入数据校验
+    $jinsi_token = "jinsi";
+
 	//=========步骤2：使用统一支付接口，获取prepay_id============
 	//使用统一支付接口
 	$unifiedOrder = new UnifiedOrder_pub();
@@ -41,11 +45,21 @@ header("Content-type: text/html; charset=utf-8");
 	//spbill_create_ip已填,商户无需重复填写
 	//sign已填,商户无需重复填写
 	$unifiedOrder->setParameter("openid","$openid");//商品描述
-	$unifiedOrder->setParameter("body","贡献一分钱");//商品描述
+    $body = isset($_GET['body'])?$_GET['body']:"会员购买";
+	$unifiedOrder->setParameter("body",$body);//商品描述
 	//自定义订单号，此处仅作举例
 	$timeStamp = time();
-	$out_trade_no = WxPayConf_pub::APPID."$timeStamp";
-	$unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号 
+	//$out_trade_no = WxPayConf_pub::APPID."$timeStamp";
+
+    $out_trade_no = isset($_GET['out_trade_no'])?$_GET['out_trade_no']:'';
+	$unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
+    $total_fee = isset($_GET['total_fee'])?$_GET['total_fee']:1;
+    $check_no = md5($out_trade_no.$openid.$total_fee.$jinsi_token);
+    $jinsi_sign = isset($_GET['jinsi_sign'])?$_GET['jinsi_sign']:'';
+    if($check_no!=$jinsi_sign){
+        echo "error";
+        exit;
+    }
 	$unifiedOrder->setParameter("total_fee","1");//总金额
 	$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址 
 	$unifiedOrder->setParameter("trade_type","JSAPI");//交易类型
