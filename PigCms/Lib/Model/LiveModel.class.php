@@ -184,7 +184,7 @@ class LiveModel extends Model
         }
         $data['id'] = $id;
         $data['push'] = 2;
-        if($flag)
+        //if($flag)
             $content->save($data);
         //print_r($follow_list);
 
