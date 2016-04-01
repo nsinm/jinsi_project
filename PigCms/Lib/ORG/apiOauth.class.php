@@ -192,7 +192,7 @@ class apiOauth
 		
 	}
 
-	public function update_authorizer_access_token($appid,$info=null){
+	public function update_authorizer_access_token($appid,$info=null,$flag=0){
 		
 		$now 	= time();
 
@@ -204,7 +204,7 @@ class apiOauth
 
 		$cache_token 	= 	S($info['appid']);
 
-		if(!$cache_token['authorizer_access_token']){
+		if(!$cache_token['authorizer_access_token']||$flag){
 			
 			if($info['type'] == 1 && $info['winxintype'] == 3  && empty($info['is_domain'])){
 			
@@ -261,8 +261,8 @@ class apiOauth
 							);
 	
 					//M('Wxuser')->where("id={$info['id']}")->save($save);
-					
-					S($info['appid'],$cache,$res['expires_in']);
+
+					S($info['appid'],$cache,$res['expires_in']-1000);
 					
 					$cache_token 	= $res['access_token'];
 				}
