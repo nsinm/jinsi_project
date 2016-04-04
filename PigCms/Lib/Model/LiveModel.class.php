@@ -169,6 +169,7 @@ class LiveModel extends Model
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$id;
         $flag = 0;
         if($follow_list){
+            $data['push'] = 2;
             foreach($follow_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
@@ -183,7 +184,7 @@ class LiveModel extends Model
             $rs = $this->send_message($data,1);
         }
         $data['id'] = $id;
-        $data['push'] = 2;
+        //$data['push'] = 2;
         //if($flag)
             $content->save($data);
         //print_r($follow_list);
