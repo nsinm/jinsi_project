@@ -168,8 +168,11 @@ class LiveModel extends Model
         $data['content'] = $content_arr['jinsi_content_info'];
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$id;
         $flag = 0;
+        $infos['id'] = $id;
+        $infos['push'] = 2;
+        $content->save($infos);
         if($follow_list){
-            $data['push'] = 2;
+
             foreach($follow_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
@@ -183,10 +186,10 @@ class LiveModel extends Model
             $data['openid'] = $user_info['open_id'];
             $rs = $this->send_message($data,1);
         }
-        $data['id'] = $id;
+
         //$data['push'] = 2;
         //if($flag)
-            $content->save($data);
+        //$content->save($infos);
         //print_r($follow_list);
 
 
