@@ -66,6 +66,23 @@ var indexAction = {
             alert('参数错误');
             return;
         }
+
+        // 获取页面的图片显示和隐藏层
+        var $imgOverlay = $('.imgbox-overlay'),
+            $imgContainer = $('.imgbox-wrap'),
+            $imgBigger = $('.img-bigger')
+
+        $imgContainer.on('click',function(){
+            $imgOverlay.hide()
+            $imgContainer.hide()
+            $imgBigger.attr('src','')
+        })
+        $imgOverlay.on('click',function(){
+            $imgOverlay.hide()
+            $imgContainer.hide()
+            $imgBigger.attr('src','')
+        })
+
         $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
             var tag = $('#content');
@@ -84,8 +101,8 @@ var indexAction = {
                     if(infos[index].jinsi_content_type == '1') {
                         html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                     }else if(infos[index].jinsi_content_type == '2'){
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                        html +=     '<p class="user_liveword" id="liveword">' + infos[index].jinsi_content_info + '</p>';
+                        html +=     '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
                     }else{
                         html +=     '<p class="user_wordbubble" >';
                         html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
@@ -93,7 +110,7 @@ var indexAction = {
                         html +=     '</p>';
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
-                    html +=         '<p class="user_liveinteract">';;
+                    html +=         '<p class="user_liveinteract">';
                         html +=         '<span class="like-btn">';
                         html +=              '<span alt="">';
                         html +=                 '</span>'
@@ -114,11 +131,59 @@ var indexAction = {
                 html += '还没有导师直播内容哦!';
                 $('#filter').attr({'width':'30px'});
             }
-            tag.html(html).find("div[class='weui_cell live_block']").each(function(){
-                var cid = $(this).attr('data-cid');
-                $(this).click(function(){
-                    location.href = params.cUrl + '&cid=' + cid;
-                });
+            tag.html(html).find("p").each(function(){
+                var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
+                var img = $(this).siblings('.pic');
+                img.click(function(){
+                    var $this = $(this)
+                    $imgOverlay.show()
+                    var imgsrc = $this.attr('src')
+                    $imgContainer.show()
+                    $imgBigger.attr('src',imgsrc)
+                })
+
+                if($(this).attr('id') == 'liveword'){
+                    $(this).click(function(){
+                        location.href = params.cUrl + '&cid=' + cid;
+                    });
+                }
+
+                $(this).find('span').each(function(){
+                    if($(this).attr('class') == 'icon-comment'){
+                        $(this).click(function(){
+                            var mask = $('#mask_reply')
+                            var replyActionsheet = $('#reply_actionsheet')
+                            var contentInput = replyActionsheet.find("#comment-input")[0]
+                            replyActionsheet.addClass('weui_actionsheet_toggle')
+                            mask.show().addClass('weui_fade_toggle').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            });
+                            replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            })
+                            replyActionsheet.find('#sendComment').click(function () {
+                                console.log(contentInput.value)
+                                if(contentInput.value == '') return
+                                // $.ajax({
+                                //     url:
+                                //     type:"post",
+                                //     dataType:'json',
+                                // data:{
+                                // },
+                                //     success:function(){
+                                //     },
+                                //     error:function(){
+                                //     }
+                                // })
+                                console.log('已发送评论')
+                                hideActionSheet(replyActionsheet, mask)
+                                contentInput.value = ''
+                            })
+                            replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+                        })
+                    }
+                })
+
             });
         }, 'JSON');
     },
@@ -294,7 +359,7 @@ var indexAction = {
     'init' : function(){
         if(params.tplName == 'index_index') {
             //banner效果
-            this.banner();
+            //this.banner();
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表

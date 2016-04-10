@@ -179,32 +179,6 @@ $(function () {
 
                 }
             },
-            // 图片点击放大
-            '.pic':{
-                click:function(){
-                    var $this = $(this)
-                    $imgOverlay.show()
-                    var imgsrc = $this.attr('src')
-                    console.log($this,imgsrc)
-                    $imgContainer.show()
-
-                    $imgBigger.attr('src',imgsrc)
-                }
-            }
-        },
-        init:function(){
-
-            // 固定筛选按钮在页面的位置
-            var $filter = $('#filter'),
-                $page = $('.home'),
-                scrollTimmer1
-            $page.scroll(function(){
-                clearTimeout(scrollTimmer1)
-                scrollTimmer1 = setTimeout(function(){
-                    $filter.css('top',$page.scrollTop()+8)
-                    console.log('scrolling')
-                },400)
-            })
         }
     };
     var button = {
