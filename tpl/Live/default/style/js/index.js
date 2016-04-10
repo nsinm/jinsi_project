@@ -307,7 +307,7 @@ var indexAction = {
     },
 
     'toComment' : function(){
-        var tag = $('.weui_actionsheet_menu');
+        var tag = $('#action_menu');
         tag.find('div').each(function(){
             var cid = tag.attr('data-value');
             var type = $(this).attr('data-value');
