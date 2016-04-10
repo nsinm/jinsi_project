@@ -211,9 +211,9 @@ var indexAction = {
                             replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                         })
                     }else if($(this).attr('class') == 'icon-like on'){
+                        var that = $(this);
                         $(this).parent().click(function(){
-                            var that = $(this);
-                            var cid = $(this).attr('data-cid');
+                            var cid = that.attr('data-cid');
                             var url = params.pUrl + '&cid=' + cid;
                             $.getJSON(url, {}, function(data){
                                 console.log(data);
