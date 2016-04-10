@@ -3,6 +3,20 @@
  */
 
 var indexAction = {
+    //首页banner显示效果
+    'banner' : function(){
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            // nextButton: '.swiper-button-next',
+            // prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            loop : true,
+            centeredSlides: true,
+            autoplay: 2500,
+            autoplayDisableOnInteraction: false
+        })
+    },
+
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
@@ -78,15 +92,6 @@ var indexAction = {
                         html +=             '<span class="icon-like on" alt="">';
                         html +=             '</span>赞&nbsp;' + infos[index].jinsi_content_praise_no;
                         html +=         '</span>';
-                    //html +=             '<span>';
-                    //html +=                 '<img src="/tpl/Live/default/style/images/like@2x.png" alt="">赞&nbsp;' + infos[index].jinsi_content_praise_no;
-                    //html +=             '</span>';
-                    //html +=             '<span>';
-                    //html +=                 '<img src="/tpl/Live/default/style/images/comment@2x.png" alt="">评论&nbsp;' + infos[index].jinsi_content_comment_no;
-                    //html +=             '</span>';
-                    //html +=             '<span>';
-                    //html +=                 '<img src="/tpl/Live/default/style/images/share@2x.png" alt="">分享&nbsp;' + infos[index].jinsi_content_share_no;
-                    //html +=             '</span>';
                     html +=         '</p>';
                     html +=     '</div>';
                     html += '</div>';
@@ -274,6 +279,8 @@ var indexAction = {
 
     'init' : function(){
         if(params.tplName == 'index_index') {
+            //banner效果
+            this.banner();
             //获取推荐导师列表
             this.getRecomendInstructor();
             //获取关注导师直播列表

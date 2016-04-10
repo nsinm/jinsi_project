@@ -193,17 +193,6 @@ $(function () {
             }
         },
         init:function(){
-            // banner图片滚动
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                // nextButton: '.swiper-button-next',
-                // prevButton: '.swiper-button-prev',
-                paginationClickable: true,
-                loop : true,
-                centeredSlides: true,
-                autoplay: 2500,
-                autoplayDisableOnInteraction: false
-            })
 
             // 固定筛选按钮在页面的位置
             var $filter = $('#filter'),
