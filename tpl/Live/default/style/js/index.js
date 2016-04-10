@@ -17,6 +17,20 @@ var indexAction = {
         })
     },
 
+    //固定筛选按钮在页面的位置
+    'filterPostion' : function(){
+        var $filter = $('#filter'),
+            $page = $('.home'),
+            scrollTimmer1
+        $page.scroll(function(){
+            clearTimeout(scrollTimmer1)
+            scrollTimmer1 = setTimeout(function(){
+                $filter.css('top',$page.scrollTop()+8)
+                console.log('scrolling')
+            },400)
+        })
+    },
+
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
@@ -281,6 +295,8 @@ var indexAction = {
         if(params.tplName == 'index_index') {
             //banner效果
             this.banner();
+            //固定筛选按钮在页面的位置
+            this.filterPostion();
             //获取推荐导师列表
             this.getRecomendInstructor();
             //获取关注导师直播列表
