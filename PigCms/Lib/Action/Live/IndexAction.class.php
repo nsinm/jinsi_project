@@ -83,8 +83,19 @@ class IndexAction extends LiveAction
         }
 
         $comments = M()->query($sql);
+        $data = array();
+
+        //加入当前用户是否赞过
+        foreach($comments as $key => $value){
+            $value['current_user_praise'] = 0;
+            $praise = M('praise')->where('jinsi_praise_content_id=' . $value['id'] . ' AND jinsi_praise_user_id=' . $this->userId)->find();
+            if($praise){
+                $value['current_user_praise'] = 1;
+            }
+            array_push($data, $value);
+        }
         if($comments){
-            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $comments);
+            $result = array('errcode' => 0, 'msg' => '获取关注导师直播列表成功!', 'data' => $data);
         }
 
         $this->ajaxReturn($result, 'JSON');

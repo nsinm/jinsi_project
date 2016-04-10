@@ -131,7 +131,11 @@ var indexAction = {
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
                         html +=         '<span>';
-                        html +=             '<span class="icon-like on" alt="">';
+                    if(infos[index].current_user_praise == 1){
+                        html +=             '<span class="icon-like" alt="">';
+                    }else{
+                        html +=             '<span class="icon-like on" alt=""  data-cid="' + infos[index].id + '">';
+                    }
                         html +=             '</span>赞&nbsp;' + infos[index].jinsi_content_praise_no;
                         html +=         '</span>';
                     html +=         '</p>';
