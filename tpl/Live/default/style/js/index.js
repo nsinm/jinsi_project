@@ -144,6 +144,7 @@ var indexAction = {
             }
             tag.html(html).find("p").each(function(){
                 var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
+                console.log(cid);
                 var img = $(this).siblings('.pic');
                 img.click(function(){
                     var $this = $(this)
@@ -173,19 +174,32 @@ var indexAction = {
                                 hideActionSheet(replyActionsheet, mask)
                             })
                             replyActionsheet.find('#sendComment').click(function () {
-                                console.log(contentInput.value)
-                                if(contentInput.value == '') return
-                                // $.ajax({
-                                //     url:
-                                //     type:"post",
-                                //     dataType:'json',
-                                // data:{
-                                // },
-                                //     success:function(){
-                                //     },
-                                //     error:function(){
-                                //     }
-                                // })
+                                var content = contentInput.value;
+                                if(content == ''){
+                                    alert('请填写评论内容!');
+                                    return;
+                                }
+                                var isComment = 1;
+                                var cid = cid;
+                                var type = 1;
+                                var userId = params.userId;
+                                var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+                                 $.ajax({
+                                     url:params.addUrl,
+                                     type:"post",
+                                     dataType:'json',
+                                     data:json,
+                                     success:function(data){
+                                         console.log(data);
+                                         if(data.errcode == 0){
+                                             location.href = params.cUrl + '&cid=' + cid;
+                                         }else{
+                                             alert(data.msg);
+                                         }
+                                     },
+                                     error:function(){
+                                     }
+                                 })
                                 console.log('已发送评论')
                                 hideActionSheet(replyActionsheet, mask)
                                 contentInput.value = ''
