@@ -143,7 +143,79 @@ $(function () {
                         $tooltips.hide();
                     }, 2000);
                 }
+            },
+            // 点击评论弹出输入框
+            '.comment':{
+                click:function(){
+                    var mask = $('#mask')
+                    var replyActionsheet = $('#reply_actionsheet')
+                    var contentInput = replyActionsheet.find("#comment-input")[0]
+                    replyActionsheet.addClass('weui_actionsheet_toggle')
+                    mask.show().addClass('weui_fade_toggle').click(function () {
+                        hideActionSheet(replyActionsheet, mask)
+                    });
+                    replyActionsheet.find('#actionsheet_cancel').click(function () {
+                        hideActionSheet(replyActionsheet, mask)
+                    })
+                    replyActionsheet.find('#sendComment').click(function () {
+                        console.log(contentInput.value)
+                        if(contentInput.value == '') return
+                        // $.ajax({
+                        //     url:
+                        //     type:"post",
+                        //     dataType:'json',
+                        // data:{
+                        // },
+                        //     success:function(){
+                        //     },
+                        //     error:function(){
+                        //     }
+                        // })
+                        console.log('已发送评论')
+                        hideActionSheet(replyActionsheet, mask)
+                        contentInput.value = ''
+                    })
+                    replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+
+                }
+            },
+            // 图片点击放大
+            '.pic':{
+                click:function(){
+                    var $this = $(this)
+                    $imgOverlay.show()
+                    var imgsrc = $this.attr('src')
+                    console.log($this,imgsrc)
+                    $imgContainer.show()
+
+                    $imgBigger.attr('src',imgsrc)
+                }
             }
+        },
+        init:function(){
+            // banner图片滚动
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                // nextButton: '.swiper-button-next',
+                // prevButton: '.swiper-button-prev',
+                paginationClickable: true,
+                loop : true,
+                centeredSlides: true,
+                autoplay: 2500,
+                autoplayDisableOnInteraction: false
+            })
+
+            // 固定筛选按钮在页面的位置
+            var $filter = $('#filter'),
+                $page = $('.home'),
+                scrollTimmer1
+            $page.scroll(function(){
+                clearTimeout(scrollTimmer1)
+                scrollTimmer1 = setTimeout(function(){
+                    $filter.css('top',$page.scrollTop()+8)
+                    console.log('scrolling')
+                },400)
+            })
         }
     };
     var button = {
