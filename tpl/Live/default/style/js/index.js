@@ -112,7 +112,7 @@ var indexAction = {
                     if(infos[index].jinsi_content_type == '1') {
                         html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                     }else if(infos[index].jinsi_content_type == '2'){
-                        html +=     '<p class="user_liveword" id="liveword">' + infos[index].jinsi_content_info + '</p>';
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                         html +=     '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
                     }else{
                         html +=     '<p class="user_wordbubble" >';
@@ -153,7 +153,7 @@ var indexAction = {
                     $imgBigger.attr('src',imgsrc)
                 })
 
-                if($(this).attr('id') == 'liveword'){
+                if($(this).attr('class') == 'user_liveword'){
                     $(this).click(function(){
                         location.href = params.cUrl + '&cid=' + cid;
                     });
