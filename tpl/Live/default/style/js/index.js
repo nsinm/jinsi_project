@@ -67,6 +67,17 @@ var indexAction = {
             return;
         }
 
+        // 隐藏弹出页
+        function hideActionSheet(weuiActionsheet, mask) {
+            weuiActionsheet.removeClass('weui_actionsheet_toggle');
+            mask.removeClass('weui_fade_toggle');
+            weuiActionsheet.on('transitionend', function () {
+                mask.hide();
+            }).on('webkitTransitionEnd', function () {
+                mask.hide();
+            })
+        }
+
         // 获取页面的图片显示和隐藏层
         var $imgOverlay = $('.imgbox-overlay'),
             $imgContainer = $('.imgbox-wrap'),
