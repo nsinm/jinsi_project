@@ -14,8 +14,6 @@ class IndexAction extends LiveAction
     function __construct()
     {
         parent::__construct();
-
-        header("Access-Control-Allow-Origin: *");
     }
 
     /**

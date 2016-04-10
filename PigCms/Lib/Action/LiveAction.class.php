@@ -30,6 +30,7 @@ class LiveAction extends Action
     function __construct ()
     {
         parent::__construct();
+        header("Access-Control-Allow-Origin: *");
         $Live = D('Live');
         $openid = $Live->get_openid(get_url());
         $userid = $Live->get_user_info($openid);
