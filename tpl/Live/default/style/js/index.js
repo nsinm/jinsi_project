@@ -104,7 +104,7 @@ var indexAction = {
                     html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
-                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" id="header_pic" alt="">';
                     html +=         '</div>';
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
@@ -149,12 +149,17 @@ var indexAction = {
             tag.html(html).find("p").each(function(){
                 var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
                 var img = $(this).siblings('.pic');
+                var headerPic = $(this).siblings('#header-pic')
                 img.click(function(){
                     var $this = $(this)
                     $imgOverlay.show()
                     var imgsrc = $this.attr('src')
                     $imgContainer.show()
                     $imgBigger.attr('src',imgsrc)
+                })
+
+                headerPic.click(function(){
+                    location.href = params.cUrl + '&cid=' + cid;
                 })
 
                 if($(this).attr('class') == 'user_liveword'){
