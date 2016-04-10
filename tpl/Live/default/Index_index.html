@@ -32,6 +32,31 @@
     <!--END actionSheet-->
 </if>
 
+    <!--BEGIN 回复块-->
+    <div id="actionSheet_wrap_reply">
+        <div class="weui_mask_transition" id="mask_reply"></div>
+        <div class="weui_actionsheet bt44" id="reply_actionsheet">
+            <div class="weui_actionsheet_menu">
+                <!-- <div class="weui_actionsheet_cell">照片</div> -->
+                <div class="weui_cells weui_cells_form my-opinion">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea id="comment-input" class="weui_textarea" placeholder="这一刻的想法" rows="3"></textarea>
+                            <div class="weui_textarea_counter"><span>0</span>/200</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_btn_area">
+                    <a class="weui_btn weui_btn_primary" href="javascript:" id="sendComment">确定发送</a>
+                </div>
+            </div>
+            <div class="weui_actionsheet_action">
+                <div class="weui_actionsheet_cell" id="actionsheet_cancel_reply">取消</div>
+            </div>
+        </div>
+    </div>
+    <!--END 回复块-->
+
     <div class="bottom-bar">
         <div class="selected">直播间</div>
         <div>导师</div>
