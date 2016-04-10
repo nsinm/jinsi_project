@@ -126,7 +126,7 @@ var indexAction = {
                         html +=              '<span alt="">';
                         html +=                 '</span>'
                         html +=         '</span>';
-                        html +=         '<span>';
+                        html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
@@ -160,7 +160,7 @@ var indexAction = {
                 }
 
                 $(this).find('span').each(function(){
-                    if($(this).attr('class') == 'icon-comment'){
+                    if($(this).attr('id') == 'icon-comment'){
                         $(this).click(function(){
                             var mask = $('#mask_reply')
                             var replyActionsheet = $('#reply_actionsheet')
