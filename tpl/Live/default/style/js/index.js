@@ -218,12 +218,13 @@ var indexAction = {
                             $.getJSON(url, {}, function(data){
                                 console.log(data);
                                 if(data.errcode == '0'){
-                                    var text = $(this).text();
+                                    var $this = that.parent();
+                                    var text = $this.text();
                                     var count = text.trim().substring(1).trim();
                                     html = '<span class="icon-like" alt=""></span>赞&nbsp;';
                                     html += parseInt(count) + 1;
-                                    $(this).empty();
-                                    $(this).html(html);
+                                    $this.empty();
+                                    $this.html(html);
                                 }else{
                                     alert($(this).attr('class'));
                                 }
