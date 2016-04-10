@@ -20,7 +20,7 @@ var indexAction = {
     //固定筛选按钮在页面的位置
     'filterPostion' : function(){
         var $filter = $('#filter'),
-            $page = $('.home'),
+            $page = $('body'),
             scrollTimmer1
         $page.scroll(function(){
             clearTimeout(scrollTimmer1)
