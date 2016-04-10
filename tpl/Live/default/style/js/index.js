@@ -149,7 +149,7 @@ var indexAction = {
             tag.html(html).find("p").each(function(){
                 var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
                 var img = $(this).siblings('.pic');
-                var headerPic = $(this).siblings('#header-pic')
+                var headerPic = $(this).parents('.weui_cell.live_block').siblings('.weui_cell_hd')
                 img.click(function(){
                     var $this = $(this)
                     $imgOverlay.show()
