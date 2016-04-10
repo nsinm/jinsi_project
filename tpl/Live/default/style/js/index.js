@@ -210,6 +210,33 @@ var indexAction = {
                             })
                             replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                         })
+                    }else if($(this).attr('class') == 'icon-like on'){
+                        $(this).click(function(){
+                            var that = $(this);
+                            var cid = $(this).attr('data-cid');
+                            var url = params.pUrl + '&cid=' + cid;
+                            $.getJSON(url, {}, function(data){
+                                console.log(data);
+                                if(data.errcode == '0'){
+                                    var parent = that.parent();
+                                    var parentText = parent.text();
+                                    parent.empty();
+                                    var count = 0;
+                                    var html = '<span class="icon-like" alt=""></span>';
+                                    if(parentText.indexOf('赞') > 0){
+                                        count = parentText.trim().substring(1).trim();
+                                        html = '<span class="icon-like" alt=""></span>赞&nbsp;'
+                                    }else{
+                                        count = parentText.trim();
+                                    }
+                                    console.log(count);
+                                    html += parseInt(count) + 1;
+                                    parent.html(html);
+                                }else{
+                                    alert($(this).attr('class'));
+                                }
+                            }, 'JSON');
+                        });
                     }
                 })
 
