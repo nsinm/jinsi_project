@@ -144,7 +144,6 @@ var indexAction = {
             }
             tag.html(html).find("p").each(function(){
                 var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
-                console.log(cid);
                 var img = $(this).siblings('.pic');
                 img.click(function(){
                     var $this = $(this)
@@ -163,6 +162,7 @@ var indexAction = {
                 $(this).find('span').each(function(){
                     if($(this).attr('id') == 'icon-comment'){
                         $(this).click(function(){
+                            var contentId = cid;
                             var mask = $('#mask_reply')
                             var replyActionsheet = $('#reply_actionsheet')
                             var contentInput = replyActionsheet.find("#comment-input")[0]
@@ -180,7 +180,7 @@ var indexAction = {
                                     return;
                                 }
                                 var isComment = 1;
-                                var cid = cid;
+                                var cid = contentId;
                                 var type = 1;
                                 var userId = params.userId;
                                 var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
