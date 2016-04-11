@@ -93,23 +93,25 @@
 
 </div>
 <script language="JavaScript">
-    var $but = $('.bunGreen');
-    $but.click(function(){
-        var pic = $("input[name='pic']").val();
-        var url = $("input[name='url']").val();
-        if(pic == '' || url == ''){
-            alert('填写的内容不完整!');
-            return;
-        }
-        var addUrl = '{pigcms::U("Telecast/addBanner")}';
-        var json = {pic:pic, url:url};
-        $.post(addUrl, json, function(data){
-            if(data.errcode == 0){
-                location.href = '{pigcms::U("Telecast/banner")}';
-            }else{
-                alert(data.msg);
+    $(function(){
+        var $but = $('.bunGreen');
+        $but.click(function(){
+            var pic = $("input[name='pic']").val();
+            var url = $("input[name='url']").val();
+            if(pic == '' || url == ''){
+                alert('填写的内容不完整!');
+                return;
             }
-        }, 'JSON');
+            var addUrl = '{pigcms::U("Telecast/addBanner")}';
+            var json = {pic:pic, url:url};
+            $.post(addUrl, json, function(data){
+                if(data.errcode == 0){
+                    location.href = '{pigcms::U("Telecast/banner")}';
+                }else{
+                    alert(data.msg);
+                }
+            }, 'JSON');
+        })
     })
 </script>
 <include file="Public:footer"/>
