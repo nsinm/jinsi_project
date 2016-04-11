@@ -104,6 +104,7 @@
             var addUrl = '{pigcms::U("Telecast/addBanner")}';
             var json = {pic:pic, url:url};
             $.post(addUrl, json, function(data){
+                var data = $.parseJSON(data);
                 console.log(data);
                 if(data.errcode == 0){
                     location.href = '{pigcms::U("Telecast/banner")}';
