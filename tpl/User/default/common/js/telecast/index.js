@@ -517,6 +517,7 @@ var indexAction = {
         this.navEvent();
         if(params.tplName == 'user_list'){
             this.userPagination(params.userCount);
+            this.userSearch();
         }else if(params.tplName == 'user_live'){
             this.livePagination();
         }else if(params.tplName == 'user_comment'){
