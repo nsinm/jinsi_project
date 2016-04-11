@@ -353,6 +353,51 @@ var indexAction = {
         }, 'JSON');
     },
 
+    //获取banner列表
+    'getBannerList' : function(index){
+        var tag = $(".ListProduct");
+        var index = index;
+        $.getJSON(params.bannerList, {'page': index, 'pageSize': params.pageSize}, function(data){
+            console.log(data);
+            var html = '';
+            if (data.errcode == '0') {
+                var infos = data.data;
+                html += '<thead>';
+                html +=     '<tr>';
+                html +=         '<th width="50">编号</th>';
+                html +=         '<th width="50">图片地址</th>';
+                html +=         '<th width="300">连接地址</th>';
+                html +=         '<th width="100" class="norightborder">操作</th>';
+                html +=     '</tr>';
+                html += '</thead>';
+                html += '<tbody id="user_info">';
+
+                for (var index in infos) {
+                    html += '<tr>';
+                    html +=     '<td>' + infos[index].id + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_banner_pic + '</td>';
+                    html +=     '<td>' + infos[index].jinsi_banner_url + '</td>';
+                    html +=     '<td class="norightborder" data-bid="' + infos[index].id + '">';
+                    html +=         '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
+                    html +=     '</td>';
+                    html += '</tr>';
+                }
+                html += '<tbody>';
+            }
+            tag.html(html).find('.norightborder a').click(function(){
+                var bid = $(this).parent().attr('data-bid');
+                var data = {'bid' : bid};
+                $.getJSON(params.bannerDel, data, function(msg){
+                    if(msg.errcode == '0'){
+                        indexAction.getBannerList(index);
+                    }else{
+                        alert(data.msg);
+                    }
+                }, 'JSON');
+            });
+        }, 'JSON')
+    },
+
     'userPagination' : function(){
         $('.M-box').pagination({
             totalData : params.userCount,
@@ -408,11 +453,27 @@ var indexAction = {
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                indexAction.getFeedbackList(index);
+                indexAction.getBannerList(index);
                 return;
             }
         },function(api){
-            indexAction.getFeedbackList(api.getCurrent());
+            indexAction.getBannerList(api.getCurrent());
+            return;
+        })
+    },
+
+    'bannerPagination' : function(){
+        $('.M-box4').pagination({
+            totalData : params.bannerCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getCommentList(index);
+                return;
+            }
+        },function(api){
+            indexAction.getCommentList(api.getCurrent());
             return;
         })
     },
@@ -428,6 +489,8 @@ var indexAction = {
             this.commentPagination();
         }else if(params.tplName == 'user_feedback'){
             this.feedbackPagination();
+        }else if(params.tplName == 'user_banner'){
+            this.bannerPagination();
         }
     }
 };

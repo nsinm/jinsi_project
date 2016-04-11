@@ -232,6 +232,72 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 添加banner
+     */
+    public function addBanner ()
+    {
+        if(!IS_AJAX) $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '添加失败!');
+
+        $picPath = $this->_post('pic');
+        $url = $this->_post('url');
+
+        if($picPath && $url){
+            $data = array(
+                'jinsi_banner_pic' => $picPath,
+                'jinsi_banner_url' => $url
+            );
+            $id = M('banner', 'jinsi_')->add($data);
+            if($id){
+                $result = array('errcode' => 0, 'msg' => '添加成功!');
+            }
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 获取banner列表
+     */
+    public function bannerList ()
+    {
+        if(!IS_AJAX) $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '获取失败!');
+
+        $model = M('banner', 'jinsi_');
+        $page = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = ($page - 1) * $pageSize;
+        $bannerList = $model->limit($start, $pageSize)->select();
+        if($bannerList){
+            $result = array('errcode' => 0, 'msg' => '获取成功!', 'data' => $bannerList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 删除banner
+     */
+    public function bannerDel ()
+    {
+        if(!IS_AJAX) $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '删除失败!');
+        $bid = $this->_get('bid');
+        if($bid){
+            $status = M('banner', 'jinsi_')->where('id=' . $bid)->delete();
+            if($status){
+                $result = array('errcode' => 0, 'msg' => '删除成功!');
+            }
+        }
+
+        $this->ajaxReturn($result, 'JOSN');
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()
