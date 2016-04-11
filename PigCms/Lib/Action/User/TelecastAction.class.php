@@ -298,6 +298,14 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 添加banner页面
+     */
+    public function addtelecast ()
+    {
+        $this->display();
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()
