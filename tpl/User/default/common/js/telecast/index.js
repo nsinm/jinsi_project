@@ -390,7 +390,7 @@ var indexAction = {
                 $.getJSON(params.bannerDel, data, function(msg){
                     console.log(msg);
                     if(msg.errcode == '0'){
-                        indexAction.getBannerList(1);
+                        indexAction.getBannerList(index);
                     }else{
                         alert(data.msg);
                     }
