@@ -433,6 +433,8 @@ var indexAction = {
 
     'init' : function(){
         if(params.tplName == 'index_index') {
+            //banner列表
+            this.getBannerList();
             //banner效果
             this.banner();
             //固定筛选按钮在页面的位置
