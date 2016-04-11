@@ -5,6 +5,7 @@
 var indexAction = {
     //首页banner显示效果
     'banner' : function(){
+        console.log(11111)
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             // nextButton: '.swiper-button-next',
@@ -434,13 +435,14 @@ var indexAction = {
     'init' : function(){
         if(params.tplName == 'index_index') {
             //banner效果
-            this.banner();
+
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表
             //this.getRecomendInstructor();
             //banner列表
             this.getBannerList();
+            this.banner();
             //获取关注导师直播列表
             this.liveFilter();
             this.moreTeacher();
