@@ -6,6 +6,7 @@
 <script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
 <script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
 <script src="/tpl/User/default/common/js/telecast/index.js"></script>
+<script type="text/javascript" src="/tpl/User/default/common/js/telecast/My97DatePicker/WdatePicker.js"></script>
 <div class="content" <if condition="session('isQcloud') eq true">style="float:center;"</if>>
 <div class="cLineB">
     <h4 class="left">微直播管理</h4>
@@ -42,7 +43,11 @@
 <!--tab end-->
 <div class="msgWrap">
     <div class="cLine">
-        <div class="pageNavigator left"></div>
+        <div class="pageNavigator left">
+            用户名:<input type="text" name="username" class="px" width="20" />&nbsp;
+            关注时间:<input id="d421" class="Wdate px" type="text" onfocus="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d'})"/>&nbsp;
+                    到&nbsp;<input id="d4312" class="Wdate px" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d421\')}',maxDate:'%y-%M-%d'})"/>
+        </div>
         <div class="clr"></div>
     </div>
     <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
