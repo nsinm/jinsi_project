@@ -422,6 +422,7 @@ var indexAction = {
                         return;
                     }else{
                         $(".ListProduct").empty();
+                        $('.M-box').empty();
                         indexAction.userPagination(data.data, username, start, end);
                     }
                 }else{
