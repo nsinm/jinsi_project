@@ -53,14 +53,14 @@ class TelecastAction extends UserAction
                     $where .= "AND jinsi_user_create_time >=" . strtotime($start);
                 elseif(!$start && $end)
                     $where .= "AND jinsi_user_create_time <=" . strtotime($end);
-                else
+                elseif($start && $end)
                     $where .= "AND jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
             }else{
                 if($start && !$end)
                     $where = "jinsi_user_create_time >= " . strtotime($start);
                 elseif(!$start && $end)
                     $where = "jinsi_user_create_time <= " . strtotime($end);
-                else
+                elseif($start && $end)
                     $where = "jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
             }
 
@@ -355,22 +355,22 @@ class TelecastAction extends UserAction
                 $where .= "AND jinsi_user_create_time >=" . strtotime($start);
             elseif(!$start && $end)
                 $where .= "AND jinsi_user_create_time <=" . strtotime($end);
-            else
+            elseif($start && $end)
                 $where .= "AND jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
         }else{
             if($start && !$end)
                 $where = "jinsi_user_create_time >= " . strtotime($start);
             elseif(!$start && $end)
                 $where = "jinsi_user_create_time <= " . strtotime($end);
-            else
+            elseif($start && $end)
                 $where = "jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
         }
 
-        $sql = "SELECT count(id) FROM jinsi_user WHERE $where";
+        $sql = "SELECT count(id) count FROM jinsi_user WHERE $where";
 
         $count = M()->query($sql);
         if($count !== false){
-            $result = array('errcode' => 0, 'msg' => '获取用户数量成功!', 'data' => $count);
+            $result = array('errcode' => 0, 'msg' => '获取用户数量成功!', 'data' => $count['count']);
         }
 
         $this->ajaxReturn($result, 'JSON');
