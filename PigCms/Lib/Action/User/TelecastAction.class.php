@@ -219,6 +219,19 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * banner管理页面
+     */
+    public function banner()
+    {
+        $params = array(
+            'bannerCount' => M('banner', 'jinsi_')->count(),
+        );
+
+        $this->assign('vars', $params);
+        $this->display();
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()

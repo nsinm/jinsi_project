@@ -33,10 +33,10 @@
 <div class="tab">
     <ul>
         <li class="tabli" id="tab0"><a href="javascript:void(0);">用户管理</a></li>
-        <li class="tabli current" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
+        <li class="tabli" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
         <li class="tabli" id="tab2"><a href="javascript:void(0);">评论管理</a></li>
         <li class="tabli" id="tab3"><a href="javascript:void(0);">反馈管理</a></li>
-        <li class="tabli" id="tab4"><a href="javascript:void(0);">banner管理</a></li>
+        <li class="tabli current" id="tab4"><a href="javascript:void(0);">banner管理</a></li>
     </ul>
 </div>
 <!--tab end-->
@@ -65,7 +65,7 @@
 </if>
 <script language="JavaScript">
     var params = {
-        'tplName' : 'user_live',
+        'tplName' : 'user_banner',
         'pageSize' : 10,
         'index' : '{pigcms::U("Telecast/index")}',
         'live' : '{pigcms::U("Telecast/live")}',

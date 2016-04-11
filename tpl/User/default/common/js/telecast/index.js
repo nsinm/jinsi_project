@@ -23,6 +23,8 @@ var indexAction = {
                     case '反馈管理':
                         location.href = params.feedback;
                         break;
+                    case 'banner管理':
+                        location.href = params.banner;
                 }
             }) ;
         });
