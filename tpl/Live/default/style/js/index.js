@@ -31,6 +31,27 @@ var indexAction = {
         })
     },
 
+    //首页banner
+    'getBannerList' : function(){
+        var tag = $('.swiper-wrapper');
+        var url = params.bananerList;
+        $.getJSON(url, {}, function(data){
+            var html = '';
+            if(data.errcode == 0) {
+                for (var index in data.data) {
+                    html += '<div class="swiper-slide" data-bid="' + data.data[index].id + '">'
+                    html +=     '<a href="' + data.data[index].jinsi_banner_url + '">';
+                    html +=         '<img src="' + data.data[index].jinsi_banner_pic + '">';
+                    html +=     '</a>';
+                    html += '</div>';
+                }
+            }else{
+                html += '还没有添加banner哦';
+            }
+            tag.append(html);
+        }, 'JSON')
+    },
+
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
@@ -413,11 +434,11 @@ var indexAction = {
     'init' : function(){
         if(params.tplName == 'index_index') {
             //banner效果
-            //this.banner();
+            this.banner();
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表
-            this.getRecomendInstructor();
+            //this.getRecomendInstructor();
             //获取关注导师直播列表
             this.liveFilter();
             this.moreTeacher();

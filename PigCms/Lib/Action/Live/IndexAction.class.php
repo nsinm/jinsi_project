@@ -167,6 +167,22 @@ class IndexAction extends LiveAction
     }
 
     /**
+     * 获取banner
+     */
+    public function getBanner ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+
+        $result = array('errcode' => 1, 'msg' => '获取banner列表失败');
+        $bannerList = M('banner', 'jinsi_')->order('id desc')->limit('5')->select();
+        if($bannerList){
+            $result = array('errcode' => 0, 'msg' => '获取banner列表成功');
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
      * 赞
      */
     public function praise ()

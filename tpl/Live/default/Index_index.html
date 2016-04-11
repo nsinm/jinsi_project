@@ -73,16 +73,14 @@
             <span class="more-teacher">更多</span>
         </div>
         <div class="bd">
-            <!--<div class="swiper-container">-->
-                <!--<div class="swiper-wrapper">-->
-                    <!--<div class="swiper-slide"><a href="http://www.baidu.com/"><img src='/tpl/Live/default/style/images/demo.jpeg'></a></div>-->
-                    <!--<div class="swiper-slide"><a href="http://www.baidu.com/"><img src='/tpl/Live/default/style/images/demo.jpeg'></a></div>-->
-                    <!--<div class="swiper-slide"><a href="http://www.baidu.com/"><img src='/tpl/Live/default/style/images/demo.jpeg'></a></div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <div class="weui_grids user_grids">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
 
+                </div>
             </div>
+            <!--<div class="weui_grids user_grids">-->
+
+            <!--</div>-->
             <div class="weui_cells weui_cells_access mt0 mb44" id="user_comments">
                 <div class="weui_toptips weui_warn js_tooltips teacher_toggle" style="display: none;"></div>
                 <div class="filter off" id="filter" alt=""></div>
@@ -110,7 +108,8 @@
             'cUrl' : '{pigcms:$urls.cUrl}',
             'tocUrl' : '{pigcms:$urls.tocUrl}',
             'addUrl' : '{pigcms::U("Comment/add")}',
-            'pUrl' : '{pigcms::U("praise")}'
+            'pUrl' : '{pigcms::U("praise")}',
+            'bananerList' : '{pigcms::U("getBanner")}'
         };
 
         if(params.userType == 2){
