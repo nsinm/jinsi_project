@@ -38,9 +38,9 @@ class TelecastAction extends UserAction
         $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
         $type = $this->_get('type');
-        $start = ($page - 1) * $pageSize;
+        $startPage = ($page - 1) * $pageSize;
         if(!$type){
-            $userList = $model->limit($start, $pageSize)->select();
+            $userList = $model->limit($startPage, $pageSize)->select();
         }else{
             $username = $this->_get('username');
             $start = $this->_get('start');
@@ -64,7 +64,7 @@ class TelecastAction extends UserAction
                     $where = "jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
             }
 
-            $sql = "SELECT * FROM jinsi_user WHERE $where";
+            $sql = "SELECT * FROM jinsi_user WHERE $where ORDER BY jinsi_user_create_time DESC LIMIT $startPage, $pageSize";
 
             $userList = M()->query($sql);
         }
