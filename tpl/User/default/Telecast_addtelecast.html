@@ -80,7 +80,7 @@
             <tr>
                 <th valign="top">&nbsp;</th>
                 <td>
-                    <button type="button" name="button" class="btnGreen">保存</button>
+                    <input type="button" name="button" class="btnGreen">保存</input>
                     <a href="javascript:history.go(-1);" class="btnGray vm">取消</a></td>
                 <td>&nbsp;
                 </td>
@@ -93,7 +93,7 @@
 </div>
 <script language="JavaScript">
     $(function(){
-        var $but = $('.bunGreen');
+        var $but = $("input[name='button']");
         $but.click(function(){
             var pic = $("input[name='pic']").val();
             var url = $("input[name='url']").val();
