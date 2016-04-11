@@ -388,6 +388,7 @@ var indexAction = {
                 var bid = $(this).parent().attr('data-bid');
                 var data = {'bid' : bid};
                 $.getJSON(params.bannerDel, data, function(msg){
+                    console.log(msg);
                     if(msg.errcode == '0'){
                         indexAction.getBannerList(index);
                     }else{
