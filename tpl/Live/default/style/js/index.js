@@ -50,6 +50,7 @@ var indexAction = {
                 html += '还没有添加banner哦';
             }
             tag.append(html);
+            indexAction.banner();
         }, 'JSON')
     },
 
@@ -434,15 +435,12 @@ var indexAction = {
 
     'init' : function(){
         if(params.tplName == 'index_index') {
-            //banner效果
-
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表
             //this.getRecomendInstructor();
             //banner列表
             this.getBannerList();
-            this.banner();
             //获取关注导师直播列表
             this.liveFilter();
             this.moreTeacher();
