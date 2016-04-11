@@ -294,7 +294,7 @@ class TelecastAction extends UserAction
             }
         }
 
-        $this->ajaxReturn($result, 'JOSN');
+        echo json_encode($result);
     }
 
     /**
