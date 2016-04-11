@@ -464,7 +464,7 @@ var indexAction = {
     },
 
     'bannerPagination' : function(){
-        $('.M-box4').pagination({
+        $('.M-box3').pagination({
             totalData : params.bannerCount,
             showData : params.pageSize,
             prevContent : '<',
