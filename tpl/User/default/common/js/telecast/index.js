@@ -30,10 +30,14 @@ var indexAction = {
         });
     },
 
-    'getUserList' : function(index){
+    'getUserList' : function(index, username, start, end){
         var tag = $(".ListProduct");
         var index = index;
-        $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': params.pageSize}, function (data) {
+        var type = 0;
+        if(username || start || end)
+            type = 1;
+
+        $.getJSON(params.getUserListUrl, {'page': index, 'pageSize': params.pageSize, username:username, start:start, end:end, type:type}, function (data) {
             console.log(data);
             var html = '';
             if (data.errcode == '0') {
@@ -399,18 +403,47 @@ var indexAction = {
         }, 'JSON')
     },
 
-    'userPagination' : function(){
+    'userSearch' : function(){
+        var btn = $('#search-btn');
+        btn.click(function(){
+            var username = $("input[name='username']").val();
+            var start = $("input[name='start']").val();
+            var end = $("input[name='end']").val();
+            if(username ==  '' && start == '' && end == ''){
+                alert('请输入搜索条件!');
+                return;
+            }
+
+            var json = {username:username, start:start, end:end};
+            $.getJSON(params.searchCount, json, function(data){
+                if(data.errcode == 0){
+                    if(data.data == '0'){
+                        alert('没有查询到!');
+                        return;
+                    }else{
+                        $(".ListProduct").empty();
+                        indexAction.userPagination(data.data, username, start, end);
+                    }
+                }else{
+                    alert(data.msg);
+                }
+            }, 'JSON')
+
+        })
+    },
+
+    'userPagination' : function(count, username, start, end){
         $('.M-box').pagination({
-            totalData : params.userCount,
+            totalData : count,
             showData : params.pageSize,
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                indexAction.getUserList(index);
+                indexAction.getUserList(index, username, start, end);
                 return;
             }
         },function(api){
-            indexAction.getUserList(api.getCurrent());
+            indexAction.getUserList(api.getCurrent(), username, start, end);
             return;
         })
     },
@@ -483,7 +516,7 @@ var indexAction = {
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.userPagination();
+            this.userPagination(params.userCount);
         }else if(params.tplName == 'user_live'){
             this.livePagination();
         }else if(params.tplName == 'user_comment'){

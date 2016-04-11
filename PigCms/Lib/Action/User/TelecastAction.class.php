@@ -37,8 +37,38 @@ class TelecastAction extends UserAction
         $model = M('user', 'jinsi_');
         $page = $this->_get('page');
         $pageSize = $this->_get('pageSize');
+        $type = $this->_get('type');
         $start = ($page - 1) * $pageSize;
-        $userList = $model->limit($start, $pageSize)->select();
+        if(!$type){
+            $userList = $model->limit($start, $pageSize)->select();
+        }else{
+            $username = $this->_get('username');
+            $start = $this->_get('start');
+            $end = $this->_get('end');
+
+            $where = 1;
+            if($username){
+                $where = "jinsi_user_name LIKE '%$username%' ";
+                if($start && !$end)
+                    $where .= "AND jinsi_user_create_time >=" . strtotime($start);
+                elseif(!$start && $end)
+                    $where .= "AND jinsi_user_create_time <=" . strtotime($end);
+                else
+                    $where .= "AND jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
+            }else{
+                if($start && !$end)
+                    $where = "jinsi_user_create_time >= " . strtotime($start);
+                elseif(!$start && $end)
+                    $where = "jinsi_user_create_time <= " . strtotime($end);
+                else
+                    $where = "jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
+            }
+
+            $sql = "SELECT * FROM jinsi_user WHERE $where";
+
+            $userList = M()->query($sql);
+        }
+
         if($userList){
             $result = array('errcode' => 0, 'msg' => '获取用户列表成功!', 'data' => $userList);
         }
@@ -303,6 +333,47 @@ class TelecastAction extends UserAction
     public function addtelecast ()
     {
         $this->display();
+    }
+
+    /**
+     * 获取所有条件存在的用户数量
+     */
+    public function searchCount ()
+    {
+        if(!IS_AJAX) $this->_to404();
+
+        $result = array('errcode' => 1, 'msg' => '获取用户数量失败!');
+
+        $username = $this->_get('username');
+        $start = $this->_get('start');
+        $end = $this->_get('end');
+
+        $where = 1;
+        if($username){
+            $where = "jinsi_user_name LIKE '%$username%' ";
+            if($start && !$end)
+                $where .= "AND jinsi_user_create_time >=" . strtotime($start);
+            elseif(!$start && $end)
+                $where .= "AND jinsi_user_create_time <=" . strtotime($end);
+            else
+                $where .= "AND jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
+        }else{
+            if($start && !$end)
+                $where = "jinsi_user_create_time >= " . strtotime($start);
+            elseif(!$start && $end)
+                $where = "jinsi_user_create_time <= " . strtotime($end);
+            else
+                $where = "jinsi_user_create_time BETWEEN " . strtotime($start) . " AND " . strtotime($end);
+        }
+
+        $sql = "SELECT count(id) FROM jinsi_user WHERE $where";
+
+        $count = M()->query($sql);
+        if($count !== false){
+            $result = array('errcode' => 0, 'msg' => '获取用户数量成功!', 'data' => $count);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
     }
 
     /**
