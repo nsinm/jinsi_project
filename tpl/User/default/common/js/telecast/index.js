@@ -453,11 +453,11 @@ var indexAction = {
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                indexAction.getBannerList(index);
+                indexAction.getFeedbackList(index);
                 return;
             }
         },function(api){
-            indexAction.getBannerList(api.getCurrent());
+            indexAction.getFeedbackList(api.getCurrent());
             return;
         })
     },
@@ -469,11 +469,11 @@ var indexAction = {
             prevContent : '<',
             nextContent : '>',
             callback : function(index){
-                indexAction.getCommentList(index);
+                indexAction.getBannerList(index);
                 return;
             }
         },function(api){
-            indexAction.getCommentList(api.getCurrent());
+            indexAction.getBannerList(api.getCurrent());
             return;
         })
     },
