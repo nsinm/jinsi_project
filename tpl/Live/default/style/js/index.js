@@ -140,7 +140,7 @@ var indexAction = {
                         html +=     '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
                     }else{
                         html +=     '<p class="user_wordbubble" >';
-                        html +=         '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
+                        html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
                         html +=         '<span>32&quot;</span>';
                         html +=     '</p>';
                     }
@@ -176,116 +176,93 @@ var indexAction = {
                 var img = $(this).siblings('.pic');
                 var headerPic = $(this).parent().siblings('.weui_cell_hd');
 
+                img.click(function(){
+                    var $this = $(this)
+                    $imgOverlay.show()
+                    var imgsrc = $this.attr('src')
+                    $imgContainer.show()
+                    $imgBigger.attr('src',imgsrc)
+                })
+
                 headerPic.click(function(){
                     location.href = params.cUrl + '&cid=' + cid;
                 })
 
-                if($(this).attr('id') == 'live_main'){
-                    $(this).children().each(function(){
-                        if($(this).attr('class') == 'pic'){
-                            $(this).click(function(){
-                                var $this = $(this)
-                                $imgOverlay.show()
-                                var imgsrc = $this.attr('src')
-                                $imgContainer.show()
-                                $imgBigger.attr('src',imgsrc)
-
-                            })
-                        }else{
-                            $(this).click(function(){
-                                location.href = params.cUrl + '&cid=' + cid;
-                            })
-                        }
-                    })
-                }else{
-                    $(this).find('span').each(function(){
-                        if($(this).attr('id') == 'icon-comment'){
-                            $(this).click(function(){
-                                var contentId = cid;
-                                var mask = $('#mask_reply')
-                                var replyActionsheet = $('#reply_actionsheet')
-                                var contentInput = replyActionsheet.find("#comment-input")[0]
-                                replyActionsheet.addClass('weui_actionsheet_toggle')
-                                mask.show().addClass('weui_fade_toggle').click(function () {
-                                    hideActionSheet(replyActionsheet, mask)
-                                });
-                                replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
-                                    hideActionSheet(replyActionsheet, mask)
-                                })
-                                replyActionsheet.find('#sendComment').click(function () {
-                                    var content = contentInput.value;
-                                    if(content == ''){
-                                        alert('请填写评论内容!');
-                                        return;
-                                    }
-                                    var isComment = 1;
-                                    var cid = contentId;
-                                    var type = 1;
-                                    var userId = params.userId;
-                                    var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
-                                    $.ajax({
-                                        url:params.addUrl,
-                                        type:"post",
-                                        dataType:'json',
-                                        data:json,
-                                        success:function(data){
-                                            console.log(data);
-                                            if(data.errcode == 0){
-                                                location.href = params.cUrl + '&cid=' + cid;
-                                            }else{
-                                                alert(data.msg);
-                                            }
-                                        },
-                                        error:function(){
-                                        }
-                                    })
-                                    console.log('已发送评论')
-                                    hideActionSheet(replyActionsheet, mask)
-                                    contentInput.value = ''
-                                })
-                                replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
-                            })
-                        }else if($(this).attr('class') == 'icon-like on'){
-                            var that = $(this);
-                            $(this).parent().click(function(){
-                                var cid = that.attr('data-cid');
-                                var url = params.pUrl + '&cid=' + cid;
-                                $.getJSON(url, {}, function(data){
-                                    console.log(data);
-                                    if(data.errcode == '0'){
-                                        var $this = that.parent();
-                                        var text = $this.text();
-                                        var count = text.trim().substring(1).trim();
-                                        html = '<span class="icon-like" alt=""></span>赞&nbsp;';
-                                        html += parseInt(count) + 1;
-                                        $this.empty();
-                                        $this.html(html);
-                                    }else{
-                                        alert(data.msg);
-                                    }
-                                }, 'JSON');
-                            });
-                        }
-                    })
+                if($(this).attr('class') != 'user_liveinteract'){
+                    $(this).click(function(){
+                        location.href = params.cUrl + '&cid=' + cid;
+                    });
                 }
 
-                // img.click(function(){
-                //     var $this = $(this)
-                //     $imgOverlay.show()
-                //     var imgsrc = $this.attr('src')
-                //     $imgContainer.show()
-                //     $imgBigger.attr('src',imgsrc)
-                // })
-
-
-
-                // if($(this).attr('class') != 'user_liveinteract'){
-                //     $(this).click(function(){
-                //         location.href = params.cUrl + '&cid=' + cid;
-                //     });
-                // }
-
-
+                $(this).find('span').each(function(){
+                    if($(this).attr('id') == 'icon-comment'){
+                        $(this).click(function(){
+                            var contentId = cid;
+                            var mask = $('#mask_reply')
+                            var replyActionsheet = $('#reply_actionsheet')
+                            var contentInput = replyActionsheet.find("#comment-input")[0]
+                            replyActionsheet.addClass('weui_actionsheet_toggle')
+                            mask.show().addClass('weui_fade_toggle').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            });
+                            replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            })
+                            replyActionsheet.find('#sendComment').click(function () {
+                                var content = contentInput.value;
+                                if(content == ''){
+                                    alert('请填写评论内容!');
+                                    return;
+                                }
+                                var isComment = 1;
+                                var cid = contentId;
+                                var type = 1;
+                                var userId = params.userId;
+                                var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+                                 $.ajax({
+                                     url:params.addUrl,
+                                     type:"post",
+                                     dataType:'json',
+                                     data:json,
+                                     success:function(data){
+                                         console.log(data);
+                                         if(data.errcode == 0){
+                                             location.href = params.cUrl + '&cid=' + cid;
+                                         }else{
+                                             alert(data.msg);
+                                         }
+                                     },
+                                     error:function(){
+                                     }
+                                 })
+                                console.log('已发送评论')
+                                hideActionSheet(replyActionsheet, mask)
+                                contentInput.value = ''
+                            })
+                            replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+                        })
+                    }else if($(this).attr('class') == 'icon-like on'){
+                        var that = $(this);
+                        $(this).parent().click(function(){
+                            var cid = that.attr('data-cid');
+                            var url = params.pUrl + '&cid=' + cid;
+                            $.getJSON(url, {}, function(data){
+                                console.log(data);
+                                if(data.errcode == '0'){
+                                    var $this = that.parent();
+                                    var text = $this.text();
+                                    var count = text.trim().substring(1).trim();
+                                    html = '<span class="icon-like" alt=""></span>赞&nbsp;';
+                                    html += parseInt(count) + 1;
+                                    $this.empty();
+                                    $this.html(html);
+                                }else{
+                                    alert(data.msg);
+                                }
+                            }, 'JSON');
+                        });
+                    }
+                })
 
             });
         }, 'JSON');
