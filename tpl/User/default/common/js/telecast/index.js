@@ -424,7 +424,7 @@ var indexAction = {
                     }else{
                         $(".ListProduct").empty();
                         $('.M-box').empty();
-                        indexAction.userPagination(data.data[0].count, username, start, end);
+                        indexAction.searchPagination(data.data[0].count, username, start, end);
                     }
                 }else{
                     alert(data.msg);
@@ -434,8 +434,24 @@ var indexAction = {
         })
     },
 
-    'userPagination' : function(count, username, start, end){
+    'userPagination' : function(){
         $('.M-box').pagination({
+            totalData : params.userCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getUserList(index);
+                return;
+            }
+        },function(api){
+            indexAction.getUserList(api.getCurrent());
+            return;
+        })
+    },
+
+    'searchPagination' : function(count, username, start, end){
+        $('.M-box1').pagination({
             totalData : count,
             showData : params.pageSize,
             prevContent : '<',
@@ -518,7 +534,7 @@ var indexAction = {
         //导航条点击事件
         this.navEvent();
         if(params.tplName == 'user_list'){
-            this.userPagination(params.userCount);
+            this.userPagination();
             this.userSearch();
         }else if(params.tplName == 'user_live'){
             this.livePagination();
