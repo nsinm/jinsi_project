@@ -370,7 +370,7 @@ class TelecastAction extends UserAction
 
         $count = M()->query($sql);
         if($count !== false){
-            $result = array('errcode' => 0, 'msg' => '获取用户数量成功!', 'data' => $count['count']);
+            $result = array('errcode' => 0, 'msg' => '获取用户数量成功!', 'data' => $count);
         }
 
         $this->ajaxReturn($result, 'JSON');
