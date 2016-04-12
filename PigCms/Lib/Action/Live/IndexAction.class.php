@@ -44,7 +44,7 @@ class IndexAction extends LiveAction
         if($this->userType == 2){
             $where .= ' AND id != ' . $this->userId;
         }
-        $instructors = M('user')->where($where)->order('jinsi_user_create_time')->limit(8)->select();
+        $instructors = M('user')->where($where)->order('jinsi_user_sort')->limit(8)->select();
         if($instructors){
             $result = array(
                 'errcode' => 0,
@@ -77,9 +77,9 @@ class IndexAction extends LiveAction
             }
             $in = '(' . implode(',', $instructorIds) . ')';
             if($instructorIds)
-                $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id IN {$in} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
+                $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_create_user_id IN {$in} AND jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC LIMIT 50";
         }else{
-            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC";
+            $sql = "SELECT FROM_UNIXTIME(jc.jinsi_content_create, '%Y-%m-%d %H:%i') AS content_create_time, jc.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_content AS jc LEFT JOIN jinsi_user AS ju ON jc.jinsi_content_create_user_id = ju.id WHERE jc.jinsi_content_is_comment = 0 ORDER BY jc.jinsi_content_create DESC LIMIT 50";
         }
 
         $comments = M()->query($sql);
