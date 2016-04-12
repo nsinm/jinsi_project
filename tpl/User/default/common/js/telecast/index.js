@@ -45,16 +45,15 @@ var indexAction = {
                 html += '<thead>';
                 html +=     '<tr>';
                 html +=         '<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall(\'id[]\');"></th>';
-                html +=         '<th width="50">编号</th>';
-                html +=         '<th width="50">openid</th>';
+                html +=         '<th width="30">编号</th>';
                 html +=         '<th width="80">用户名</th>';
-                html +=         '<th width="100">类型</th>';
-                html +=         '<th class="210">风格</th>';
+                html +=         '<th width="80">类型</th>';
+                html +=         '<th class="100">风格</th>';
                 html +=         '<th width="50">签名</th>';
                 html +=         '<th class="50">信息</th>';
                 html +=         '<th class="50">推荐</th>';
-                html +=         '<th class="40">所在城市</th>';
-                html +=         '<th class="40">导师排序</th>';
+                html +=         '<th class="60">所在城市</th>';
+                html +=         '<th class="60">导师排序</th>';
                 html +=         '<th width="100" class="norightborder">操作</th>';
                 html +=     '</tr>';
                 html += '</thead>';
@@ -64,7 +63,6 @@ var indexAction = {
                     html += '<tr>';
                     html += '<td><input type="checkbox" value="" class="cbitem" name="id[]"></td>';
                     html += '<td id="user_id">' + infos[index].id + '</td>';
-                    html += '<td>' + infos[index].open_id + '</td>';
                     html += '<td id="user_name">' + infos[index].jinsi_user_name + '</td>';
                     if (infos[index].jinsi_user_type == '1') {
                         html += '<td>普通用户</td>';
