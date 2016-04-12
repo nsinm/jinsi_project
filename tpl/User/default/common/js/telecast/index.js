@@ -416,15 +416,15 @@ var indexAction = {
 
             var json = {username:username, start:start, end:end};
             $.getJSON(params.searchCount, json, function(data){
-                console.log(data.data.count)
+                console.log(data)
                 if(data.errcode == 0){
-                    if(data.data.count == '0'){
+                    if(data.data[0].count == '0'){
                         alert('没有查询到!');
                         return;
                     }else{
                         $(".ListProduct").empty();
                         $('.M-box').empty();
-                        indexAction.userPagination(data.data.count, username, start, end);
+                        indexAction.userPagination(data.data[0].count, username, start, end);
                     }
                 }else{
                     alert(data.msg);
