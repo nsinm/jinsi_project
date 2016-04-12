@@ -30,7 +30,7 @@ class TelecastAction extends UserAction
      */
     public function getUserList ()
     {
-        $this->_to404();
+        if(!IS_AJAX) $this->_to404();
 
         $result = array('errcode' => 1, 'msg' => '获取用户列表失败!');
 
