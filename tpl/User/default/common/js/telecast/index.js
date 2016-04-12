@@ -416,8 +416,9 @@ var indexAction = {
 
             var json = {username:username, start:start, end:end};
             $.getJSON(params.searchCount, json, function(data){
+                console.log(data.data.count)
                 if(data.errcode == 0){
-                    if(data.data == '0'){
+                    if(data.data.count == '0'){
                         alert('没有查询到!');
                         return;
                     }else{
