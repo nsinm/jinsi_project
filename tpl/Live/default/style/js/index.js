@@ -179,19 +179,17 @@ var indexAction = {
                     var imgsrc = $this.attr('src')
                     $imgContainer.show()
                     $imgBigger.attr('src',imgsrc)
-                    return;
                 })
 
                 headerPic.click(function(){
                     location.href = params.cUrl + '&cid=' + cid;
-                    return;
                 })
 
-                // if($(this).attr('class') != 'user_liveinteract'){
-                //     $(this).click(function(){
-                //         location.href = params.cUrl + '&cid=' + cid;
-                //     });
-                // }
+                if($(this).attr('class') != 'user_liveinteract'){
+                    $(this).click(function(){
+                        location.href = params.cUrl + '&cid=' + cid;
+                    });
+                }
 
                 $(this).find('span').each(function(){
                     if($(this).attr('id') == 'icon-comment'){
@@ -261,11 +259,6 @@ var indexAction = {
                             }, 'JSON');
                         });
                     }
-                    return;
-                })
-
-                $(this).parent().click(function(){
-                    location.href = params.cUrl + '&cid=' + cid;
                 })
 
             });
