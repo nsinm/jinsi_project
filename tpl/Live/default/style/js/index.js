@@ -8,8 +8,6 @@ var indexAction = {
         console.log(11111)
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
-            // nextButton: '.swiper-button-next',
-            // prevButton: '.swiper-button-prev',
             paginationClickable: true,
             loop : true,
             centeredSlides: true,
@@ -54,6 +52,7 @@ var indexAction = {
         }, 'JSON')
     },
 
+    //获取推荐导师列表
     'getRecomendInstructor' : function(){
         $.getJSON(params.griUrl, {}, function(data){
             var tag = $('.bd .weui_grids');
