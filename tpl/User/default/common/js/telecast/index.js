@@ -424,7 +424,7 @@ var indexAction = {
                     }else{
                         $(".ListProduct").empty();
                         $('.M-box').empty();
-                        indexAction.userPagination(data.data, username, start, end);
+                        indexAction.userPagination(data.data.count, username, start, end);
                     }
                 }else{
                     alert(data.msg);
