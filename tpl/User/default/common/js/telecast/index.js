@@ -54,6 +54,7 @@ var indexAction = {
                 html +=         '<th class="50">信息</th>';
                 html +=         '<th class="50">推荐</th>';
                 html +=         '<th class="40">所在城市</th>';
+                html +=         '<th class="40">导师排序</th>';
                 html +=         '<th width="100" class="norightborder">操作</th>';
                 html +=     '</tr>';
                 html += '</thead>';
@@ -83,6 +84,7 @@ var indexAction = {
                         html += '<td></td>';
                     }
                     html += '<td id="user_city">' + infos[index].jinsi_user_city + '</td>';
+                    html += '<td id="user_sort">' + infos[index].jinsi_user_sort + '</td>';
                     html += '<td class="norightborder" data-uid="' + infos[index].id + '">';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
                     html += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">编辑</a><br/>';
@@ -179,6 +181,9 @@ var indexAction = {
                     case 'user_city':
                         createHtml(n, 'city');
                         break;
+                    case 'user_sort':
+                        createHtml(n, 'sort');
+                        break;
                 }
             })
         }
@@ -196,7 +201,8 @@ var indexAction = {
             var sign = grand.find("input[name='sign']").val();
             var content = grand.find("input[name='content']").val();
             var city = grand.find("input[name='city']").val();
-            var json = {'name':name, 'style':style, 'sign':sign, 'content':content, 'city':city};
+            var sort = grand.find("input[name='sort']").val();
+            var json = {'name':name, 'style':style, 'sign':sign, 'content':content, 'city':city, 'sort':sort};
             return json;
         }
     },

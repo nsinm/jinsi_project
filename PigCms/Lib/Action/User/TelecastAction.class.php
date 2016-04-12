@@ -127,7 +127,8 @@ class TelecastAction extends UserAction
                         'jinsi_user_style' => $this->_post('style'),
                         'jinsi_user_sign' => $this->_post('sign'),
                         'jinsi_user_info' => $this->_post('content'),
-                        'jinsi_user_city' => $this->_post('city')
+                        'jinsi_user_city' => $this->_post('city'),
+                        'jinsi_user_sort' => $this->_post('sort')
                     );
                     $status = $model->save($data);
                     if($status)
