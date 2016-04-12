@@ -99,6 +99,7 @@ class TelecastAction extends UserAction
                 case '2':
                     $data['jinsi_user_type'] = 1;
                     $data['jinsi_user_recommend'] = 0;
+                    $data['jinsi_user_sort'] = '';
                     $status = $model->save($data);
                     if($status)
                         $result = array('errcode' => 0, 'msg' => '取消成功!');
@@ -117,6 +118,7 @@ class TelecastAction extends UserAction
                     break;
                 case '5':
                     $data['jinsi_user_type'] = 2;
+                    $data['jinsi_user_sort'] = '9999';
                     $status = $model->save($data);
                     if($status)
                         $result = array('errcode' => 0, 'msg' => '设置成功!');
