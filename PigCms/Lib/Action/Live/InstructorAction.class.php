@@ -78,15 +78,8 @@ class InstructorAction extends LiveAction
         $filter = $this->_get('filter');
         if($filter == '2'){
             $where = 'jinsi_user_type = 2';
-            if($this->userType == 2){
-                $where .= ' AND id != ' . $this->userId;
-            }
         }else{
-            $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1';
-            if($this->userType == 2){
-                $where .= ' AND id != ' . $this->userId;
-            }
-            $where .= ' ORDER BY jinsi_user_create_time';
+            $where = 'jinsi_user_type = 2 AND jinsi_user_recommend = 1 ORDER BY jinsi_user_sort ASC';
         }
 
 
@@ -106,7 +99,7 @@ class InstructorAction extends LiveAction
                 array_push($instructors, $value);
             }
 
-            if ($filter) {
+            if ($filter == '2') {
                 usort($instructors, function ($a, $b) {
                     if ($a['follow_num'] == $b['follow_num'])
                         return 0;
