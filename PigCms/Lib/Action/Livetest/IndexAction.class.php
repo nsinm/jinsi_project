@@ -245,6 +245,6 @@ class IndexAction extends LiveAction
             }
         }
 
-        $this->ajaxReturn($readNo, 'JSON');
+        $this->ajaxReturn($result, 'JSON');
     }
 }
