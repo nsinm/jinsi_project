@@ -149,7 +149,7 @@ var indexAction = {
                     html +=         '<p class="user_liveinteract">';
                         html +=         '<span class="like-btn">';
                         html +=              '<span alt="">';
-                        html +=                 '</span>'
+                        html +=                 '</span>已阅&nbsp;3232'
                         html +=         '</span>';
                         html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';
