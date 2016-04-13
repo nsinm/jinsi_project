@@ -184,21 +184,12 @@ var indexAction = {
                 })
 
                 headerPic.click(function(){
-                    $.getJSON(params.upReadNo, {cid:cid}, function(data){
-                        if(data.errcode == 0){
-                            location.href = params.cUrl + '&cid=' + cid;
-                        }
-                    })
-
+                    location.href = params.cUrl + '&cid=' + cid;
                 })
 
                 if($(this).attr('class') != 'user_liveinteract'){
                     $(this).click(function(){
-                        $.getJSON(params.upReadNo, {cid:cid}, function(data){
-                            if(data.errcode == 0){
-                                location.href = params.cUrl + '&cid=' + cid;
-                            }
-                        })
+                         location.href = params.cUrl + '&cid=' + cid;
                     });
                 }
 

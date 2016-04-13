@@ -104,6 +104,12 @@ class IndexAction extends LiveAction
     public function comment ()
     {
         $cid = $this->_get('cid');
+
+        //更新阅读数
+        $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
+        $update['jinsi_content_read_no'] = $readNo + 1;
+        M('content')->where('id=' . $cid)->save($update);
+        
         $uris = array(
             'gcUrl' => U('getComment', 'cid=' . $cid),
             'pUrl' => U('praise'),
