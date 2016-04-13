@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>股播</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <div>导师</div>
+    <div class="selected">我的</div>
+</div>
+<div class="container js_container">
+    <div class="page">
+        <div class="bd">
+            <div class="weui_cells_title"></div>
+            <div class="weui_cells weui_cells_checkbox mb44">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/my.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'userId' : '{pigcms:$urls.userId}',
+        'tplName' : 'my_follow',
+        'gfUrl' : '{pigcms:$urls.gfUrl}',
+        'cfUrl' : '{pigcms:$urls.cfUrl}',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}',
+    };
+</script>
+</body>
+</html>

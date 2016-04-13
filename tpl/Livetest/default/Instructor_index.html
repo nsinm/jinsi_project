@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>股播</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <if condition="$type eq 1">
+        <div>导师</div>
+        <div class="selected">我的</div>
+    <else/>
+        <div class="selected">导师</div>
+        <div>我的</div>
+    </if>
+
+</div>
+<div class="container js_container">
+    <div class="page">
+        <div class="weui_cells weui_cells_access mb44">
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_hd">
+                    <div class="user_thumb mr10">
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>头像</p>
+                </div>
+                <div></div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>名字</p>
+                </div>
+                <div id="name">血海</div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>风格</p>
+                </div>
+                <div id="style">激进</div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>签名</p>
+                </div>
+                <div id="sign">我不是股神</div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>简介</p>
+                </div>
+                <div id="info"></div>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/user.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'tplName' : 'instructor_index',
+        'guiUrl' : '{pigcms:$urls.giiUrl}',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}'
+    };
+</script>
+</body>
+</html>
