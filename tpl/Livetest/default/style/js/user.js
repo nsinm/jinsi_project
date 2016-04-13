@@ -40,19 +40,19 @@ var userAction = {
                         html += '<div class="weui_cell teacherlist_block" data-uid="' + infos[index].id + '">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10">';
-                        html +=             '<a href="http://baidu.com">';
+                        //html +=             '<a href="http://baidu.com">';
                         html +=                 '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
-                        html +=             '</a>';
+                        //html +=             '</a>';
                         html +=         '</div>';
                         html +=     '</div>';
                         html +=     '<div class="weui_cell_bd weui_cell_primary ">';
                         html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
                         if(infos[index].is_follow){
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt" data-value="' + infos[index].id + '">取消关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt c_attention" data-value="' + infos[index].id + '">取消关注</a>';
                         }else{
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '">关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt attention" data-value="' + infos[index].id + '">关注</a>';
                         }
-                        html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '">成为会员</a>';
+                        html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member">成为会员</a>';
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
                         html +=         '<p class="user_style">风格：' + infos[index].jinsi_user_style + '</p>';
@@ -67,7 +67,7 @@ var userAction = {
                     var instructorId = $(this).attr('data-value');
                     var userId = params.userId;
                     var json = {'userId' : userId, 'instructorId' : instructorId};
-                    if($(this).attr('class').indexOf('weui_btn_default') > 0){
+                    if($(this).attr('class').indexOf('c_attention') > 0){
                         $(this).click(function(){
                             $.getJSON(params.cfollowUrl, json, function(data){
                                 console.log(data);
@@ -78,7 +78,7 @@ var userAction = {
                                 }
                             }, 'JSON');
                         });
-                    }else{
+                    }else if($(this).attr('class').indexOf('attention') > 0){
                         $(this).click(function(){
                             $.getJSON(params.followUrl, json, function(data){
                                 console.log(data);
