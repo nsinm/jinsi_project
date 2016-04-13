@@ -148,7 +148,7 @@ var indexAction = {
                     html +=        '</p>';
                     html +=         '<p class="user_liveinteract">';
                         html +=         '<span class="like-btn">';
-                        html +=              '已阅&nbsp;3232';
+                        html +=              '已阅&nbsp;' + infos[index].jinsi_content_read_no;
                         html +=         '</span>';
                         html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';
