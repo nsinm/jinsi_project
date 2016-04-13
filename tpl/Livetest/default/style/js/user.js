@@ -17,6 +17,8 @@ var userAction = {
             }
         }, 'JSON');
     },
+
+    //导师列表
     'instructorList': function () {
         $('.weui_select').change(function(){
             var filter = $(this).children('option:selected').val();
@@ -38,16 +40,19 @@ var userAction = {
                         html += '<div class="weui_cell teacherlist_block" data-uid="' + infos[index].id + '">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10">';
-                        html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                        html +=             '<a href="http://baidu.com">';
+                        html +=                 '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                        html +=             '</a>';
                         html +=         '</div>';
                         html +=     '</div>';
                         html +=     '<div class="weui_cell_bd weui_cell_primary ">';
                         html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
                         if(infos[index].is_follow){
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini follow weui_btn_default" data-value="' + infos[index].id + '">取消关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt" data-value="' + infos[index].id + '">取消关注</a>';
                         }else{
-                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_mini follow weui_btn_primary" data-value="' + infos[index].id + '">关注</a>';
+                            html +=     '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '">关注</a>';
                         }
+                        html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '>成为会员</a>';
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
                         html +=         '<p class="user_style">风格：' + infos[index].jinsi_user_style + '</p>';
