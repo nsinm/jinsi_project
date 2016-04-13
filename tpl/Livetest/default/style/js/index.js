@@ -267,6 +267,7 @@ var indexAction = {
         }, 'JSON');
     },
 
+    //获取评论列表
     'getComments' : function(){
         var tag = $('.weui_cells.weui_cells_access.mt0');
         var html = '';
@@ -275,15 +276,15 @@ var indexAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block user_comment">';
+                    html += '<div class="weui_cell live_block pleft40 user_comment">';
                     html +=     '<div class="weui_cell_hd">';
-                    html +=         '<div class="user_thumb mr10">';
+                    html +=         '<div class="user_thumb mr10 user-comment">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
                     html +=         '</div>';
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
-                    html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    html +=         '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                    html +=         '<p class="user_livename user-comment-name">' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_liveword user-comment-name">' + infos[index].jinsi_content_info + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
                         html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
                     }
