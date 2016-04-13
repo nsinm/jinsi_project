@@ -35,6 +35,7 @@ var indexAction = {
         var tag = $('.swiper-wrapper');
         var url = params.bananerList;
         $.getJSON(url, {}, function(data){
+            console.log(data);
             var html = '';
             if(data.errcode == 0) {
                 for (var index in data.data) {
