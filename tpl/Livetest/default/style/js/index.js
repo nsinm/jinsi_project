@@ -294,7 +294,7 @@ var indexAction = {
                     html +=             '<span class="sm-like like-btn">';
                     html +=             '</span>';
                     html +=             '<span class="sm-comment">'
-                    //html +=                 '<span class="icon-comment reply" alt=""></span>回复'
+                    html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
