@@ -441,9 +441,9 @@ var indexAction = {
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表
-            this.getRecomendInstructor();
+            //this.getRecomendInstructor();
             //banner列表
-            //this.getBannerList();
+            this.getBannerList();
             //获取关注导师直播列表
             this.liveFilter();
             this.moreTeacher();
