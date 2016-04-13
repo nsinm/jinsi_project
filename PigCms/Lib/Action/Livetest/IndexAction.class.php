@@ -227,4 +227,24 @@ class IndexAction extends LiveAction
 
         $this->ajaxReturn($result, 'JSON');
     }
+
+    /**
+     * 已阅
+     */
+    public function read ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '更新失败!');
+        $cid = $this->_get('cid');
+        if($cid){
+            $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
+            $update['jinsi_content_read_no'] = $readNo + 1;
+            $fetchRows = M('content')->where('id=' . $cid)->save($update);
+            if($fetchRows){
+                $result = array('errcode' => 0, 'msg' => '更新成功!');
+            }
+        }
+
+        $this->ajaxReturn($readNo, 'JSON');
+    }
 }

@@ -185,12 +185,21 @@ var indexAction = {
                 })
 
                 headerPic.click(function(){
-                    location.href = params.cUrl + '&cid=' + cid;
+                    $.getJSON(params.upReadNo, {cid:cid}, function(data){
+                        if(data.errcode == 0){
+                            location.href = params.cUrl + '&cid=' + cid;
+                        }
+                    })
+
                 })
 
                 if($(this).attr('class') != 'user_liveinteract'){
                     $(this).click(function(){
-                        location.href = params.cUrl + '&cid=' + cid;
+                        $.getJSON(params.upReadNo, {cid:cid}, function(data){
+                            if(data.errcode == 0){
+                                location.href = params.cUrl + '&cid=' + cid;
+                            }
+                        })
                     });
                 }
 
