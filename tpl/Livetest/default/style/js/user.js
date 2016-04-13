@@ -52,7 +52,7 @@ var userAction = {
                         }else{
                             html +=     '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '">关注</a>';
                         }
-                        html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '>成为会员</a>';
+                        html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt" data-value="' + infos[index].id + '">成为会员</a>';
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
                         html +=         '<p class="user_style">风格：' + infos[index].jinsi_user_style + '</p>';
