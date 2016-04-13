@@ -5,7 +5,6 @@
 var indexAction = {
     //首页banner显示效果
     'banner' : function(){
-        console.log(11111)
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             paginationClickable: true,
