@@ -159,6 +159,9 @@ class IndexAction extends LiveAction
                 if($praise){
                     $value['current_user_praise'] = 1;
                 }
+                $sql = "SELECT FROM_UNIXTIME(jc.jinsi_reply_time, '%Y-%m-%d %H:%i') AS reply_create_time, jr.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_reply AS jr LEFT JOIN jinsi_user AS ju ON jr.jinsi_reply_user_id = ju.id WHERE jc.jinsi_reply_content_id = {$value['id']} ORDER BY jc.jinsi_reply_time ASC";
+                $replies = M()->query($sql);
+                $value['replies'] = $replies;
                 array_push($data, $value);
             }
 
