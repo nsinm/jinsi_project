@@ -368,7 +368,7 @@ var indexAction = {
                                 success:function(data){
                                     console.log(data);
                                     if(data.errcode == 0){
-                                        location.href = params.cUrl + '&cid=' + cid;
+                                        indexAction.getComments();
                                     }else{
                                         alert(data.msg);
                                     }
