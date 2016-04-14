@@ -372,14 +372,6 @@ var indexAction = {
                 mask.hide();
             })
         }
-
-        $('.thumb-image').click(function(){
-            var $this = $(this)
-            $imgOverlay.show()
-            var imgsrc = $this.attr('src')
-            $imgContainer.show()
-            $imgBigger.attr('src',imgsrc)
-        })
     },
 
     'toComment' : function(){
@@ -458,6 +450,15 @@ var indexAction = {
             //获取直播评论列表
             this.getComments();
             this.toUserInfo();
+
+            //图片放大
+            $('.thumb-image').click(function(){
+                var $this = $(this)
+                $imgOverlay.show()
+                var imgsrc = $this.attr('src')
+                $imgContainer.show()
+                $imgBigger.attr('src',imgsrc)
+            })
         }
         //十字呼出框点击事件
         this.toComment();
