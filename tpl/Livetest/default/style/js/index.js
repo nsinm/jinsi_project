@@ -268,7 +268,7 @@ var indexAction = {
 
     //获取评论列表
     'getComments' : function(){
-        var tag = $('.weui_cells.weui_cells_access.mt0');
+        var tag = $('#comment');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
             console.log(data);
@@ -308,7 +308,7 @@ var indexAction = {
             }else{
                 html += '当前还没有评论内容哦!';
             }
-            tag.append(html).find('.user_liveinteract span').each(function(){
+            tag.append(html).parents('.weui_cells.weui_cells_access.mt0').find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
                         var that = $(this);
