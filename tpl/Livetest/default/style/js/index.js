@@ -326,9 +326,11 @@ var indexAction = {
                         }
                         html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                         html +=             '</span>';
-                        html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '">';
-                        html +=                 '<span class="icon-comment reply" alt=""></span>回复'
-                        html +=             '</span>'
+                        if(params.userId != replies[i].user_id) {
+                            html += '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '">';
+                            html += '<span class="icon-comment reply" alt=""></span>回复'
+                            html += '</span>'
+                        }
                         html +=         '</p>';
                         html +=     '</div>';
                         html += '</div>';
