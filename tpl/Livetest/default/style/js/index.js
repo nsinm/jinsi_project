@@ -298,7 +298,7 @@ var indexAction = {
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
-                    html +=             '<span class="sm-comment">'
+                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '">';
                     html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
@@ -336,9 +336,8 @@ var indexAction = {
                             }
                         }, 'JSON');
                     });
-                }else if($(this).attr('class') == 'icon-comment reply'){
+                }else if($(this).attr('class') == 'sm-comment'){
                     $(this).click(function(){
-                        var that = $(this);
                         var cid = $(this).attr('data-cid');
                         var contentId = cid;
                         var mask = $('#mask_reply')
