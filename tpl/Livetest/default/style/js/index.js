@@ -362,51 +362,54 @@ var indexAction = {
                         }, 'JSON');
                     });
                 }else if($(this).attr('class') == 'sm-comment'){
-                    $(this).click(function(){
-                        var cid = $(this).attr('data-cid');
-                        var contentId = cid;
-                        $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
-                        var mask = $('#mask_reply')
-                        var replyActionsheet = $('#reply_actionsheet')
-                        var contentInput = replyActionsheet.find("#comment-input")[0]
-                        replyActionsheet.addClass('weui_actionsheet_toggle')
-                        mask.show().addClass('weui_fade_toggle').click(function () {
-                            hideActionSheet(replyActionsheet, mask)
-                        });
-                        replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
-                            hideActionSheet(replyActionsheet, mask)
-                        })
-                        replyActionsheet.find('#sendComment').click(function () {
-                            var content = contentInput.value;
-                            if(content == ''){
-                                alert('请填写回复内容!');
-                                return;
-                            }
-                            var cid = contentId;
-                            var userId = params.userId;
-                            var json = {'content':content, 'cid':cid, 'userId':userId}
-                            $.ajax({
-                                url:params.addReplyUrl,
-                                type:"post",
-                                dataType:'json',
-                                data:json,
-                                success:function(data){
-                                    console.log(data);
-                                    if(data.errcode == 0){
-                                        tag.empty();
-                                        indexAction.getComments();
-                                    }else{
-                                        alert(data.msg);
-                                    }
-                                },
-                                error:function(){
-                                }
+                    $.each(function(){
+                        $(this).click(function(){
+                            var cid = $(this).attr('data-cid');
+                            var contentId = cid;
+                            $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
+                            var mask = $('#mask_reply')
+                            var replyActionsheet = $('#reply_actionsheet')
+                            var contentInput = replyActionsheet.find("#comment-input")[0]
+                            replyActionsheet.addClass('weui_actionsheet_toggle')
+                            mask.show().addClass('weui_fade_toggle').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            });
+                            replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
                             })
-                            hideActionSheet(replyActionsheet, mask)
-                            contentInput.value = ''
-                        })
-                        replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
-                    });
+                            replyActionsheet.find('#sendComment').click(function () {
+                                var content = contentInput.value;
+                                if(content == ''){
+                                    alert('请填写回复内容!');
+                                    return;
+                                }
+                                var cid = contentId;
+                                var userId = params.userId;
+                                var json = {'content':content, 'cid':cid, 'userId':userId}
+                                $.ajax({
+                                    url:params.addReplyUrl,
+                                    type:"post",
+                                    dataType:'json',
+                                    data:json,
+                                    success:function(data){
+                                        console.log(data);
+                                        if(data.errcode == 0){
+                                            tag.empty();
+                                            indexAction.getComments();
+                                        }else{
+                                            alert(data.msg);
+                                        }
+                                    },
+                                    error:function(){
+                                    }
+                                })
+                                hideActionSheet(replyActionsheet, mask)
+                                contentInput.value = ''
+                            })
+                            replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+                        });
+                    })
+
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).parent().click(function() {
                         showDailog();
