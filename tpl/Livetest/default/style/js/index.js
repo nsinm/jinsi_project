@@ -299,7 +299,7 @@ var indexAction = {
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
                     html +=             '<span class="sm-comment">'
-                    html +=                 '<span class="icon-comment" alt=""></span>回复'
+                    html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
                     html +=     '</div>';
@@ -338,9 +338,51 @@ var indexAction = {
                     });
                 }else if($(this).attr('class') == 'icon-comment reply'){
                     $(this).click(function(){
-                        $('.weui_actionsheet_menu').find("div[data-value='2']").text('图文回复');
-                        $('.weui_actionsheet_menu').find("div[data-value='1']").text('文字回复');
-                        showDailog();
+                        var that = $(this);
+                        var cid = $(this).attr('data-cid');
+                        var contentId = cid;
+                        var mask = $('#mask_reply')
+                        var replyActionsheet = $('#reply_actionsheet')
+                        var contentInput = replyActionsheet.find("#comment-input")[0]
+                        replyActionsheet.addClass('weui_actionsheet_toggle')
+                        mask.show().addClass('weui_fade_toggle').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        });
+                        replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        })
+                        replyActionsheet.find('#sendComment').click(function () {
+                            var content = contentInput.value;
+                            if(content == ''){
+                                alert('请填写评论内容!');
+                                return;
+                            }
+                            var isComment = 1;
+                            var cid = contentId;
+                            var type = 1;
+                            var userId = params.userId;
+                            var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+                            $.ajax({
+                                url:params.addUrl,
+                                type:"post",
+                                dataType:'json',
+                                data:json,
+                                success:function(data){
+                                    console.log(data);
+                                    if(data.errcode == 0){
+                                        location.href = params.cUrl + '&cid=' + cid;
+                                    }else{
+                                        alert(data.msg);
+                                    }
+                                },
+                                error:function(){
+                                }
+                            })
+                            console.log('已发送评论')
+                            hideActionSheet(replyActionsheet, mask)
+                            contentInput.value = ''
+                        })
+                        replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).parent().click(function() {
