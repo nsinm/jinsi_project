@@ -362,7 +362,8 @@ var indexAction = {
                         }, 'JSON');
                     });
                 }else if($(this).attr('class') == 'sm-comment'){
-                    $.each(function(){
+                    var that = $(this);
+                    that.each(function(){
                         $(this).click(function(){
                             var cid = $(this).attr('data-cid');
                             var contentId = cid;
