@@ -298,7 +298,7 @@ var indexAction = {
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
-                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '">';
+                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '">';
                     html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
@@ -340,6 +340,7 @@ var indexAction = {
                     $(this).click(function(){
                         var cid = $(this).attr('data-cid');
                         var contentId = cid;
+                        $('#comment-input').val('@' + $(this).attr('data-name'));
                         var mask = $('#mask_reply')
                         var replyActionsheet = $('#reply_actionsheet')
                         var contentInput = replyActionsheet.find("#comment-input")[0]
@@ -353,16 +354,14 @@ var indexAction = {
                         replyActionsheet.find('#sendComment').click(function () {
                             var content = contentInput.value;
                             if(content == ''){
-                                alert('请填写评论内容!');
+                                alert('请填写回复内容!');
                                 return;
                             }
-                            var isComment = 1;
                             var cid = contentId;
-                            var type = 1;
                             var userId = params.userId;
-                            var json = {'content':content, 'picUrl':'', 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+                            var json = {'content':content, 'cid':cid, 'userId':userId}
                             $.ajax({
-                                url:params.addUrl,
+                                url:params.addReplyUrl,
                                 type:"post",
                                 dataType:'json',
                                 data:json,
@@ -377,7 +376,6 @@ var indexAction = {
                                 error:function(){
                                 }
                             })
-                            console.log('已发送评论')
                             hideActionSheet(replyActionsheet, mask)
                             contentInput.value = ''
                         })

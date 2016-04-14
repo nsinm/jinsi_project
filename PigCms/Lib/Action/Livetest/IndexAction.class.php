@@ -109,7 +109,7 @@ class IndexAction extends LiveAction
         $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
         $update['jinsi_content_read_no'] = $readNo + 1;
         M('content')->where('id=' . $cid)->save($update);
-        
+
         $uris = array(
             'gcUrl' => U('getComment', 'cid=' . $cid),
             'pUrl' => U('praise'),
@@ -180,6 +180,36 @@ class IndexAction extends LiveAction
         $bannerList = M('banner', 'jinsi_')->order('id desc')->limit('5')->select();
         if($bannerList){
             $result = array('errcode' => 0, 'msg' => '获取banner列表成功', 'data' => $bannerList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 添加回复
+     */
+    public function addComment ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+
+        $result = array('errcode' => 1, 'msg' => '添加回复失败!');
+
+        $cid = $this->_post('contentId');
+        $userId = $this->_post('userId');
+        $content = $this->_post('content');
+
+        if($cid && $userId && $content){
+            $data = array(
+                'jinsi_reply_user_id' => $userId,
+                'jinsi_reply_content_id' => $cid,
+                'jinsi_reply_content' => $content,
+                'jinsi_reply_time' => time()
+            );
+
+            $id = M('reply', 'jinsi_')->add($data);
+            if($id){
+                $result = array('errcode' => 0, 'msg' => '添加回复成功!');
+            }
         }
 
         $this->ajaxReturn($result, 'JSON');
