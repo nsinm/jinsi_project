@@ -306,7 +306,7 @@ var indexAction = {
                     html += '</div>';
                     var replies = infos[index].replies;
                     for(var i in replies){
-                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment">';
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10 user-comment">';
                         html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
@@ -318,14 +318,6 @@ var indexAction = {
                         html +=         '<p class="user_livetime"></p>';
                         html +=         '<p class="user_liveinteract">';
                         html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
-                        html +=             '<span class="sm-like like-btn">';
-                        if(infos[index].current_user_praise == 1){
-                            html +=             '<span class="icon-like" alt="">';
-                        }else{
-                            html +=             '<span class="icon-like on" alt=""  data-cid="' + replies[i].id + '">';
-                        }
-                        html +=                 '</span>' + infos[index].jinsi_content_praise_no;
-                        html +=             '</span>';
                         if(params.userId != replies[i].user_id) {
                             html += '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '">';
                             html += '<span class="icon-comment reply" alt=""></span>回复'
