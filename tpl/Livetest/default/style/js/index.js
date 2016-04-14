@@ -340,7 +340,7 @@ var indexAction = {
                     $(this).click(function(){
                         var cid = $(this).attr('data-cid');
                         var contentId = cid;
-                        $('#comment-input').val('@' + $(this).attr('data-name'));
+                        $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
                         var mask = $('#mask_reply')
                         var replyActionsheet = $('#reply_actionsheet')
                         var contentInput = replyActionsheet.find("#comment-input")[0]
