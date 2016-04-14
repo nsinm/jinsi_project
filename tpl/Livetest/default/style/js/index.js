@@ -318,6 +318,8 @@ var indexAction = {
                         html +=         '<p class="user_livetime"></p>';
                         html +=         '<p class="user_liveinteract">';
                         html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
+                        html +=             '<span class="sm-like like-btn">';
+                        html +=             '</span>';
                         if(params.userId != replies[i].user_id) {
                             html += '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '">';
                             html += '<span class="icon-comment reply" alt=""></span>回复'
