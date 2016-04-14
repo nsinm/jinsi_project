@@ -304,6 +304,35 @@ var indexAction = {
                     html +=         '</p>';
                     html +=     '</div>';
                     html += '</div>';
+                    var replies = infos[index].replies;
+                    for(var i in replies){
+                        html += '<div class="weui_cell live_block pleft40 user_comment">';
+                        html +=     '<div class="weui_cell_hd">';
+                        html +=         '<div class="user_thumb mr10 user-comment">';
+                        html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
+                        html +=         '</div>';
+                        html +=     '</div>';
+                        html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                        html +=         '<p class="user_livename user-comment-name">' + replies[i].jinsi_user_name + '</p>';
+                        html +=         '<p class="user_liveword user-comment-name">' + replies[i].jinsi_reply_content + '</p>';
+                        html +=         '<p class="user_livetime"></p>';
+                        html +=         '<p class="user_liveinteract">';
+                        html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
+                        html +=             '<span class="sm-like like-btn">';
+                        if(infos[index].current_user_praise == 1){
+                            html +=             '<span class="icon-like" alt="">';
+                        }else{
+                            html +=             '<span class="icon-like on" alt=""  data-cid="' + replies[i].id + '">';
+                        }
+                        html +=                 '</span>' + infos[index].jinsi_content_praise_no;
+                        html +=             '</span>';
+                        html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '">';
+                        html +=                 '<span class="icon-comment reply" alt=""></span>回复'
+                        html +=             '</span>'
+                        html +=         '</p>';
+                        html +=     '</div>';
+                        html += '</div>';
+                    }
                 }
             }else{
                 html += '当前还没有评论内容哦!';
