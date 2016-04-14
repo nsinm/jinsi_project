@@ -2,6 +2,22 @@
  * Created by Nsinm on 16/2/27.
  */
 
+// 获取页面的图片显示和隐藏层
+var $imgOverlay = $('.imgbox-overlay'),
+    $imgContainer = $('.imgbox-wrap'),
+    $imgBigger = $('.img-bigger')
+
+$imgContainer.on('click',function(){
+    $imgOverlay.hide()
+    $imgContainer.hide()
+    $imgBigger.attr('src','')
+})
+$imgOverlay.on('click',function(){
+    $imgOverlay.hide()
+    $imgContainer.hide()
+    $imgBigger.attr('src','')
+})
+
 var indexAction = {
     //首页banner显示效果
     'banner' : function(){
@@ -100,22 +116,6 @@ var indexAction = {
                 mask.hide();
             })
         }
-
-        // 获取页面的图片显示和隐藏层
-        var $imgOverlay = $('.imgbox-overlay'),
-            $imgContainer = $('.imgbox-wrap'),
-            $imgBigger = $('.img-bigger')
-
-        $imgContainer.on('click',function(){
-            $imgOverlay.hide()
-            $imgContainer.hide()
-            $imgBigger.attr('src','')
-        })
-        $imgOverlay.on('click',function(){
-            $imgOverlay.hide()
-            $imgContainer.hide()
-            $imgBigger.attr('src','')
-        })
 
         $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
@@ -262,7 +262,6 @@ var indexAction = {
                         });
                     }
                 })
-
             });
         }, 'JSON');
     },
@@ -373,6 +372,14 @@ var indexAction = {
                 mask.hide();
             })
         }
+
+        $('.thumb-image').click(function(){
+            var $this = $(this)
+            $imgOverlay.show()
+            var imgsrc = $this.attr('src')
+            $imgContainer.show()
+            $imgBigger.attr('src',imgsrc)
+        })
     },
 
     'toComment' : function(){
