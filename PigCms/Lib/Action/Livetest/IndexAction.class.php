@@ -194,7 +194,7 @@ class IndexAction extends LiveAction
 
         $result = array('errcode' => 1, 'msg' => '添加回复失败!');
 
-        $cid = $this->_post('contentId');
+        $cid = $this->_post('cid');
         $userId = $this->_post('userId');
         $content = $this->_post('content');
 
