@@ -368,6 +368,7 @@ var indexAction = {
                                 success:function(data){
                                     console.log(data);
                                     if(data.errcode == 0){
+                                        tag.empty();
                                         indexAction.getComments();
                                     }else{
                                         alert(data.msg);
