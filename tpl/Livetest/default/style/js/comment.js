@@ -85,7 +85,7 @@ var commemtAction = {
     'upload' : function(){
         var tag = $("#file");
         var ul = $('.weui_uploader_files');
-        tag.change(function(){
+        tag.bind('change', function(){
             $.ajaxFileUpload({
                 url : params.upUrl,
                 secureuri : false,
