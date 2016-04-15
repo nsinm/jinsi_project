@@ -298,12 +298,37 @@ var indexAction = {
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
-                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '">';
+                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '" style="margin-left:3px;">';
                     html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
                     html +=     '</div>';
                     html += '</div>';
+                    var replies = infos[index].replies;
+                    for(var i in replies){
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
+                        html +=     '<div class="weui_cell_hd">';
+                        html +=         '<div class="user_thumb mr10 user-comment">';
+                        html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
+                        html +=         '</div>';
+                        html +=     '</div>';
+                        html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                        html +=         '<p class="user_livename user-comment-name">' + replies[i].jinsi_user_name + '</p>';
+                        html +=         '<p class="user_liveword user-comment-name">' + replies[i].jinsi_reply_content + '</p>';
+                        html +=         '<p class="user_livetime"></p>';
+                        html +=         '<p class="user_liveinteract">';
+                        html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
+                        html +=             '<span class="sm-like like-btn">';
+                        html +=             '</span>';
+                        if(params.userId != replies[i].user_id) {
+                            html += '<span class="sm-comment"' + replies[i].id + ' data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '" click="show(this)">';
+                            html += '<span class="icon-comment reply" alt=""></span>回复'
+                            html += '</span>'
+                        }
+                        html +=         '</p>';
+                        html +=     '</div>';
+                        html += '</div>';
+                    }
                 }
             }else{
                 html += '当前还没有评论内容哦!';
@@ -411,6 +436,54 @@ var indexAction = {
             }).on('webkitTransitionEnd', function () {
                 mask.hide();
             })
+        }
+
+        function show(obj){
+            obj.click(function(){
+                var cid = $(this).attr('data-cid');
+                var contentId = cid;
+                $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
+                var mask = $('#mask_reply')
+                var replyActionsheet = $('#reply_actionsheet')
+                var contentInput = replyActionsheet.find("#comment-input")[0]
+                replyActionsheet.addClass('weui_actionsheet_toggle')
+                mask.show().addClass('weui_fade_toggle').click(function () {
+                    hideActionSheet(replyActionsheet, mask)
+                });
+                replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                    hideActionSheet(replyActionsheet, mask)
+                })
+                replyActionsheet.find('#sendComment').click(function () {
+                    var content = contentInput.value;
+                    if(content == ''){
+                        alert('请填写回复内容!');
+                        return;
+                    }
+                    var cid = contentId;
+                    var userId = params.userId;
+                    var json = {'content':content, 'cid':cid, 'userId':userId}
+                    $.ajax({
+                        url:params.addReplyUrl,
+                        type:"post",
+                        dataType:'json',
+                        data:json,
+                        success:function(data){
+                            console.log(data);
+                            if(data.errcode == 0){
+                                tag.empty();
+                                indexAction.getComments();
+                            }else{
+                                alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                        }
+                    })
+                    hideActionSheet(replyActionsheet, mask)
+                    contentInput.value = ''
+                })
+                replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+            });
         }
     },
 
