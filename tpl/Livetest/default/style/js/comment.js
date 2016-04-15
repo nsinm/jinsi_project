@@ -94,11 +94,17 @@ var commemtAction = {
                 success : function(data){
                     console.log(data);
                     if(data.errcode == '0'){
-                        $('.weui_uploader_input_wrp').remove();
+                        //$('.weui_uploader_input_wrp').remove();
                         var infos = data.data;
                         var picUrl = infos[0].savepath + infos[0].savename;
-                        $('#picurl').val(picUrl);
                         var html = '<li class="weui_uploader_file" style="background-image:url(' + picUrl + ')"></li>';
+                        var imgPath = $('#picurl').val();
+                        imgPath += picUrl + ',';
+                        $('#picurl').val(imgPath);
+                        var imgs = imgPath.substring(0, imgPath.lastIndexOf(',')-1).split(',');
+                        if(imgs.length >= 4){
+                            $('.weui_uploader_input_wrp').remove();
+                        }
                         ul.append(html);
                     }
                 },
