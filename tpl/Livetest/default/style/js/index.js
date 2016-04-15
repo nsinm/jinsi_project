@@ -292,7 +292,7 @@ var indexAction = {
                         var imgString = infos[index].jinsi_content_url;
                         var imgs = imgString.split(',');
                         for(var urlIndex in imgs) {
-                            html += '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                            html += '<img src="' + imgs[urlIndex] + '" alt="">';
                         }
                     }
                     html +=         '<p class="user_livetime"></p>';
