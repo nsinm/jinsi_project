@@ -292,7 +292,7 @@ var indexAction = {
                         var imgString = infos[index].jinsi_content_url;
                         var imgs = imgString.split(',');
                         for(var urlIndex in imgs) {
-                            html += '<img src="' + imgs[urlIndex] + '" alt="" click="showImg(this)">';
+                            html += '<img src="' + imgs[urlIndex] + '" alt="" class="thumb-image">';
                         }
                     }
                     html +=         '<p class="user_livetime"></p>';
@@ -420,6 +420,16 @@ var indexAction = {
                         showDailog();
                     })
                 }
+
+                $(this).parents('.weui_cell_bd.weui_cell_primary').find('.thumb-image').each(function(){
+                    $(this).click(function(){
+                        var $this = $(this)
+                        $imgOverlay.show()
+                        var imgsrc = $this.attr('src')
+                        $imgContainer.show()
+                        $imgBigger.attr('src',imgsrc)
+                    })
+                })
             });
         }, 'JSON');
 
@@ -492,16 +502,6 @@ var indexAction = {
                 })
                 replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
             });
-        }
-
-        function showImg (obj){
-            obj.click(function(){
-                var $this = $(this)
-                $imgOverlay.show()
-                var imgsrc = $this.attr('src')
-                $imgContainer.show()
-                $imgBigger.attr('src',imgsrc)
-            })
         }
     },
 
