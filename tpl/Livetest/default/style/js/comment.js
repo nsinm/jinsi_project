@@ -83,7 +83,7 @@ var commemtAction = {
     },
 
     'upload' : function(){
-        var tag = $("#file");
+        var tag = $("input[type='file']");
         var ul = $('.weui_uploader_files');
         tag.bind('change', function(){
             $.ajaxFileUpload({
@@ -101,7 +101,7 @@ var commemtAction = {
                         var imgPath = $('#picurl').val();
                         imgPath += picUrl + ',';
                         $('#picurl').val(imgPath);
-                        var imgs = imgPath.substring(0, imgPath.lastIndexOf(',')-1).split(',');
+                        var imgs = imgPath.substring(0, imgPath.lastIndexOf(',')).split(',');
                         if(imgs.length >= 4){
                             $('.weui_uploader_input_wrp').remove();
                         }
