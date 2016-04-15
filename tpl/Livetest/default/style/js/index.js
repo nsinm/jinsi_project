@@ -125,7 +125,7 @@ var indexAction = {
                 var infos = data.data;
                 for(var index in infos){
                     var imgString = infos[index].jinsi_content_url;
-                    var imgs = imgString.substring(0, imgString.lastIndexOf(',')).split(',');
+                    var imgs = imgString.split(',');
                     html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
@@ -290,7 +290,7 @@ var indexAction = {
                     html +=         '<p class="user_liveword user-comment-name">' + infos[index].jinsi_content_info + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
                         var imgString = infos[index].jinsi_content_url;
-                        var imgs = imgString.substring(0, imgString.lastIndexOf(',')).split(',');
+                        var imgs = imgString.split(',');
                         for(var urlIndex in imgs) {
                             html += '<img src="' + imgs[urlIndex] + '" alt="" class="thumb-image">';
                         }

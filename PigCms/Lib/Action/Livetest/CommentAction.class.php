@@ -63,7 +63,7 @@ class CommentAction extends LiveAction
             'jinsi_content_info' => $this->_post('content'),
             'jinsi_content_type' => $this->_post('type'),
             'jinsi_content_create' => time(),
-            'jinsi_content_url' => $this->_post('picUrl'),
+            'jinsi_content_url' => trim($this->_post('picUrl'), ','),
             'jinsi_content_praise_no' => 0,
             'jinsi_content_comment_no' => 0,
             'jinsi_content_share_no' => 0,
