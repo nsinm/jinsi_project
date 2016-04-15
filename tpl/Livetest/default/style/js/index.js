@@ -314,7 +314,7 @@ var indexAction = {
                     html += '</div>';
                     var replies = infos[index].replies;
                     for(var i in replies){
-                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="margin-left:20px;">';
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10 user-comment">';
                         html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
