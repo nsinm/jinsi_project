@@ -292,7 +292,7 @@ var indexAction = {
                         var imgString = infos[index].jinsi_content_url;
                         var imgs = imgString.split(',');
                         for(var urlIndex in imgs) {
-                            html += '<img src="' + imgs[urlIndex] + '" alt="" class="thumb-image">';
+                            html += '<img src="' + imgs[urlIndex] + '" alt="" onclick="showImg(this)">';
                         }
                     }
                     html +=         '<p class="user_livetime"></p>';
@@ -492,6 +492,16 @@ var indexAction = {
                 })
                 replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
             });
+        }
+
+        function showImg (obj){
+            obj.click(function(){
+                var $this = $(this)
+                $imgOverlay.show()
+                var imgsrc = $this.attr('src')
+                $imgContainer.show()
+                $imgBigger.attr('src',imgsrc)
+            })
         }
     },
 
