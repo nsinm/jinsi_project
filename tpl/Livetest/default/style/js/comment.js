@@ -107,6 +107,8 @@ var commemtAction = {
                         }
                         ul.append(html);
                     }
+                    tag.unbind('change');
+                    commemtAction.upload();
                 },
                 error : function(data, status, e){
                     console.log(data);
