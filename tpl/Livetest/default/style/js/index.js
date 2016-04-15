@@ -124,6 +124,8 @@ var indexAction = {
             if(data.errcode == 0){
                 var infos = data.data;
                 for(var index in infos){
+                    var imgString = infos[index].jinsi_content_url;
+                    var imgs = imgString.split(',');
                     html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
@@ -137,7 +139,9 @@ var indexAction = {
                         html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
                     }else if(infos[index].jinsi_content_type == '2'){
                         html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
+                        for(var urlIndex in imgs) {
+                            html += '<img src="' + imgs[urlIndex] + '" class="pic" alt="">';
+                        }
                     }else{
                         html +=     '<p class="user_wordbubble" >';
                         html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
@@ -285,7 +289,11 @@ var indexAction = {
                     html +=         '<p class="user_livename user-comment-name">' + infos[index].jinsi_user_name + '</p>';
                     html +=         '<p class="user_liveword user-comment-name">' + infos[index].jinsi_content_info + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                        var imgString = infos[index].jinsi_content_url;
+                        var imgs = imgString.split(',');
+                        for(var urlIndex in imgs) {
+                            html += '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                        }
                     }
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
