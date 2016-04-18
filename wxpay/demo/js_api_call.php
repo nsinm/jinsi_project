@@ -19,7 +19,7 @@ header("Content-type: text/html; charset=utf-8");
 	if (!isset($_GET['code']))
 	{
 		//触发微信返回code码
-		$url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL);
+		$url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL).'?'.$_SERVER['QUERY_STRING'];
 		Header("Location: $url"); 
 	}else
 	{
