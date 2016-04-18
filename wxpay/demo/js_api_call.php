@@ -46,7 +46,7 @@ header("Content-type: text/html; charset=utf-8");
 	//spbill_create_ip已填,商户无需重复填写
 	//sign已填,商户无需重复填写
 	$unifiedOrder->setParameter("openid","$openid");//商品描述
-    $body = isset($_GET['body'])?$_GET['body']:"会员购买";
+    $body = isset($_GET['content'])?$_GET['content']:"会员购买";
 	$unifiedOrder->setParameter("body",$body);//商品描述
 	//自定义订单号，此处仅作举例
 	$timeStamp = time();
