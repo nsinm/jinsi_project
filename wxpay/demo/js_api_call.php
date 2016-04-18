@@ -60,8 +60,9 @@ header("Content-type: text/html; charset=utf-8");
         echo "error";
         exit;
     }
-	$unifiedOrder->setParameter("total_fee","1");//总金额
-	$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址 
+	$unifiedOrder->setParameter("total_fee",$total_fee);//总金额
+	//$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址
+    $unifiedOrder->setParameter("notify_url","http://mp.jinsxy.com/index.php?g=Live&m=Auth&a=get_pay_info");//通知地址
 	$unifiedOrder->setParameter("trade_type","JSAPI");//交易类型
 	//非必填参数，商户可根据实际情况选填
 	//$unifiedOrder->setParameter("sub_mch_id","XXXX");//子商户号  
