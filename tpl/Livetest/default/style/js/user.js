@@ -101,7 +101,7 @@ var userAction = {
                                 alert('请先关注该导师!');
                                 return;
                             }
-                            location.href = params.payUrl + '?userId=' + params.userId + '&fid=' + instructorId + '&insName=' + insName;
+                            location.href = params.payUrl + '&userId=' + params.userId + '&fid=' + instructorId + '&insName=' + insName;
                         })
                     }
 
