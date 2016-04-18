@@ -29,10 +29,15 @@ class PayAction extends LiveAction
         $fid = $this->_get('fid');
         $username = $this->_get('insName');
         if($userId && $fid && $username){
+            $userInfo = M('user')->where('id=' . $userId)->select();
+            if(!$userInfo){
+                throw_exception('用户信息错误');
+            }
             $data = array(
                 'userId' => $userId,
                 'followUserId' => $fid,
-                'username' => $username
+                'followUsername' => $username,
+                'userInfo' => $userInfo
             );
             $this->assign('data', $data);
         }else{
