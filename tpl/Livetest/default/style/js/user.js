@@ -55,7 +55,7 @@ var userAction = {
                         if(infos[index].is_member != '0'){
                             html +=         '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt c_member">成为会员</a>';
                         }else{
-                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member">成为会员</a>';
+                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member" data-value="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '">成为会员</a>';
                         }
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
@@ -94,8 +94,13 @@ var userAction = {
                             }, 'JSON');
                         });
                     }else  if($(this).attr('class').indexOf('member') > 0){
+                        var insName = $(this).attr('data-name');
                         $(this).click(function(){
-                            alert(1111);
+                            if($(this).siblings('.weui_btn.weui_btn_plain_primary.jumpBt.attention')){
+                                alert('请先关注该导师!');
+                                return;
+                            }
+                            location.href = params.payUrl + '?userId=' + userId + '&fid=' + instructorId + '&insName=' + insName;
                         })
                     }
 
