@@ -12,12 +12,23 @@
 
 class PayAction extends LiveAction
 {
+    /*
+     * 会员价格
+     */
+    private $price;
+
     /**
      * PayAction constructor.
      */
     function __construct()
     {
         parent::__construct();
+
+        //获取当前会员价格
+        $this->price = M('pay')->where('id=1')->getField('jinsi_pay_price');
+        if(!$this->price){
+            throw_exception('没有设置会员价格!');
+        }
     }
 
     /**
@@ -33,24 +44,36 @@ class PayAction extends LiveAction
             if(!$userInfo){
                 throw_exception('用户信息错误');
             }
-
-            //获取当前会员价格
-            $price = M('pay')->where('id=1')->getField('jinsi_pay_price');
-            if(!$price){
-                throw_exception('没有设置会员价格!');
-            }
             $data = array(
                 'userId' => $userId,
                 'followUserId' => $fid,
                 'followUsername' => $username,
                 'userInfo' => $userInfo[0],
-                'price' => $price
+                'price' => $this->price
             );
             $this->assign('data', $data);
         }else{
             throw_exception('参数错误');
         }
         $this->assign('urls', $this->ajaxUrls);
+        $this->display();
+    }
+
+    /**
+     * 跳到支付流程页面
+     */
+    public function toPayPage ()
+    {
+        $followUserId = $this->_get('fid');
+        if(!$followUserId){
+            throw_exception('缺少关键参数!');
+        }
+        $data = array(
+            'userId' => $this->userId,
+            'followUserId' => $followUserId,
+            'price' => $this->price
+        );
+        $this->assign('data', $data);
         $this->display();
     }
 }

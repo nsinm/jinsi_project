@@ -78,10 +78,13 @@
 <script>
     var params = {
         'tplName' : 'pay_index',
+        'userId' : '{pigcms:$data.userId}',
+        'followUserId' : '{pigcms:$data.followUserId}',
         'guiUrl' : '{pigcms:$urls.giiUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
-        'myUrl' : '{pigcms:$urls.myUrl}'
+        'myUrl' : '{pigcms:$urls.myUrl}',
+        'payFlowUrl' : '{pigcms::U("Pay/toPayPage")}'
     };
 </script>
 </body>
