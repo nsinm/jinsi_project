@@ -96,6 +96,7 @@ class InstructorAction extends LiveAction
                     $res = $model->query($sql);
                     $value['is_follow'] = in_array($this->userId, array_column($res, 'jinsi_follow_user_id')) ? 1 : 0;
                 }
+                $value['is_member'] = M('member')->where('user_id=' . $this->userId . ' AND follow_id=' . $value['id'])->count();
                 array_push($instructors, $value);
             }
 
