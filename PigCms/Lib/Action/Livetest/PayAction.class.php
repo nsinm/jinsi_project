@@ -66,7 +66,7 @@ class PayAction extends LiveAction
     {
         $followUserId = $this->_get('fid');
         $payName = $this->_get('payName');
-        if(!$followUserId || $payName){
+        if(!$followUserId || !$payName){
             throw_exception('缺少关键参数!');
         }
         $data = array(
