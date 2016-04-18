@@ -5,8 +5,9 @@
 payAction = {
     //跳到付款流程页面
     payFlowPage : function(){
+        var payName = $('pay-desc').text();
         $('.weui_btn').click(function(){
-            location.href = params.payFlowUrl + '&fid=' + params.followUserId;
+            location.href = params.payFlowUrl + '&fid=' + params.followUserId + '&payName=' + payName;
         })
     },
 
