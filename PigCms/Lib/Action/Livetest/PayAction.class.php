@@ -25,6 +25,7 @@ class PayAction extends LiveAction
      */
     public function index ()
     {
+        
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }
