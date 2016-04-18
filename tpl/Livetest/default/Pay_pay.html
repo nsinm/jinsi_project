@@ -245,6 +245,7 @@
             // wp = new WritingPad('#cnt-signature');
             var orderUrl = '{pigcms::U("Pay/writeOrder")}';
             $.post(orderUrl, sendData, function(data){
+                console.log(data);
                 if(data.errcode == 0){
                     $step2bt.hide()
                     $step4bt.css("display",'block')
