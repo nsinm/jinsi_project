@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>股播</title>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="/tpl/Live/default/style/css/main.css"/>
+</head>
+<body ontouchstart>
+<div class="bottom-bar">
+    <div>直播间</div>
+    <if condition="$type eq 1">
+        <div>导师</div>
+        <div class="selected">我的</div>
+        <else/>
+        <div class="selected">导师</div>
+        <div>我的</div>
+    </if>
+
+</div>
+<div class="container js_container">
+    <div class="page">
+        <div class="hd">
+            <div class="title">月付费</div>
+            <div class="weui_text_area">
+                <div class="pay-info">66.00元/月</div>
+                <p class="pay-desc">神话老师月会员服务</p>
+            </div>
+        </div>
+        <div class="bd">
+            <div class="weui_cells weui_cells_access">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="./uinfo/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>JUDY</p>
+                        <p class="user_signature">我不是股神，是神</p>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </div>
+            </div>
+        </div>
+        <div class="weui_cells weui_cells_access">
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>会员服务介绍</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+            <a class="weui_cell" href="javascript:;">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p>联系我们</p>
+                </div>
+                <div class="weui_cell_ft">
+                </div>
+            </a>
+        </div>
+        <div class="weui_btn_area">
+            <a href="javascript:;" class="weui_btn weui_btn_primary">签署协议并开通服务</a>
+        </div>
+    </div>
+</div>
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/Live/default/style/js/pay.js"></script>
+<script src="/tpl/Live/default/style/js/bottom.js"></script>
+<script>
+    var params = {
+        'tplName' : 'pay_index',
+        'guiUrl' : '{pigcms:$urls.giiUrl}',
+        'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
+        'instructorUrl' : '{pigcms:$urls.instructorUrl}',
+        'myUrl' : '{pigcms:$urls.myUrl}'
+    };
+</script>
+</body>
+</html>

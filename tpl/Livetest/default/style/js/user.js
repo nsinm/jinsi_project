@@ -89,6 +89,10 @@ var userAction = {
                                 }
                             }, 'JSON');
                         });
+                    }else  if($(this).attr('class').indexOf('member') > 0){
+                        $(this).click(function(){
+                            alert(1111);
+                        })
                     }
 
                     var parent = $(this).parents('.weui_cell.teacherlist_block');
