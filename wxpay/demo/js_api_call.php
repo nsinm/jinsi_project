@@ -117,6 +117,7 @@ header("Content-type: text/html; charset=utf-8");
 			}
 		}
 
+        setTimeout(function(){callpay();}, 1000);
         callpay();
 	</script>
 </head>
