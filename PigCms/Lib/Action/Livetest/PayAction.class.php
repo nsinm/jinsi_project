@@ -25,7 +25,19 @@ class PayAction extends LiveAction
      */
     public function index ()
     {
-        
+        $userId = $this->_get('userId');
+        $fid = $this->_get('fid');
+        $username = $this->_get('insName');
+        if($userId && $fid && $username){
+            $data = array(
+                'userId' => $userId,
+                'followUserId' => $fid,
+                'username' => $username
+            );
+            $this->assign('data', $data);
+        }else{
+            throw_exception('参数错误');
+        }
         $this->assign('urls', $this->ajaxUrls);
         $this->display();
     }
