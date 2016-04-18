@@ -134,17 +134,17 @@
     <div class="content" id="cnt-check">
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <p>开通服务：刀锋的会员服务</p>
+                <p id="service_name">{pigcms:$data.payName}</p>
             </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <p>开通时间：2016年3月23日</p>
+                <p id="open_time">{pigcms:$data.payTime}</p>
             </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <p>支付金额：2068元</p>
+                <p id="how_much">{pigcms:$data.price}</p>
             </div>
         </div>
     </div>
@@ -169,6 +169,12 @@
 </div>
 <!--END dialog2-->
 <script>
+    var params = {
+        userId : '{pigcms:$data.userId}',
+        fid : '{pigcms:$data.followUserId}',
+        payName : '{pigcms:$data.payName}',
+    }
+
     $(function () {
         // 四个底部按钮
         var $step1bt =  $('#read-complete'),
@@ -233,14 +239,23 @@
             sendData.name = $nameInput[0].value
             sendData.pnum = $pNumInput[0].value
             sendData.certifynum = $idNumInput[0].value
+            sendData.fid = params.fid
+            sendData.payName = params.payName
 
             // wp = new WritingPad('#cnt-signature');
-            $step2bt.hide()
-            $step4bt.css("display",'block')
-            $content2.hide()
-            $content4.show()
-            $tip2.removeClass('active')
-            $tip4.addClass('active')
+            var orderUrl = '{pigcms::U("Pay/writeOrder")}';
+            $.post(orderUrl, sendData, function(data){
+                if(data.errcode == 0){
+                    $step2bt.hide()
+                    $step4bt.css("display",'block')
+                    $content2.hide()
+                    $content4.show()
+                    $tip2.removeClass('active')
+                    $tip4.addClass('active')
+                }else{
+                    alert(data.msg);
+                }
+            }, 'JSON')
         })
         // 第三块签名暂不开启
         // $step3bt.click(function(){

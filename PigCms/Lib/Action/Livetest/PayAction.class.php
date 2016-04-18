@@ -65,15 +65,55 @@ class PayAction extends LiveAction
     public function pay ()
     {
         $followUserId = $this->_get('fid');
-        if(!$followUserId){
+        $payName = $this->_get('payName');
+        if(!$followUserId || $payName){
             throw_exception('缺少关键参数!');
         }
         $data = array(
             'userId' => $this->userId,
             'followUserId' => $followUserId,
-            'price' => $this->price
+            'price' => $this->price,
+            'payName' => $payName,
+            'payTime' => date('Y-m-d')
         );
         $this->assign('data', $data);
         $this->display();
+    }
+
+    /**
+     * 写入订单
+     */
+    public function writeOrder ()
+    {
+        if(!IS_AJAX) $this->_404('页面不存在!');
+
+        $result = array('errcode' => 1, 'msg' => '生成订单失败!');
+
+        $followUserId = $this->_post('fid');
+        $serviceName = $this->_post('payName');
+        $telNo = $this->_post('telNo');
+        $realName = $this->_post('realName');
+        $identityCardNo = $this->_post('cardNo');
+
+        if($followUserId && $serviceName && $telNo && $realName && $identityCardNo){
+            $data = array(
+                'pay_time' => time(),
+                'pay_money' => $this->price,
+                'order_no' => str_replace('.', '', uniqid('MEMBERSERVICE', true)),
+                'status' => 0,
+                'user_id' => $this->userId,
+                'follow_id' => $followUserId,
+                'real_name' => $realName,
+                'tel_no' => $telNo,
+                'identity_card_no' => $identityCardNo,
+                'service_name' => $serviceName
+            );
+
+            $id = M('order')->add($data);
+            if($id){
+                $result = array('errcode' => 0, 'msg' => '生成订单成功!', 'id' => $id);
+            }
+        }
+        $this->ajaxReturn($result, 'JSON');
     }
 }
