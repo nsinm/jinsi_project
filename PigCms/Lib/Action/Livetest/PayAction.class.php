@@ -62,7 +62,7 @@ class PayAction extends LiveAction
     /**
      * 跳到支付流程页面
      */
-    public function toPayPage ()
+    public function pay ()
     {
         $followUserId = $this->_get('fid');
         if(!$followUserId){

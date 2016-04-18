@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="weui/dist/style/weui.min.css"/>
+    <link rel="stylesheet" href="weui/dist/example/example.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="js/writingPad.js"></script>
+    <script src="js/signature.js"></script>
+    <style>
+        #writingPad{
+            width: 100%;
+            height: 200px;
+        }
+        .top-tab{
+            width: 100%;
+            display: flex;
+            background-color: #fff;
+            color:#999;
+        }
+        .top-tab .itm{
+            height: 60px;
+            width: 33.333333%;
+            border:1px solid #888;
+            border-right:none;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .top-tab .itm.active{
+            color:#333;
+        }
+        .top-tab .item.last{
+            border-right:1px solid #888;
+        }
+        .top-tab .itm div{
+            vertical-align: middle;
+        }
+        .container{
+            display: fixed;
+            top: 60px;
+            bottom: 64px;
+            left: 0;
+            right: 0;
+            overflow: scroll;
+        }
+        .container .content{
+            display: none;
+        }
+        .container .content.active{
+            display: block;
+        }
+        .foot{
+            position: fixed;
+            bottom: 0;
+            background-color: #777;
+            height: 44px;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .bottom-btn{
+            margin-top: 0!important;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 我的    页面 -->
+<div class="top-tab">
+    <div class="itm active" id = "protocal">
+        <div>①<br/>阅读协议</div>
+    </div>
+    <div class="itm" id = "fillInfo">
+        <div>②<br/>填写信息</div>
+    </div>
+    <!--       <div class="itm" id = "signature">
+            <div>③<br/>用户签名</div>
+          </div> -->
+    <div class="itm last" id = "check">
+        <div>③<br/>确认付款</div>
+    </div>
+</div>
+
+<!-- <button class="btn btn-primary" type="button" style="position:relative">点击我</button> -->
+<!-- 内容 -->
+<div class="container scroll">
+    <div class="content active" id="cnt-protocal">
+        <p>尊敬的客户：
+            在进行证券交易时，可能会获得较高的投资收益，但同时也存在着较大的证券投资风险。为了使您更好地了解其中的风险，根据有关证券交易法律法规、行政规章、证券登记结算机构业务规则和证券交易所业务规则，中天证券有限责任公司特提供本风险提示书，请您务必认真详细阅读。投资者从事证券投资包括但不限于如下风险：
+            １、宏观经济风险：由于我国宏观经济形势的变化以及其他国家、地区宏观经济环境和证券市场的变化，可能会引起国内证券市场的波动，使您存在亏损的可能，您将不得不承担由此造成的损失。
+            ２、政策风险：有关证券市场的法律、法规及相关政策、规则发生变化，可能引起证券市场价格波动，使您存在亏损的可能，您将不得不承担由此造成的损失。
+            ３、上市公司经营风险：由于上市公司所处行业整体经营形势的变化；由于上市公司经营管理等方面的因素，如经营决策重大失误、高级管理人员变更、重大诉讼等都可能引起该公司证券价格的波动；由于上市公司经营不善甚至于会导致该公司被停牌、摘牌，这些都使您存在亏损的可能。
+            ４、技术风险：由于交易撮合、清算交收、行情揭示及银证转账是通过电子通讯技术和电脑技术来实现的，这些技术存在着被网络黑客和计算机病毒攻击的可能，同时通讯技术、电脑技术和相关软件具有存在缺陷的可能，这些风险可能给您带来损失或银证转账资金不能即时到账。
+            ５、不可抗力因素导致的风险：诸如地震、台风、火灾、水灾、战争、瘟疫、社会动乱等不可抗力因素可能导致证券交易系统的瘫痪；证券公司无法控制和不可预测的系统故障、设备故障、通讯故障、电力故障等也可能导致证券交易系统非正常运行甚至瘫痪；证券公司和银行无法控制和不可预测的系统故障、设备故障、通讯故障、电力故障等也可能导致银证转账系统非正常运行甚至瘫痪，这些都会使您的交易委托无法成交或者无法全部成交，或者银证转账资金不能即时到账，您将不得不承担由此导致的损失和不便。
+            ６、其他风险：由于您密码失密、操作不当、投资决策失误等原因可能会使您发生亏损；网上委托、热键操作完毕后未及时退出，他人进行恶意操作而造成的损失；网上交易未及时退出还可能遭遇黑客攻击，从而造成损失；委托他人代理证券交易，且长期不关注账户变化，致使他人恶意操作而造成的损失，上述损失都将由您自行承担。在您进行证券交易时，他人给予您的保证获利或不会发生亏损的任何承诺都是没有根据的，类似的承诺不会减少您发生亏损的可能。
+            特别提示：本公司敬告投资者，应当根据自身的经济条件和心理承受能力认真制定证券投资策略，尤其是当您决定购买ＳＴ、*ＳＴ类股票或者其他有较大潜在风险的证券产品（比如权证等衍生品种）时，更应当清醒地认识到该类证券比其他证券蕴涵更大的风险。
+            证券市场是一个风险无时不在的市场。您在进行证券交易时存在赢利的可能，也存在亏损的风险。本风险提示书并不能揭示从事证券交易的全部风险及证券市场的全部情形。您务必对此有清醒的认识，认真考虑是否进行证券交易。
+            股市有风险，入市需谨慎！
+
+            以上《风险提示书》本人／机构已阅读并完全理解，愿意承担证券市场的各种风险。
+        </p>
+    </div>
+    <div class="content" id="cnt-fillInfo">
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="name" class="weui_input" type="tel" placeholder="请输入姓名">
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="pNum" class="weui_input" type="tel" placeholder="请输入手机号">
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">身份证</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="idNum" class="weui_input" type="number" placeholder="请输入身份证">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content" id="cnt-signature">
+        <!-- <button id="show" class="btn btn-primary" type="button" style="position:relative">点击我</button> -->
+    </div>
+    <div class="content" id="cnt-check">
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>开通服务：刀锋的会员服务</p>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>开通时间：2016年3月23日</p>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>支付金额：2068元</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+<div class="foot">
+    <a href="javascript:;" id="read-complete" class="weui_btn weui_btn_default">请滑动屏幕，确保阅读所有内容</a>
+    <a href="javascript:;" id="info-complete" class="weui_btn weui_btn_default bottom-btn">请将信息填写完成</a>
+    <a href="javascript:;" id="sig-complete" class="weui_btn weui_btn weui_btn_warn bottom-btn">保存签名并提交</a>
+    <a href="javascript:;" id="pay-complete" class="weui_btn weui_btn weui_btn_warn bottom-btn">立即支付</a>
+</div>
+<!--BEGIN 信息弹窗 -->
+<div class="weui_dialog_alert" id="dialog" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示</strong></div>
+        <div class="weui_dialog_bd">弹窗内容，告知当前页面信息等</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+<!--END dialog2-->
+<script>
+    $(function () {
+        // 四个底部按钮
+        var $step1bt =  $('#read-complete'),
+                $step2bt =  $('#info-complete'),
+                $step3bt =  $('#sig-complete'),
+                $step4bt =  $('#pay-complete'),
+        // 四个内容容器
+                $content1 = $('#cnt-protocal'),
+                $content2 = $('#cnt-fillInfo'),
+                $content3 = $('#cnt-signature'),
+                $content4 = $('#cnt-check'),
+        // 四个顶部协议
+                $tip1 = $('#protocal'),
+                $tip2 = $('#fillInfo'),
+                $tip3 = $('#signature'),
+                $tip4 = $('#check'),
+        // 弹框
+                $dialog = $('#dialog'),
+        // 姓名手机号身份证输入框
+                $nameInput = $('#name'),
+                $pNumInput = $('#pNum'),
+                $idNumInput = $('#idNum'),
+        // 保存数据集
+                sendData = {},
+        // 手写板
+                wp
+
+
+
+        // 正则
+        var idRegexp = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+                pnumRegexp = /^1[3|4|5|7|8][0-9]\d{8}$/
+        $dialog.find('.weui_btn_dialog').on('click', function () {
+            $dialog.hide();
+        });
+        // 点击后
+        $step1bt.click(function(){
+            $step1bt.hide()
+            $step2bt.css("display",'block')
+            $content1.hide()
+            $content2.show()
+            $tip1.removeClass('active')
+            $tip2.addClass('active')
+        })
+        $step2bt.click(function(){
+            // 检测是否已经填写相关信息
+            if($nameInput[0].value == '' || $pNumInput[0].value == '' || $idNumInput[0].value == '' ){
+                $dialog.find('.weui_dialog_bd').html("请完整填写姓名，手机号和身份证")
+                $dialog.show();
+                return
+            }
+            if(!pnumRegexp.test($pNumInput[0].value)){
+                $dialog.find('.weui_dialog_bd').html("不是正确的手机号")
+                $dialog.show();
+                return
+            }
+            if(!idRegexp.test($idNumInput[0].value)){
+                $dialog.find('.weui_dialog_bd').html("不是正确的身份证号")
+                $dialog.show();
+                return
+            }
+            sendData.name = $nameInput[0].value
+            sendData.pnum = $pNumInput[0].value
+            sendData.certifynum = $idNumInput[0].value
+
+            // wp = new WritingPad('#cnt-signature');
+            $step2bt.hide()
+            $step4bt.css("display",'block')
+            $content2.hide()
+            $content4.show()
+            $tip2.removeClass('active')
+            $tip4.addClass('active')
+        })
+        // 第三块签名暂不开启
+        // $step3bt.click(function(){
+        //   $step3bt.hide()
+        //   $step4bt.css("display",'block')
+        //   $content3.hide()
+        //   $content4.show()
+        //   $tip3.removeClass('active')
+        //   $tip4.addClass('active')
+        // })
+        $step4bt.click(function(){
+            $.ajax({
+                url:'http://www.baidu.com',
+                dataType:'json',
+                data:sendData,
+                success:function(){
+
+                },
+                error:function(){
+                    $dialog.hide()
+                    $dialog.find('.weui_dialog_bd').html("网络错误，请确保连上网络后再进行提交")
+                    $dialog.show()
+                }
+            })
+        })
+
+
+    });
+    // $('body').on('touchmove', function (event) {
+    //   event.preventDefault();
+    // });
+</script>
+</body>
+</html>
+
