@@ -18,8 +18,9 @@ header("Content-type: text/html; charset=utf-8");
 	//通过code获得openid
 	if (!isset($_GET['code']))
 	{
+        $url = WxPayConf_pub::JS_API_CALL_URL.'?'.$_SERVER['QUERY_STRING'];
 		//触发微信返回code码
-		$url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL).'?'.$_SERVER['QUERY_STRING'];
+		$url = $jsApi->createOauthUrlForCode($url);
 		Header("Location: $url"); 
 	}else
 	{
