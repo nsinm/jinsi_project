@@ -33,11 +33,15 @@ class PayAction extends LiveAction
             if(!$userInfo){
                 throw_exception('用户信息错误');
             }
+
+            //获取当前会员价格
+            $price = M('pay')->where('id=1')->getField('jinsi_pay_price');
             $data = array(
                 'userId' => $userId,
                 'followUserId' => $fid,
                 'followUsername' => $username,
-                'userInfo' => $userInfo[0]
+                'userInfo' => $userInfo[0],
+                'price' => $price
             );
             $this->assign('data', $data);
         }else{
