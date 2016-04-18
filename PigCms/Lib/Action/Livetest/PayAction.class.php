@@ -36,6 +36,9 @@ class PayAction extends LiveAction
 
             //获取当前会员价格
             $price = M('pay')->where('id=1')->getField('jinsi_pay_price');
+            if(!$price){
+                throw_exception('没有设置会员价格!');
+            }
             $data = array(
                 'userId' => $userId,
                 'followUserId' => $fid,
