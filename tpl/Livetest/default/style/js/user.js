@@ -55,7 +55,7 @@ var userAction = {
                         if(infos[index].is_member != '0'){
                             html +=         '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt c_member">成为会员</a>';
                         }else{
-                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member" data-follow="' + infos[index].is_follow + '" data-name="' + infos[index].jinsi_user_name + '">成为会员</a>';
+                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member" data-filter="' + infos[index].is_follow + '" data-name="' + infos[index].jinsi_user_name + '">成为会员</a>';
                         }
                         html +=         '<p class="user_fans">粉丝：' + infos[index].follow_num + '</p>';
                         html +=         '<p class="user_location">位置：' + infos[index].jinsi_user_city + '</p>';
@@ -95,7 +95,7 @@ var userAction = {
                         });
                     }else  if($(this).attr('class').indexOf('member') > 0){
                         var insName = $(this).attr('data-name');
-                        var isFollow = $(this).attr('data-follow');
+                        var isFollow = $(this).attr('data-filter=');
                         $(this).click(function(){
                             if(isFollow){
                                 alert('请先关注该导师!');
