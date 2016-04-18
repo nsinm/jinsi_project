@@ -53,9 +53,9 @@ class AuthAction extends Action
 
     public function get_pay_info()
     {
-        $dir = str_replace('\\','/',substr(dirname(__FILE__),0,-8));
-        require($dir."/../../../wxpay/demo/log_.php");
-        include_once($dir."/../../../wxpay/WxPayPubHelper/WxPayPubHelper.php");
+        $dir = dirname(__FILE__);
+        require($dir."/../../../../wxpay/demo/log_.php");
+        include_once($dir."/../../../../wxpay/WxPayPubHelper/WxPayPubHelper.php");
 
         //使用通用通知接口
         $notify = new Notify_pub();
@@ -81,7 +81,7 @@ class AuthAction extends Action
 
         //以log文件形式记录回调信息
         $log_ = new Log_();
-        $log_name=$dir."/../../../wxpay/demo/notify_url.log";//log文件路径
+        $log_name=$dir."/../../../../wxpay/demo/notify_url.log";//log文件路径
         $log_->log_result($log_name,"【接收到的notify通知】:\n".$xml."\n");
 
         if($notify->checkSign() == TRUE)
