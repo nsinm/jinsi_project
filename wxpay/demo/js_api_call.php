@@ -52,14 +52,14 @@ header("Content-type: text/html; charset=utf-8");
 	$timeStamp = time();
 	//$out_trade_no = WxPayConf_pub::APPID."$timeStamp";
 
-    $out_trade_no = isset($_GET['out_trade_no'])?$_GET['out_trade_no']:'';
+    $out_trade_no = isset($_GET['order_no'])?$_GET['order_no']:'';
 	$unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
-    $total_fee = isset($_GET['total_fee'])?$_GET['total_fee']:1;
+    $total_fee = isset($_GET['pay_no'])?$_GET['pay_no']:1;
     $check_no = md5($out_trade_no.$openid.$total_fee.$jinsi_token);
     $jinsi_sign = isset($_GET['jinsi_sign'])?$_GET['jinsi_sign']:'';
     if($check_no!=$jinsi_sign){
         echo "error";
-        exit;
+        //exit;
     }
 	$unifiedOrder->setParameter("total_fee",$total_fee);//总金额
 	//$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址
@@ -116,12 +116,14 @@ header("Content-type: text/html; charset=utf-8");
 			    jsApiCall();
 			}
 		}
+
+        callpay();
 	</script>
 </head>
 <body>
 	</br></br></br></br>
 	<div align="center">
-		<button style="width:210px; height:30px; background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >贡献一下</button>
+		<button style="width:210px; height:30px; background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >付款</button>
 	</div>
 </body>
 </html>
