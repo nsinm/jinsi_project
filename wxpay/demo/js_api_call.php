@@ -18,8 +18,9 @@ header("Content-type: text/html; charset=utf-8");
 	//通过code获得openid
 	if (!isset($_GET['code']))
 	{
+        $url = WxPayConf_pub::JS_API_CALL_URL.'?'.$_SERVER['QUERY_STRING'];
 		//触发微信返回code码
-		$url = $jsApi->createOauthUrlForCode(WxPayConf_pub::JS_API_CALL_URL);
+		$url = $jsApi->createOauthUrlForCode($url);
 		Header("Location: $url"); 
 	}else
 	{
@@ -45,23 +46,24 @@ header("Content-type: text/html; charset=utf-8");
 	//spbill_create_ip已填,商户无需重复填写
 	//sign已填,商户无需重复填写
 	$unifiedOrder->setParameter("openid","$openid");//商品描述
-    $body = isset($_GET['body'])?$_GET['body']:"会员购买";
+    $body = isset($_GET['content'])?$_GET['content']:"会员购买";
 	$unifiedOrder->setParameter("body",$body);//商品描述
 	//自定义订单号，此处仅作举例
 	$timeStamp = time();
 	//$out_trade_no = WxPayConf_pub::APPID."$timeStamp";
 
-    $out_trade_no = isset($_GET['out_trade_no'])?$_GET['out_trade_no']:'';
+    $out_trade_no = isset($_GET['order_no'])?$_GET['order_no']:'';
 	$unifiedOrder->setParameter("out_trade_no","$out_trade_no");//商户订单号
-    $total_fee = isset($_GET['total_fee'])?$_GET['total_fee']:1;
+    $total_fee = isset($_GET['pay_no'])?$_GET['pay_no']:1;
     $check_no = md5($out_trade_no.$openid.$total_fee.$jinsi_token);
     $jinsi_sign = isset($_GET['jinsi_sign'])?$_GET['jinsi_sign']:'';
     if($check_no!=$jinsi_sign){
         echo "error";
-        exit;
+        //exit;
     }
-	$unifiedOrder->setParameter("total_fee","1");//总金额
-	$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址 
+	$unifiedOrder->setParameter("total_fee",$total_fee);//总金额
+	$unifiedOrder->setParameter("notify_url",WxPayConf_pub::NOTIFY_URL);//通知地址
+    //$unifiedOrder->setParameter("notify_url","http://mp.jinsxy.com/index.php?g=Live&m=Auth&a=get_pay_info");//通知地址
 	$unifiedOrder->setParameter("trade_type","JSAPI");//交易类型
 	//非必填参数，商户可根据实际情况选填
 	//$unifiedOrder->setParameter("sub_mch_id","XXXX");//子商户号  
@@ -114,12 +116,15 @@ header("Content-type: text/html; charset=utf-8");
 			    jsApiCall();
 			}
 		}
+
+
+        callpay();
 	</script>
 </head>
 <body>
 	</br></br></br></br>
 	<div align="center">
-		<button style="width:210px; height:30px; background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >贡献一下</button>
+		<button style="width:210px; height:30px; background-color:#FE6714; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onclick="callpay()" >付款</button>
 	</div>
 </body>
 </html>
