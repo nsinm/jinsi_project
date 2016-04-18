@@ -95,9 +95,9 @@ var userAction = {
                         });
                     }else  if($(this).attr('class').indexOf('member') > 0){
                         var insName = $(this).attr('data-name');
-                        var isFollow = $(this).attr('data-filter=');
+                        var isFollow = $(this).attr('data-filter');
                         $(this).click(function(){
-                            if(isFollow){
+                            if('0' == isFollow){
                                 alert('请先关注该导师!');
                                 return;
                             }
