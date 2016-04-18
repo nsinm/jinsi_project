@@ -37,7 +37,7 @@ class PayAction extends LiveAction
                 'userId' => $userId,
                 'followUserId' => $fid,
                 'followUsername' => $username,
-                'userInfo' => $userInfo
+                'userInfo' => $userInfo[0]
             );
             $this->assign('data', $data);
         }else{
