@@ -133,7 +133,8 @@ class PayAction extends LiveAction
             $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND status=0')->select();
             if($orderInfo){
                 $directUrl = "http://mp.jinsxy.com/wxpay/demo/js_api_call.php?order_no={$orderInfo[0]['order_no']}&pay_no={$orderInfo[0]['pay_money']}&content={$orderInfo[0]['service_name']}&jinsi_sign=";
-                $this->success('确认支付?', $directUrl);
+                //$this->success('确认支付?', $directUrl);
+                redirect($directUrl, 3, '页面跳转中...')
             }
         }
         $this->error('支付失败');
