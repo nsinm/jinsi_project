@@ -220,7 +220,7 @@ class LiveModel extends Model
         //print_r($user_info);
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $reply_arr['jinsi_reply_content'];
-        $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_arr['jinsi_content_id'];
+        $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_replay_arr['jinsi_content_id'];
 
         //回复人的ID
         $reply_info = $this->get_user_one_info($content_replay_arr['jinsi_content_create_user_id']);
