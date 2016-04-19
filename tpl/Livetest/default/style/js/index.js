@@ -522,7 +522,7 @@ var indexAction = {
 
     'moreTeacher' : function(){
         var tag = $('.more-teacher');
-        var url = params.instructorUrl + '&type=3';
+        var url = params.instructorUrl;
         tag.click(function(){
             location.href = url;
         });
