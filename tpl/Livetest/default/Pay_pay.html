@@ -270,8 +270,17 @@
         //   $tip4.addClass('active')
         // })
         $step4bt.click(function(){
-            var payUrl = '{pigcms::U("Pay/payOrder")}';
-            $.ajax({
+            var payUrl = '{pigcms::U("Pay/payOrder")}' + '&fid=' + params.followUserId;
+            $.getJSON(payUrl, {}, function(data){
+                if(data.errcode == 0){
+                    location.href = data.url;
+                }else{
+                    $dialog.hide()
+                    $dialog.find('.weui_dialog_bd').html(data.msg)
+                    $dialog.show()
+                }
+            })
+            /*$.ajax({
                 type : 'get',
                 url: payUrl + '&fid=' + params.followUserId,
                 dataType:'json',
@@ -291,7 +300,7 @@
                     $dialog.find('.weui_dialog_bd').html("网络错误，请确保连上网络后再进行提交")
                     $dialog.show()
                 }
-            })
+            })*/
         })
 
 
