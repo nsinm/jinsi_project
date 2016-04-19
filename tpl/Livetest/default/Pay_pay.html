@@ -272,6 +272,7 @@
         $step4bt.click(function(){
             var payUrl = '{pigcms::U("Pay/payOrder")}' + '&fid=' + params.followUserId;
             $.getJSON(payUrl, {}, function(data){
+                console.log(data);
                 if(data.errcode == 0){
                     location.href = data.url;
                 }else{
