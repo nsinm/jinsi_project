@@ -222,4 +222,26 @@ class LiveModel extends Model
         $user_info = $user->find($id);
         return $user_info;
     }
+
+
+    public function update_order($order_id,$transaction_id)
+    {
+        $order = M('order');
+        $order_data = $order->where('order_no='.$order_id)->find();
+        //更新支付状态
+        $update_data['status'] = 1;
+        $update_data['transaction_id'] = $transaction_id;
+        $order->where('order_no='.$order)->setField($update_data);
+        $member = M('member');
+
+        $data['user_id'] = $order_data['user_id'];
+        $data['follow_id'] = $order_data['follow_id'];
+        $data['crea_time'] = time();
+        $data['pay_time'] = time();
+        $next_time = strtotime(date("Y-m-d H:i:s",strtotime("+1 month")));
+        $data['over_time'] = $next_time;
+        $data['status'] = 1;
+        $member->save($data);
+
+    }
 }

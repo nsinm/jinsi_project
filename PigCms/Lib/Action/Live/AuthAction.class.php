@@ -99,8 +99,10 @@ class AuthAction extends Action
 
                 //支付成功，开始写入数据库
                 $array = $this->xmlToArray($xml);
-                $xml = json_encode($array);
-                $log_->log_result($log_name,"【支付成功】:\n".$xml."\n");
+                $Live = D('Live');
+                $Live->update_order($array['out_trade_no'],$array['transaction_id']);
+                //$xml = json_encode($array);
+                //$log_->log_result($log_name,"【支付成功】:\n".$xml."\n");
             }
 
             //商户自行增加处理流程,
