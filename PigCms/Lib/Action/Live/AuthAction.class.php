@@ -96,6 +96,10 @@ class AuthAction extends Action
             }
             else{
                 //此处应该更新一下订单状态，商户自行增删操作
+
+                //支付成功，开始写入数据库
+                $array = $this->xmlToArray($xml);
+                $xml = json_encode($array);
                 $log_->log_result($log_name,"【支付成功】:\n".$xml."\n");
             }
 
@@ -104,5 +108,12 @@ class AuthAction extends Action
             //例如：数据库操作
             //例如：推送支付完成信息
         }
+    }
+
+    public function xmlToArray($xml)
+    {
+        //将XML转为array
+        $array_data = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+        return $array_data;
     }
 }
