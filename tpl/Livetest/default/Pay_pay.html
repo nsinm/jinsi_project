@@ -270,12 +270,20 @@
         //   $tip4.addClass('active')
         // })
         $step4bt.click(function(){
+            var payUrl = '{pigcms::U("Pay/payOrder")}';
             $.ajax({
-                url:'http://www.baidu.com',
+                type : 'get',
+                url: payUrl + '&fid=' + params.followUserId,
                 dataType:'json',
-                data:sendData,
-                success:function(){
-
+                data:{},
+                success:function(data){
+                    if(data.errcode == 0){
+                        location.href = data.url;
+                    }else{
+                        $dialog.hide()
+                        $dialog.find('.weui_dialog_bd').html(data.msg)
+                        $dialog.show()
+                    }
                 },
                 error:function(){
                     $dialog.hide()
