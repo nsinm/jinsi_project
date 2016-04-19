@@ -132,7 +132,7 @@ class PayAction extends LiveAction
 
         $result = array('errcode' => 1, 'msg' => '获取订单信息失败');
 
-        $fid = $this->_get('fid');
+        $fid = $this->_post('fid');
         if($fid){
             $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND status=0')->select();
             if($orderInfo){
