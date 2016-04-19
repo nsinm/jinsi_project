@@ -380,6 +380,19 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 支付金额设置
+     */
+    public function pay ()
+    {
+        $price = M('pay', 'jinsi_')->select();
+        if(!$price){
+            $this->error('为初始化设置');
+        }
+        $this->assign('price', $price[0]);
+        $this->display();
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()

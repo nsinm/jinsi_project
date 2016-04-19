@@ -1,0 +1,87 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<link rel="stylesheet" type="text/css" href="/tpl/User/default/common/css/telecast/pagination.css" />
+<script src="/tpl/Live/default/style/js/jquery.min.js"></script>
+<script src="/tpl/User/default/common/js/telecast/jquery.pagination.js"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/User/default/common/js/telecast/index.js"></script>
+<div class="content" <if condition="session('isQcloud') eq true">style="float:center;"</if>>
+<div class="cLineB">
+    <h4 class="left">微直播管理</h4>
+    <div class="searchbar right">
+        <script>
+            function selectall(name) {
+                var checkItems=$('.cbitem');
+                if ($("#check_box").attr('checked')==false) {
+                    $.each(checkItems, function(i,val){
+                        val.checked=false;
+                    });
+
+                } else {
+                    $.each(checkItems, function(i,val){
+                        val.checked=true;
+                    });
+                }
+            }
+        </script>
+    </div>
+    <div class="clr"></div>
+</div>
+
+<!--tab start-->
+<div class="tab">
+    <ul>
+        <li class="tabli" id="tab0"><a href="javascript:void(0);">用户管理</a></li>
+        <li class="tabli" id="tab1"><a href="javascript:void(0);">直播管理</a></li>
+        <li class="tabli" id="tab2"><a href="javascript:void(0);">评论管理</a></li>
+        <li class="tabli current" id="tab3"><a href="javascript:void(0);">反馈管理</a></li>
+        <li class="tabli" id="tab4"><a href="javascript:void(0);">banner管理</a></li>
+        <li class="tabli" id="tab5"><a href="javascript:void(0);">支付管理</a></li>
+    </ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+    <div class="cLine">
+        <div class="pageNavigator left"></div>
+        <div class="clr"></div>
+    </div>
+    <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+
+    </table>
+    <input type="hidden" name="token" value="" />
+    <script>
+
+    </script>
+</div>
+<div class="cLine">
+    <div class="pageNavigator right">
+        <div class="M-box3"></div>
+    </div>
+    <div class="clr"></div>
+</div>
+</div>
+<if condition="session('isQcloud') neq true">
+    <include file="Public:footer"/>
+</if>
+<script language="JavaScript">
+    var params = {
+        'tplName' : 'user_feedback',
+        'pageSize' : 10,
+        'index' : '{pigcms::U("Telecast/index")}',
+        'live' : '{pigcms::U("Telecast/live")}',
+        'comment' : '{pigcms::U("Telecast/comment")}',
+        'feedback' : '{pigcms::U("Telecast/feedback")}',
+        'banner' : '{pigcms::U("Telecast/banner")}',
+        'getUserListUrl' : '{pigcms::U("Telecast/getUserList")}',
+        'editUserUrl' : '{pigcms::U("Telecast/editUser")}',
+        'getLiveList' : '{pigcms::U("Telecast/getLiveList")}',
+        'getCommentList' : '{pigcms::U("Telecast/getCommentList")}',
+        'getFeedbackList' : '{pigcms::U("Telecast/getFeedbackList")}',
+        'delContent' : '{pigcms::U("Telecast/delContent")}',
+        'userCount' : '{pigcms:$vars.userCount}',
+        'commentCount' : '{pigcms:$vars.commentCount}',
+        'liveCount' : '{pigcms:$vars.liveCount}',
+        'feedbackCount' : '{pigcms:$vars.feedbackCount}',
+    };
+</script>
