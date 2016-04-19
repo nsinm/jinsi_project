@@ -270,7 +270,7 @@
         //   $tip4.addClass('active')
         // })
         $step4bt.click(function(){
-            var payUrl = '{pigcms::U("Pay/payOrder")}' + '&fid=' + params.followUserId;
+            var payUrl = '{pigcms::U("Pay/payOrder")}&fid={pigcms:$data.followUserId}';
             $.getJSON(payUrl, {}, function(data){
                 console.log(data);
                 if(data.errcode == 0){
