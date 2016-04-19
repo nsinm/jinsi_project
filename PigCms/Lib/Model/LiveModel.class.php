@@ -231,7 +231,7 @@ class LiveModel extends Model
         //更新支付状态
         $update_data['status'] = 1;
         $update_data['transaction_id'] = $transaction_id;
-        $order->where('order_no='.$order)->setField($update_data);
+        $order->where('order_no='.$order_id)->setField($update_data);
         $sql1 = $order->getLastSql();
         $member = M('member');
 
@@ -242,9 +242,9 @@ class LiveModel extends Model
         $next_time = strtotime(date("Y-m-d H:i:s",strtotime("+1 month")));
         $data['over_time'] = $next_time;
         $data['status'] = 1;
-        $member->save($data);
+        $member->add($data);
         $sql = $member->getLastSql();
-        return $sql1.'----'.$sql;
+        return $sql1.'----'.$sql.'----'.json_encode($data);
 
     }
 }
