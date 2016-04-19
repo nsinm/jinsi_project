@@ -40,9 +40,9 @@ class PayAction extends LiveAction
         $fid = $this->_get('fid');
         $username = $this->_get('insName');
         if($userId && $fid && $username){
-            $userInfo = M('user')->where('id=' . $userId)->select();
+            $userInfo = M('user')->where('id=' . $fid)->select();
             if(!$userInfo){
-                throw_exception('用户信息错误');
+                throw_exception('导师信息错误');
             }
             $data = array(
                 'userId' => $userId,
