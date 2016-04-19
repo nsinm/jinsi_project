@@ -128,7 +128,7 @@ class PayAction extends LiveAction
      */
     public function payOrder ()
     {
-        $fid = $this->_post('fid');
+        $fid = $this->_get('fid');
         if($fid){
             $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND status=0')->select();
             if($orderInfo){
