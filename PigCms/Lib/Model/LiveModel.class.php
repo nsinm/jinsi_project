@@ -203,14 +203,19 @@ class LiveModel extends Model
      * @param $id
      * 推送评论
      */
-    public function put_comment($id)
+    public function put_comment($id,$user_id)
     {
         $reply = M('reply');
         $reply_arr = $reply->find($id);
         $content = M('content');
         $content_arr = $content->find($reply_arr['jinsi_reply_content_id']);
+        //如果不是作者回复，则不会发送
+        if($content_arr['jinsi_content_create_user_id']!=$user_id){
+            return false;
+        }
         //print_r($content_arr)；
         $user_info = $this->get_user_one_info($content_arr['jinsi_content_create_user_id']);
+
         //print_r($user_info);
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $reply_arr['jinsi_reply_content'];
@@ -218,7 +223,7 @@ class LiveModel extends Model
 
         //回复人的ID
         $reply_info = $this->get_user_one_info($reply_arr['jinsi_reply_user_id']);
-        $data['openid'] = $reply_info['open_id'];
+        $data['openid'] = $user_info['open_id'];
         $this->send_message($data,2);
                 //print_r($rs);
     }
