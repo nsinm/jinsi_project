@@ -403,6 +403,8 @@ var indexAction = {
                                     console.log(data);
                                     if(data.errcode == 0){
                                         tag.empty();
+                                        var count = parseInt($('#comment_count').text());
+                                        $('#comment_count').text(++count);
                                         indexAction.getComments();
                                     }else{
                                         alert(data.msg);
