@@ -96,6 +96,12 @@ class PayAction extends LiveAction
         $identityCardNo = $this->_post('cardNo');
 
         if($followUserId && $serviceName && $telNo && $realName && $identityCardNo){
+            $existsOrder = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->count();
+            if($existsOrder > 0){
+                $status = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->delete();
+                if(!$status)
+                    $this->ajaxReturn($result, 'JSON');
+            }
             $data = array(
                 'pay_time' => time(),
                 'pay_money' => $this->price,
