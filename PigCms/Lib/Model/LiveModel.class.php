@@ -227,11 +227,11 @@ class LiveModel extends Model
     public function update_order($order_id,$transaction_id)
     {
         $order = M('order');
-        $order_data = $order->where('order_no='.$order_id)->find();
+        $order_data = $order->where("order_no='{$order_id}'")->find();
         //更新支付状态
         $update_data['status'] = 1;
         $update_data['transaction_id'] = $transaction_id;
-        $order->where('order_no='.$order_id)->setField($update_data);
+        $order->where("order_no='{$order_id}'")->setField($update_data);
         $sql1 = $order->getLastSql();
         $member = M('member');
 
