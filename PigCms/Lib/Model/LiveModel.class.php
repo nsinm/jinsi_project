@@ -208,7 +208,8 @@ class LiveModel extends Model
         $reply = M('reply');
         $reply_arr = $reply->find($id);
         $content = M('content');
-        $content_arr = $content->find($reply_arr['jinsi_reply_content_id']);
+        $content_replay_arr = $content->find($reply_arr['jinsi_reply_content_id']);
+        $content_arr = $content->find($content_replay_arr['jinsi_content_id']);
         //如果不是作者回复，则不会发送
         if($content_arr['jinsi_content_create_user_id']!=$user_id){
             return false;
