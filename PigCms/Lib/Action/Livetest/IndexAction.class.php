@@ -213,7 +213,12 @@ class IndexAction extends LiveAction
             if($id){
                 $model = D('Live');
                 $model->put_comment($id, $this->userId);
-                $result = array('errcode' => 0, 'msg' => '添加回复成功!');
+                $model = M('content');
+                $number = $model->where('id=' . $cid)->getField('jinsi_content_comment_no');
+                $upData['jinsi_content_comment_no'] = $number + 1;
+                $status = $model->where('id=' . $cid)->save($upData);
+                if($status)
+                    $result = array('errcode' => 0, 'msg' => '添加回复成功!');
             }
         }
 
