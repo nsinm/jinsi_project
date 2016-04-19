@@ -13,6 +13,8 @@ class AuthAction extends Action
     {
 
         $Live = D('Live');
+
+        $Live->put_comment(11);
         //$openid = $Live->get_openid(get_url());
 
         //$userid = $Live->get_user_info('o6KftvwBgDKYsQoUaoiCzC8bKpV0');
@@ -33,9 +35,9 @@ class AuthAction extends Action
         $send_data['url'] = "http://www.baidu.com";
         */
         //$rs = $Live->send_message($send_data);
-        $Live->put_content(428);
+        //$Live->put_content(428);
         //print_r($rs);
-        $this->display();
+        //$this->display();
     }
 
     public function send ()
