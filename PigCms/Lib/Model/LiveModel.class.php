@@ -232,6 +232,7 @@ class LiveModel extends Model
         $update_data['status'] = 1;
         $update_data['transaction_id'] = $transaction_id;
         $order->where('order_no='.$order)->setField($update_data);
+        $sql1 = $order->getLastSql();
         $member = M('member');
 
         $data['user_id'] = $order_data['user_id'];
@@ -242,6 +243,8 @@ class LiveModel extends Model
         $data['over_time'] = $next_time;
         $data['status'] = 1;
         $member->save($data);
+        $sql = $member->getLastSql();
+        return $sql1.'----'.$sql;
 
     }
 }
