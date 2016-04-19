@@ -11,10 +11,18 @@ payAction = {
         })
     },
 
+    //导师详情页
+    toTeacherPage : function (){
+        var tid = $('.weui_cell_bd').attr('data-uid');
+        var url = params.toTeacherUrl + '&userId=' + tid;
+        location.href = url;
+    },
+
     //初始化
     init : function(){
         if(params.tplName == 'pay_index'){
             this.payFlowPage();
+            this.toTeacherPage();
         }
     }
 }
