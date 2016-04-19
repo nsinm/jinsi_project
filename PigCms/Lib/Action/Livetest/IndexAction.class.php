@@ -211,6 +211,8 @@ class IndexAction extends LiveAction
 
             $id = M('reply', 'jinsi_')->add($data);
             if($id){
+                $model = D('Live');
+                $model->put_comment($id, $this->userId);
                 $result = array('errcode' => 0, 'msg' => '添加回复成功!');
             }
         }
