@@ -200,8 +200,9 @@ class IndexAction extends LiveAction
         $cid = $this->_post('cid');
         $userId = $this->_post('userId');
         $content = $this->_post('content');
+        $fid = $this->_post('fid');
 
-        if($cid && $userId && $content){
+        if($cid && $userId && $content && $fid){
             $data = array(
                 'jinsi_reply_user_id' => $userId,
                 'jinsi_reply_content_id' => $cid,
@@ -214,9 +215,9 @@ class IndexAction extends LiveAction
                 $model = D('Live');
                 $model->put_comment($id, $this->userId);
                 $model = M('content');
-                $number = $model->where('id=' . $cid)->getField('jinsi_content_comment_no');
+                $number = $model->where('id=' . $fid)->getField('jinsi_content_comment_no');
                 $upData['jinsi_content_comment_no'] = $number + 1;
-                $status = $model->where('id=' . $cid)->save($upData);
+                $status = $model->where('id=' . $fid)->save($upData);
                 if($status)
                     $result = array('errcode' => 0, 'msg' => '添加回复成功!');
             }

@@ -390,9 +390,10 @@ var indexAction = {
                                 alert('请填写回复内容!');
                                 return;
                             }
+                            var fid = $('#live_content').attr('data-cid');
                             var cid = contentId;
                             var userId = params.userId;
-                            var json = {'content':content, 'cid':cid, 'userId':userId}
+                            var json = {'content':content, 'cid':cid, 'userId':userId, 'fid':fid}
                             $.ajax({
                                 url:params.addReplyUrl,
                                 type:"post",
