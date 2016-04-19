@@ -270,17 +270,8 @@
         //   $tip4.addClass('active')
         // })
         $step4bt.click(function(){
-            var payUrl = '{pigcms::U("Pay/payOrder")}';
-            $.post(payUrl, {fid:'{pigcms:$data.followUserId}'}, function(data){
-                console.log(data);
-                if(data.errcode == 0){
-                    location.href = data.url;
-                }else{
-                    $dialog.hide()
-                    $dialog.find('.weui_dialog_bd').html(data.msg)
-                    $dialog.show()
-                }
-            }, 'JSON')
+            var payUrl = '{pigcms::U("Pay/payOrder")}&fid={pigcms:$data.followUserId}';
+            location.href = payUrl;
             /*$.ajax({
                 type : 'get',
                 url: payUrl + '&fid=' + params.followUserId,

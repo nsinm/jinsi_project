@@ -128,20 +128,15 @@ class PayAction extends LiveAction
      */
     public function payOrder ()
     {
-        if(!IS_AJAX) $this->_404('页面不存在');
-
-        $result = array('errcode' => 1, 'msg' => '获取订单信息失败');
-
         $fid = $this->_post('fid');
         if($fid){
             $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND status=0')->select();
             if($orderInfo){
                 $directUrl = "mp.jinsxy.com/wxpay/demo/js_api_call.php?order_no={$orderInfo[0]['order_no']}&pay_no={$orderInfo[0]['pay_money']}&content={$orderInfo[0]['service_name']}&jinsi_sign=";
-                $result = array('errcode' => 0, 'msg' => '获取订单信息成功', 'url' => $directUrl);
+                $this->success('确认支付?', $directUrl);
             }
         }
-
-        $this->ajaxReturn($result, 'JOSN');
+        $this->error('支付失败');
 
     }
 }
