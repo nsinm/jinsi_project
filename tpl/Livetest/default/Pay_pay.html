@@ -253,11 +253,13 @@
                     $content4.show()
                     $tip2.removeClass('active')
                     $tip4.addClass('active')
+                    params.orderId = data.id;
                 }else{
                     alert(data.msg);
                 }
             }, 'JSON')
         })
+        console.log(params);
         // 第三块签名暂不开启
         // $step3bt.click(function(){
         //   $step3bt.hide()

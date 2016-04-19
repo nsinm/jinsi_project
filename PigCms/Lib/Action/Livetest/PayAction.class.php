@@ -122,4 +122,12 @@ class PayAction extends LiveAction
         }
         $this->ajaxReturn($result, 'JSON');
     }
+
+    /**
+     * 订单支付
+     */
+    public function payOrder ()
+    {
+        
+    }
 }
