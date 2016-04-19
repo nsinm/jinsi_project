@@ -14,7 +14,7 @@ class AuthAction extends Action
 
         $Live = D('Live');
 
-        $Live->put_comment(11);
+        $Live->put_comment(11,15);
         //$openid = $Live->get_openid(get_url());
 
         //$userid = $Live->get_user_info('o6KftvwBgDKYsQoUaoiCzC8bKpV0');
