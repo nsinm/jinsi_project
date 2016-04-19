@@ -172,6 +172,21 @@ var myAction = {
         }, 'JSON');
     },
 
+    'getUserInfo': function () {
+        $.getJSON(params.guiUrl, {userId:params.cUserId}, function (data) {
+            if (data.errcode == '0') {
+                var infos = data.data[0];
+                $('.user_thumb img').attr('src', infos.jinsi_user_header_pic);
+                $('#name').text(infos.jinsi_user_name);
+                $('#style').text(infos.jinsi_user_style);
+                $('#sign').text(infos.jinsi_user_sign);
+                $('#info').text(infos.jinsi_user_info);
+            } else {
+                alert(data.msg);
+            }
+        }, 'JSON');
+    },
+
     'addFeedback' : function(){
         var tag = $('.weui_btn.weui_btn_primary');
         tag.click(function(){
@@ -198,6 +213,7 @@ var myAction = {
         }else if(params.tplName == 'my_fans'){
             this.getMyFansList();
         }else if(params.tplName == 'my_live'){
+            this.getUserInfo();
             this.getMyLiveList();
         }else if(params.tplName == 'my_feedback'){
             this.addFeedback();

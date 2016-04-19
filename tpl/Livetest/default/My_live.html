@@ -21,6 +21,45 @@
 </div>
 <div class="container js_container">
     <div class="page">
+        <if condition="$cUserId neq ''">
+            <div class="weui_cells weui_cells_access mb44">
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>头像</p>
+                    </div>
+                    <div></div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>名字</p>
+                    </div>
+                    <div id="name">血海</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>风格</p>
+                    </div>
+                    <div id="style">激进</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>签名</p>
+                    </div>
+                    <div id="sign">我不是股神</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>简介</p>
+                    </div>
+                    <div id="info"></div>
+                </a>
+            </div>
+        </if>
         <div class="bd">
             <if condition="$cUserId neq ''">
                 <div class="weui_cells_title">直播列表</div>
@@ -46,6 +85,7 @@
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',
+        'guiUrl' : '{pigcms::U("Instructor/getInstructorInfo")}'
     };
 </script>
 </body>
