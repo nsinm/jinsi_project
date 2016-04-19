@@ -127,8 +127,10 @@ class LiveModel extends Model
         $array['template_id'] = $t_id;
         $array['url'] = $data['url'];
         $data['content'] = cut_str($data['content'],20);
-        if($self){
+        if($self==1){
             $item['first'] = array('value'=>"您有新消息发布了",'color'=>'#173177');
+        }elseif($self==2){
+            $item['first'] = array('value'=>"您关注的导师{$data['auther']}回复了您的消息",'color'=>'#173177');
         }else{
             $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
         }
@@ -201,19 +203,23 @@ class LiveModel extends Model
      * @param $id
      * 推送评论
      */
-    public function put_comment($id,$openid)
+    public function put_comment($id)
     {
+        $reply = M('reply');
+        $reply_arr = $reply->find($id);
         $content = M('content');
-        $content_arr = $content->find($id);
+        $content_arr = $content->find($reply_arr['jinsi_reply_content_id']);
         //print_r($content_arr)；
         $user_info = $this->get_user_one_info($content_arr['jinsi_content_create_user_id']);
         //print_r($user_info);
         $data['auther'] = $user_info['jinsi_user_name'];
-        $data['content'] = $content_arr['jinsi_content_info'];
+        $data['content'] = $reply_arr['jinsi_reply_content'];
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_arr['jinsi_content_id'];
 
-        $data['openid'] = $openid;
-        $this->send_message($data);
+        //回复人的ID
+        $reply_info = $this->get_user_one_info($reply_arr['jinsi_reply_user_id']);
+        $data['openid'] = $reply_info['open_id'];
+        $this->send_message($data,2);
                 //print_r($rs);
     }
     public function get_user_one_info($id)
