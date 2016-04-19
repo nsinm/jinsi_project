@@ -277,6 +277,7 @@
                 dataType:'json',
                 data:{},
                 success:function(data){
+                    console.log(data);
                     if(data.errcode == 0){
                         location.href = data.url;
                     }else{
