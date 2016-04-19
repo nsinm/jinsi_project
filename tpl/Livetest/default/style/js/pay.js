@@ -13,9 +13,12 @@ payAction = {
 
     //导师详情页
     toTeacherPage : function (){
-        var tid = $('.weui_cell_bd').attr('data-uid');
+        var tag = $('.weui_cell_bd');
+        var tid = tag.attr('data-uid');
         var url = params.toTeacherUrl + '&userId=' + tid;
-        location.href = url;
+        tag.click(function(){
+            location.href = url;
+        })
     },
 
     //初始化
