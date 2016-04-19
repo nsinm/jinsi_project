@@ -224,7 +224,7 @@ class LiveModel extends Model
 
         //回复人的ID
         $reply_info = $this->get_user_one_info($reply_arr['jinsi_reply_user_id']);
-        $data['openid'] = $user_info['open_id'];
+        $data['openid'] = $reply_info['open_id'];
         $this->send_message($data,2);
                 //print_r($rs);
     }
