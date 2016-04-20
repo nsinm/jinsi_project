@@ -135,7 +135,7 @@ var indexAction = {
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=        '<p id="live_main">'
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    if(!infos[index].isMember && infos[index].jinsi_push_type){
+                    if(infos[index].isMember != 1 && infos[index].jinsi_push_type == '1'){
                         var payUrl = params.payUrl + '&userId=' + params.userId + '&fid=' + infos[index].user_id + '&insName=' + infos[index].jinsi_user_name;
                         html +=         '<p class="user_liveword user-comment-name">该条直播为会员内容&nbsp;&nbsp;<a href="' + payUrl + '" class="weui_btn weui_btn_mini weui_btn_default jumpBt c_member">成为会员</a></p>';
                     }else{
