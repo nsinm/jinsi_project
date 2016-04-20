@@ -319,6 +319,9 @@ var indexAction = {
                     html += '</div>';
                     var replies = infos[index].replies;
                     for(var i in replies){
+                        var content = replies[i].jinsi_reply_content;
+                        var at = content.substring(0, content.indexOf(' '));
+                        var reply = content.substring(content.indexOf(' '));
                         html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10 user-comment">';
@@ -327,7 +330,7 @@ var indexAction = {
                         html +=     '</div>';
                         html +=     '<div class="weui_cell_bd weui_cell_primary">';
                         html +=         '<p class="user_livename user-comment-name">' + replies[i].jinsi_user_name + '</p>';
-                        html +=         '<p class="user_liveword user-comment-name">' + replies[i].jinsi_reply_content + '</p>';
+                        html +=         '<p class="user_liveword user-comment-name"><span style="color:orange;">' + at + '</span><span>' + reply + '</span></p>';
                         html +=         '<p class="user_livetime"></p>';
                         html +=         '<p class="user_liveinteract">';
                         html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
