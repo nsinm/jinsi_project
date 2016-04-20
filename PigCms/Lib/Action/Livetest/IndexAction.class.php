@@ -91,7 +91,7 @@ class IndexAction extends LiveAction
             }
 
             if($this->userId != $value['user_id']){
-                $value['isMember'] = $this->_isMember($this->userId, $value['user_id']);
+                $value['isMember'] = $this->_isMember($this->userId, $value['jinsi_content_create_user_id']);
             }else{
                 $value['isMember'] = 1;
             }
