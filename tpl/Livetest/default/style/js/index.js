@@ -126,7 +126,7 @@ var indexAction = {
                 for(var index in infos){
                     var imgString = infos[index].jinsi_content_url;
                     var imgs = imgString.split(',');
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '" data-uid="' + infos[index].user_id + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" id="header_pic" alt="">';
@@ -173,9 +173,13 @@ var indexAction = {
                 $('#filter').attr({'width':'30px'});
             }
             tag.html(html).find("p").each(function(){
-                var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
+                var parent = $(this).parents('.weui_cell.live_block');
+                var cid = parent.attr('data-cid');
                 var img = $(this).siblings('.pic');
                 var headerPic = $(this).parent().siblings('.weui_cell_hd');
+                var isMember = parent.attr('data-value');
+                var pushType = parent.attr('data-push-type');
+                var userId = parent.attr('data-uid');
 
                 img.click(function(){
                     var $this = $(this)
@@ -186,12 +190,15 @@ var indexAction = {
                 })
 
                 headerPic.click(function(){
-                    location.href = params.cUrl + '&cid=' + cid;
+                    location.href = params.liveListUrl + '&userId=' + userId;
                 })
 
                 if($(this).attr('class') != 'user_liveinteract'){
                     $(this).click(function(){
-                         location.href = params.cUrl + '&cid=' + cid;
+                        if(isMember != 1 && pushType == '1'){
+                            return;
+                        }
+                        location.href = params.cUrl + '&cid=' + cid;
                     });
                 }
 
