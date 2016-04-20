@@ -89,6 +89,12 @@ class IndexAction extends LiveAction
             if($praise){
                 $value['current_user_praise'] = 1;
             }
+
+            if($this->userId != $value['user_id']){
+                $value['isMember'] = $this->_isMember($this->userId, $value['user_id']);
+            }else{
+                $value['isMember'] = 1;
+            }
             array_push($data, $value);
         }
         if($comments){
@@ -96,6 +102,19 @@ class IndexAction extends LiveAction
         }
 
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     *
+     * 判断是否为导师会员
+     *
+     * @param $userId
+     * @param $teacherId
+     * @return bool
+     */
+    private function _isMember ($userId, $teacherId){
+        $count = M('member')->where('user_id=' . $userId . ' AND follow_id=' . $teacherId)->count();
+        return $count > 0 ? 1 : 0;
     }
 
     /**
