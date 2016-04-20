@@ -109,6 +109,34 @@ class MyAction extends LiveAction
     }
 
     /**
+     * 我的会员
+     */
+    public function member ()
+    {
+        $this->assign('urls', $this->ajaxUrls);
+        $this->display();
+    }
+
+    /**
+     * 我的会员列表
+     */
+    public function getMyMemberList ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+        $result = array('errcode' => 1, 'msg' => '获取会员列表失败!');
+
+        $res = M('member')->where('follow_id=' . $this->userId)->select();
+        if($res){
+            $memberIds = array_column($res, 'user_id');
+            $in = '(' . implode(',', $memberIds) . ')';
+            $memberInfos = M('user')->where('id IN ' . $in)->select();
+            $count = M('user')->where('id IN ' . $in)->count();
+            $result = array('errcode' => 0, 'msg' => '获取会员列表成功!', 'data' => $memberInfos, 'count' => $count);
+        }
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
      * 我的直播
      */
     public function live ()

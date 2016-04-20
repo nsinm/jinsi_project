@@ -16,6 +16,8 @@ var myAction = {
                 toUrl(this, params.followUrl);
             }else if(text.indexOf('我的粉丝') > 0){
                 toUrl(this, params.fansUrl);
+            }else if(text.indexOf('我的会员') > 0){
+                toUrl(this, params.memberUrl);
             }else if(text.indexOf('我的直播') > 0){
                 toUrl(this, params.liveUrl);
             }else if(text.indexOf('用户反馈') > 0){
@@ -106,6 +108,35 @@ var myAction = {
                 }
             }else{
                 html += '您还没有粉丝,加油哦!';
+            }
+            tag.html(html);
+        }, 'JSON');
+    },
+    
+    'getMyMemberList' : function () {
+        var tag = $('.weui_cells.weui_cells_access');
+        $.getJSON(params.memberListUrl, {}, function(data){
+            console.log(data);
+            var html = '';
+            if(data.errcode == '0'){
+                var infos = data.data;
+                var text = '我的会员&nbsp;&nbsp;(' + data.count + '人)';
+                $('.bd .weui_cells_title').html(text);
+                for(var index in infos){
+                    html += '<div class="weui_cell">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_signature">' + infos[index].jinsi_user_sign + '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
+                }
+            }else{
+                html += '您还没有会员,加油哦!';
             }
             tag.html(html);
         }, 'JSON');
@@ -217,6 +248,8 @@ var myAction = {
             this.getMyLiveList();
         }else if(params.tplName == 'my_feedback'){
             this.addFeedback();
+        }else if(params.tplName == 'my_member'){
+            this.getMyMemberList();
         }
     }
 };
