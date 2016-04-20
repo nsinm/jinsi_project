@@ -24,7 +24,7 @@ var commemtAction = {
             var isComment = !cid ? 0 : 1;
             //评论人id
             var userId = params.userId;
-            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId, 'pushType':0}
             if(!isComment){
                 commemtAction.showDialog(url, cid, json);
             }else{
@@ -59,6 +59,7 @@ var commemtAction = {
             }
             if($(this).text() == '仅对会员推送'){
                 push = -1;
+                json.pushType = 1;
             }
             json.push = push;
             $.post(url, json, function(data){

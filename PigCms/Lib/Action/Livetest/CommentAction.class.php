@@ -58,6 +58,7 @@ class CommentAction extends LiveAction
         //直播id
         $cid = $this->_post('cid');
         $push = $this->_post('push');
+        $pushType = $this->_post('pushType');
 
         $data = array(
             'jinsi_content_info' => $this->_post('content'),
@@ -70,6 +71,7 @@ class CommentAction extends LiveAction
             'jinsi_content_create_user_id' => $userId,
             'jinsi_content_is_comment' => $this->_post('isComment'),
             'jinsi_content_id' => $cid,
+            'jinsi_push_type' => $pushType,
             'push' => $push
         );
 
