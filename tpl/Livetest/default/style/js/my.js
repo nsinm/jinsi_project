@@ -154,7 +154,9 @@ var myAction = {
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    var imgString = infos[index].jinsi_content_url;
+                    var imgs = imgString.split(',');
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -162,16 +164,16 @@ var myAction = {
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    if(infos[index].jinsi_content_type == '1') {
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                    }else if(infos[index].jinsi_content_type == '2'){
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                    if(infos[index].isMember != 1 && infos[index].jinsi_push_type == '1'){
+                        var payUrl = params.payUrl + '&userId=' + params.userId + '&fid=' + infos[index].user_id + '&insName=' + infos[index].jinsi_user_name;
+                        html +=         '<p class="user_liveword user-comment-name"><span style="color:red;">该条直播为会员内容</span>&nbsp;&nbsp;<a href="' + payUrl + '" class="weui_btn weui_btn_plain_primary jumpBt member" style="top:9px;">成为会员</a></p>';
                     }else{
-                        html +=     '<p class="user_wordbubble" >';
-                        html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
-                        html +=         '<span>32&quot;</span>';
-                        html +=     '</p>';
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                        if(infos[index].jinsi_content_type == '2'){
+                            for(var urlIndex in imgs) {
+                                html += '<img src="' + imgs[urlIndex] + '" class="pic" alt="">';
+                            }
+                        }
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=         '<p class="user_liveinteract">';
@@ -196,7 +198,12 @@ var myAction = {
             }
             tag.html(html).find("div[class='weui_cell live_block']").each(function(){
                 var cid = $(this).attr('data-cid');
+                var isMember = $(this).attr('data-value');
+                var pushType = $(this).attr('data-push-type');
                 $(this).click(function(){
+                    if(isMember != 1 && pushType == '1'){
+                        return;
+                    }
                     location.href = params.commentUrl + '&cid=' + cid;
                 });
             });
