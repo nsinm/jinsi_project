@@ -57,6 +57,9 @@ var commemtAction = {
             if($(this).text() == '发布并推送'){
                 push = 1;
             }
+            if($(this).text() == '仅对会员推送'){
+                push = -1;
+            }
             json.push = push;
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
