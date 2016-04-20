@@ -144,11 +144,6 @@ var indexAction = {
                             for(var urlIndex in imgs) {
                                 html += '<img src="' + imgs[urlIndex] + '" class="pic" alt="">';
                             }
-                        }else{
-                            html +=     '<p class="user_wordbubble" >';
-                            html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
-                            html +=         '<span>32&quot;</span>';
-                            html +=     '</p>';
                         }
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
