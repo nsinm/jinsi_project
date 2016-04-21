@@ -229,18 +229,12 @@ var myAction = {
 
     //关注和加入会员
     'attentionOrJoinMember' : function(){
-        var parent = $('.weui_btn_area.mg010');
-        var teacherId = parent.attr('data-uid');
-        parent.find('a').each(function(){
-            if($(this).text == '关注'){
-                $(this).click(function(){
-                    alert(1111);
-                })
-            }else{
-                $(this).click(function(){
-                    alert(2222);
-                })
-            }
+        $('#attention').click(function(){
+            alert(1111);
+        })
+
+        $('#join-member').click(function(){
+            alert(2222);
         })
     },
 
