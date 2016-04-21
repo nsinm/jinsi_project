@@ -221,7 +221,7 @@ var myAction = {
                 $('#style').text(infos.jinsi_user_style);
                 $('#sign').text(infos.jinsi_user_sign);
                 $('#info').text(infos.jinsi_user_info);
-                myAction.attentionOrJoinMember(infos.id, infos.is_member, infos.is_follow);
+                myAction.attentionOrJoinMember(infos.id, infos.is_member, infos.is_follow, infos.jinsi_user_name);
             } else {
                 alert(data.msg);
             }
@@ -229,28 +229,53 @@ var myAction = {
     },
 
     //关注和加入会员
-    'attentionOrJoinMember' : function(teacherId, isMember, isFollow){
+    'attentionOrJoinMember' : function(teacherId, isMember, isFollow, tName){
         var isFollow = isFollow,
             isMember = isMember,
             tid = teacherId,
+            tName = tName,
             attention = $('#attention'),
-            joinMember = $('#join-member');
+            joinMember = $('#join-member'),
+            cAttention = $('#cancel-attention');
 
         if(isFollow) {
-            attention.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
+            attention.hide();
+            cAttention.show();
         }
 
         if(isMember != '0'){
             joinMember.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
         }
 
+        var json = {'userId' : params.userId, 'instructorId' : tid};
+        //关注
         attention.click(function(){
-            if(isFollow) return;
-
+            $.getJSON(params.followUrl, json, function(data){
+                console.log(data);
+                if(data.errcode == '0'){
+                    $(this).hide();
+                    cAttention.show();
+                }else{
+                    alert(data.msg);
+                }
+            })
+        })
+        //取消关注
+        cAttention.click(function(){
+            $.getJSON(params.cFollowUrl, json, function(data){
+                console.log(data);
+                if(data.errcode == '0'){
+                    $(this).hide();
+                    attention.show();
+                }else{
+                    alert(data.msg);
+                }
+            })
         })
 
         joinMember.click(function(){
             if(isMember != '0') return;
+            location.href = params.payUrl + '&userId=' + params.userId + '&fid=' + tid + '&insName=' + tName;
         })
     },
 
