@@ -234,7 +234,7 @@ var myAction = {
             attention = $('#attention'),
             cAttention = $('#cancel-attention');
 
-        if(isFollow == '0') {
+        if(isFollow == '1') {
             cAttention.show();
         }
 
