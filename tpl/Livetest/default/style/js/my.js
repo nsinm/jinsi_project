@@ -236,6 +236,8 @@ var myAction = {
 
         if(isFollow == '1') {
             cAttention.show();
+        }else{
+            attention.show();
         }
 
         var json = {'userId' : params.userId, 'instructorId' : tid};
