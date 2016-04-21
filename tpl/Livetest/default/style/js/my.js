@@ -234,7 +234,7 @@ var myAction = {
             attention = $('#attention'),
             cAttention = $('#cancel-attention');
 
-        if(isFollow) {
+        if(isFollow == '0') {
             cAttention.show();
         }
 
@@ -244,7 +244,6 @@ var myAction = {
             $.getJSON(params.followUrl, json, function(data){
                 console.log(data);
                 if(data.errcode == '0'){
-                    $(this).hide();
                     cAttention.show();
                 }else{
                     alert(data.msg);
@@ -256,7 +255,6 @@ var myAction = {
             $.getJSON(params.cFollowUrl, json, function(data){
                 console.log(data);
                 if(data.errcode == '0'){
-                    $(this).hide();
                     attention.show();
                 }else{
                     alert(data.msg);
