@@ -178,7 +178,7 @@ class LiveModel extends Model
         //查询会员
         $time = time();
         $member = M('member');
-        $member_list = $member->where("follow_id=".$content_arr['jinsi_content_create_user_id']." and over_time<".$time)->select();
+        $member_list = $member->where("follow_id=".$content_arr['jinsi_content_create_user_id']." and over_time>".$time)->select();
         if($member_list){
             foreach($member_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
