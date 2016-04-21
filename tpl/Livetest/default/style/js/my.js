@@ -240,13 +240,17 @@ var myAction = {
             attention.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
         }
 
-        attention.click(function(){
-            if(isMember) return;
+        if(isMember){
+            joinMember.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
+        }
 
+        attention.click(function(){
+            if(isFollow) return;
+            
         })
 
         joinMember.click(function(){
-            alert(2222);
+            is(isMember) return;
         })
     },
 
