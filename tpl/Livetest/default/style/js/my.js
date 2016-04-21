@@ -246,11 +246,11 @@ var myAction = {
 
         attention.click(function(){
             if(isFollow) return;
-            
+
         })
 
         joinMember.click(function(){
-            is(isMember) return;
+            if(isMember) return;
         })
     },
 
