@@ -181,9 +181,13 @@ class LiveModel extends Model
         $member_list = $member->where("follow_id=".$content_arr['jinsi_content_create_user_id']." and over_time>".$time)->select();
         if($member_list){
             foreach($member_list as $v){
+
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
+
+                //对于已经是会员不用重复发送
+                $member_arr[] = $user_arr['open_id'];
                 //print_r($rs);
             }
         }
@@ -193,8 +197,19 @@ class LiveModel extends Model
 
                 foreach($follow_list as $v){
                     $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
-                    $data['openid'] = $user_arr['open_id'];
-                    $rs = $this->send_message($data);
+                    $flag = 0;
+                    if($member_arr){
+                        foreach($member_arr as $mv){
+                            if($mv==$user_arr['open_id']){
+                                $flag = 1;
+                            }
+                        }
+                    }
+                    if($flag==0){
+                        $data['openid'] = $user_arr['open_id'];
+                        $rs = $this->send_message($data);
+                    }
+
                     //print_r($rs);
                 }
 
