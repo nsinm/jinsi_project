@@ -232,16 +232,20 @@ var myAction = {
     'attentionOrJoinMember' : function(teacherId, isMember, isFollow){
         var isFollow = isFollow,
             isMember = isMember,
-            tid = teacherId;
-        $('#attention').click(function(){
-            if(isFollow){
-                $(this).removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
-            }else{
+            tid = teacherId,
+            attention = $('#attention'),
+            joinMember = $('#join-member');
 
-            }
+        if(isFollow) {
+            attention.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
+        }
+
+        attention.click(function(){
+            if(isMember) return;
+
         })
 
-        $('#join-member').click(function(){
+        joinMember.click(function(){
             alert(2222);
         })
     },
