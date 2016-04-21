@@ -125,7 +125,7 @@
     })
     //取消关注
     cAttention.click(function(){
-        $.getJSON(params.cFollowUrl, json, function(data){
+        $.post(params.cFollowUrl, json, function(data){
             console.log(data);
             if(data.errcode == '0'){
                 attention.show();

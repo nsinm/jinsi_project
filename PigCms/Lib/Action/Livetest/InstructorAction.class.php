@@ -138,6 +138,10 @@ class InstructorAction extends LiveAction
 
         $userId = $this->_get('userId');
         $instructorId = $this->_get('instructorId');
+        if(!$userId && !$instructorId){
+            $userId = $this->_post('userId');
+            $instructorId = $this->_post('instructorId');
+        }
 
         if($userId && $instructorId){
             $data = array(
@@ -163,6 +167,10 @@ class InstructorAction extends LiveAction
 
         $userId = $this->_get('userId');
         $instructorId = $this->_get('instructorId');
+        if(!$userId && !$instructorId){
+            $userId = $this->_post('userId');
+            $instructorId = $this->_post('instructorId');
+        }
 
         if($userId && $instructorId){
             $status = M('follow')->where("jinsi_follow_user_id = {$userId} AND jinsi_follow_id_user = {$instructorId}")->delete();
