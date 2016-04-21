@@ -58,7 +58,7 @@ header("Content-type: text/html; charset=utf-8");
     $check_no = md5($out_trade_no.$openid.$total_fee.$jinsi_token);
     $jinsi_sign = isset($_GET['jinsi_sign'])?$_GET['jinsi_sign']:'';
     if($check_no!=$jinsi_sign){
-        echo "error";
+        //echo "error";
         //exit;
     }
 	$unifiedOrder->setParameter("total_fee",$total_fee);//总金额
