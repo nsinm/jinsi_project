@@ -53,7 +53,7 @@ var userAction = {
                             html +=     '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt attention" data-value="' + infos[index].id + '">关注</a>';
                         }
                         if(infos[index].is_member != '0'){
-                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt c_member">成为会员</a>';
+                            html +=         '<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default jumpBt cancel">成为会员</a>';
                         }else{
                             html +=         '<a href="javascript:;" class="weui_btn weui_btn_plain_primary jumpBt member" data-value="' + infos[index].id + '" data-filter="' + infos[index].is_follow + '" data-name="' + infos[index].jinsi_user_name + '">成为会员</a>';
                         }
