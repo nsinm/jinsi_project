@@ -43,7 +43,20 @@ class InstructorAction extends LiveAction
         $userId = $this->_get('userId');
         if($userId){
             $userInfo = M('user')->where('id = ' . $userId)->select();
+            $model = M();
             if($userInfo){
+                $value = $userInfo[0];
+
+                $sql = "SELECT jinsi_follow_user_id FROM jinsi_follow WHERE jinsi_follow_id_user = {$value['id']}";
+                $res = $model->query($sql);
+                $value['is_follow'] = in_array($this->userId, array_column($res, 'jinsi_follow_user_id')) ? 1 : 0;
+
+                $value['is_member'] = M('member')->where('user_id=' . $this->userId . ' AND follow_id=' . $value['id'])->count();
+                if($this->userId == $value['id'])
+                    $value['is_member'] = 1;
+
+                $userInfo[0] = $value;
+
                 $result = array('errcode' => 0, 'msg' => '获取导师信息成功!', 'data' => $userInfo);
             }
         }

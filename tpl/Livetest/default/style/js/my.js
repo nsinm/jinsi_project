@@ -225,6 +225,12 @@ var myAction = {
         }, 'JSON');
     },
 
+    //关注和加入会员
+    'attentionOrJoinMember' : function(){
+        var parent = $('.weui_btn_area.mg010');
+        var teacherId = parent.attr('data-uid');
+    },
+
     'addFeedback' : function(){
         var tag = $('.weui_btn.weui_btn_primary');
         tag.click(function(){
