@@ -87,6 +87,18 @@ canvas { display: block; }
 .bt44{
 	bottom:44px;
 }
+.wd49{
+	width:46%;
+	display: inline-block;
+}
+.wd100{
+width: 100%;
+}
+.mg010{
+	margin:0 10px!important;
+	display: -webkit-flex!important; /* Safari */
+	display:flex!important;
+}
 .more-teacher{
 	position: absolute;
 	right: 0;
@@ -128,6 +140,17 @@ canvas { display: block; }
 	margin-right: 6px;
 	line-height: 1.7!important;
     font-size: 12px!important;
+}
+.jumpBtFull{
+	margin-top: 3px!important;
+	margin-bottom: 4px!important;
+	padding-top: 5px!important;
+	padding-bottom: 5px!important;
+	min-width: 70px;
+	display: inline-block;
+	margin-right: 6px;
+	line-height: 1.7!important;
+    font-size: 14px!important;
 }
 .plus-nav{
 	width: 31px;
