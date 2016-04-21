@@ -240,7 +240,7 @@ var myAction = {
             attention.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
         }
 
-        if(isMember){
+        if(isMember == '0'){
             joinMember.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
         }
 
@@ -250,7 +250,7 @@ var myAction = {
         })
 
         joinMember.click(function(){
-            if(isMember) return;
+            if(isMember == '0') return;
         })
     },
 
