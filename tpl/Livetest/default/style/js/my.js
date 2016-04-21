@@ -220,6 +220,7 @@ var myAction = {
                 $('#style').text(infos.jinsi_user_style);
                 $('#sign').text(infos.jinsi_user_sign);
                 $('#info').text(infos.jinsi_user_info);
+                myAction.attentionOrJoinMember();
             } else {
                 alert(data.msg);
             }
@@ -230,6 +231,13 @@ var myAction = {
     'attentionOrJoinMember' : function(){
         var parent = $('.weui_btn_area.mg010');
         var teacherId = parent.attr('data-uid');
+        parent.find('a').each(function(){
+            if($(this).text == '关注'){
+                alert(1111);
+            }else{
+                alert(2222);
+            }
+        })
     },
 
     'addFeedback' : function(){
