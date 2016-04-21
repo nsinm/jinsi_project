@@ -228,44 +228,42 @@ var myAction = {
             }
         }, 'JSON');
 
-        function followAndCfollow(tid, isFollow){
-            var isFollow = isFollow,
-                tid = tid,
-                attention = $('#attention'),
-                cAttention = $('#cancel-attention');
 
-            if(isFollow) {
-                cAttention.show();
-            }
+        var isFollow = isFollow,
+            tid = userId,
+            attention = $('#attention'),
+            cAttention = $('#cancel-attention');
 
-            var json = {'userId' : params.userId, 'instructorId' : tid};
-            //关注
-            attention.click(function(){
-                $.getJSON(params.followUrl, json, function(data){
-                    console.log(data);
-                    if(data.errcode == '0'){
-                        $(this).hide();
-                        cAttention.show();
-                    }else{
-                        alert(data.msg);
-                    }
-                })
-            })
-            //取消关注
-            cAttention.click(function(){
-                $.getJSON(params.cFollowUrl, json, function(data){
-                    console.log(data);
-                    if(data.errcode == '0'){
-                        $(this).hide();
-                        attention.show();
-                    }else{
-                        alert(data.msg);
-                    }
-                })
-            })
+        if(isFollow) {
+            cAttention.show();
         }
 
-        followAndCfollow(userId, isFollow);
+        var json = {'userId' : params.userId, 'instructorId' : tid};
+        //关注
+        attention.click(function(){
+            $.getJSON(params.followUrl, json, function(data){
+                console.log(data);
+                if(data.errcode == '0'){
+                    $(this).hide();
+                    cAttention.show();
+                }else{
+                    alert(data.msg);
+                }
+            })
+        })
+        //取消关注
+        cAttention.click(function(){
+            $.getJSON(params.cFollowUrl, json, function(data){
+                console.log(data);
+                if(data.errcode == '0'){
+                    $(this).hide();
+                    attention.show();
+                }else{
+                    alert(data.msg);
+                }
+            })
+        })
+
     },
 
     //关注和加入会员
