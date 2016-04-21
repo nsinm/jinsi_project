@@ -114,7 +114,7 @@
     var json = {'userId' : params.userId, 'instructorId' : tid};
     //关注
     attention.click(function(){
-        $.getJSON('{pigcms::U("InstructorAction/follow")}', json, function(data){
+        $.post('{pigcms::U("InstructorAction/follow")}', json, function(data){
             console.log(data);
             if(data.errcode == '0'){
                 cAttention.show();
