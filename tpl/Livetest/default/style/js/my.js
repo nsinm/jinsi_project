@@ -211,7 +211,8 @@ var myAction = {
     },
 
     'getUserInfo': function () {
-        var userId = params.cUserId;
+        var userId = params.cUserId,
+            isFollow = params.isFollow;
         $.getJSON(params.guiUrl, {userId: userId}, function (data) {
             console.log(data)
             if (data.errcode == '0') {
@@ -221,57 +222,62 @@ var myAction = {
                 $('#style').text(infos.jinsi_user_style);
                 $('#sign').text(infos.jinsi_user_sign);
                 $('#info').text(infos.jinsi_user_info);
-                myAction.attentionOrJoinMember(infos.id, infos.is_member, infos.is_follow, infos.jinsi_user_name);
+                myAction.joinMember(infos.id, infos.is_member, infos.jinsi_user_name);
             } else {
                 alert(data.msg);
             }
         }, 'JSON');
+
+        function followAndCfollow(tid, isFollow){
+            var isFollow = isFollow,
+                tid = tid,
+                attention = $('#attention'),
+                cAttention = $('#cancel-attention');
+
+            if(isFollow) {
+                cAttention.show();
+            }
+
+            var json = {'userId' : params.userId, 'instructorId' : tid};
+            //关注
+            attention.click(function(){
+                $.getJSON(params.followUrl, json, function(data){
+                    console.log(data);
+                    if(data.errcode == '0'){
+                        $(this).hide();
+                        cAttention.show();
+                    }else{
+                        alert(data.msg);
+                    }
+                })
+            })
+            //取消关注
+            cAttention.click(function(){
+                $.getJSON(params.cFollowUrl, json, function(data){
+                    console.log(data);
+                    if(data.errcode == '0'){
+                        $(this).hide();
+                        attention.show();
+                    }else{
+                        alert(data.msg);
+                    }
+                })
+            })
+        }
+
+        followAndCfollow(userId, isFollow);
     },
 
     //关注和加入会员
-    'attentionOrJoinMember' : function(teacherId, isMember, isFollow, tName){
-        var isFollow = isFollow,
-            isMember = isMember,
+    'joinMember' : function(teacherId, isMember, tName){
+        var isMember = isMember,
             tid = teacherId,
             tName = tName,
-            attention = $('#attention'),
-            joinMember = $('#join-member'),
-            cAttention = $('#cancel-attention');
-
-        if(isFollow) {
-            attention.hide();
-            cAttention.show();
-        }
+            joinMember = $('#join-member');
 
         if(isMember != '0'){
             joinMember.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
         }
-
-        var json = {'userId' : params.userId, 'instructorId' : tid};
-        //关注
-        attention.click(function(){
-            $.getJSON(params.followUrl, json, function(data){
-                console.log(data);
-                if(data.errcode == '0'){
-                    $(this).hide();
-                    cAttention.show();
-                }else{
-                    alert(data.msg);
-                }
-            })
-        })
-        //取消关注
-        cAttention.click(function(){
-            $.getJSON(params.cFollowUrl, json, function(data){
-                console.log(data);
-                if(data.errcode == '0'){
-                    $(this).hide();
-                    attention.show();
-                }else{
-                    alert(data.msg);
-                }
-            })
-        })
 
         joinMember.click(function(){
             if(isMember != '0') return;

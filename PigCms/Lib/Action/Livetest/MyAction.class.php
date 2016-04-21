@@ -147,9 +147,15 @@ class MyAction extends LiveAction
         );
 
         $cUserId = $this->_get('userId');
+        if($cUserId){
+            $sql = "SELECT jinsi_follow_user_id FROM jinsi_follow WHERE jinsi_follow_id_user = {$cUserId}";
+            $res = M()->query($sql);
+            $isFollow = in_array($this->userId, array_column($res, 'jinsi_follow_user_id')) ? 1 : 0;
+        }
 
         $urls = array_merge($this->ajaxUrls, $uris);
         $this->assign('cUserId', $cUserId);
+        $this->assign('isFollow', $isFollow);
         $this->assign('urls', $urls);
         $this->display();
     }

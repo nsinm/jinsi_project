@@ -61,7 +61,7 @@
                 <div class="weui_btn_area mg010">
                     <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_default" id="cancel-attention" style="display: none;">取消关注</a>
                     <!--<a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_disabled weui_btn_default">成为会员</a>-->
-                    <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_primary" id="attention">关注</a>
+                    <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_primary" id="attention" style="display:none;">关注</a>
                     <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_primary" id="join-member">成为会员</a>
                 </div>
             </div>
@@ -85,6 +85,7 @@
     var params = {
         'userId' : '{pigcms:$urls.userId}',
         'cUserId' : '{pigcms:$cUserId}',
+        'isFollow' : '{pigcms:$isFollow}',
         'tplName' : 'my_live',
         'llUrl' : '{pigcms:$urls.llUrl}',
         'commentUrl' : '{pigcms:$urls.commentUrl}',
