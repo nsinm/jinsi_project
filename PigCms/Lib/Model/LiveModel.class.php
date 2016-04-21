@@ -285,11 +285,11 @@ class LiveModel extends Model
     function send_pay($user_id,$follow_id,$pay_no,$type=0)
     {
         $user_info = $this->get_user_one_info($user_id);
-        $follow_id = $this->get_user_one_info($follow_id);
+        $follow_info = $this->get_user_one_info($follow_id);
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
         $t_id = "PQKYlOBTrVEm5i_lXmfrlo_vsdmfUH_oX00lVE8Et6E";
-        $array['touser'] = $follow_id['openid'];
+        $array['touser'] = $follow_id['open_id'];
         $array['template_id'] = $t_id;
         if($type==0){
             $item['first'] = array('value'=>"您的会员被订购",'color'=>'#173177');
