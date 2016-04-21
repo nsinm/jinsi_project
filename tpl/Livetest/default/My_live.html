@@ -94,8 +94,8 @@
         'myUrl' : '{pigcms:$urls.myUrl}',
         'guiUrl' : '{pigcms::U("Instructor/getInstructorInfo")}',
         'payUrl' : '{pigcms::U("Pay/index")}',
-        'cFollowUrl' : '{pigcms::U("InstructorAction/cancelFollow")}',
-        'followUrl' : '{pigcms::U("InstructorAction/follow")}',
+        'cFollowUrl' : '{pigcms::U("Instructor/cancelFollow")}',
+        'followUrl' : '{pigcms::U("Instructor/follow")}',
         'payUrl' : '{pigcms::U("Pay/index")}'
     };
 
@@ -114,14 +114,14 @@
     var json = {'userId' : params.userId, 'instructorId' : tid};
     //关注
     attention.click(function(){
-        $.post('{pigcms::U("InstructorAction/follow")}', json, function(data){
+        $.getJSON('{pigcms::U("Instructor/follow")}', json, function(data){
             console.log(data);
             if(data.errcode == '0'){
                 cAttention.show();
             }else{
                 alert(data.msg);
             }
-        })
+        }, 'JSON')
     })
     //取消关注
     cAttention.click(function(){
