@@ -211,7 +211,8 @@ var myAction = {
     },
 
     'getUserInfo': function () {
-        $.getJSON(params.guiUrl, {userId:params.cUserId}, function (data) {
+        var userId = params.cUserId;
+        $.getJSON(params.guiUrl, {userId: userId}, function (data) {
             console.log(data)
             if (data.errcode == '0') {
                 var infos = data.data[0];
@@ -220,7 +221,7 @@ var myAction = {
                 $('#style').text(infos.jinsi_user_style);
                 $('#sign').text(infos.jinsi_user_sign);
                 $('#info').text(infos.jinsi_user_info);
-                myAction.attentionOrJoinMember();
+                myAction.attentionOrJoinMember(infos.id, infos.is_member, infos.is_follow);
             } else {
                 alert(data.msg);
             }
@@ -228,9 +229,16 @@ var myAction = {
     },
 
     //关注和加入会员
-    'attentionOrJoinMember' : function(){
+    'attentionOrJoinMember' : function(teacherId, isMember, isFollow){
+        var isFollow = isFollow,
+            isMember = isMember,
+            tid = teacherId;
         $('#attention').click(function(){
-            alert(1111);
+            if(isFollow){
+                $(this).removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
+            }else{
+
+            }
         })
 
         $('#join-member').click(function(){
