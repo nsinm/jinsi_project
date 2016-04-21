@@ -271,11 +271,11 @@ class LiveModel extends Model
             $data['status'] = 1;
             $member->add($data);
 
-            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['order_no']);
+            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['pay_money']);
             //$sql = $member->getLastSql();
             //return $sql1.'----'.$sql.'----'.json_encode($data);
         }else{
-            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['order_no'],1);
+            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['pay_money'],1);
         }
 
 
