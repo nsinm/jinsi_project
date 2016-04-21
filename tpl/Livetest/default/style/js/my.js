@@ -211,8 +211,7 @@ var myAction = {
     },
 
     'getUserInfo': function () {
-        var userId = params.cUserId,
-            isFollow = params.isFollow;
+        var userId = params.cUserId;
         $.getJSON(params.guiUrl, {userId: userId}, function (data) {
             console.log(data)
             if (data.errcode == '0') {
@@ -227,43 +226,6 @@ var myAction = {
                 alert(data.msg);
             }
         }, 'JSON');
-
-
-        var isFollow = isFollow,
-            tid = userId,
-            attention = $('#attention'),
-            cAttention = $('#cancel-attention');
-
-        if(isFollow == '1') {
-            cAttention.show();
-        }else{
-            attention.show();
-        }
-
-        var json = {'userId' : params.userId, 'instructorId' : tid};
-        //关注
-        attention.click(function(){
-            $.getJSON(params.followUrl, json, function(data){
-                console.log(data);
-                if(data.errcode == '0'){
-                    cAttention.show();
-                }else{
-                    alert(data.msg);
-                }
-            })
-        })
-        //取消关注
-        cAttention.click(function(){
-            $.getJSON(params.cFollowUrl, json, function(data){
-                console.log(data);
-                if(data.errcode == '0'){
-                    attention.show();
-                }else{
-                    alert(data.msg);
-                }
-            })
-        })
-
     },
 
     //关注和加入会员
@@ -311,6 +273,41 @@ var myAction = {
         }else if(params.tplName == 'my_live'){
             this.getUserInfo();
             this.getMyLiveList();
+
+            var isFollow = params.isFollow,
+                tid = params.cUserId,
+                attention = $('#attention'),
+                cAttention = $('#cancel-attention');
+
+            if(isFollow == '1') {
+                cAttention.show();
+            }else{
+                attention.show();
+            }
+
+            var json = {'userId' : params.userId, 'instructorId' : tid};
+            //关注
+            attention.click(function(){
+                $.getJSON(params.followUrl, json, function(data){
+                    console.log(data);
+                    if(data.errcode == '0'){
+                        cAttention.show();
+                    }else{
+                        alert(data.msg);
+                    }
+                })
+            })
+            //取消关注
+            cAttention.click(function(){
+                $.getJSON(params.cFollowUrl, json, function(data){
+                    console.log(data);
+                    if(data.errcode == '0'){
+                        attention.show();
+                    }else{
+                        alert(data.msg);
+                    }
+                })
+            })
         }else if(params.tplName == 'my_feedback'){
             this.addFeedback();
         }else if(params.tplName == 'my_member'){
