@@ -94,6 +94,7 @@ class PayAction extends LiveAction
         $telNo = $this->_post('telNo');
         $realName = $this->_post('realName');
         $identityCardNo = $this->_post('cardNo');
+        $type = $this->_post('type');
 
         if($followUserId && $serviceName && $telNo && $realName && $identityCardNo){
             $existsOrder = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->count();
@@ -112,7 +113,8 @@ class PayAction extends LiveAction
                 'real_name' => $realName,
                 'tel_no' => $telNo,
                 'identity_card_no' => $identityCardNo,
-                'service_name' => $serviceName
+                'service_name' => $serviceName,
+                'type' => $type
             );
 
             $id = M('order')->add($data);
