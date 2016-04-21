@@ -99,6 +99,42 @@
         'followUrl' : '{pigcms::U("InstructorAction/follow")}',
         'payUrl' : '{pigcms::U("Pay/index")}'
     };
+
+
+    var isFollow = params.isFollow,
+            tid = params.cUserId,
+            attention = $('#attention'),
+            cAttention = $('#cancel-attention');
+
+    if(isFollow == '1') {
+        cAttention.show();
+    }else{
+        attention.show();
+    }
+
+    var json = {'userId' : params.userId, 'instructorId' : tid};
+    //关注
+    attention.click(function(){
+        $.getJSON(params.followUrl, json, function(data){
+            console.log(data);
+            if(data.errcode == '0'){
+                cAttention.show();
+            }else{
+                alert(data.msg);
+            }
+        })
+    })
+    //取消关注
+    cAttention.click(function(){
+        $.getJSON(params.cFollowUrl, json, function(data){
+            console.log(data);
+            if(data.errcode == '0'){
+                attention.show();
+            }else{
+                alert(data.msg);
+            }
+        })
+    })
 </script>
 </body>
 </html>

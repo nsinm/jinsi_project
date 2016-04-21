@@ -273,55 +273,6 @@ var myAction = {
         }else if(params.tplName == 'my_live'){
             this.getUserInfo();
             this.getMyLiveList();
-
-            var isFollow = params.isFollow,
-                tid = params.cUserId,
-                attention = $('#attention'),
-                cAttention = $('#cancel-attention');
-
-            if(isFollow == '1') {
-                cAttention.show();
-            }else{
-                attention.show();
-            }
-
-            var json = {'userId' : params.userId, 'instructorId' : tid};
-            //关注
-            attention.click(function(){
-                $.ajax({
-                    type : 'get',
-                    url : params.followUrl,
-                    dataType : 'JSON',
-                    data : json,
-                    success : function(data){
-                        console.log(data);
-                        if(data.errcode == '0'){
-                            cAttention.show();
-                        }else{
-                            alert(data.msg);
-                        }
-                    }
-                })
-                /*$.getJSON(params.followUrl, json, function(data){
-                    console.log(data);
-                    if(data.errcode == '0'){
-                        cAttention.show();
-                    }else{
-                        alert(data.msg);
-                    }
-                })*/
-            })
-            //取消关注
-            cAttention.click(function(){
-                $.getJSON(params.cFollowUrl, json, function(data){
-                    console.log(data);
-                    if(data.errcode == '0'){
-                        attention.show();
-                    }else{
-                        alert(data.msg);
-                    }
-                })
-            })
         }else if(params.tplName == 'my_feedback'){
             this.addFeedback();
         }else if(params.tplName == 'my_member'){
