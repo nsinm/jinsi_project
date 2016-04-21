@@ -289,7 +289,7 @@ class LiveModel extends Model
         $token = $this->get_token();
         $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
         $t_id = "PQKYlOBTrVEm5i_lXmfrlo_vsdmfUH_oX00lVE8Et6E";
-        $array['touser'] = $follow_id['open_id'];
+        $array['touser'] = $follow_info['open_id'];
         $array['template_id'] = $t_id;
         if($type==0){
             $item['first'] = array('value'=>"您的会员被订购",'color'=>'#173177');
