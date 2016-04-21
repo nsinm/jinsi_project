@@ -212,6 +212,7 @@ var myAction = {
 
     'getUserInfo': function () {
         $.getJSON(params.guiUrl, {userId:params.cUserId}, function (data) {
+            console.log(data)
             if (data.errcode == '0') {
                 var infos = data.data[0];
                 $('.user_thumb img').attr('src', infos.jinsi_user_header_pic);
