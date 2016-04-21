@@ -288,14 +288,28 @@ var myAction = {
             var json = {'userId' : params.userId, 'instructorId' : tid};
             //关注
             attention.click(function(){
-                $.getJSON(params.followUrl, json, function(data){
+                $.ajax({
+                    type : 'get',
+                    url : params.followUrl,
+                    dataType : 'JSON',
+                    data : json,
+                    success : function(data){
+                        console.log(data);
+                        if(data.errcode == '0'){
+                            cAttention.show();
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                })
+                /*$.getJSON(params.followUrl, json, function(data){
                     console.log(data);
                     if(data.errcode == '0'){
                         cAttention.show();
                     }else{
                         alert(data.msg);
                     }
-                })
+                })*/
             })
             //取消关注
             cAttention.click(function(){
