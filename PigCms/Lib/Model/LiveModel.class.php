@@ -182,7 +182,7 @@ class LiveModel extends Model
         if($member_list){
             foreach($member_list as $v){
 
-                $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
+                $user_arr = $this->get_user_one_info($v['user_id']);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
 
