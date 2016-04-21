@@ -45,7 +45,7 @@ class AuthAction extends Action
     {
         $content = M('content');
         $Live = D('Live');
-        $content_arr = $content->where('push=1')->select();
+        $content_arr = $content->where('push=1 or push=-1')->select();
         //print_r($content_arr);
         if($content_arr){
             foreach($content_arr as $v){
