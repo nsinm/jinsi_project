@@ -169,25 +169,38 @@ class LiveModel extends Model
         $data['auther'] = $user_info['jinsi_user_name'];
         $data['content'] = $content_arr['jinsi_content_info'];
         $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$id;
-        $flag = 0;
         $infos['id'] = $id;
         $infos['push'] = 2;
         $content->save($infos);
-        if($follow_list){
-
-            foreach($follow_list as $v){
+        //给自己推送一条
+        $data['openid'] = $user_info['open_id'];
+        $rs = $this->send_message($data,1);
+        //查询会员
+        $time = time();
+        $member = M('member');
+        $member_list = $member->where("follow_id=".$content_arr['jinsi_content_create_user_id']." and over_time<".$time)->select();
+        if($member_list){
+            foreach($member_list as $v){
                 $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
                 $data['openid'] = $user_arr['open_id'];
                 $rs = $this->send_message($data);
                 //print_r($rs);
-                if($rs['errcode']==0){
-                    $flag = 1;
-                }
             }
-            //给自己推送一条
-            $data['openid'] = $user_info['open_id'];
-            $rs = $this->send_message($data,1);
         }
+        //判断是否给非会员推送
+        if($content_arr['push']!=-1){
+            if($follow_list){
+
+                foreach($follow_list as $v){
+                    $user_arr = $this->get_user_one_info($v['jinsi_follow_user_id']);
+                    $data['openid'] = $user_arr['open_id'];
+                    $rs = $this->send_message($data);
+                    //print_r($rs);
+                }
+
+            }
+        }
+
 
         //$data['push'] = 2;
         //if($flag)
@@ -244,19 +257,64 @@ class LiveModel extends Model
         $update_data['status'] = 1;
         $update_data['transaction_id'] = $transaction_id;
         $order->where("order_no='{$order_id}'")->setField($update_data);
-        $sql1 = $order->getLastSql();
-        $member = M('member');
+        //$sql1 = $order->getLastSql();
+        //如果是购买会员则有以下动作
+        if($order_data['type'] == 1){
+            $member = M('member');
 
-        $data['user_id'] = $order_data['user_id'];
-        $data['follow_id'] = $order_data['follow_id'];
-        $data['crea_time'] = time();
-        $data['pay_time'] = time();
-        $next_time = strtotime(date("Y-m-d H:i:s",strtotime("+1 month")));
-        $data['over_time'] = $next_time;
-        $data['status'] = 1;
-        $member->add($data);
-        $sql = $member->getLastSql();
-        return $sql1.'----'.$sql.'----'.json_encode($data);
+            $data['user_id'] = $order_data['user_id'];
+            $data['follow_id'] = $order_data['follow_id'];
+            $data['crea_time'] = time();
+            $data['pay_time'] = time();
+            $next_time = strtotime(date("Y-m-d H:i:s",strtotime("+1 month")));
+            $data['over_time'] = $next_time;
+            $data['status'] = 1;
+            $member->add($data);
 
+            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['order_no']);
+            //$sql = $member->getLastSql();
+            //return $sql1.'----'.$sql.'----'.json_encode($data);
+        }else{
+            $this->send_pay($order_data['user_id'],$order_data['follow_id'],$order_data['order_no'],1);
+        }
+
+
+    }
+
+
+    function send_pay($user_id,$follow_id,$pay_no,$type=0)
+    {
+        $user_info = $this->get_user_one_info($user_id);
+        $follow_id = $this->get_user_one_info($follow_id);
+        $token = $this->get_token();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=".$token;
+        $t_id = "PQKYlOBTrVEm5i_lXmfrlo_vsdmfUH_oX00lVE8Et6E";
+        $array['touser'] = $follow_id['openid'];
+        $array['template_id'] = $t_id;
+        if($type==0){
+            $item['first'] = array('value'=>"您的会员被订购",'color'=>'#173177');
+        }else{
+            $item['first'] = array('value'=>"您被打赏了",'color'=>'#173177');
+        }
+
+
+        $item['keyword1'] = array('value'=>$pay_no,'color'=>'#173177');
+
+        $date = date('Y-m-d H:i:s');
+        $item['keyword2'] = array('value'=>$date,'color'=>'#173177');
+        if($type==0){
+            $item['remark'] = array('value'=>"{$user_info['jinsi_user_name']}购买了您的会员，请关注",'color'=>'#173177');
+        }else{
+            $item['remark'] = array('value'=>"{$user_info['jinsi_user_name']}打赏了您，请关注",'color'=>'#173177');
+        }
+
+        $array['data'] = $item;
+        $str = json_encode($array);
+        $result = postUrl($url,$str);
+        $rs_arr = json_decode($result,true);
+        if($rs_arr['errcode']==42001){
+            $token = $this->get_token(1);
+        }
+        return $rs_arr;
     }
 }
