@@ -117,6 +117,7 @@
         $.getJSON('{pigcms::U("Instructor/follow")}', json, function(data){
             console.log(data);
             if(data.errcode == '0'){
+                attention.hide();
                 cAttention.show();
             }else{
                 alert(data.msg);
@@ -125,14 +126,15 @@
     })
     //取消关注
     cAttention.click(function(){
-        $.post(params.cFollowUrl, json, function(data){
+        $.getJSON(params.cFollowUrl, json, function(data){
             console.log(data);
             if(data.errcode == '0'){
+                cAttention.hide();
                 attention.show();
             }else{
                 alert(data.msg);
             }
-        })
+        }, 'JSON')
     })
 </script>
 </body>
