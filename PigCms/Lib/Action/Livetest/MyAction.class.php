@@ -167,6 +167,7 @@ class MyAction extends LiveAction
     {
         if(!IS_AJAX) _404('页面不存在!');
 
+        $currentUserId = $this->userId;
         if($this->_get('userId')){
             $this->userId = $this->_get('userId');
         }
@@ -178,7 +179,7 @@ class MyAction extends LiveAction
         if($liveList){
             foreach($liveList as $key => $value){
                 if($this->userId != $value['user_id']){
-                    $value['isMember'] = $this->_isMember($this->userId, $value['jinsi_content_create_user_id']);
+                    $value['isMember'] = $this->_isMember($currentUserId, $this->userId);
                 }else{
                     $value['isMember'] = 1;
                 }
