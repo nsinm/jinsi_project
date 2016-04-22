@@ -151,6 +151,7 @@ var myAction = {
         }
         $.getJSON(params.llUrl, data, function(data){
             var html = '';
+            console.log(data);
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
