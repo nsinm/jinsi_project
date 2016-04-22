@@ -184,7 +184,7 @@ class MyAction extends LiveAction
                 }
                 array_push($data, $value);
             }
-            $result = array('errcode' => 0, 'msg' => '获取直播列表成功!', 'data' => $liveList);
+            $result = array('errcode' => 0, 'msg' => '获取直播列表成功!', 'data' => $data);
         }
 
         $this->ajaxReturn($result, 'JSON');
