@@ -178,7 +178,7 @@ class MyAction extends LiveAction
         $data = array();
         if($liveList){
             foreach($liveList as $key => $value){
-                if($this->userId != $value['user_id']){
+                if($this->userId != $currentUserId){
                     $value['isMember'] = $this->_isMember($currentUserId, $this->userId);
                 }else{
                     $value['isMember'] = 1;
