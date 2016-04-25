@@ -175,7 +175,7 @@
         payName : '{pigcms:$data.payName}',
     }
 
-    $(function () {
+    ~(function () {
         // 四个底部按钮
         var $step1bt =  $('#read-complete'),
                 $step2bt =  $('#info-complete'),
@@ -204,23 +204,13 @@
         // 手写板
                 wp
 
-
-
         // 正则
         var idRegexp = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
                 pnumRegexp = /^1[3|4|5|7|8][0-9]\d{8}$/
         $dialog.find('.weui_btn_dialog').on('click', function () {
             $dialog.hide();
         });
-        // 点击后
-//        $step1bt.click(function(){
-//            $step1bt.hide()
-//            $step2bt.css("display",'block')
-//            $content1.hide()
-//            $content2.show()
-//            $tip1.removeClass('active')
-//            $tip2.addClass('active')
-//        })
+
         $step2bt.click(function(){
             // 检测是否已经填写相关信息
             if($nameInput[0].value == '' || $pNumInput[0].value == '' || $idNumInput[0].value == '' ){
@@ -316,7 +306,7 @@
         },false)
 
 
-    });
+    }());
     // $('body').on('touchmove', function (event) {
     //   event.preventDefault();
     // });
