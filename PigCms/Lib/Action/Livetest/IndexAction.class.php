@@ -313,4 +313,12 @@ class IndexAction extends LiveAction
 
         $this->ajaxReturn($result, 'JSON');
     }
+
+    /**
+     * 跳转到关注页
+     */
+    public function attention ()
+    {
+        $this->display();
+    }
 }

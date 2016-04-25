@@ -156,6 +156,10 @@ var indexAction = {
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
+                    html +=             '<span class="comment">';
+                    html +=                 '<span class="icon-reward" alt="">';
+                    html +=                 '</span>打赏';
+                    html +=             '</span>';
                         html +=         '<span>';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
