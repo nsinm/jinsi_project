@@ -291,6 +291,8 @@
         })
 
         $scrollContainer[0].addEventListener('scroll',function(){
+            console.log(111111)
+            console.log()
             if($content1.css('display') !== 'none' && ($scrollContainer[0].scrollTop + 20 > ($content1[0].offsetHeight - $scrollContainer[0].clientHeight))){
                 // console.log($scrollContainer[0].scrollTop,$content1[0].offsetHeight,$content1[0].offsetHeight - $scrollContainer[0].clientHeight)
                 $step1bt.removeClass('weui_btn_default')
