@@ -277,7 +277,7 @@ var indexAction = {
                     }else if($(this).attr('class') == 'icon-reward'){
                         $(this).parent().click(function(){
                             var mask = $('#mask_pay')
-                            var replyActionsheet = $('#reward_actionsheet')
+                            var replyActionsheet = $('#reward-input')
                             var contentInput = replyActionsheet.find("#reward-input")[0]
                             replyActionsheet.addClass('weui_actionsheet_toggle')
                             mask.show().addClass('weui_fade_toggle').click(function () {
