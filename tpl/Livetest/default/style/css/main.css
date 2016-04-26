@@ -283,7 +283,7 @@ width: 100%;
 }
 .user_liveinteract span{
 	display: inline-block;
-	width: 24%;
+	margin-right: 5px;
 }
 .user_liveinteract .sm-time{
 	display: inline-block;
@@ -461,6 +461,30 @@ width: 100%;
 .user-comment-name{
 	line-height: 1.4em;
 }
+
+.reward_label{
+	width: auto;
+	font-size: 24px;
+	color: orange;
+	/*font-weight: bold;*/
+}
+.reward_first{
+	width: auto;
+	font-size: 16px;
+	color: #999;
+	/*font-weight: bold;*/
+}
+#reward-input{
+	font-size: 22px;
+	color:rgb(85, 85, 85);
+	padding: 3px 5px;
+}
+
+.pop-wrapper{
+	overflow: hidden;
+}
+
+
 /* 页脚 */
 .page-bottom{
 	line-height: 2.2;
