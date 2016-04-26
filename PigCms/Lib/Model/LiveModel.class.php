@@ -342,7 +342,7 @@ class LiveModel extends Model
         $push = M('push');
         $push_arr = $push->where("status=0")->select();
         $update_data['status'] = 1;
-        $push->save($update_data);
+        $push->where('status=0')->save($update_data);
         $content = M('content');
         if($push_arr){
             foreach($push_arr as $v){
