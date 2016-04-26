@@ -288,7 +288,10 @@ var indexAction = {
                             })
                             replyActionsheet.find('#payReward').click(function () {
                                 console.log(contentInput.value)
-                                if(contentInput.value == '') return
+                                if(contentInput.value == '') {
+                                    alert('请输入打赏金额!')
+                                    return
+                                }
                                 sendData.realName = '';
                                 sendData.telNo = '';
                                 sendData.cardNo = '';
