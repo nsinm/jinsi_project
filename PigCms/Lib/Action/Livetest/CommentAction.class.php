@@ -82,6 +82,13 @@ class CommentAction extends LiveAction
             $status = $model->where('id=' . $cid)->save($upData);
             $id = M('content')->add($data);
             if($status && $id){
+                $pushExists = M('push')->where('cid=' . $cid)->count();
+                if($pushExists < 1){
+                    M('push')->add(array(
+                        'cid' => $cid,
+                        'status' => 0
+                    ));
+                }
                 $result = array('errcode' => 0, 'msg' => '添加成功!');
             }
         }else{
