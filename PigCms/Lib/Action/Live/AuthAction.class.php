@@ -54,6 +54,13 @@ class AuthAction extends Action
         }
     }
 
+
+    public function send_author()
+    {
+        $Live = D('Live');
+        $Live->put_comment_author();
+    }
+
     public function get_pay_info()
     {
         $dir = dirname(__FILE__);
