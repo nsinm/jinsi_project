@@ -131,6 +131,8 @@ class LiveModel extends Model
             $item['first'] = array('value'=>"您有新消息发布了",'color'=>'#173177');
         }elseif($self==2){
             $item['first'] = array('value'=>"您关注的导师{$data['auther']}回复了您的消息",'color'=>'#173177');
+        }elseif($self==3){
+            $item['first'] = array('value'=>$data['content'],'color'=>'#173177');
         }else{
             $item['first'] = array('value'=>"您关注的{$data['auther']}有新消息发布了",'color'=>'#173177');
         }
@@ -331,5 +333,35 @@ class LiveModel extends Model
             $token = $this->get_token(1);
         }
         return $rs_arr;
+    }
+
+
+
+    public function put_comment_author()
+    {
+        $push = M('push');
+        $push_arr = $push->where("status=0")->select();
+        $update_data['status'] = 1;
+        $push->save($update_data);
+        $content = M('content');
+        if($push_arr){
+            foreach($push_arr as $v){
+                $content_replay_arr = $content->find($v['cid']);
+                $content_arr = $content->find($content_replay_arr['jinsi_content_id']);
+
+                //print_r($content_arr)；
+                $user_info = $this->get_user_one_info($content_arr['jinsi_content_create_user_id']);
+
+                //print_r($user_info);
+                $data['auther'] = $user_info['jinsi_user_name'];
+                $data['content'] = '有人回复了你的直播';
+                $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_replay_arr['jinsi_content_id'];
+
+                $data['openid'] = $user_info['open_id'];
+                $this->send_message($data,3);
+            }
+        }
+
+        //print_r($rs);
     }
 }
