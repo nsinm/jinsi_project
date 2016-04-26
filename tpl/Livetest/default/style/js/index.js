@@ -274,7 +274,7 @@ var indexAction = {
                             }, 'JSON');
                         });
                     }else if($(this).attr('class') == 'icon-reward'){
-                        $(this).click(function(){
+                        $(this).parent().click(function(){
                             alert('打赏');
                         })
                     }
