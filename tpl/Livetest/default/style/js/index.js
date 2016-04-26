@@ -276,8 +276,8 @@ var indexAction = {
                     }else if($(this).attr('class') == 'icon-reward'){
                         $(this).parent().click(function(){
                             var mask = $('#mask_pay')
-                            var replyActionsheet = $('#reply_actionsheet')
-                            var contentInput = replyActionsheet.find("#comment-input")[0]
+                            var replyActionsheet = $('#reward_actionsheet')
+                            var contentInput = replyActionsheet.find("#reward-input")[0]
                             replyActionsheet.addClass('weui_actionsheet_toggle')
                             mask.show().addClass('weui_fade_toggle').click(function () {
                                 hideActionSheet(replyActionsheet, mask)
@@ -285,10 +285,10 @@ var indexAction = {
                             replyActionsheet.find('#actionsheet_pay_cancel').click(function () {
                                 hideActionSheet(replyActionsheet, mask)
                             })
-                            replyActionsheet.find('#sendComment').click(function () {
+                            replyActionsheet.find('#payReward').click(function () {
                                 console.log(contentInput.value)
                                 if(contentInput.value == '') return
-
+                                
                                 console.log('已发送评论')
                                 hideActionSheet(replyActionsheet, mask)
                                 contentInput.value = ''
