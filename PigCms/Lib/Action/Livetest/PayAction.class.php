@@ -95,6 +95,7 @@ class PayAction extends LiveAction
         $realName = $this->_post('realName');
         $identityCardNo = $this->_post('cardNo');
         $type = $this->_post('type');
+        $money = empty($this->_post('money')) ? $this->price : $this->_post('money');
 
         if($followUserId && $serviceName && $telNo && $realName && $identityCardNo){
             $existsOrder = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->count();
@@ -105,7 +106,7 @@ class PayAction extends LiveAction
             }
             $data = array(
                 'pay_time' => time(),
-                'pay_money' => $this->price,
+                'pay_money' => $money,
                 'order_no' => str_replace('.', '', uniqid('MEMBERSERVICE', true)),
                 'status' => 0,
                 'user_id' => $this->userId,
@@ -131,8 +132,9 @@ class PayAction extends LiveAction
     public function payOrder ()
     {
         $fid = $this->_get('fid');
+        $type = empty($this->_get('type')) ? 1 : $this->_get('type');
         if($fid){
-            $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND status=0')->select();
+            $orderInfo = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $fid . ' AND type=' . $type . ' AND status=0')->select();
             if($orderInfo){
                 $directUrl = "http://mp.jinsxy.com/wxpay/demo/js_api_call.php?order_no={$orderInfo[0]['order_no']}&pay_no={$orderInfo[0]['pay_money']}&content={$orderInfo[0]['service_name']}&jinsi_sign=";
                 //$this->success('确认支付?', $directUrl);

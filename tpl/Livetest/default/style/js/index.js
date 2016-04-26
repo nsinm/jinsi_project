@@ -126,7 +126,7 @@ var indexAction = {
                 for(var index in infos){
                     var imgString = infos[index].jinsi_content_url;
                     var imgs = imgString.split(',');
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '" data-uid="' + infos[index].user_id + '">';
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '" data-uid="' + infos[index].user_id + '" data-name="' + infos[index].jinsi_user_name + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" id="header_pic" alt="">';
@@ -184,6 +184,7 @@ var indexAction = {
                 var isMember = parent.attr('data-value');
                 var pushType = parent.attr('data-push-type');
                 var userId = parent.attr('data-uid');
+                var teacherName = parent.attr('data-name');
 
                 img.click(function(){
                     var $this = $(this)
@@ -288,8 +289,30 @@ var indexAction = {
                             replyActionsheet.find('#payReward').click(function () {
                                 console.log(contentInput.value)
                                 if(contentInput.value == '') return
-                                
-                                console.log('已发送评论')
+                                sendData.realName = '';
+                                sendData.telNo = '';
+                                sendData.cardNo = '';
+                                sendData.fid = userId;
+                                sendData.payName = '打赏导师' + teacherName;
+                                sendData.type = 2;
+                                sendData.money = contentInput.value;
+                                var directUrl = params.directUrl + '&fid=' + userId + '&type=2';
+                                $.ajax({
+                                    url: params.addOrderUrl,
+                                    type:"post",
+                                    dataType:'json',
+                                    data: sendData,
+                                    success:function(data){
+                                        if(data.errcode == 0){
+                                            location.href = directUrl;
+                                        }else{
+                                            alert(data.msg);
+                                        }
+                                    },
+                                    error:function(){
+                                    }
+                                })
+                                console.log('打赏成功')
                                 hideActionSheet(replyActionsheet, mask)
                                 contentInput.value = ''
                             })
