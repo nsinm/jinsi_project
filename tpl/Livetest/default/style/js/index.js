@@ -273,6 +273,10 @@ var indexAction = {
                                 }
                             }, 'JSON');
                         });
+                    }else if($(this).attr('class') == 'icon-reward'){
+                        $(this).click(function(){
+                            alert('打赏');
+                        })
                     }
                 })
             });
