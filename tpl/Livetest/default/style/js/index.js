@@ -325,10 +325,6 @@ var indexAction = {
                 })
             });
         }, 'JSON');
-
-        $('#payReward').click(function(){
-            alert(1111);
-        })
     },
 
     //获取评论列表
