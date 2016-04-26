@@ -97,7 +97,7 @@ class PayAction extends LiveAction
         $type = $this->_post('type');
         $money = empty($this->_post('money')) ? $this->price : $this->_post('money');
 
-        if($followUserId && $serviceName && $telNo && $realName && $identityCardNo){
+        if($followUserId && $serviceName){
             $existsOrder = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->count();
             if($existsOrder > 0){
                 $status = M('order')->where('user_id=' . $this->userId . ' AND follow_id=' . $followUserId)->delete();
