@@ -276,6 +276,7 @@ var indexAction = {
                         });
                     }else if($(this).attr('class') == 'icon-reward'){
                         $(this).parent().click(function(){
+                            var sendData = {};
                             var mask = $('#mask_pay')
                             var replyActionsheet = $('#reward_actionsheet')
                             var contentInput = replyActionsheet.find("#reward-input")[0]
