@@ -275,7 +275,35 @@ var indexAction = {
                         });
                     }else if($(this).attr('class') == 'icon-reward'){
                         $(this).parent().click(function(){
-                            alert('打赏');
+                            var mask = $('#mask_pay')
+                            var replyActionsheet = $('#reward_actionsheet')
+                            var contentInput = replyActionsheet.find("#reward-input")[0]
+                            replyActionsheet.addClass('weui_actionsheet_toggle')
+                            mask.show().addClass('weui_fade_toggle').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            });
+                            replyActionsheet.find('#actionsheet_pay_cancel').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            })
+                            replyActionsheet.find('#payReward').click(function () {
+                                console.log(contentInput.value)
+                                if(contentInput.value == '') return
+                                // $.ajax({
+                                //     url:
+                                //     type:"post",
+                                //     dataType:'json',
+                                // data:{
+                                // },
+                                //     success:function(){
+                                //     },
+                                //     error:function(){
+                                //     }
+                                // })
+                                console.log('已发送评论')
+                                hideActionSheet(replyActionsheet, mask)
+                                contentInput.value = ''
+                            })
+                            replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                         })
                     }
                 })
