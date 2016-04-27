@@ -276,6 +276,7 @@ width: 100%;
 	color:#aaa;
 	line-height: 2em;
 }
+
 .user_liveinteract{
 	margin-right: -15px;
 	font-size: 12px;
@@ -288,6 +289,9 @@ width: 100%;
 	flex:1;
 	overflow: hidden;
 	/*margin-right: 5px;*/
+}
+.user_liveinteract span.sm-time{
+	flex:2;
 }
 .user_liveinteract span.readed{
 	/*display: inline-block;*/
