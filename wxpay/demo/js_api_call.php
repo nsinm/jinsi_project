@@ -126,7 +126,7 @@ $jsApiParameters = $jsApi->getParameters();
 
 
         callpay();
-        setTimeout(jump_url,10000)
+        setTimeout(jump_url,3000)
     </script>
 </head>
 <body>
