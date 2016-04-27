@@ -26,6 +26,9 @@ if (!isset($_GET['code'])) {
     $code = $_GET['code'];
     $jsApi->setCode($code);
     $openid = $jsApi->getOpenId();
+    if(!$openid){
+        Header("Location: 'http://mp.jinsxy.com/index.php?g=Livetest&m=Index&a=index");
+    }
 }
 
 
