@@ -276,6 +276,10 @@ var indexAction = {
                         });
                     }else if($(this).attr('class') == 'icon-reward'){
                         $(this).parent().click(function(){
+                            if(params.userId == userId){
+                                alert('不能打赏自己!');
+                                return;
+                            }
                             var sendData = {};
                             var mask = $('#mask_pay')
                             var replyActionsheet = $('#reward_actionsheet')
@@ -482,6 +486,10 @@ var indexAction = {
                 }else if($(this).attr('class') == 'icon-reward') {
                     $(this).parent().click(function () {
                         var userId = $(this).attr('data-uid');
+                        if(userId == params.userId){
+                            alert('不能打赏自己!');
+                            return;
+                        }
                         var teacherName = $(this).attr('data-name');
                         var sendData = {};
                         var mask = $('#mask_pay')
