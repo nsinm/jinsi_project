@@ -54,14 +54,14 @@
         <div class="weui_cells weui_cells_access">
             <a class="weui_cell" href="javascript:;">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <p>会员服务介绍</p>
+                    <p id="service">会员服务介绍</p>
                 </div>
                 <div class="weui_cell_ft">
                 </div>
             </a>
             <a class="weui_cell" href="javascript:;">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <p>联系我们</p>
+                    <p id="contect">联系我们</p>
                 </div>
                 <div class="weui_cell_ft">
                 </div>
@@ -87,6 +87,17 @@
         'payFlowUrl' : '{pigcms::U("Pay/pay")}',
         'toTeacherUrl' : '{pigcms::U("My/live")}'
     };
+
+    var service = $('#service'),
+        contect = $('#contect');
+
+    service.click(function(){
+        location.href = '{pigcms::U("Pay/service")}'
+    })
+
+    contect.click(function(){
+        location.href = '{pigcms::U("Pay/contect")}'
+    })
 </script>
 </body>
 </html>
