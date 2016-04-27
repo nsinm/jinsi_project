@@ -148,7 +148,7 @@ class IndexAction extends LiveAction
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
         $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr($liveInfo[0]['jinsi_content_info'], 0, 20, 'UTF-8') . '...';
-        $data['imgUrl'] = "https://www.baidu.com/img/baidu_jgylogo3.gif";
+        $data['imgUrl'] = $liveInfo[0]['jinsi_user_header_pic'];
         $data['link'] = get_url();
         $this->assign('data',$data);
         $this->assign('live', $liveInfo[0]);

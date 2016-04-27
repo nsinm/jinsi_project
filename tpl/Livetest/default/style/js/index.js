@@ -126,6 +126,7 @@ var indexAction = {
                 for(var index in infos){
                     var imgString = infos[index].jinsi_content_url;
                     var imgs = imgString.split(',');
+                    //var readCount = Math.round(parseInt(infos[index].jinsi_content_read_no) * 13 + Math.random());
                     html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '" data-uid="' + infos[index].user_id + '" data-name="' + infos[index].jinsi_user_name + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
