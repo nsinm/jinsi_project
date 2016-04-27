@@ -116,7 +116,14 @@ $jsApiParameters = $jsApi->getParameters();
         }
 
 
+        function jump_url()
+        {
+            window.location.href="http://mp.jinsxy.com/index.php?g=Livetest&m=My&a=live&userId=<?=$order_arr[2]?>";
+        }
+
+
         callpay();
+        setTimeout(jump_url,10000)
     </script>
 </head>
 <body>
