@@ -672,7 +672,7 @@ var indexAction = {
         var element = $('.user_thumb.mr10');
         var userId = element.attr('data-uid');
         element.children('img').on('click', function(){
-            location.href = params.guiUrl + '&userId=' + userId;
+            location.href = params.myLiveUrl + '&userId=' + userId;
         })
     },
 
