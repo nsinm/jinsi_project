@@ -25,8 +25,10 @@ var indexAction = {
                         break;
                     case 'banner管理':
                         location.href = params.banner;
+                        break;
                     case '订单管理':
                         location.href = params.order;
+                        break;
                 }
             }) ;
         });
