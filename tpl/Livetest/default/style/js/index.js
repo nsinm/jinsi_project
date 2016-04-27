@@ -149,7 +149,7 @@ var indexAction = {
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=        '</p>';
                     html +=         '<p class="user_liveinteract">';
-                        html +=         '<span class="like-btn">';
+                        html +=         '<span class="readed">';
                         html +=              '已阅&nbsp;' + parseInt(infos[index].jinsi_content_read_no) * 13;
                         html +=         '</span>';
                         html +=         '<span id="icon-comment" style="margin-left:12px;">';
@@ -482,6 +482,54 @@ var indexAction = {
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).parent().click(function() {
                         showDailog();
+                    })
+                }else if($(this).attr('class') == 'icon-reward') {
+                    $(this).parent().click(function () {
+                        var sendData = {};
+                        var mask = $('#mask_pay')
+                        var replyActionsheet = $('#reward_actionsheet')
+                        var contentInput = replyActionsheet.find("#reward-input")[0]
+                        replyActionsheet.addClass('weui_actionsheet_toggle')
+                        mask.show().addClass('weui_fade_toggle').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        });
+                        replyActionsheet.find('#actionsheet_pay_cancel').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        })
+                        replyActionsheet.find('#payReward').click(function () {
+                            console.log(contentInput.value)
+                            if (contentInput.value == '') {
+                                alert('请输入打赏金额!')
+                                return
+                            }
+                            sendData.realName = '';
+                            sendData.telNo = '';
+                            sendData.cardNo = '';
+                            sendData.fid = userId;
+                            sendData.payName = '打赏导师' + teacherName;
+                            sendData.type = 2;
+                            sendData.money = contentInput.value;
+                            var directUrl = params.directUrl + '&fid=' + userId + '&type=2';
+                            $.ajax({
+                                url: params.addOrderUrl,
+                                type: "post",
+                                dataType: 'json',
+                                data: sendData,
+                                success: function (data) {
+                                    if (data.errcode == 0) {
+                                        location.href = directUrl;
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                },
+                                error: function () {
+                                }
+                            })
+                            console.log('打赏成功')
+                            hideActionSheet(replyActionsheet, mask)
+                            contentInput.value = ''
+                        })
+                        replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                     })
                 }
 

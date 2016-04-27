@@ -50,6 +50,29 @@
 </div>
 <!--END 回复块-->
 
+<!--BEGIN 打赏块-->
+<div id="actionSheet_wrap_pay">
+    <div class="weui_mask_transition" id="mask_pay"></div>
+    <div class="weui_actionsheet bt44" id="reward_actionsheet">
+        <div class="weui_actionsheet_menu pop-wrapper">
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label reward_first">打赏金额</label></div>
+                <div class="weui_cell_hd"><label class="weui_label reward_label">&nbsp;¥</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" id="reward-input" type="tel" placeholder="请输入金额(元)">
+                </div>
+            </div>
+            <div class="weui_btn_area">
+                <a class="weui_btn weui_btn_primary" href="javascript:" id="payReward">立即支付</a>
+            </div>
+        </div>
+        <div class="weui_actionsheet_action">
+            <div class="weui_actionsheet_cell" id="actionsheet_pay_cancel">取消</div>
+        </div>
+    </div>
+</div>
+<!--END 打赏块-->
+
 <div class="bottom-bar">
     <div  class="selected">直播间</div>
     <div>导师</div>
@@ -77,14 +100,14 @@
                         </if>
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
-                            <span class="like-btn">
+                            <span class="readed">
                                 已阅&nbsp;{pigcms:$live.jinsi_content_read_no}
                             </span>
                             <span style="margin-left:12px;">
                                 <span class="icon-comment" alt="">
                                 </span>评论&nbsp;<span id="comment_count">{pigcms:$live['jinsi_content_comment_no']*13}</span>
                             </span>
-                            <span class="comment" style="margin-left:12px;">
+                            <span class="comment" style="margin-left:12px;" data-uid="{pigcms:$live.user_id}" data-name="{pigcms:$live.jinsi_user_name}">
                                 <span class="icon-reward" alt=""></span>打赏
                             </span>
                             <span style="margin-left:12px;">
