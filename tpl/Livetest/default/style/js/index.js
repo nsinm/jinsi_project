@@ -152,15 +152,15 @@ var indexAction = {
                         html +=         '<span class="like-btn">';
                         html +=              '已阅&nbsp;' + parseInt(infos[index].jinsi_content_read_no) * 13;
                         html +=         '</span>';
-                        html +=         '<span id="icon-comment">';
+                        html +=         '<span id="icon-comment" style="margin-left:5px;">';
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
-                    html +=             '<span class="comment">';
+                    html +=             '<span class="comment" style="margin-left:5px;">';
                     html +=                 '<span class="icon-reward" alt="">';
                     html +=                 '</span>打赏';
                     html +=             '</span>';
-                        html +=         '<span>';
+                        html +=         '<span style="margin-left:5px;">';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
@@ -208,7 +208,6 @@ var indexAction = {
                 }
 
                 $(this).find('span').each(function(){
-                    $(this).css({'margin-left' : '5px'});
                     if($(this).attr('id') == 'icon-comment'){
                         $(this).click(function(){
                             var contentId = cid;
