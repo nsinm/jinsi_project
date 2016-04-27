@@ -447,10 +447,6 @@ var indexAction = {
                         })
                         replyActionsheet.find('#sendComment').click(function () {
                             var content = contentInput.value;
-                            if(content == ''){
-                                alert('请填写回复内容!');
-                                return;
-                            }
                             var fid = $('#live_content').attr('data-cid');
                             var cid = contentId;
                             var userId = params.userId;
