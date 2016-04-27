@@ -355,7 +355,7 @@ var indexAction = {
                     }
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
-                    html +=             '<span class="sm-time" style="max-width: 150px;">' + infos[index].content_create_time + '</span>';
+                    html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
                     html +=             '<span class="sm-like like-btn">';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
@@ -375,7 +375,7 @@ var indexAction = {
                         var content = replies[i].jinsi_reply_content;
                         var at = content.substring(0, content.indexOf(' '));
                         var reply = content.substring(content.indexOf(' '));
-                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10 user-comment">';
                         html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
