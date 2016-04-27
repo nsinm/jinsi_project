@@ -17,4 +17,9 @@ $value = $_POST['content'];
 $sql = "INSERT INTO `jinsi_emoji` (`id`, `content`) VALUES (NULL, '{$value}');";
 
 $rs = mysql_query($sql);
-print_r($rs);
+
+
+$rs = $db->query("SELECT* FROM jinsi_emoji");
+while($row = $rs->fetch()){
+    print_r($row);
+}
