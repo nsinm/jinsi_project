@@ -80,11 +80,14 @@
                             <span class="like-btn">
                                 已阅&nbsp;{pigcms:$live.jinsi_content_read_no}
                             </span>
-                            <span>
+                            <span style="margin-left:12px;">
                                 <span class="icon-comment" alt="">
                                 </span>评论&nbsp;<span id="comment_count">{pigcms:$live['jinsi_content_comment_no']*13}</span>
                             </span>
-                            <span>
+                            <span class="comment" style="margin-left:12px;">
+                                <span class="icon-reward" alt=""></span>打赏
+                            </span>
+                            <span style="margin-left:12px;">
                                 <if condition="$live.current_user_praise eq 1">
                                     <span class="icon-like" alt="">
                                 <else />
