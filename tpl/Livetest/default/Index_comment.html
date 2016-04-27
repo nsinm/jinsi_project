@@ -101,11 +101,11 @@
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
                             <span class="readed">
-                                已阅&nbsp;{pigcms:$live.jinsi_content_read_no}
+                                已阅&nbsp;{pigcms:$live['jinsi_content_read_no']*13}
                             </span>
                             <span>
                                 <span class="icon-comment" alt="">
-                                </span>评论&nbsp;{pigcms:$live['jinsi_content_comment_no']*13}
+                                </span>评论&nbsp;{pigcms:$live.jinsi_content_comment_no}
                             </span>
                             <span class="comment" data-uid="{pigcms:$live.user_id}" data-name="{pigcms:$live.jinsi_user_name}">
                                 <span class="icon-reward" alt=""></span>打赏
