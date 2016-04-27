@@ -152,15 +152,15 @@ var indexAction = {
                         html +=         '<span class="readed">';
                         html +=              '已阅&nbsp;' + parseInt(infos[index].jinsi_content_read_no) * 13;
                         html +=         '</span>';
-                        html +=         '<span id="icon-comment" style="margin-left:12px;">';
+                        html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
-                    html +=             '<span class="comment" style="margin-left:12px;">';
+                    html +=             '<span class="comment">';
                     html +=                 '<span class="icon-reward" alt="">';
                     html +=                 '</span>打赏';
                     html +=             '</span>';
-                        html +=         '<span style="margin-left:12px;">';
+                        html +=         '<span>';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
