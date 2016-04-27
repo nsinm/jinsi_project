@@ -208,6 +208,7 @@ var indexAction = {
                 }
 
                 $(this).find('span').each(function(){
+                    $(this).css({'margin-left' : '5px'});
                     if($(this).attr('id') == 'icon-comment'){
                         $(this).click(function(){
                             var contentId = cid;
