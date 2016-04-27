@@ -439,14 +439,16 @@ var indexAction = {
                 html += '<tbody id="order_info">';
 
                 for (var index in infos) {
+                    var payStatus = infos[index].status == '0' ? '等待支付' : '支付成功';
+                    var payType = infos[index].type == '1' ? '会员购买' : '打赏导师';
                     html += '<tr>';
                     html +=     '<td>' + infos[index].id + '</td>';
                     html +=     '<td>' + infos[index].userName + '</td>';
                     html +=     '<td>' + infos[index].teacherName + '</td>';
                     html +=     '<td>' + infos[index].order_no + '</td>';
-                    html +=     '<td>' + infos[index].order_money + '</td>';
-                    html +=     '<td>' + infos[index].status ? '支付成功' : '等待支付' + '</td>';
-                    html +=     '<td>' + infos[index].type=='1' ? '会员' : '打赏'  + '</td>';
+                    html +=     '<td>' + infos[index].pay_money + '</td>';
+                    html +=     '<td>' + payStatus + '</td>';
+                    html +=     '<td>' + payType  + '</td>';
                     html +=     '<td>' + infos[index].real_name + '</td>';
                     html +=     '<td>' + infos[index].tel_no + '</td>';
                     html +=     '<td>' + infos[index].identity_card_no + '</td>';
