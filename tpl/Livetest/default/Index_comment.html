@@ -107,7 +107,7 @@
                                 <span class="icon-comment" alt="">
                                 </span>评论&nbsp;{pigcms:$live.jinsi_content_comment_no}
                             </span>
-                            <span class="comment" data-uid="{pigcms:$live.user_id}" data-name="{pigcms:$live.jinsi_user_name}">
+                            <span class="comment" data-uid="{pigcms:$live.user_id}" data-name="{pigcms:$live.jinsi_user_name}" data-cid="{pigcms:$live.id}">
                                 <span class="icon-reward" alt=""></span>打赏
                             </span>
                             <span>
@@ -149,7 +149,9 @@
         'tocUrl' : '{pigcms:$urls.tocUrl}',
         'shareUrl' : '{pigcms::U("Index/share")}',
         'cid' : '{pigcms:$live.id}',
-        'addReplyUrl' : '{pigcms::U("addComment")}'
+        'addReplyUrl' : '{pigcms::U("addComment")}',
+        'addOrderUrl' : '{pigcms::U("Pay/writeOrder")}',
+        'directUrl' : '{pigcms::U("Pay/payOrder")}'
     };
 
     wx.config({
