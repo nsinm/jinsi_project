@@ -355,7 +355,7 @@ var indexAction = {
                     }
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
-                    html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
+                    html +=             '<span class="sm-time" style="max-width: 150px;">' + infos[index].content_create_time + '</span>';
                     html +=             '<span class="sm-like like-btn">';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
