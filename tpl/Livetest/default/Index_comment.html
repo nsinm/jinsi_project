@@ -189,6 +189,7 @@
 
         wx.onMenuShareAppMessage({
             title: '{pigcms:$data.title}', // 分享标题
+            desc : '{pigcms:$data.title}',
             link: '{pigcms:$data.link}', // 分享链接
             imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
             success: function () {
