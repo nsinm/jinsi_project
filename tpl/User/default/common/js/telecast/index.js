@@ -465,7 +465,7 @@ var indexAction = {
                 $.getJSON(params.orderDel, data, function(msg){
                     console.log(msg);
                     if(msg.errcode == '0'){
-                        indexAction.getBannerList(1);
+                        indexAction.getOrderList(1);
                     }else{
                         alert(data.msg);
                     }
@@ -601,6 +601,22 @@ var indexAction = {
         })
     },
 
+    'orderPagination' : function(){
+        $('.M-box3').pagination({
+            totalData : params.orderCount,
+            showData : params.pageSize,
+            prevContent : '<',
+            nextContent : '>',
+            callback : function(index){
+                indexAction.getOrderList(index);
+                return;
+            }
+        },function(api){
+            indexAction.getOrderList(api.getCurrent());
+            return;
+        })
+    },
+
     'init' : function(){
         //导航条点击事件
         this.navEvent();
@@ -615,6 +631,8 @@ var indexAction = {
             this.feedbackPagination();
         }else if(params.tplName == 'user_banner'){
             this.bannerPagination();
+        }else if(params.tplName == 'user_order'){
+            this.orderPagination();
         }
     }
 };

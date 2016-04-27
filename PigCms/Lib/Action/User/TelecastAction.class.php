@@ -397,6 +397,11 @@ class TelecastAction extends UserAction
      */
     public function order ()
     {
+        $params = array(
+            'orderCount' => M('order', 'jinsi_')->count(),
+        );
+
+        $this->assign('vars', $params);
         $this->display();
     }
 
