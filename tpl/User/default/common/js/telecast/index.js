@@ -441,7 +441,7 @@ var indexAction = {
                 html += '<tbody id="order_info">';
 
                 for (var index in infos) {
-                    var payStatus = infos[index].status == '0' ? '等待支付' : '支付成功';
+                    var payStatus = infos[index].status == '0' ? '<span style="color:green;">等待支付</span>' : '<span style="color:red;">支付成功</span>';
                     var payType = infos[index].type == '1' ? '会员购买' : '打赏导师';
                     html += '<tr>';
                     html +=     '<td>' + infos[index].id + '</td>';
