@@ -364,7 +364,7 @@ var indexAction = {
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
                     html +=             '</span>';
-                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '">';
+                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '" style="margin-left:3px;">';
                     html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
@@ -375,7 +375,7 @@ var indexAction = {
                         var content = replies[i].jinsi_reply_content;
                         var at = content.substring(0, content.indexOf(' '));
                         var reply = content.substring(content.indexOf(' '));
-                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment">';
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment" style="padding-left:50px;">';
                         html +=     '<div class="weui_cell_hd">';
                         html +=         '<div class="user_thumb mr10 user-comment">';
                         html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
@@ -386,7 +386,7 @@ var indexAction = {
                         html +=         '<p class="user_liveword user-comment-name"><span style="color:orange;">' + at + '</span><span>' + reply + '</span></p>';
                         html +=         '<p class="user_livetime"></p>';
                         html +=         '<p class="user_liveinteract">';
-                        html +=             '<span class="sm-time">' + replies[i].reply_create_time + '</span>';
+                        html +=             '<span class="sm-time" style="max-width: 150px;">' + replies[i].reply_create_time + '</span>';
                         html +=             '<span class="sm-like like-btn">';
                         html +=             '</span>';
                         if(params.userId != replies[i].user_id) {
