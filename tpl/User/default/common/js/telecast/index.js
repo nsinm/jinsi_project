@@ -25,6 +25,8 @@ var indexAction = {
                         break;
                     case 'banner管理':
                         location.href = params.banner;
+                    case '订单管理':
+                        location.href = params.order;
                 }
             }) ;
         });
@@ -396,6 +398,71 @@ var indexAction = {
                 var bid = $(this).parent().attr('data-bid');
                 var data = {'bid' : bid};
                 $.getJSON(params.bannerDel, data, function(msg){
+                    console.log(msg);
+                    if(msg.errcode == '0'){
+                        indexAction.getBannerList(1);
+                    }else{
+                        alert(data.msg);
+                    }
+                }, 'JSON');
+            });
+        }, 'JSON')
+    },
+
+    //获取订单列表
+    'getOrderList' : function(index, type){
+        var tag = $(".ListProduct");
+        var index = index;
+        var type = type;
+        $.getJSON(params.getOrderList, {'page': index, 'pageSize': params.pageSize, 'type':type}, function(data){
+            console.log(data);
+            var html = '';
+            if (data.errcode == '0') {
+                var infos = data.data;
+                html += '<thead>';
+                html +=     '<tr>';
+                html +=         '<th width="50">编号</th>';
+                html +=         '<th width="50">购买人</th>';
+                html +=         '<th width="50">导师</th>';
+                html +=         '<th width="50">订单号</th>';
+                html +=         '<th width="50">订单金额</th>';
+                html +=         '<th width="50">订单状态</th>';
+                html +=         '<th width="50">订单类型</th>';
+                html +=         '<th width="50">购买人姓名</th>';
+                html +=         '<th width="50">购买人电话</th>';
+                html +=         '<th width="50">购买人身份证</th>';
+                html +=         '<th width="50">购买商品名称</th>';
+                html +=         '<th width="50">微信支付凭证</th>';
+                html +=         '<th width="100" class="norightborder">操作</th>';
+                html +=     '</tr>';
+                html += '</thead>';
+                html += '<tbody id="order_info">';
+
+                for (var index in infos) {
+                    html += '<tr>';
+                    html +=     '<td>' + infos[index].id + '</td>';
+                    html +=     '<td>' + infos[index].userName + '</td>';
+                    html +=     '<td>' + infos[index].teacherName + '</td>';
+                    html +=     '<td>' + infos[index].order_no + '</td>';
+                    html +=     '<td>' + infos[index].order_money + '</td>';
+                    html +=     '<td>' + infos[index].status ? '支付成功' : '等待支付' + '</td>';
+                    html +=     '<td>' + infos[index].type=='1' ? '会员' : '打赏'  + '</td>';
+                    html +=     '<td>' + infos[index].real_name + '</td>';
+                    html +=     '<td>' + infos[index].tel_no + '</td>';
+                    html +=     '<td>' + infos[index].identity_card_no + '</td>';
+                    html +=     '<td>' + infos[index].service_name + '</td>';
+                    html +=     '<td>' + infos[index].transaction_id + '</td>';
+                    html +=     '<td class="norightborder" data-bid="' + infos[index].id + '">';
+                    html +=         '&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">删除</a><br/>';
+                    html +=     '</td>';
+                    html += '</tr>';
+                }
+                html += '<tbody>';
+            }
+            tag.html(html).find('.norightborder a').click(function(){
+                var orderId = $(this).parent().attr('data-bid');
+                var data = {'id' : orderId};
+                $.getJSON(params.orderDel, data, function(msg){
                     console.log(msg);
                     if(msg.errcode == '0'){
                         indexAction.getBannerList(1);

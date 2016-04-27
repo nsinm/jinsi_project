@@ -393,6 +393,63 @@ class TelecastAction extends UserAction
     }
 
     /**
+     * 订单管理页
+     */
+    public function order ()
+    {
+        $this->display();
+    }
+
+    /**
+     * 获取订单列表
+     */
+    public function getOrderList ()
+    {
+        if(!IS_AJAX) $this->_to404();
+        $result = array('errcode' => 1, 'msg' => '获取订单列表失败!');
+
+        $type = $this->_get('type');
+        $page = $this->_get('page');
+        $pageSize = $this->_get('pageSize');
+        $start = ($page - 1) * $pageSize;
+
+        $model = M('order', 'jinsi_');
+        if($type){
+            $count = $model->where('type=' . $type)->count();
+            $sql = "SELECT FROM_UNIXTIME(jo.pay_time, '%Y-%m-%d %H:%i:%s') AS order_time, jo.*, ju.jinsi_user_name as userName, jt.jinsi_user_name as teacherName FROM jinsi_order jo JOIN jinsi_user ju ON jo.user_id = ju.id JOIN jinsi_user jt ON jo.follow_id = jt.id WHERE jo.type={$type} ORDER BY jo.pay_time DESC LIMIT {$start}, {$pageSize}";
+        }else{
+            $count = $model->count();
+            $sql = "SELECT FROM_UNIXTIME(jo.pay_time, '%Y-%m-%d %H:%i:%s') AS order_time, jo.*, ju.jinsi_user_name as userName, jt.jinsi_user_name as teacherName FROM jinsi_order jo JOIN jinsi_user ju ON jo.user_id = ju.id JOIN jinsi_user jt ON jo.follow_id = jt.id WHERE 1 ORDER BY jo.pay_time DESC LIMIT {$start}, {$pageSize}";
+        }
+
+        $orderList = M()->query($sql);
+
+        if($orderList){
+            $result = array('errcode' => 0, 'msg' => '获取订单列表成功!', 'data' => $orderList, 'count' => $count);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+
+    }
+
+    /**
+     * 删除订单
+     */
+    public function orderDel ()
+    {
+        if(!IS_AJAX) $this->_to404();
+        $result = array('errcode' => 1, 'msg' => '删除订单失败!');
+        $orderId = $this->_get('id');
+        if($orderId){
+            $status = M('order', 'jinsi_')->where('id=' . $orderId)->delete();
+            if($status){
+                $result = array('errcode' => 0, 'msg' => '删除订单成功!');
+            }
+        }
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
      * 非ajax请求错误提示
      */
     private function _to404 ()
