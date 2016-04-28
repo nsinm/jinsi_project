@@ -126,7 +126,7 @@ class IndexAction extends LiveAction
 
         //更新阅读数
         $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
-        $update['jinsi_content_read_no'] = $readNo + mt_rand(1,9);
+        $update['jinsi_content_read_no'] = $readNo + mt_rand(1,5);
         M('content')->where('id=' . $cid)->save($update);
 
         $uris = array(
