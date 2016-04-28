@@ -94,10 +94,10 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary" id="live_content" data-cid="{pigcms:$live.id}">
                         <p class="user_livename user-comment-name">{pigcms:$live.jinsi_user_name}</p>
-                        <?php if($live['isMember']): ?>
-                            <p class="user_liveword user-comment-name">{pigcms:$live.jinsi_content_info}</p>
-                        <?php else: ?>
+                        <?php if(!$live['isMember'] && $live['jinsi_push_type']): ?>
                             <p class="user_liveword user-comment-name"><span style="color:red;">该条直播为会员内容</span>&nbsp;&nbsp;<a href="{pigcms::U('Pay/index')}&userId={pigcms:$urls.userId}&fid={pigcms:$live.user_id}&insName={pigcms:$live.jinsi_user_name}" class="weui_btn weui_btn_plain_primary jumpBt member" style="top:9px;">成为会员</a></p>
+                        <?php else: ?>
+                            <p class="user_liveword user-comment-name">{pigcms:$live.jinsi_content_info}</p>
                         <?php endif ?>
                         <if condition="$live.jinsi_content_type neq 1">
                             <img class="thumb-image" src="{pigcms:$live.jinsi_content_url}" alt="">
