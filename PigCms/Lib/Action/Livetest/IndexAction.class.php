@@ -148,6 +148,7 @@ class IndexAction extends LiveAction
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
         $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr($liveInfo[0]['jinsi_content_info'], 0, 20, 'UTF-8') . '...';
+        $data['desc'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ';
         $data['imgUrl'] = $liveInfo[0]['jinsi_user_header_pic'];
         $data['link'] = get_url();
         $this->assign('data',$data);
@@ -304,7 +305,7 @@ class IndexAction extends LiveAction
         $cid = $this->_get('cid');
         if($cid){
             $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
-            $update['jinsi_content_read_no'] = $readNo + 1;
+            $update['jinsi_content_read_no'] = $readNo + mt_rand(1, 9);
             $fetchRows = M('content')->where('id=' . $cid)->save($update);
             if($fetchRows){
                 $result = array('errcode' => 0, 'msg' => '更新成功!');

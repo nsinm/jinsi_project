@@ -151,7 +151,7 @@ var indexAction = {
                     html +=        '</p>';
                     html +=         '<p class="user_liveinteract">';
                         html +=         '<span class="readed">';
-                        html +=              '已阅&nbsp;' + parseInt(infos[index].jinsi_content_read_no) * 13;
+                        html +=              '已阅&nbsp;' + infos[index].jinsi_content_read_no;
                         html +=         '</span>';
                         html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';

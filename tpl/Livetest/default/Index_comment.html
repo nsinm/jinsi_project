@@ -101,7 +101,7 @@
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
                         <p class="user_liveinteract">
                             <span class="readed">
-                                已阅&nbsp;{pigcms:$live['jinsi_content_read_no']*13}
+                                已阅&nbsp;{pigcms:$live['jinsi_content_read_no']}
                             </span>
                             <span>
                                 <span class="icon-comment" alt="">
@@ -188,7 +188,7 @@
         });
 
         wx.onMenuShareAppMessage({
-            title: '{pigcms:$data.title}', // 分享标题
+            title: '{pigcms:$data.desc}', // 分享标题
             desc : '{pigcms:$data.title}',
             link: '{pigcms:$data.link}', // 分享链接
             imgUrl: '{pigcms:$data.imgUrl}', // 分享图标
