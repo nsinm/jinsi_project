@@ -296,7 +296,7 @@ width: 100%;
 .user_liveinteract span.readed{
 	/*display: inline-block;*/
 	/*width: 22%;*/
-	flex:2;
+	/*flex:2;*/
 	/*margin-right: 5px;*/
 }
 @media screen and (min-width: 355px) {
