@@ -354,7 +354,7 @@ class LiveModel extends Model
                 //print_r($user_info);
                 $data['auther'] = $user_info['jinsi_user_name'];
                 $data['content'] = '有人回复了你的直播';
-                $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$content_arr['jinsi_content_id'];
+                $data['url'] = "http://mp.jinsxy.com".U('Index/comment')."&cid=".$v['cid'];
 
                 $data['openid'] = $user_info['open_id'];
                 $this->send_message($data,3);
