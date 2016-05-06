@@ -558,6 +558,27 @@ var indexAction = {
                         var imgsrc = $this.attr('src')
                         $imgContainer.show()
                         $imgBigger.attr('src',imgsrc)
+
+                        if(myScroll == null){
+                            myScroll = new IScroll('#wrapper')
+                        }
+                        else{
+                            myScroll.refresh()
+                        }
+
+                        $imgContainer.on('click',function(){
+                            $imgContainer[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                            $imgOverlay.hide()
+                            $imgContainer.hide()
+                            $imgBigger.attr('src','')
+                        })
+
+                        $imgOverlay.on('click',function(){
+                            $imgOverlay[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                            $imgOverlay.hide()
+                            $imgContainer.hide()
+                            $imgBigger.attr('src','')
+                        })
                     })
                 })
             });
