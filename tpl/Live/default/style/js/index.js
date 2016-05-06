@@ -2,10 +2,26 @@
  * Created by Nsinm on 16/2/27.
  */
 
+// 获取页面的图片显示和隐藏层
+var $imgOverlay = $('.imgbox-overlay'),
+    $imgContainer = $('.imgbox-wrap'),
+    $imgBigger = $('.img-bigger')
+
+
+$imgContainer.on('click',function(){
+    $imgOverlay.hide()
+    $imgContainer.hide()
+    $imgBigger.attr('src','')
+})
+$imgOverlay.on('click',function(){
+    $imgOverlay.hide()
+    $imgContainer.hide()
+    $imgBigger.attr('src','')
+})
+
 var indexAction = {
     //首页banner显示效果
     'banner' : function(){
-        console.log(11111)
         var swiper = new Swiper('.swiper-container', {
             pagination: '.swiper-pagination',
             paginationClickable: true,
@@ -35,6 +51,7 @@ var indexAction = {
         var tag = $('.swiper-wrapper');
         var url = params.bananerList;
         $.getJSON(url, {}, function(data){
+            console.log(data);
             var html = '';
             if(data.errcode == 0) {
                 for (var index in data.data) {
@@ -101,22 +118,6 @@ var indexAction = {
             })
         }
 
-        // 获取页面的图片显示和隐藏层
-        var $imgOverlay = $('.imgbox-overlay'),
-            $imgContainer = $('.imgbox-wrap'),
-            $imgBigger = $('.img-bigger')
-
-        $imgContainer.on('click',function(){
-            $imgOverlay.hide()
-            $imgContainer.hide()
-            $imgBigger.attr('src','')
-        })
-        $imgOverlay.on('click',function(){
-            $imgOverlay.hide()
-            $imgContainer.hide()
-            $imgBigger.attr('src','')
-        })
-
         $.getJSON(params.gricUrl, {'type' : type}, function(data){
             console.log(data);
             var tag = $('#content');
@@ -124,7 +125,10 @@ var indexAction = {
             if(data.errcode == 0){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    var imgString = infos[index].jinsi_content_url;
+                    var imgs = imgString.split(',');
+                    //var readCount = Math.round(parseInt(infos[index].jinsi_content_read_no) * 13 + Math.random());
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '" data-uid="' + infos[index].user_id + '" data-name="' + infos[index].jinsi_user_name + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" id="header_pic" alt="">';
@@ -133,28 +137,31 @@ var indexAction = {
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=        '<p id="live_main">'
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    if(infos[index].jinsi_content_type == '1') {
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                    }else if(infos[index].jinsi_content_type == '2'){
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" class="pic" alt="">';
+                    if(infos[index].isMember != 1 && infos[index].jinsi_push_type == '1'){
+                        var payUrl = params.payUrl + '&userId=' + params.userId + '&fid=' + infos[index].user_id + '&insName=' + infos[index].jinsi_user_name;
+                        html +=         '<p class="user_liveword user-comment-name"><span style="color:red;">该条直播为会员内容</span>&nbsp;&nbsp;<a href="' + payUrl + '" class="weui_btn weui_btn_plain_primary jumpBt member" style="top:9px;">成为会员</a></p>';
                     }else{
-                        html +=     '<p class="user_wordbubble" >';
-                        html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
-                        html +=         '<span>32&quot;</span>';
-                        html +=     '</p>';
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                        if(infos[index].jinsi_content_type == '2'){
+                            for(var urlIndex in imgs) {
+                                html += '<img src="' + imgs[urlIndex] + '" class="pic" alt="">';
+                            }
+                        }
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=        '</p>';
                     html +=         '<p class="user_liveinteract">';
-                        html +=         '<span class="like-btn">';
-                        html +=              '<span alt="">';
-                        html +=                 '</span>'
+                        html +=         '<span class="readed">';
+                        html +=              '已阅&nbsp;' + infos[index].jinsi_content_read_no;
                         html +=         '</span>';
                         html +=         '<span id="icon-comment">';
                         html +=             '<span class="icon-comment" alt="">';
                         html +=             '</span>评论&nbsp;' + infos[index].jinsi_content_comment_no;
                         html +=         '</span>';
+                    html +=             '<span class="comment">';
+                    html +=                 '<span class="icon-reward" alt="">';
+                    html +=                 '</span>打赏';
+                    html +=             '</span>';
                         html +=         '<span>';
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
@@ -172,9 +179,14 @@ var indexAction = {
                 $('#filter').attr({'width':'30px'});
             }
             tag.html(html).find("p").each(function(){
-                var cid = $(this).parents('.weui_cell.live_block').attr('data-cid');
+                var parent = $(this).parents('.weui_cell.live_block');
+                var cid = parent.attr('data-cid');
                 var img = $(this).siblings('.pic');
                 var headerPic = $(this).parent().siblings('.weui_cell_hd');
+                var isMember = parent.attr('data-value');
+                var pushType = parent.attr('data-push-type');
+                var userId = parent.attr('data-uid');
+                var teacherName = parent.attr('data-name');
 
                 img.click(function(){
                     var $this = $(this)
@@ -185,11 +197,14 @@ var indexAction = {
                 })
 
                 headerPic.click(function(){
-                    location.href = params.cUrl + '&cid=' + cid;
+                    location.href = params.liveListUrl + '&userId=' + userId;
                 })
 
                 if($(this).attr('class') != 'user_liveinteract'){
                     $(this).click(function(){
+                        if(isMember != 1 && pushType == '1'){
+                            return;
+                        }
                         location.href = params.cUrl + '&cid=' + cid;
                     });
                 }
@@ -261,55 +276,139 @@ var indexAction = {
                                 }
                             }, 'JSON');
                         });
+                    }else if($(this).attr('class') == 'icon-reward'){
+                        $(this).parent().click(function(){
+                            if(params.userId == userId){
+                                alert('不能打赏自己!');
+                                return;
+                            }
+                            var sendData = {};
+                            var mask = $('#mask_pay')
+                            var replyActionsheet = $('#reward_actionsheet')
+                            var contentInput = replyActionsheet.find("#reward-input")[0]
+                            replyActionsheet.addClass('weui_actionsheet_toggle')
+                            mask.show().addClass('weui_fade_toggle').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            });
+                            replyActionsheet.find('#actionsheet_pay_cancel').click(function () {
+                                hideActionSheet(replyActionsheet, mask)
+                            })
+                            replyActionsheet.find('#payReward').click(function () {
+                                console.log(contentInput.value)
+                                if(contentInput.value == '') {
+                                    alert('请输入打赏金额!')
+                                    return
+                                }
+                                sendData.realName = '';
+                                sendData.telNo = '';
+                                sendData.cardNo = '';
+                                sendData.fid = userId;
+                                sendData.payName = '打赏导师' + teacherName;
+                                sendData.type = 2;
+                                sendData.money = contentInput.value;
+                                var directUrl = params.directUrl + '&fid=' + userId + '&type=2';
+                                $.ajax({
+                                    url: params.addOrderUrl,
+                                    type:"post",
+                                    dataType:'json',
+                                    data: sendData,
+                                    success:function(data){
+                                        if(data.errcode == 0){
+                                            location.href = directUrl;
+                                        }else{
+                                            alert(data.msg);
+                                        }
+                                    },
+                                    error:function(){
+                                    }
+                                })
+                                console.log('打赏成功')
+                                hideActionSheet(replyActionsheet, mask)
+                                contentInput.value = ''
+                            })
+                            replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+                        })
                     }
                 })
-
             });
         }, 'JSON');
     },
 
+    //获取评论列表
     'getComments' : function(){
-        var tag = $('.weui_cells.weui_cells_access.mt0');
+        var tag = $('#comment');
         var html = '';
         $.getJSON(params.gcUrl, {}, function(data){
             console.log(data);
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block user_comment">';
+                    html += '<div class="weui_cell live_block pleft40 user_comment">';
                     html +=     '<div class="weui_cell_hd">';
-                    html +=         '<div class="user_thumb mr10">';
+                    html +=         '<div class="user_thumb mr10 user-comment">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
                     html +=         '</div>';
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
-                    html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    html +=         '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                    html +=         '<p class="user_livename user-comment-name">' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_liveword user-comment-name">' + infos[index].jinsi_content_info + '</p>';
                     if(infos[index].jinsi_content_type != '1'){
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                        var imgString = infos[index].jinsi_content_url;
+                        var imgs = imgString.split(',');
+                        for(var urlIndex in imgs) {
+                            html += '<img src="' + imgs[urlIndex] + '" alt="" class="thumb-image">';
+                        }
                     }
                     html +=         '<p class="user_livetime"></p>';
                     html +=         '<p class="user_liveinteract">';
                     html +=             '<span class="sm-time">' + infos[index].content_create_time + '</span>';
                     html +=             '<span class="sm-like like-btn">';
-                    html +=             '</span>';
-                    html +=             '<span class="sm-comment">'
-                    //html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     if(infos[index].current_user_praise == 1){
                         html +=             '<span class="icon-like" alt="">';
                     }else{
                         html +=             '<span class="icon-like on" alt=""  data-cid="' + infos[index].id + '">';
                     }
                     html +=                 '</span>' + infos[index].jinsi_content_praise_no;
+                    html +=             '</span>';
+                    html +=             '<span class="sm-comment" data-cid="' + infos[index].id + '" data-name="' + infos[index].jinsi_user_name + '" style="margin-left:3px;">';
+                    html +=                 '<span class="icon-comment reply" alt=""></span>回复'
                     html +=             '</span>'
                     html +=         '</p>';
                     html +=     '</div>';
                     html += '</div>';
+                    var replies = infos[index].replies;
+                    for(var i in replies){
+                        var content = replies[i].jinsi_reply_content;
+                        var at = content.substring(0, content.indexOf(' '));
+                        var reply = content.substring(content.indexOf(' '));
+                        html += '<div class="weui_cell live_block pleft40 pleft40 user_comment">';
+                        html +=     '<div class="weui_cell_hd">';
+                        html +=         '<div class="user_thumb mr10 user-comment">';
+                        html +=             '<img src="' + replies[i].jinsi_user_header_pic + '" alt="">';
+                        html +=         '</div>';
+                        html +=     '</div>';
+                        html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                        html +=         '<p class="user_livename user-comment-name">' + replies[i].jinsi_user_name + '</p>';
+                        html +=         '<p class="user_liveword user-comment-name"><span style="color:orange;">' + at + '</span><span>' + reply + '</span></p>';
+                        html +=         '<p class="user_livetime"></p>';
+                        html +=         '<p class="user_liveinteract">';
+                        html +=             '<span class="sm-time" style="max-width: 150px;">' + replies[i].reply_create_time + '</span>';
+                        html +=             '<span class="sm-like like-btn">';
+                        html +=             '</span>';
+                        if(params.userId != replies[i].user_id) {
+                            html += '<span class="sm-comment"' + replies[i].id + ' data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '" click="show(this)">';
+                            html += '<span class="icon-comment reply" alt=""></span>回复'
+                            html += '</span>'
+                        }
+                        html +=         '</p>';
+                        html +=     '</div>';
+                        html += '</div>';
+                    }
                 }
             }else{
                 html += '当前还没有评论内容哦!';
             }
-            tag.append(html).find('.user_liveinteract span').each(function(){
+            tag.append(html).parents('.weui_cells.weui_cells_access.mt0').find('.user_liveinteract span').each(function(){
                 if($(this).attr('class') == 'icon-like on'){
                     $(this).click(function(){
                         var that = $(this);
@@ -337,17 +436,120 @@ var indexAction = {
                             }
                         }, 'JSON');
                     });
-                }else if($(this).attr('class') == 'icon-comment reply'){
+                }else if($(this).attr('class') == 'sm-comment'){
                     $(this).click(function(){
-                        $('.weui_actionsheet_menu').find("div[data-value='2']").text('图文回复');
-                        $('.weui_actionsheet_menu').find("div[data-value='1']").text('文字回复');
-                        showDailog();
+                        var cid = $(this).attr('data-cid');
+                        var contentId = cid;
+                        $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
+                        var mask = $('#mask_reply')
+                        var replyActionsheet = $('#reply_actionsheet')
+                        var contentInput = replyActionsheet.find("#comment-input")[0]
+                        replyActionsheet.addClass('weui_actionsheet_toggle')
+                        mask.show().addClass('weui_fade_toggle').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        });
+                        replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        })
+                        replyActionsheet.find('#sendComment').click(function () {
+                            var content = contentInput.value;
+                            var fid = $('#live_content').attr('data-cid');
+                            var cid = contentId;
+                            var userId = params.userId;
+                            var json = {'content':content, 'cid':cid, 'userId':userId, 'fid':fid}
+                            $.ajax({
+                                url:params.addReplyUrl,
+                                type:"post",
+                                dataType:'json',
+                                data:json,
+                                success:function(data){
+                                    console.log(data);
+                                    if(data.errcode == 0){
+                                        tag.empty();
+                                        var count = parseInt($('#comment_count').text());
+                                        $('#comment_count').text(++count);
+                                        indexAction.getComments();
+                                    }else{
+                                        alert(data.msg);
+                                    }
+                                },
+                                error:function(){
+                                }
+                            })
+                            hideActionSheet(replyActionsheet, mask)
+                            contentInput.value = ''
+                        })
+                        replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
                     });
                 }else if($(this).attr('class') == 'icon-comment'){
                     $(this).parent().click(function() {
                         showDailog();
                     })
+                }else if($(this).attr('class') == 'icon-reward') {
+                    $(this).parent().click(function () {
+                        var userId = $(this).attr('data-uid');
+                        if(userId == params.userId){
+                            alert('不能打赏自己!');
+                            return;
+                        }
+                        var teacherName = $(this).attr('data-name');
+                        var sendData = {};
+                        var mask = $('#mask_pay')
+                        var replyActionsheet = $('#reward_actionsheet')
+                        var contentInput = replyActionsheet.find("#reward-input")[0]
+                        replyActionsheet.addClass('weui_actionsheet_toggle')
+                        mask.show().addClass('weui_fade_toggle').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        });
+                        replyActionsheet.find('#actionsheet_pay_cancel').click(function () {
+                            hideActionSheet(replyActionsheet, mask)
+                        })
+                        replyActionsheet.find('#payReward').click(function () {
+                            console.log(contentInput.value)
+                            if (contentInput.value == '') {
+                                alert('请输入打赏金额!')
+                                return
+                            }
+                            sendData.realName = '';
+                            sendData.telNo = '';
+                            sendData.cardNo = '';
+                            sendData.fid = userId;
+                            sendData.payName = '打赏导师' + teacherName;
+                            sendData.type = 2;
+                            sendData.money = contentInput.value;
+                            var directUrl = params.directUrl + '&fid=' + userId + '&type=2';
+                            $.ajax({
+                                url: params.addOrderUrl,
+                                type: "post",
+                                dataType: 'json',
+                                data: sendData,
+                                success: function (data) {
+                                    if (data.errcode == 0) {
+                                        location.href = directUrl;
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                },
+                                error: function () {
+                                }
+                            })
+                            console.log('打赏成功')
+                            hideActionSheet(replyActionsheet, mask)
+                            contentInput.value = ''
+                        })
+                        replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+                    })
                 }
+
+                $(this).parents('.weui_cell_bd.weui_cell_primary').find('.thumb-image').each(function(){
+                    $(this).click(function(){
+                        var $this = $(this)
+                        $imgOverlay.show()
+                        var imgsrc = $this.attr('src')
+                        $imgContainer.show()
+                        $imgBigger.attr('src',imgsrc)
+                    })
+                })
             });
         }, 'JSON');
 
@@ -373,6 +575,54 @@ var indexAction = {
                 mask.hide();
             })
         }
+
+        function show(obj){
+            obj.click(function(){
+                var cid = $(this).attr('data-cid');
+                var contentId = cid;
+                $('#comment-input').val('@' + $(this).attr('data-name') + ' ');
+                var mask = $('#mask_reply')
+                var replyActionsheet = $('#reply_actionsheet')
+                var contentInput = replyActionsheet.find("#comment-input")[0]
+                replyActionsheet.addClass('weui_actionsheet_toggle')
+                mask.show().addClass('weui_fade_toggle').click(function () {
+                    hideActionSheet(replyActionsheet, mask)
+                });
+                replyActionsheet.find('#actionsheet_cancel_reply').click(function () {
+                    hideActionSheet(replyActionsheet, mask)
+                })
+                replyActionsheet.find('#sendComment').click(function () {
+                    var content = contentInput.value;
+                    if(content == ''){
+                        alert('请填写回复内容!');
+                        return;
+                    }
+                    var cid = contentId;
+                    var userId = params.userId;
+                    var json = {'content':content, 'cid':cid, 'userId':userId}
+                    $.ajax({
+                        url:params.addReplyUrl,
+                        type:"post",
+                        dataType:'json',
+                        data:json,
+                        success:function(data){
+                            console.log(data);
+                            if(data.errcode == 0){
+                                tag.empty();
+                                indexAction.getComments();
+                            }else{
+                                alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                        }
+                    })
+                    hideActionSheet(replyActionsheet, mask)
+                    contentInput.value = ''
+                })
+                replyActionsheet.unbind('transitionend').unbind('webkitTransitionEnd')
+            });
+        }
     },
 
     'toComment' : function(){
@@ -392,7 +642,7 @@ var indexAction = {
 
     'moreTeacher' : function(){
         var tag = $('.more-teacher');
-        var url = params.instructorUrl + '&type=3';
+        var url = params.instructorUrl;
         tag.click(function(){
             location.href = url;
         });
@@ -432,7 +682,7 @@ var indexAction = {
         var element = $('.user_thumb.mr10');
         var userId = element.attr('data-uid');
         element.children('img').on('click', function(){
-            location.href = params.guiUrl + '&userId=' + userId;
+            location.href = params.myLiveUrl + '&userId=' + userId;
         })
     },
 
@@ -441,9 +691,9 @@ var indexAction = {
             //固定筛选按钮在页面的位置
             this.filterPostion();
             //获取推荐导师列表
-            this.getRecomendInstructor();
+            //this.getRecomendInstructor();
             //banner列表
-            //this.getBannerList();
+            this.getBannerList();
             //获取关注导师直播列表
             this.liveFilter();
             this.moreTeacher();
@@ -451,6 +701,15 @@ var indexAction = {
             //获取直播评论列表
             this.getComments();
             this.toUserInfo();
+
+            //图片放大
+            $('.thumb-image').click(function(){
+                var $this = $(this)
+                $imgOverlay.show()
+                var imgsrc = $this.attr('src')
+                $imgContainer.show()
+                $imgBigger.attr('src',imgsrc)
+            })
         }
         //十字呼出框点击事件
         this.toComment();

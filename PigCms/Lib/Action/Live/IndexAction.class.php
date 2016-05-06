@@ -89,6 +89,12 @@ class IndexAction extends LiveAction
             if($praise){
                 $value['current_user_praise'] = 1;
             }
+
+            if($this->userId != $value['jinsi_content_create_user_id']){
+                $value['isMember'] = $this->_isMember($this->userId, $value['jinsi_content_create_user_id']);
+            }else{
+                $value['isMember'] = 1;
+            }
             array_push($data, $value);
         }
         if($comments){
@@ -99,11 +105,30 @@ class IndexAction extends LiveAction
     }
 
     /**
+     *
+     * 判断是否为导师会员
+     *
+     * @param $userId
+     * @param $teacherId
+     * @return bool
+     */
+    private function _isMember ($userId, $teacherId){
+        $count = M('member')->where('user_id=' . $userId . ' AND follow_id=' . $teacherId)->count();
+        return $count > 0 ? 1 : 0;
+    }
+
+    /**
      * 直播详情页
      */
     public function comment ()
     {
         $cid = $this->_get('cid');
+
+        //更新阅读数
+        $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
+        $update['jinsi_content_read_no'] = $readNo + mt_rand(1,5);
+        M('content')->where('id=' . $cid)->save($update);
+
         $uris = array(
             'gcUrl' => U('getComment', 'cid=' . $cid),
             'pUrl' => U('praise'),
@@ -120,11 +145,14 @@ class IndexAction extends LiveAction
         }
         $jssdk = D('Jssdk');
         $signPackage = $jssdk->GetSignPackage();
+        //查看是否为会员
+        $liveInfo[0]['isMember'] = $this->_isMember($this->userId, $liveInfo[0]['user_id']);
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
-        $data['title'] = $liveInfo[0]['jinsi_content_info'];
-        $data['imgUrl'] = "https://www.baidu.com/img/baidu_jgylogo3.gif";
         $data['link'] = get_url();
+        $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr($liveInfo[0]['jinsi_content_info'], 0, 20, 'UTF-8') . '...';
+        $data['desc'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ';
+        $data['imgUrl'] = $liveInfo[0]['jinsi_user_header_pic'];
         $this->assign('data',$data);
         $this->assign('live', $liveInfo[0]);
         $this->assign('urls', $urls);
@@ -153,6 +181,9 @@ class IndexAction extends LiveAction
                 if($praise){
                     $value['current_user_praise'] = 1;
                 }
+                $sql = "SELECT FROM_UNIXTIME(jr.jinsi_reply_time, '%Y-%m-%d %H:%i') AS reply_create_time, jr.*, ju.id AS user_id, ju.jinsi_user_name, ju.jinsi_user_header_pic FROM jinsi_reply AS jr LEFT JOIN jinsi_user AS ju ON jr.jinsi_reply_user_id = ju.id WHERE jr.jinsi_reply_content_id = {$value['id']} ORDER BY jr.jinsi_reply_time ASC";
+                $replies = M()->query($sql);
+                $value['replies'] = $replies;
                 array_push($data, $value);
             }
 
@@ -174,6 +205,44 @@ class IndexAction extends LiveAction
         $bannerList = M('banner', 'jinsi_')->order('id desc')->limit('5')->select();
         if($bannerList){
             $result = array('errcode' => 0, 'msg' => '获取banner列表成功', 'data' => $bannerList);
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 添加回复
+     */
+    public function addComment ()
+    {
+        if(!IS_AJAX) _404('页面不存在!');
+
+        $result = array('errcode' => 1, 'msg' => '添加回复失败!');
+
+        $cid = $this->_post('cid');
+        $userId = $this->_post('userId');
+        $content = $this->_post('content');
+        $fid = $this->_post('fid');
+
+        if($cid && $userId && $content && $fid){
+            $data = array(
+                'jinsi_reply_user_id' => $userId,
+                'jinsi_reply_content_id' => $cid,
+                'jinsi_reply_content' => $content,
+                'jinsi_reply_time' => time()
+            );
+
+            $id = M('reply', 'jinsi_')->add($data);
+            if($id){
+                $model = D('Live');
+                $model->put_comment($id, $this->userId);
+                $model = M('content');
+                $number = $model->where('id=' . $fid)->getField('jinsi_content_comment_no');
+                $upData['jinsi_content_comment_no'] = $number + 1;
+                $status = $model->where('id=' . $fid)->save($upData);
+                if($status)
+                    $result = array('errcode' => 0, 'msg' => '添加回复成功!');
+            }
         }
 
         $this->ajaxReturn($result, 'JSON');
@@ -226,5 +295,33 @@ class IndexAction extends LiveAction
         }
 
         $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 已阅
+     */
+    public function read ()
+    {
+        if(!IS_AJAX) _404('页面不存在');
+        $result= array('errcode' => 1, 'msg' => '更新失败!');
+        $cid = $this->_get('cid');
+        if($cid){
+            $readNo = M('content')->where('id=' . $cid)->getField('jinsi_content_read_no');
+            $update['jinsi_content_read_no'] = $readNo + mt_rand(1, 9);
+            $fetchRows = M('content')->where('id=' . $cid)->save($update);
+            if($fetchRows){
+                $result = array('errcode' => 0, 'msg' => '更新成功!');
+            }
+        }
+
+        $this->ajaxReturn($result, 'JSON');
+    }
+
+    /**
+     * 跳转到关注页
+     */
+    public function attention ()
+    {
+        $this->display();
     }
 }

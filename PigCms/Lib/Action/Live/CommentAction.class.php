@@ -58,18 +58,20 @@ class CommentAction extends LiveAction
         //直播id
         $cid = $this->_post('cid');
         $push = $this->_post('push');
+        $pushType = $this->_post('pushType');
 
         $data = array(
             'jinsi_content_info' => $this->_post('content'),
             'jinsi_content_type' => $this->_post('type'),
             'jinsi_content_create' => time(),
-            'jinsi_content_url' => $this->_post('picUrl'),
+            'jinsi_content_url' => trim($this->_post('picUrl'), ','),
             'jinsi_content_praise_no' => 0,
             'jinsi_content_comment_no' => 0,
             'jinsi_content_share_no' => 0,
             'jinsi_content_create_user_id' => $userId,
             'jinsi_content_is_comment' => $this->_post('isComment'),
             'jinsi_content_id' => $cid,
+            'jinsi_push_type' => $pushType,
             'push' => $push
         );
 
@@ -80,6 +82,13 @@ class CommentAction extends LiveAction
             $status = $model->where('id=' . $cid)->save($upData);
             $id = M('content')->add($data);
             if($status && $id){
+                $pushExists = M('push')->where('cid=' . $cid)->count();
+                if($pushExists < 1){
+                    M('push')->add(array(
+                        'cid' => $cid,
+                        'status' => 0
+                    ));
+                }
                 $result = array('errcode' => 0, 'msg' => '添加成功!');
             }
         }else{

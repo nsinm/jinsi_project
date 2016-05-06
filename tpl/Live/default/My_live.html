@@ -20,10 +20,55 @@
     </if>
 </div>
 <div class="container js_container">
-    <div class="page">
+    <div class="page" style="background-color: white;">
+        <if condition="$cUserId neq ''">
+            <div class="weui_cells weui_cells_access" style="padding-bottom:10px;">
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_hd">
+                        <div class="user_thumb mr10">
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>头像</p>
+                    </div>
+                    <div></div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>名字</p>
+                    </div>
+                    <div id="name">血海</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>风格</p>
+                    </div>
+                    <div id="style">激进</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>签名</p>
+                    </div>
+                    <div id="sign">我不是股神</div>
+                </a>
+                <a class="weui_cell" href="javascript:;">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>简介</p>
+                    </div>
+                    <div id="info"></div>
+                </a>
+                <div class="weui_btn_area mg010">
+                    <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_default" id="cancel-attention" style="display: none;">取消关注</a>
+                    <!--<a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_disabled weui_btn_default">成为会员</a>-->
+                    <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_primary" id="attention" style="display:none;">关注</a>
+                    <a href="javascript:;" class="weui_btn jumpBtFull wd100 weui_btn_plain_primary" id="join-member">成为会员</a>
+                </div>
+            </div>
+        </if>
         <div class="bd">
             <if condition="$cUserId neq ''">
-                <div class="weui_cells_title">直播列表</div>
+                <div class="weui_cells_title">他的直播</div>
             <else/>
                 <div class="weui_cells_title">我的直播</div>
             </if>
@@ -40,13 +85,57 @@
     var params = {
         'userId' : '{pigcms:$urls.userId}',
         'cUserId' : '{pigcms:$cUserId}',
+        'isFollow' : '{pigcms:$isFollow}',
         'tplName' : 'my_live',
         'llUrl' : '{pigcms:$urls.llUrl}',
         'commentUrl' : '{pigcms:$urls.commentUrl}',
         'liveRoomUrl' : '{pigcms:$urls.liveRoomUrl}',
         'instructorUrl' : '{pigcms:$urls.instructorUrl}',
         'myUrl' : '{pigcms:$urls.myUrl}',
+        'guiUrl' : '{pigcms::U("Instructor/getInstructorInfo")}',
+        'payUrl' : '{pigcms::U("Pay/index")}',
+        'cFollowUrl' : '{pigcms::U("Instructor/cancelFollow")}',
+        'followUrl' : '{pigcms::U("Instructor/follow")}',
+        'payUrl' : '{pigcms::U("Pay/index")}'
     };
+
+
+    var isFollow = params.isFollow,
+            tid = params.cUserId,
+            attention = $('#attention'),
+            cAttention = $('#cancel-attention');
+
+    if(isFollow == '1') {
+        cAttention.show();
+    }else{
+        attention.show();
+    }
+
+    var json = {'userId' : params.userId, 'instructorId' : tid};
+    //关注
+    attention.click(function(){
+        $.getJSON('{pigcms::U("Instructor/follow")}', json, function(data){
+            console.log(data);
+            if(data.errcode == '0'){
+                attention.hide();
+                cAttention.show();
+            }else{
+                alert(data.msg);
+            }
+        }, 'JSON')
+    })
+    //取消关注
+    cAttention.click(function(){
+        $.getJSON(params.cFollowUrl, json, function(data){
+            console.log(data);
+            if(data.errcode == '0'){
+                cAttention.hide();
+                attention.show();
+            }else{
+                alert(data.msg);
+            }
+        }, 'JSON')
+    })
 </script>
 </body>
 </html>

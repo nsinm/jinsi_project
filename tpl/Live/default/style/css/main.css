@@ -10,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
 }
+canvas { display: block; }  
 .swiper-container {
     width: 100%;
     height: 100%;
@@ -41,14 +42,32 @@ body {
 }
 /* ==============swiper 相关结束============ */
 
-
+.page .title{
+	text-align: center;
+    font-size: 24px;
+    color: #3cc51f;
+    font-weight: 400;
+    margin: 0 15%;
+}
+.page .pay-info{
+	text-align: center;
+	font-size: 18px;
+}
+.page .pay-desc{
+	text-align: center;
+	font-size: 16px;
+	color: #777;
+}
+.pleft40{
+	padding-left: 34px;
+}
 .topbar{
 	padding: 0;
 	border-bottom: 1px solid #cac6c3;
 }
 .filter{
 	position: absolute;
-	right: 8px;
+	right: 6px;
 	top: 8px;
 	width: 30px;
 	height: 30px;
@@ -67,6 +86,18 @@ body {
 }
 .bt44{
 	bottom:44px;
+}
+.wd49{
+	width:46%;
+	display: inline-block;
+}
+.wd100{
+width: 100%;
+}
+.mg010{
+	margin:0 10px!important;
+	display: -webkit-flex!important; /* Safari */
+	display:flex!important;
 }
 .more-teacher{
 	position: absolute;
@@ -109,6 +140,17 @@ body {
 	margin-right: 6px;
 	line-height: 1.7!important;
     font-size: 12px!important;
+}
+.jumpBtFull{
+	margin-top: 3px!important;
+	margin-bottom: 4px!important;
+	padding-top: 5px!important;
+	padding-bottom: 5px!important;
+	min-width: 70px;
+	display: inline-block;
+	margin-right: 6px;
+	line-height: 1.7!important;
+    font-size: 14px!important;
 }
 .plus-nav{
 	width: 31px;
@@ -200,9 +242,14 @@ body {
 }
 
 .live_block img{
-	width: 160px;
-	height: auto;
+	width: 64px;
+	height:64px;
+	/*height: auto;*/
+	overflow: hidden;
+	display: inline-block;
+	margin-right: 4px;
 }
+
 .user_thumb img,
 .userinfo_grids .userthumb img{
     display: block;
@@ -229,15 +276,36 @@ body {
 	color:#aaa;
 	line-height: 2em;
 }
+
 .user_liveinteract{
 	margin-right: -15px;
 	font-size: 12px;
 	color:#555;
+	display: flex;
 }
 .user_liveinteract span{
-	display: inline-block;
-	width: 32%;
+	/*display: inline-block;*/
+	/*width: 22%;*/
+	flex:1;
+	overflow: hidden;
+	/*margin-right: 5px;*/
 }
+.user_liveinteract span.sm-time{
+	flex:2;
+}
+.user_liveinteract span.readed{
+	/*display: inline-block;*/
+	/*width: 22%;*/
+	/*flex:2;*/
+	/*margin-right: 5px;*/
+}
+@media screen and (min-width: 355px) {
+	.user_liveinteract span{
+		display: inline-block;
+		/*margin-right: 10px;*/
+	}
+}
+
 .user_liveinteract .sm-time{
 	display: inline-block;
 	width: 55%;
@@ -248,6 +316,7 @@ body {
 }
 .user_liveinteract .sm-comment{
 	display: inline-block;
+
 	width: 20%;
 }
 .user_liveinteract span img{
@@ -280,6 +349,15 @@ body {
 	width: 20px;
 	display: inline-block;
 	background-image:url(../images/comment@2x.png);
+	background-size: 20px 15px;
+}
+.user_liveinteract span .icon-reward{
+	vertical-align: top;
+	height: 15px;
+	width: 20px;
+	text-align: right;
+	display: inline-block;
+	background-image:url(../images/reward@2x.png);
 	background-size: 20px 15px;
 }
 .user_liveinteract span .icon-share{
@@ -405,3 +483,51 @@ body {
 .user-comment-name{
 	line-height: 1.4em;
 }
+
+.reward_label{
+	width: auto;
+	font-size: 24px;
+	color: orange;
+	/*font-weight: bold;*/
+}
+.reward_first{
+	width: auto;
+	font-size: 16px;
+	color: #999;
+	/*font-weight: bold;*/
+}
+#reward-input{
+	font-size: 22px;
+	color:rgb(85, 85, 85);
+	padding: 3px 5px;
+}
+
+.pop-wrapper{
+	overflow: hidden;
+}
+
+
+/* 页脚 */
+.page-bottom{
+	line-height: 2.2;
+	margin-bottom: 44px;
+	text-align: center;
+	color: #888;
+}
+.page-bottom span{
+	color:#f15d12;
+}
+.page-bottom a:hover,
+.page-bottom a:visited,
+.page-bottom a:link{
+	color:#444;
+}
+
+
+/* 二维码 */
+.qr{
+	margin: 2%;
+}
+.qr img{
+	width: 100%;
+}	

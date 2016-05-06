@@ -16,6 +16,8 @@ var myAction = {
                 toUrl(this, params.followUrl);
             }else if(text.indexOf('我的粉丝') > 0){
                 toUrl(this, params.fansUrl);
+            }else if(text.indexOf('我的会员') > 0){
+                toUrl(this, params.memberUrl);
             }else if(text.indexOf('我的直播') > 0){
                 toUrl(this, params.liveUrl);
             }else if(text.indexOf('用户反馈') > 0){
@@ -110,6 +112,35 @@ var myAction = {
             tag.html(html);
         }, 'JSON');
     },
+    
+    'getMyMemberList' : function () {
+        var tag = $('.weui_cells.weui_cells_access');
+        $.getJSON(params.memberListUrl, {}, function(data){
+            console.log(data);
+            var html = '';
+            if(data.errcode == '0'){
+                var infos = data.data;
+                var text = '我的会员&nbsp;&nbsp;(' + data.count + '人)';
+                $('.bd .weui_cells_title').html(text);
+                for(var index in infos){
+                    html += '<div class="weui_cell">';
+                    html +=     '<div class="weui_cell_hd">';
+                    html +=         '<div class="user_thumb mr10">';
+                    html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
+                    html +=         '</div>';
+                    html +=     '</div>';
+                    html +=     '<div class="weui_cell_bd weui_cell_primary">';
+                    html +=         '<p>' + infos[index].jinsi_user_name + '</p>';
+                    html +=         '<p class="user_signature">' + infos[index].jinsi_user_sign + '</p>';
+                    html +=     '</div>';
+                    html += '</div>';
+                }
+            }else{
+                html += '您还没有会员,加油哦!';
+            }
+            tag.html(html);
+        }, 'JSON');
+    },
 
     'getMyLiveList' : function(){
         var tag = $('#live_list');
@@ -120,10 +151,13 @@ var myAction = {
         }
         $.getJSON(params.llUrl, data, function(data){
             var html = '';
+            console.log(data);
             if(data.errcode == '0'){
                 var infos = data.data;
                 for(var index in infos){
-                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '">';
+                    var imgString = infos[index].jinsi_content_url;
+                    var imgs = imgString.split(',');
+                    html += '<div class="weui_cell live_block" data-cid="' + infos[index].id + '" data-value="' + infos[index].isMember + '" data-push-type="' + infos[index].jinsi_push_type + '">';
                     html +=     '<div class="weui_cell_hd">';
                     html +=         '<div class="user_thumb mr10">';
                     html +=             '<img src="' + infos[index].jinsi_user_header_pic + '" alt="">';
@@ -131,16 +165,16 @@ var myAction = {
                     html +=     '</div>';
                     html +=     '<div class="weui_cell_bd weui_cell_primary">';
                     html +=         '<p class="user_livename">' + infos[index].jinsi_user_name + '</p>';
-                    if(infos[index].jinsi_content_type == '1') {
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                    }else if(infos[index].jinsi_content_type == '2'){
-                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
-                        html +=     '<img src="' + infos[index].jinsi_content_url + '" alt="">';
+                    if(infos[index].isMember != 1 && infos[index].jinsi_push_type == '1'){
+                        var payUrl = params.payUrl + '&userId=' + params.userId + '&fid=' + infos[index].user_id + '&insName=' + infos[index].jinsi_user_name;
+                        html +=         '<p class="user_liveword user-comment-name"><span style="color:red;">该条直播为会员内容</span>&nbsp;&nbsp;<a href="' + payUrl + '" class="weui_btn weui_btn_plain_primary jumpBt member" style="top:9px;">成为会员</a></p>';
                     }else{
-                        html +=     '<p class="user_wordbubble" >';
-                        html +=         '<img src="' + infos[index].jinsi_content_url + '" alt="">';
-                        html +=         '<span>32&quot;</span>';
-                        html +=     '</p>';
+                        html +=     '<p class="user_liveword">' + infos[index].jinsi_content_info + '</p>';
+                        if(infos[index].jinsi_content_type == '2'){
+                            for(var urlIndex in imgs) {
+                                html += '<img src="' + imgs[urlIndex] + '" class="pic" alt="">';
+                            }
+                        }
                     }
                     html +=         '<p class="user_livetime">' + infos[index].content_create_time + '</p>';
                     html +=         '<p class="user_liveinteract">';
@@ -165,11 +199,51 @@ var myAction = {
             }
             tag.html(html).find("div[class='weui_cell live_block']").each(function(){
                 var cid = $(this).attr('data-cid');
+                var isMember = $(this).attr('data-value');
+                var pushType = $(this).attr('data-push-type');
                 $(this).click(function(){
+                    if(isMember != 1 && pushType == '1'){
+                        return;
+                    }
                     location.href = params.commentUrl + '&cid=' + cid;
                 });
             });
         }, 'JSON');
+    },
+
+    'getUserInfo': function () {
+        var userId = params.cUserId;
+        $.getJSON(params.guiUrl, {userId: userId}, function (data) {
+            console.log(data)
+            if (data.errcode == '0') {
+                var infos = data.data[0];
+                $('.user_thumb img').attr('src', infos.jinsi_user_header_pic);
+                $('#name').text(infos.jinsi_user_name);
+                $('#style').text(infos.jinsi_user_style);
+                $('#sign').text(infos.jinsi_user_sign);
+                $('#info').text(infos.jinsi_user_info);
+                myAction.joinMember(infos.id, infos.is_member, infos.jinsi_user_name);
+            } else {
+                alert(data.msg);
+            }
+        }, 'JSON');
+    },
+
+    //关注和加入会员
+    'joinMember' : function(teacherId, isMember, tName){
+        var isMember = isMember,
+            tid = teacherId,
+            tName = tName,
+            joinMember = $('#join-member');
+
+        if(isMember != '0'){
+            joinMember.removeClass('weui_btn_plain_primary').addClass('weui_btn_plain_default');
+        }
+
+        joinMember.click(function(){
+            if(isMember != '0') return;
+            location.href = params.payUrl + '&userId=' + params.userId + '&fid=' + tid + '&insName=' + tName;
+        })
     },
 
     'addFeedback' : function(){
@@ -198,9 +272,12 @@ var myAction = {
         }else if(params.tplName == 'my_fans'){
             this.getMyFansList();
         }else if(params.tplName == 'my_live'){
+            this.getUserInfo();
             this.getMyLiveList();
         }else if(params.tplName == 'my_feedback'){
             this.addFeedback();
+        }else if(params.tplName == 'my_member'){
+            this.getMyMemberList();
         }
     }
 };

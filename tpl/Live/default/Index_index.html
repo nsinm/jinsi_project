@@ -57,6 +57,29 @@
     </div>
     <!--END 回复块-->
 
+    <!--BEGIN 打赏块-->
+    <div id="actionSheet_wrap_pay">
+        <div class="weui_mask_transition" id="mask_pay"></div>
+        <div class="weui_actionsheet bt44" id="reward_actionsheet">
+            <div class="weui_actionsheet_menu pop-wrapper">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd"><label class="weui_label reward_first">打赏金额</label></div>
+                    <div class="weui_cell_hd"><label class="weui_label reward_label">&nbsp;¥</label></div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" id="reward-input" type="tel" placeholder="请输入金额(元)">
+                    </div>
+                </div>
+                <div class="weui_btn_area">
+                    <a class="weui_btn weui_btn_primary" href="javascript:" id="payReward">立即支付</a>
+                </div>
+            </div>
+            <div class="weui_actionsheet_action">
+                <div class="weui_actionsheet_cell" id="actionsheet_pay_cancel">取消</div>
+            </div>
+        </div>
+    </div>
+    <!--END 打赏块-->
+
     <div class="bottom-bar">
         <div class="selected">直播间</div>
         <div>导师</div>
@@ -69,24 +92,27 @@
     </div>
     <div class="page">
         <div class="hd topbar">
-            <h1 class="page_title teacher_title">推荐导师</h1>
+            <h1 class="page_title teacher_title">正在股播</h1>
             <span class="more-teacher">更多</span>
         </div>
         <div class="bd">
-            <!--<div class="swiper-container">-->
-                <!--<div class="swiper-wrapper">-->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
 
-                <!--</div>-->
-            <!--</div>-->
-            <div class="weui_grids user_grids">
-
+                </div>
             </div>
-            <div class="weui_cells weui_cells_access mt0 mb44" id="user_comments">
+            <!--<div class="weui_grids user_grids">-->
+
+            <!--</div>-->
+            <div class="weui_cells weui_cells_access mt0" id="user_comments">
                 <div class="weui_toptips weui_warn js_tooltips teacher_toggle" style="display: none;"></div>
                 <div class="filter off" id="filter" alt=""></div>
                 <span id="content">
 
                 </span>
+            </div>
+            <div class="page-bottom">
+                由<span>股播</span>提供技术支持&nbsp;<a href="{pigcms::U('Index/attention')}">点击关注</a>
             </div>
         </div>
     </div>
@@ -109,7 +135,13 @@
             'tocUrl' : '{pigcms:$urls.tocUrl}',
             'addUrl' : '{pigcms::U("Comment/add")}',
             'pUrl' : '{pigcms::U("praise")}',
-            'bananerList' : '{pigcms::U("getBanner")}'
+            'bananerList' : '{pigcms::U("getBanner")}',
+            'upReadNo' : '{pigcms::U("read")}',
+            'payUrl' : '{pigcms::U("Pay/index")}',
+            'liveListUrl' : '{pigcms::U("My/live")}',
+            'addOrderUrl' : '{pigcms::U("Pay/writeOrder")}',
+            'directUrl' : '{pigcms::U("Pay/payOrder")}',
+            'myLiveUrl' : '{pigcms::U("My/live")}',
         };
 
         if(params.userType == 2){

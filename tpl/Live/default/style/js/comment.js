@@ -24,7 +24,7 @@ var commemtAction = {
             var isComment = !cid ? 0 : 1;
             //评论人id
             var userId = params.userId;
-            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId}
+            var json = {'content':content, 'picUrl':picUrl, 'type':type, 'cid':cid, 'isComment':isComment, 'userId':userId, 'pushType':0}
             if(!isComment){
                 commemtAction.showDialog(url, cid, json);
             }else{
@@ -57,6 +57,10 @@ var commemtAction = {
             if($(this).text() == '发布并推送'){
                 push = 1;
             }
+            if($(this).text() == '仅对会员推送'){
+                push = -1;
+                json.pushType = 1;
+            }
             json.push = push;
             $.post(url, json, function(data){
                 if(data.errcode == '0'){
@@ -83,9 +87,9 @@ var commemtAction = {
     },
 
     'upload' : function(){
-        var tag = $("#file");
+        var tag = $("input[type='file']");
         var ul = $('.weui_uploader_files');
-        tag.change(function(){
+        tag.bind('change', function(){
             $.ajaxFileUpload({
                 url : params.upUrl,
                 secureuri : false,
@@ -94,13 +98,21 @@ var commemtAction = {
                 success : function(data){
                     console.log(data);
                     if(data.errcode == '0'){
-                        $('.weui_uploader_input_wrp').remove();
+                        //$('.weui_uploader_input_wrp').remove();
                         var infos = data.data;
                         var picUrl = infos[0].savepath + infos[0].savename;
-                        $('#picurl').val(picUrl);
                         var html = '<li class="weui_uploader_file" style="background-image:url(' + picUrl + ')"></li>';
+                        var imgPath = $('#picurl').val();
+                        imgPath += picUrl + ',';
+                        $('#picurl').val(imgPath);
+                        var imgs = imgPath.substring(0, imgPath.lastIndexOf(',')).split(',');
+                        if(imgs.length >= 4){
+                            $('.weui_uploader_input_wrp').remove();
+                        }
                         ul.append(html);
                     }
+                    tag.unbind('change');
+                    commemtAction.upload();
                 },
                 error : function(data, status, e){
                     console.log(data);
