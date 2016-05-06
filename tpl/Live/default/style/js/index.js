@@ -5,15 +5,24 @@
 // 获取页面的图片显示和隐藏层
 var $imgOverlay = $('.imgbox-overlay'),
     $imgContainer = $('.imgbox-wrap'),
-    $imgBigger = $('.img-bigger')
+    $imgBigger = $('.img-bigger'),
+    myScroll = null
 
+if(myScroll == null){
+    myScroll = new IScroll('#wrapper')
+}
+else{
+    myScroll.refresh()
+}
 
 $imgContainer.on('click',function(){
+    $imgContainer[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     $imgOverlay.hide()
     $imgContainer.hide()
     $imgBigger.attr('src','')
 })
 $imgOverlay.on('click',function(){
+    $imgOverlay[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     $imgOverlay.hide()
     $imgContainer.hide()
     $imgBigger.attr('src','')
