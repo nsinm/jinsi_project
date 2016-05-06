@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/tpl/Livetest/default/style/css/main.css"/>
     <link rel="stylesheet" href="http://cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css">
     <script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+    <script src="/tpl/Livetest/default/style/js/iscroll-lite.js"></script>
 </head>
 <body ontouchstart>
 <if condition="$urls.userType eq 2">
@@ -86,9 +87,11 @@
         <div>我的</div>
     </div>
     <div class="container js_container"></div>
-    <div class="imgbox-overlay"></div>
-    <div class="imgbox-wrap">
-        <img class="img-bigger">
+    <div class="imgbox-overlay">
+        <div class="close">关闭</div>
+    </div>
+    <div class="imgbox-wrap" id="wrapper">
+        <img class="img-bigger" id="scroll">
     </div>
     <div class="page">
         <div class="hd topbar">

@@ -307,24 +307,30 @@
             })*/
         })
 
-        $scrollContainer[0].addEventListener('scroll',function(){
-            console.log(111111)
-            console.log()
-            if($content1.css('display') !== 'none' && ($scrollContainer[0].scrollTop + 20 > ($content1[0].offsetHeight - $scrollContainer[0].clientHeight))){
-                // console.log($scrollContainer[0].scrollTop,$content1[0].offsetHeight,$content1[0].offsetHeight - $scrollContainer[0].clientHeight)
-                $step1bt.removeClass('weui_btn_default')
-                $step1bt.addClass('weui_btn_primary')
-                // 点击后
-                $step1bt.click(function(){
-                    $step1bt.hide()
-                    $step2bt.css("display",'block')
-                    $content1.hide()
-                    $content2.show()
-                    $tip1.removeClass('active')
-                    $tip2.addClass('active')
-                })
-            }
-        },false)
+        if($content1.css('display') !== 'none' && $content1[0].offsetHeight > $scrollContainer[0].clientHeight){
+            // console.log($scrollContainer[0].scrollTop,$content1[0].offsetHeight,$scrollContainer[0].clientHeight,($content1[0].offsetHeight - $scrollContainer[0].clientHeight))
+            $scrollContainer[0].addEventListener('scroll',function(){
+                if($content1.css('display') !== 'none' && ($scrollContainer[0].scrollTop + 20 > ($content1[0].offsetHeight - $scrollContainer[0].clientHeight))){
+                    // console.log($scrollContainer[0].scrollTop,$content1[0].offsetHeight,$content1[0].offsetHeight - $scrollContainer[0].clientHeight)
+                    $step1bt.removeClass('weui_btn_default')
+                    $step1bt.addClass('weui_btn_primary')
+                    // 点击后
+                    $step1bt.click(function(){
+                        $step1bt.hide()
+                        $step2bt.css("display",'block')
+                        $content1.hide()
+                        $content2.show()
+                        $tip1.removeClass('active')
+                        $tip2.addClass('active')
+                    })
+                }
+            },false)
+        }
+        else
+        {
+            $step1bt.removeClass('weui_btn_default')
+            $step1bt.addClass('weui_btn_primary')
+        }
 
     // $('body').on('touchmove', function (event) {
     //   event.preventDefault();
