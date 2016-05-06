@@ -145,12 +145,14 @@ class IndexAction extends LiveAction
         }
         $jssdk = D('Jssdk');
         $signPackage = $jssdk->GetSignPackage();
+        //查看是否为会员
+        $liveInfo[0]['isMember'] = $this->_isMember($this->userId, $liveInfo[0]['user_id']);
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
+        $data['link'] = get_url();
         $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr($liveInfo[0]['jinsi_content_info'], 0, 20, 'UTF-8') . '...';
         $data['desc'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ';
         $data['imgUrl'] = $liveInfo[0]['jinsi_user_header_pic'];
-        $data['link'] = get_url();
         $this->assign('data',$data);
         $this->assign('live', $liveInfo[0]);
         $this->assign('urls', $urls);
