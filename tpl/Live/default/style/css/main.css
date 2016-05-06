@@ -42,7 +42,7 @@ canvas { display: block; }
 }
 /* ==============swiper 相关结束============ */
 .container{
-	z-index: 10;
+	/*z-index: 10;*/
 }
 .forbid-touchmove{
 	overflow:hidden;
