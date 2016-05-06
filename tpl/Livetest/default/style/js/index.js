@@ -5,18 +5,28 @@
 // 获取页面的图片显示和隐藏层
 var $imgOverlay = $('.imgbox-overlay'),
     $imgContainer = $('.imgbox-wrap'),
-    $imgBigger = $('.img-bigger')
+    $imgBigger = $('.img-bigger'),
+    myScroll = null
 
-$imgContainer.on('click',function(){
-    $imgOverlay.hide()
-    $imgContainer.hide()
-    $imgBigger.attr('src','')
-})
-$imgOverlay.on('click',function(){
-    $imgOverlay.hide()
-    $imgContainer.hide()
-    $imgBigger.attr('src','')
-})
+    if(myScroll == null){
+        myScroll = new IScroll('#wrapper')
+    }
+    else{
+        myScroll.refresh()
+    }
+
+    $imgContainer.on('click',function(){
+        $imgContainer[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        $imgOverlay.hide()
+        $imgContainer.hide()
+        $imgBigger.attr('src','')
+    })
+    $imgOverlay.on('click',function(){
+        $imgOverlay[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        $imgOverlay.hide()
+        $imgContainer.hide()
+        $imgBigger.attr('src','')
+    })
 
 var indexAction = {
     //首页banner显示效果

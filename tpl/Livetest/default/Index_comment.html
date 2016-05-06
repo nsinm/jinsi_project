@@ -79,9 +79,11 @@
     <div>我的</div>
 </div>
 <div class="container js_container">
-    <div class="imgbox-overlay"></div>
-    <div class="imgbox-wrap">
-        <img class="img-bigger">
+    <div class="imgbox-overlay">
+        <div class="close">关闭</div>
+    </div>
+    <div class="imgbox-wrap" id="wrapper">
+        <img class="img-bigger" id="scroll">
     </div>
     <div class="page">
         <div class="bd pdtb0">
@@ -135,6 +137,7 @@
 <script src="/tpl/Livetest/default/style/js/jquery.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="/tpl/Livetest/default/style/js/index.js"></script>
+<script src="/tpl/Livetest/default/style/js/iscroll-lite.js"></script>
 <script src="/tpl/Livetest/default/style/js/bottom.js"></script>
 <script>
     var params = {
