@@ -177,33 +177,33 @@ var indexAction = {
                 var userId = parent.attr('data-uid');
                 var teacherName = parent.attr('data-name');
 
-                if(myScroll == null){
-                    myScroll = new IScroll('#wrapper')
-                }
-                else{
-                    myScroll.refresh()
-                }
-
-                $imgContainer.on('click',function(){
-                    $imgContainer[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-                    $imgOverlay.hide()
-                    $imgContainer.hide()
-                    $imgBigger.attr('src','')
-                })
-
-                $imgOverlay.on('click',function(){
-                    $imgOverlay[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-                    $imgOverlay.hide()
-                    $imgContainer.hide()
-                    $imgBigger.attr('src','')
-                })
-
                 img.click(function(){
                     var $this = $(this)
                     $imgOverlay.show()
                     var imgsrc = $this.attr('src')
                     $imgContainer.show()
                     $imgBigger.attr('src',imgsrc)
+
+                    if(myScroll == null){
+                        myScroll = new IScroll('#wrapper')
+                    }
+                    else{
+                        myScroll.refresh()
+                    }
+
+                    $imgContainer.on('click',function(){
+                        $imgContainer[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                        $imgOverlay.hide()
+                        $imgContainer.hide()
+                        $imgBigger.attr('src','')
+                    })
+
+                    $imgOverlay.on('click',function(){
+                        $imgOverlay[0].addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                        $imgOverlay.hide()
+                        $imgContainer.hide()
+                        $imgBigger.attr('src','')
+                    })
                 })
 
                 headerPic.click(function(){
