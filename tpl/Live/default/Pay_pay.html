@@ -328,6 +328,14 @@
         }
         else
         {
+            $step1bt.click(function(){
+                $step1bt.hide()
+                $step2bt.css("display",'block')
+                $content1.hide()
+                $content2.show()
+                $tip1.removeClass('active')
+                $tip2.addClass('active')
+            })
             $step1bt.removeClass('weui_btn_default')
             $step1bt.addClass('weui_btn_primary')
         }
