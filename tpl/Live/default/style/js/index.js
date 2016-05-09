@@ -403,7 +403,7 @@ var indexAction = {
                         html +=         '<p class="user_livetime"></p>';
                         html +=         '<p class="user_liveinteract">';
                         html +=             '<span class="sm-time" style="max-width: 150px;">' + replies[i].reply_create_time + '</span>';
-                        html +=             '<span class="sm-like like-btn">';
+                        html +=             '<span class="sm-like like-btn" style="text-align:center;">';
                         html +=             '</span>';
                         if(params.userId != replies[i].user_id) {
                             html += '<span class="sm-comment"' + replies[i].id + ' data-cid="' + infos[index].id + '" data-name="' + replies[i].jinsi_user_name + '" click="show(this)">';
