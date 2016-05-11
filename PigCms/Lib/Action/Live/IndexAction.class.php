@@ -147,7 +147,7 @@ class IndexAction extends LiveAction
         $signPackage = $jssdk->GetSignPackage();
         //查看是否为会员
         $liveInfo[0]['isMember'] = $this->_isMember($this->userId, $liveInfo[0]['user_id']);
-        $imgs = trim(implode(',', $liveInfo[0]['jinsi_content_url']), ',');
+        $imgs = explode(',', $liveInfo[0]['jinsi_content_url']);
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
         $data['link'] = get_url();
