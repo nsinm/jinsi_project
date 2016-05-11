@@ -103,8 +103,8 @@
                             <p class="user_liveword user-comment-name">{pigcms:$live.jinsi_content_info}</p>
                         <?php endif ?>
                         <if condition="$live.jinsi_content_type neq 1">
-                            <?php foreach($live['imgs'] as img): ?>
-                                <img class="thumb-image" src="<?php echo img; ?>" alt="">
+                            <?php foreach($live['imgs'] as $img): ?>
+                                <img class="thumb-image" src="<?php echo $img; ?>" alt="">
                             <?php endforeach ?>
                         </if>
                         <p class="user_livetime">{pigcms:$live.content_create_time}</p>
