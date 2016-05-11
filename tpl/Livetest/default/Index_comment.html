@@ -103,7 +103,7 @@
                             <p class="user_liveword user-comment-name">{pigcms:$live.jinsi_content_info}</p>
                         <?php endif ?>
                         <if condition="$live.jinsi_content_type neq 1">
-                            <?php foreach(join(',', $live.jinsi_content_url) as img):) ?>
+                            <?php foreach(join(',', $live.jinsi_content_url) as img)): ?>
                                 <img class="thumb-image" src="<?php echo img; ?>" alt="">
                             <?php endforeach ?>
                         </if>
