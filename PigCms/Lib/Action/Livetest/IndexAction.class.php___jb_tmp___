@@ -151,7 +151,7 @@ class IndexAction extends LiveAction
         //print_r($signPackage);
         $this->assign('signPackage',$signPackage);
         $data['link'] = get_url();
-        $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr(trim(nl2br($liveInfo[0]['jinsi_content_info'])), 0, 20, 'UTF-8') . '...'; 
+        $data['title'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ' . mb_substr(trim(str_replace('\n', '', $liveInfo[0]['jinsi_content_info'])), 0, 20, 'UTF-8') . '...';
         $data['desc'] = $liveInfo[0]['jinsi_user_name'] . ' 正在股播,快来围观! ';
         $data['imgUrl'] = $liveInfo[0]['jinsi_user_header_pic'];
         $this->assign('data',$data);
